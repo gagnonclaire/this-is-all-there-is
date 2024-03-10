@@ -1,12 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://2wm0f8ckxv6q"]
+[gd_scene load_steps=10 format=3 uid="uid://2wm0f8ckxv6q"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_xgfpv"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="2_6enaa"]
 [ext_resource type="Material" uid="uid://bqfuxpjafkup7" path="res://textures/grass/grass.tres" id="3_i7abt"]
 [ext_resource type="Script" path="res://main_menu/camera_pivot.gd" id="4_11l6f"]
-[ext_resource type="Texture2D" uid="uid://bklcxj0knl54b" path="res://textures/sky/night_sky.png" id="5_56myd"]
+[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/night_environment.tres" id="5_dr6je"]
 [ext_resource type="FontFile" uid="uid://d0kvl1quvdwi6" path="res://fonts/sylfaen.ttf" id="6_bnocc"]
-[ext_resource type="FontFile" uid="uid://t4dji8hg75hf" path="res://fonts/ebrima.ttf" id="7_plca0"]
+[ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="6_i5klj"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dmwkp"]
 _surfaces = [{
@@ -35,28 +35,6 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 249, 141, 199, 130, 131, 84, 156, 173, 162, 154, 111, 134, 131, 84, 64, 3, 235, 123, 189, 136, 131, 84, 49, 175, 235, 123, 189, 136, 131, 84, 97, 182, 161, 148, 2, 116, 17, 204, 0, 0, 249, 141, 249, 112, 17, 204, 52, 172, 113, 125, 118, 108, 17, 204, 67, 0, 113, 125, 118, 108, 17, 204, 64, 3, 235, 123, 189, 136, 100, 64, 49, 175, 235, 123, 189, 136, 100, 64, 70, 0, 41, 121, 14, 163, 100, 64, 55, 172, 41, 121, 14, 163, 100, 64, 70, 0, 41, 121, 14, 163, 18, 193, 55, 172, 41, 121, 14, 163, 18, 193, 252, 14, 136, 139, 114, 227, 18, 193, 237, 186, 136, 139, 114, 227, 18, 193, 237, 186, 136, 139, 114, 227, 132, 70, 55, 172, 41, 121, 14, 163, 132, 70, 135, 213, 186, 198, 255, 255, 132, 70, 137, 196, 255, 255, 14, 196, 132, 70, 55, 172, 41, 121, 14, 163, 142, 199, 49, 175, 235, 123, 189, 136, 142, 199, 137, 196, 255, 255, 14, 196, 142, 199, 221, 203, 117, 172, 211, 179, 142, 199, 49, 175, 235, 123, 189, 136, 169, 85, 156, 173, 162, 154, 111, 134, 169, 85, 221, 203, 117, 172, 211, 179, 169, 85, 179, 204, 151, 224, 45, 170, 169, 85, 97, 182, 161, 148, 2, 116, 103, 218, 52, 172, 113, 125, 118, 108, 103, 218, 35, 210, 60, 217, 173, 150, 103, 218, 75, 218, 0, 0, 208, 129, 103, 218, 52, 172, 113, 125, 118, 108, 238, 66, 67, 0, 113, 125, 118, 108, 238, 66, 7, 185, 169, 155, 177, 69, 238, 66, 22, 13, 169, 155, 177, 69, 238, 66, 7, 185, 169, 155, 177, 69, 89, 65, 22, 13, 169, 155, 177, 69, 89, 65, 220, 206, 152, 180, 0, 0, 89, 65, 235, 34, 152, 180, 0, 0, 89, 65, 75, 218, 0, 0, 208, 129, 190, 69, 52, 172, 113, 125, 118, 108, 190, 69, 210, 230, 140, 35, 24, 95, 190, 69, 7, 185, 169, 155, 177, 69, 190, 69, 210, 230, 140, 35, 24, 95, 59, 68, 7, 185, 169, 155, 177, 69, 59, 68, 255, 255, 69, 95, 126, 25, 59, 68, 220, 206, 152, 180, 0, 0, 59, 68, 109, 255, 144, 128, 109, 255, 144, 128, 109, 255, 144, 128, 109, 255, 144, 128, 241, 255, 241, 127, 241, 255, 241, 127, 241, 255, 241, 127, 241, 255, 241, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 27, 230, 227, 153, 27, 230, 227, 153, 27, 230, 227, 153, 27, 230, 227, 153, 244, 252, 9, 131, 244, 252, 9, 131, 244, 252, 9, 131, 244, 252, 9, 131, 108, 215, 145, 168, 108, 215, 145, 168, 108, 215, 145, 168, 108, 215, 145, 168, 9, 225, 10, 97, 9, 225, 10, 97, 9, 225, 10, 97, 9, 225, 10, 97, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 29, 246, 29, 118, 29, 246, 29, 118, 29, 246, 29, 118, 29, 246, 29, 118, 182, 247, 182, 119, 182, 247, 182, 119, 182, 247, 182, 119, 182, 247, 182, 119)
 }]
 
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_mi36w"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lhfrk"]
-panorama = ExtResource("5_56myd")
-
-[sub_resource type="Sky" id="Sky_ls477"]
-sky_material = SubResource("PanoramaSkyMaterial_lhfrk")
-
-[sub_resource type="Environment" id="Environment_pirmr"]
-background_mode = 2
-sky = SubResource("Sky_ls477")
-ambient_light_source = 3
-ambient_light_color = Color(0.517647, 0.411765, 0.701961, 1)
-ambient_light_energy = 16.0
-ssao_enabled = true
-glow_enabled = true
-glow_map = SubResource("AnimatedTexture_mi36w")
-fog_enabled = true
-fog_light_color = Color(0.458824, 0.411765, 0.509804, 1)
-fog_light_energy = 0.63
-fog_sky_affect = 0.0
-
 [sub_resource type="LabelSettings" id="LabelSettings_p22nc"]
 font = ExtResource("6_bnocc")
 font_size = 32
@@ -79,12 +57,13 @@ transform = Transform3D(0.995959, 0.0887946, -0.0134766, -0.0868982, 0.99065, 0.
 fov = 100.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pirmr")
+environment = ExtResource("5_dr6je")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.88009, -0.16779, 0.444171, -0.408246, -0.745074, 0.527447, 0.24244, -0.645532, -0.724232, 0, 10, 0)
 light_color = Color(0.898039, 0.937255, 0.960784, 1)
 light_bake_mode = 1
+shadow_enabled = true
 directional_shadow_mode = 1
 sky_mode = 1
 
@@ -96,6 +75,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_i5klj")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -110,35 +90,41 @@ label_settings = SubResource("LabelSettings_p22nc")
 horizontal_alignment = 1
 justification_flags = 0
 
-[node name="Menu" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 25
 
-[node name="NewGameButton" type="Button" parent="CanvasLayer/MarginContainer/Menu"]
+[node name="NewGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_plca0")
 text = "New Game"
 
-[node name="LoadGameButton" type="Button" parent="CanvasLayer/MarginContainer/Menu"]
+[node name="LoadGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_plca0")
 text = "Load Game"
 
-[node name="JoinGameButton" type="Button" parent="CanvasLayer/MarginContainer/Menu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_plca0")
+
+[node name="JoinGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 text = "Join Game"
 
-[node name="SettingsButton" type="Button" parent="CanvasLayer/MarginContainer/Menu"]
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_plca0")
+size_flags_vertical = 4
+placeholder_text = "Enter IP Address"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/Menu"]
+[node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_plca0")
 text = "Exit"
 
-[connection signal="pressed" from="CanvasLayer/MarginContainer/Menu/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/JoinGameButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

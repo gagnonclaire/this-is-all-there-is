@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgd0dypjq6ul"]
+
+[ext_resource type="Script" path="res://characters/player/player.gd" id="1_vjsyy"]
+[ext_resource type="PackedScene" uid="uid://cbkc34coio66g" path="res://characters/character_body.tscn" id="2_1tdev"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y7ohg"]
+radius = 0.286105
+height = 1.5
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30qq8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_vjsyy")
+
+[node name="CharacterBody" parent="." instance=ExtResource("2_1tdev")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.746609, -0.0427096)
+shape = SubResource("CapsuleShape3D_y7ohg")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0141945, 1.64453, -0.176759)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="InteractRaycast" type="RayCast3D" parent="CameraPivot/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_30qq8")

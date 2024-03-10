@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbkc34coio66g"]
+
+[ext_resource type="ArrayMesh" uid="uid://ci005qa8jvyg7" path="res://characters/models/body.obj" id="1_axbvh"]
+[ext_resource type="ArrayMesh" uid="uid://t22luyqbrlf7" path="res://characters/models/foot.obj" id="2_a5251"]
+[ext_resource type="ArrayMesh" uid="uid://12cpi572hmb4" path="res://characters/models/hand.obj" id="3_7xdvv"]
+[ext_resource type="ArrayMesh" uid="uid://skm6n32m7h2r" path="res://characters/models/head.obj" id="4_ijt4r"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6221h"]
+properties/0/path = NodePath("TorsoPivot:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("TorsoPivot:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("LeftFootPivot:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("LeftFootPivot:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("RightFootPivot:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("RightFootPivot:rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("LeftHandPivot:position")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("LeftHandPivot:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("RightHandPivot:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("RightHandPivot:rotation")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("HeadPivot:position")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("HeadPivot:rotation")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+
+[node name="CharacterBody" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="TorsoPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.567638, 0)
+
+[node name="Torso" type="MeshInstance3D" parent="TorsoPivot"]
+mesh = ExtResource("1_axbvh")
+skeleton = NodePath("../..")
+
+[node name="LeftFootPivot" type="Node3D" parent="."]
+transform = Transform3D(-1.09278e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.09278e-08, 0.25, -1, 0)
+
+[node name="LeftFoot" type="MeshInstance3D" parent="LeftFootPivot"]
+mesh = ExtResource("2_a5251")
+skeleton = NodePath("../..")
+
+[node name="RightFootPivot" type="Node3D" parent="."]
+
+[node name="RightFoot" type="MeshInstance3D" parent="RightFootPivot"]
+transform = Transform3D(-1.09278e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.09278e-08, -0.25, -1, 0)
+mesh = ExtResource("2_a5251")
+skeleton = NodePath("../../LeftFootPivot/LeftFoot")
+
+[node name="LeftHandPivot" type="Node3D" parent="."]
+
+[node name="LeftHand" type="MeshInstance3D" parent="LeftHandPivot"]
+transform = Transform3D(-0.5, 0, 0, 0, -0.5, 0, 0, 0, -0.5, 0.35, -0.2, 0)
+mesh = ExtResource("3_7xdvv")
+skeleton = NodePath("../../RightFootPivot/RightFoot")
+
+[node name="RightHandPivot" type="Node3D" parent="."]
+
+[node name="RightHand" type="MeshInstance3D" parent="RightHandPivot"]
+transform = Transform3D(0.5, 0, 0, 0, -0.5, 4.37114e-08, 0, -4.37114e-08, -0.5, -0.35, -0.2, 0)
+mesh = ExtResource("3_7xdvv")
+skeleton = NodePath("../../LeftHandPivot/LeftHand")
+
+[node name="HeadPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.440777, 0.0586548)
+
+[node name="Head" type="MeshInstance3D" parent="HeadPivot"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("4_ijt4r")
+skeleton = NodePath("../..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6221h")

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ce6cpfne6646l"]
+
+[ext_resource type="FontFile" uid="uid://bhimofllkys6f" path="res://fonts/body_font.tres" id="1_08421"]
+
+[resource]
+default_font = ExtResource("1_08421")
+default_font_size = 16
