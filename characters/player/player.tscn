@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgd0dypjq6ul"]
+[gd_scene load_steps=9 format=3 uid="uid://dgd0dypjq6ul"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_vjsyy"]
 [ext_resource type="PackedScene" uid="uid://cbkc34coio66g" path="res://characters/character_body.tscn" id="2_1tdev"]
 [ext_resource type="Texture2D" uid="uid://dmidx7th1t6xv" path="res://textures/hud/reticule.png" id="3_xbgvk"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y7ohg"]
-radius = 0.286105
-height = 1.5
+[ext_resource type="Texture2D" uid="uid://l36enygun3cg" path="res://textures/hud/stamina_vignette.png" id="4_sv741"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30qq8"]
 properties/0/path = NodePath(".:position")
@@ -16,45 +13,31 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y7ohg"]
+radius = 0.286105
+height = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_atbkl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jtm8r"]
+radius = 0.25
+height = 1.5
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_vjsyy")
-
-[node name="CharacterBody" parent="." instance=ExtResource("2_1tdev")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.746609, -0.0427096)
-shape = SubResource("CapsuleShape3D_y7ohg")
-
-[node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0141945, 1.64453, -0.176759)
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-
-[node name="InteractRaycast" type="RayCast3D" parent="CameraPivot/Camera3D"]
-target_position = Vector3(0, 0, -3)
-collision_mask = 2
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_30qq8")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="HUD"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="HUD/Control"]
+[node name="Reticule" type="TextureRect" parent="HUD/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -69,3 +52,68 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_xbgvk")
 stretch_mode = 3
+
+[node name="StaminaVignette" type="TextureRect" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_sv741")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_30qq8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.746609, -0.0427096)
+shape = SubResource("CapsuleShape3D_y7ohg")
+
+[node name="PlayerSkeleton" type="Skeleton3D" parent="."]
+
+[node name="HeadBone" type="PhysicalBone3D" parent="PlayerSkeleton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.24313, -0.221313)
+collision_layer = 4
+collision_mask = 0
+joint_type = 1
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.24313, 0.221313)
+body_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.24313, -0.221313)
+joint_constraints/bias = 0.3
+joint_constraints/damping = 1.0
+joint_constraints/impulse_clamp = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSkeleton/HeadBone"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_atbkl")
+
+[node name="BodyBone" type="PhysicalBone3D" parent="PlayerSkeleton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.24313, -0.221313)
+collision_layer = 4
+collision_mask = 0
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.24313, 0.221313)
+body_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.24313, -0.221313)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSkeleton/BodyBone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753088, 0)
+shape = SubResource("CapsuleShape3D_jtm8r")
+
+[node name="BodyPosition" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.24313, -0.221313)
+remote_path = NodePath("../PlayerSkeleton/BodyBone")
+
+[node name="CharacterBody" parent="BodyPosition" instance=ExtResource("2_1tdev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.24313, 0.221313)
+
+[node name="HeadPosition" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62156, -0.110656)
+remote_path = NodePath("../PlayerSkeleton/HeadBone")
+
+[node name="CameraPivot" type="Node3D" parent="HeadPosition"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0141945, 0.022967, -0.0661026)
+
+[node name="Camera3D" type="Camera3D" parent="HeadPosition/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.977202, 0.212314, 0, -0.212314, 0.977202, 0, 0.7624, 2.67209)
+
+[node name="InteractRaycast" type="RayCast3D" parent="HeadPosition/CameraPivot/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
