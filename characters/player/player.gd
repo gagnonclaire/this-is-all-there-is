@@ -53,3 +53,7 @@ func _unhandled_input(event):
 			if interact_raycast.is_colliding():
 				var hit_object: PhysicsBody3D = interact_raycast.get_collider()
 				hit_object.interacted_with()
+
+		# Debug events
+		if Input.is_action_just_pressed("debug_spawn"):
+			world_node.debug_spawn(Vector3(randi_range(-9,9), 0, randi_range(-9,9)))

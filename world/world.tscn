@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=5 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_axlw3"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/night_environment.tres" id="2_rdtky"]
-[ext_resource type="PackedScene" uid="uid://btjk0c3rc8lhv" path="res://characters/human/human_character.tscn" id="3_s0q6o"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_oqlnp"]
 
@@ -28,9 +27,12 @@ environment = ExtResource("2_rdtky")
 transform = Transform3D(1, 0, 0, 0, 0.700212, 0.713935, 0, -0.713935, 0.700212, 0, 4.2619, 0)
 shadow_enabled = true
 
-[node name="HumanCharacter" parent="." instance=ExtResource("3_s0q6o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.29443)
+[node name="NPCSpawn" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://characters/player/player.tscn")
 spawn_path = NodePath("..")
+
+[connection signal="timeout" from="NPCSpawn" to="." method="_on_npc_spawn_timeout"]
