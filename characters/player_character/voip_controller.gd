@@ -1,4 +1,6 @@
-extends Node
+extends Node3D
+
+const BUFFER_SIZE: int = 512
 
 @onready var input: AudioStreamPlayer3D = $Input
 @onready var player_node: Node = get_parent()
@@ -16,7 +18,7 @@ func _enter_tree():
 func _ready():
 	if is_multiplayer_authority():
 		input.stream = AudioStreamMicrophone.new()
-		print(input.stream)
+		print("Input stream set up: ", input.stream)
 		input.play()
 
 		idx = AudioServer.get_bus_index("Record")
@@ -27,18 +29,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
 	if is_multiplayer_authority():
-		if (effect.can_get_buffer(512)):
-			send_data.rpc(effect.get_buffer(512))
-			if player_node.is_severed:
-				send_data_self(effect.get_buffer(512))
+		if (effect.can_get_buffer(BUFFER_SIZE)):
+			var data = effect.get_buffer(BUFFER_SIZE)
+			send_data.rpc(data)
 
 		effect.clear_buffer()
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_remote", "reliable")
 func send_data(data : PackedVector2Array):
-	for i in range(0,512):
-		playback.push_frame(data[i])
-
-func send_data_self(data : PackedVector2Array):
-	for i in range(0,512):
+	for i in range(0,BUFFER_SIZE):
 		playback.push_frame(data[i])

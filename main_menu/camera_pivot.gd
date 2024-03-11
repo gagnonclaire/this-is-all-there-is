@@ -8,5 +8,4 @@ var frequency: float = 0.0005
 func _process(_delta):
 	# Bob camera using sine
 	var bobbing_offset = sin(frequency * Time.get_ticks_msec()) * amplitude
-	#print(bobbing_offset)
 	set_position(Vector3(0, bobbing_offset, 0))

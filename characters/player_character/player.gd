@@ -10,11 +10,13 @@ const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
 const VOIP_CONTROLLER: PackedScene = preload("res://characters/player_character/voip_controller.tscn")
 
 @onready var voice_output: AudioStreamPlayer3D = $VoiceOutput
+@onready var record_bus_index: int = AudioServer.get_bus_index("Record")
 
 @onready var hud: CanvasLayer = $HUD
 @onready var physics_collision: CollisionShape3D = $PhysicsCollider
 @onready var sever_cooldown_timer: Timer = $SeverCooldown
 @onready var frame: Node3D = $HumanFrame
+@onready var camera: Camera3D = frame.camera
 
 @onready var world_node: Node = get_parent()
 @onready var main_node: Node = world_node.get_parent()
@@ -40,7 +42,7 @@ func _ready():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		hud.show()
 
-		frame.camera.current = true
+		camera.current = true
 
 	var voip_controller: Node = VOIP_CONTROLLER.instantiate()
 	voip_controller.owner_id = name.to_int()
@@ -99,7 +101,7 @@ func _unhandled_key_input(_event):
 		if Input.is_action_just_pressed("change_camera") \
 		and is_severed \
 		and can_switch_cameras:
-			reset_camera()
+			un_sever()
 
 		if Input.is_action_just_pressed("debug_camera"):
 			world_node.toggle_debug_camera()
@@ -109,8 +111,8 @@ func _unhandled_input(event):
 		# Camera movement
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x *.005)
-			frame.camera.rotate_x(-event.relative.y *.005)
-			frame.camera.rotation.x = clamp(frame.camera.rotation.x, -PI/2, PI/2)
+			camera.rotate_x(-event.relative.y *.005)
+			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 #endregion
 
 #region Signal Callbacks
@@ -139,7 +141,7 @@ func do_knockout():
 	# Check knockout state, prevent movement
 	if current_stamina == 0 and not is_knocked_out:
 		if is_severed:
-			reset_camera()
+			un_sever()
 		is_knocked_out = true
 		rpc("start_ragdoll")
 	elif is_knocked_out and current_stamina == MAX_STAMINA:
@@ -154,7 +156,7 @@ func do_short_raycast_events(target: Object):
 	and not is_severed \
 	and target.is_in_group("possessable") \
 	and can_switch_cameras:
-		change_camera_to(target)
+		sever_to(target)
 #endregion
 
 @rpc("any_peer", "call_local")
@@ -182,8 +184,8 @@ func unstuck():
 	set_global_position(Vector3.ZERO)
 	unstuck_progress = 0.0
 
-func change_camera_to(target: Object):
-	frame.camera.current = false
+func sever_to(target: Object):
+	camera.current = false
 	target.camera.current = true
 
 	is_severed = true
@@ -192,15 +194,19 @@ func change_camera_to(target: Object):
 	can_switch_cameras = false
 	sever_cooldown_timer.start()
 
-func reset_camera():
+	AudioServer.set_bus_mute(record_bus_index, false)
+
+func un_sever():
 	sever_target.camera.current = false
-	frame.camera.current = true
+	camera.current = true
 
 	is_severed = false
 	sever_target = null
 
 	can_switch_cameras = false
 	sever_cooldown_timer.start()
+
+	AudioServer.set_bus_mute(record_bus_index, true)
 
 
 

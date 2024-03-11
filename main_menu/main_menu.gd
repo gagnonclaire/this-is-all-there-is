@@ -13,6 +13,7 @@ func _ready():
 
 func _on_new_game_button_pressed():
 	main_node.is_host = true
+	print("Hosting new game on port 9999")
 	main_node.load_world()
 
 func _on_load_game_button_pressed():

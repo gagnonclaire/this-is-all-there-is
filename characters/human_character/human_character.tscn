@@ -22,7 +22,7 @@ properties/3/replication_mode = 1
 radius = 0.75
 height = 3.25
 
-[node name="HumanCharacter" type="CharacterBody3D" groups=["interactable", "persists", "possessable", "short_raycast_target"]]
+[node name="HumanCharacter" type="CharacterBody3D" groups=["interactable", "possessable", "short_raycast_target"]]
 collision_layer = 2
 script = ExtResource("1_q1py3")
 

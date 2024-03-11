@@ -5,9 +5,9 @@ const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.
 
 @export var lines: Array
 @export var current_line: int = 0
-@export var camera: Camera3D
 
 @onready var frame: Node3D = $HumanFrame
+@onready var camera: Camera3D = frame.camera
 @onready var speech_bubble: Label3D = $SpeechBubble
 @onready var speech_timer: Timer = $SpeechTimer
 
@@ -18,8 +18,6 @@ const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	camera = frame.camera
-
 	# Read from lines file
 	var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
 	var full_lines: Array = lines_file.get_as_text().split("\n")

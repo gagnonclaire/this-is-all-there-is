@@ -23,8 +23,8 @@ height = 3.0
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_y4wb6"]
 
-[node name="Player" type="CharacterBody3D"]
-collision_layer = 0
+[node name="Player" type="CharacterBody3D" groups=["possessable", "short_raycast_target"]]
+collision_layer = 2
 script = ExtResource("1_wttkl")
 
 [node name="HUD" parent="." instance=ExtResource("2_scleb")]
