@@ -1,20 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgd0dypjq6ul"]
+[gd_scene load_steps=6 format=3 uid="uid://dgd0dypjq6ul"]
 
 [ext_resource type="Script" path="res://characters/player_character/player.gd" id="1_wttkl"]
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="2_jio5s"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
-resource_local_to_scene = true
-load_path = "res://.godot/imported/reticule.png-dede4b0f0dc2de985978a85e9cd7a9ec.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ccw5d"]
-resource_local_to_scene = true
-load_path = "res://.godot/imported/stamina_vignette.png-21104bbd41dc8d7c3309f3100586a5e7.ctex"
-
-[sub_resource type="Curve" id="Curve_cnevg"]
-
-[sub_resource type="CurveTexture" id="CurveTexture_gbonj"]
-curve = SubResource("Curve_cnevg")
+[ext_resource type="PackedScene" uid="uid://bpxgt3rbb7fwy" path="res://characters/player_character/hud.tscn" id="2_scleb"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30qq8"]
 properties/0/path = NodePath(".:position")
@@ -37,53 +25,9 @@ height = 3.0
 collision_layer = 0
 script = ExtResource("1_wttkl")
 
-[node name="HUD" type="CanvasLayer" parent="."]
-visible = false
+[node name="HUD" parent="." instance=ExtResource("2_scleb")]
 
-[node name="Control" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Reticule" type="TextureRect" parent="HUD/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 38.0
-offset_bottom = 38.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.1, 0.1)
-texture = SubResource("CompressedTexture2D_1diql")
-
-[node name="StaminaVignette" type="TextureRect" parent="HUD/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CompressedTexture2D_ccw5d")
-
-[node name="UnstuckVignette" type="TextureRect" parent="HUD/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CurveTexture_gbonj")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_30qq8")
 
 [node name="HumanFrame" parent="." instance=ExtResource("2_jio5s")]

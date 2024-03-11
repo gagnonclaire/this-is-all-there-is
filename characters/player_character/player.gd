@@ -5,16 +5,8 @@ const SPRINT_MODIFIER: float = 3.0
 const MAX_STAMINA: float = 100.0
 
 @onready var hud: CanvasLayer = $HUD
-@onready var stamina_vignette: TextureRect = $HUD/Control/StaminaVignette
-@onready var unstuck_vignette: TextureRect = $HUD/Control/UnstuckVignette
 @onready var physics_collision: CollisionShape3D = $PhysicsCollider
-
-# Get references to frame nodes
 @onready var frame: Node3D = $HumanFrame
-@onready var skeleton: Skeleton3D = frame.skeleton
-@onready var core_bone: PhysicalBone3D = frame.core_bone
-@onready var camera: Camera3D = frame.camera
-@onready var interact_raycast: RayCast3D = frame.interact_raycast
 
 @onready var world_node: Node = get_parent()
 @onready var main_node: Node = world_node.get_parent()
@@ -34,7 +26,7 @@ func _ready():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		hud.show()
 
-		camera.current = true
+		frame.camera.current = true
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
@@ -53,7 +45,7 @@ func _physics_process(delta):
 			current_stamina = clampf(current_stamina + (delta * 25.0), 0, MAX_STAMINA)
 
 		# Update stamina vignette
-		stamina_vignette.set_modulate(Color(1, 1, 1, 1 - (current_stamina / MAX_STAMINA)))
+		hud.stamina_vignette.set_modulate(Color(1, 1, 1, 1 - (current_stamina / MAX_STAMINA)))
 
 		# Check knockout state, prevent movement
 		if current_stamina == 0:
@@ -71,7 +63,7 @@ func _physics_process(delta):
 		else:
 			unstuck_progress = clampf(unstuck_progress - (delta * 100.0), 0, 100.0)
 
-		unstuck_vignette.set_modulate(Color(1, 1, 1, (unstuck_progress / 100.0)))
+		hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (unstuck_progress / 100.0)))
 
 		if unstuck_progress == 100.0:
 			rpc("unstuck")
@@ -93,13 +85,13 @@ func _unhandled_input(event):
 		# Camera movement
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x *.005)
-			camera.rotate_x(-event.relative.y *.005)
-			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+			frame.camera.rotate_x(-event.relative.y *.005)
+			frame.camera.rotation.x = clamp(frame.camera.rotation.x, -PI/2, PI/2)
 
 		# Interact events
 		if Input.is_action_just_pressed("interact"):
-			if interact_raycast.is_colliding():
-				var hit_object: PhysicsBody3D = interact_raycast.get_collider()
+			if frame.interact_raycast.is_colliding():
+				var hit_object: PhysicsBody3D = frame.interact_raycast.get_collider()
 				if hit_object.is_in_group("interactable"):
 					hit_object.interacted_with()
 
@@ -109,22 +101,25 @@ func _unhandled_input(event):
 			var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
 			world_node.debug_spawn(random_position, random_rotation)
 
+		if Input.is_action_just_pressed("change_camera"):
+			world_node.toggle_debug_camera()
+
 @rpc("any_peer", "call_local")
 func start_ragdoll():
-	skeleton.physical_bones_start_simulation()
+	frame.skeleton.physical_bones_start_simulation()
 	physics_collision.set_disabled(true)
 	is_knocked_out = true
 
 @rpc("any_peer", "call_local")
 func stop_ragdoll():
 	# Get the final position of the core bone
-	var bone_position: Vector3 = core_bone.get_global_position()
+	var bone_position: Vector3 = frame.core_bone.get_global_position()
 
 	# Weird hack to reset bones
 	# When you start a simulation it seems that all bones reset
-	skeleton.physical_bones_stop_simulation()
-	skeleton.physical_bones_start_simulation()
-	skeleton.physical_bones_stop_simulation()
+	frame.skeleton.physical_bones_stop_simulation()
+	frame.skeleton.physical_bones_start_simulation()
+	frame.skeleton.physical_bones_stop_simulation()
 
 # Correct position and return to normal
 	set_global_position(bone_position)
