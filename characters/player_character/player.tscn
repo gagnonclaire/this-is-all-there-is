@@ -31,7 +31,6 @@ properties/3/spawn = true
 properties/3/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kds0n"]
-radius = 0.4
 height = 3.0
 
 [node name="Player" type="CharacterBody3D"]

@@ -35,11 +35,11 @@ func _on_speech_timer_timeout():
 	speech_bubble.text = ""
 
 func interacted_with():
-	current_line = (current_line + 1) % 2
 	rpc("speech")
 
 @rpc("any_peer", "call_local")
 func speech():
+	current_line = (current_line + 1) % 2
 	speech_bubble.text = lines[current_line]
 
 	# Start the timer to clear text
