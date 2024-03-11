@@ -10,7 +10,6 @@ const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
 const VOIP_CONTROLLER: PackedScene = preload("res://characters/player_character/voip_controller.tscn")
 
 @onready var voice_output: AudioStreamPlayer3D = $VoiceOutput
-@onready var record_bus_index: int = AudioServer.get_bus_index("Record")
 
 @onready var hud: CanvasLayer = $HUD
 @onready var physics_collision: CollisionShape3D = $PhysicsCollider
@@ -194,8 +193,6 @@ func sever_to(target: Object):
 	can_switch_cameras = false
 	sever_cooldown_timer.start()
 
-	AudioServer.set_bus_mute(record_bus_index, false)
-
 func un_sever():
 	sever_target.camera.current = false
 	camera.current = true
@@ -205,10 +202,3 @@ func un_sever():
 
 	can_switch_cameras = false
 	sever_cooldown_timer.start()
-
-	AudioServer.set_bus_mute(record_bus_index, true)
-
-
-
-
-
