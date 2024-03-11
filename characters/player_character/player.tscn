@@ -35,3 +35,9 @@ replication_config = SubResource("SceneReplicationConfig_30qq8")
 [node name="PhysicsCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_kds0n")
+
+[node name="SeverCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="SeverCooldown" to="." method="_on_sever_cooldown_timeout"]

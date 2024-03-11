@@ -71,18 +71,26 @@ transform = Transform3D(1, 0, 0, 0, 0.944852, 0.327498, 0, -0.327498, 0.944852, 
 fov = 90.0
 
 [node name="TextWall" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3.64008, -1.89132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.792228, 2.91054, -1.89132)
 
-[node name="Label3D" type="Label3D" parent="TextWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21522, -0.682951, 0)
+[node name="BaseControlText" type="Label3D" parent="TextWall"]
 shaded = true
 texture_filter = 0
-text = "Move:	 wasd
+text = "Controls:
+Move:	 wasd
 Camera: Mouse
-Spawn NPC: 	`
 Interact:	 E
 Sprint:  hold shift
-Wake up: hold X
-Debug cam: F
+Wake Up: hold X
+Change Cam: F
 Exit:	 esc"
+horizontal_alignment = 0
+
+[node name="DebugControlText" type="Label3D" parent="TextWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66893, 0, 0)
+shaded = true
+texture_filter = 0
+text = "Debug Controls:
+Spawn NPC: 	`
+Debug  Cam: 1"
 horizontal_alignment = 0

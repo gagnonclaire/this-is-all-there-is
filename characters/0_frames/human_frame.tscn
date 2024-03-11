@@ -69,7 +69,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 [node name="FrameCamera" type="Camera3D" parent="Armature/Skeleton3D/CoreBone" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907467, -0.437766)
 
-[node name="InteractRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/FrameCamera" index="0"]
+[node name="ShortRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/FrameCamera" index="0"]
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 
