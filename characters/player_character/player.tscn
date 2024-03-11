@@ -21,7 +21,7 @@ properties/3/replication_mode = 1
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kds0n"]
 height = 3.0
 
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_y4wb6"]
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_ygy4n"]
 
 [node name="Player" type="CharacterBody3D" groups=["possessable", "short_raycast_target"]]
 collision_layer = 2
@@ -43,7 +43,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="VoiceOutput" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamGenerator_y4wb6")
+stream = SubResource("AudioStreamGenerator_ygy4n")
 autoplay = true
+bus = &"VOIP Playback"
 
 [connection signal="timeout" from="SeverCooldown" to="." method="_on_sever_cooldown_timeout"]

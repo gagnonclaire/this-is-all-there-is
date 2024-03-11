@@ -30,12 +30,10 @@ func _ready():
 func _process(_delta: float):
 	if is_multiplayer_authority():
 		if (effect.can_get_buffer(BUFFER_SIZE)):
-			var data = effect.get_buffer(BUFFER_SIZE)
-			send_data.rpc(data)
-
+			send_data.rpc(effect.get_buffer(BUFFER_SIZE))
 		effect.clear_buffer()
 
-@rpc("any_peer", "call_remote", "reliable")
+@rpc("any_peer", "call_remote")
 func send_data(data : PackedVector2Array):
-	for i in range(0,BUFFER_SIZE):
+	for i in range(0, BUFFER_SIZE):
 		playback.push_frame(data[i])
