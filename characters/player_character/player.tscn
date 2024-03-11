@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgd0dypjq6ul"]
+[gd_scene load_steps=7 format=3 uid="uid://dgd0dypjq6ul"]
 
 [ext_resource type="Script" path="res://characters/player_character/player.gd" id="1_wttkl"]
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="2_jio5s"]
@@ -21,6 +21,8 @@ properties/3/replication_mode = 1
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kds0n"]
 height = 3.0
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_y4wb6"]
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_wttkl")
@@ -39,5 +41,9 @@ shape = SubResource("CapsuleShape3D_kds0n")
 [node name="SeverCooldown" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="VoiceOutput" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamGenerator_y4wb6")
+autoplay = true
 
 [connection signal="timeout" from="SeverCooldown" to="." method="_on_sever_cooldown_timeout"]

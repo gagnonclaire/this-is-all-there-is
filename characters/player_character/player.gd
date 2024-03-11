@@ -4,9 +4,12 @@ const SPEED: float = 5.0
 const SPRINT_MODIFIER: float = 3.0
 const MAX_STAMINA: float = 100.0
 const STAMINA_DRAIN_MODIFIER_SPRINT: float = 25.0
-const STAMINA_DRAIN_MODIFIER_SEVER: float = 25.0
+const STAMINA_DRAIN_MODIFIER_SEVER: float = 10.0
 const STAMINA_GAIN_MODIFIER_BASE: float = 5.0
 const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
+const VOIP_CONTROLLER: PackedScene = preload("res://characters/player_character/voip_controller.tscn")
+
+@onready var voice_output: AudioStreamPlayer3D = $VoiceOutput
 
 @onready var hud: CanvasLayer = $HUD
 @onready var physics_collision: CollisionShape3D = $PhysicsCollider
@@ -38,6 +41,12 @@ func _ready():
 		hud.show()
 
 		frame.camera.current = true
+
+	var voip_controller: Node = VOIP_CONTROLLER.instantiate()
+	voip_controller.owner_id = name.to_int()
+	voip_controller.name = str("voip", voip_controller.owner_id)
+	voip_controller.output = voice_output
+	add_child(voip_controller)
 
 func _physics_process(delta: float):
 	if is_multiplayer_authority():
@@ -74,7 +83,7 @@ func _physics_process(delta: float):
 
 		move_and_slide()
 
-func _unhandled_key_input(event):
+func _unhandled_key_input(_event):
 	if is_multiplayer_authority() and not is_knocked_out:
 		# Short Raycast events
 		if frame.short_raycast.is_colliding() \
@@ -111,7 +120,7 @@ func _on_sever_cooldown_timeout():
 
 #region Do Functions
 func do_stamina_change(delta: float):
-	var stamina_change = 0
+	var stamina_change = delta * STAMINA_GAIN_MODIFIER_BASE
 
 	if Input.is_action_pressed("sprint") \
 	and not is_severed and not is_knocked_out:
@@ -122,9 +131,6 @@ func do_stamina_change(delta: float):
 
 	if is_knocked_out:
 		stamina_change = delta * STAMINA_GAIN_MODIFIER_OUT
-
-	# Always add base regen
-	stamina_change += delta * STAMINA_GAIN_MODIFIER_BASE
 
 	current_stamina = clampf(current_stamina + stamina_change, 0, MAX_STAMINA)
 	hud.stamina_vignette.set_modulate(Color(1, 1, 1, 1 - (current_stamina / MAX_STAMINA)))

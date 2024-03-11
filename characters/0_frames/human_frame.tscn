@@ -34,11 +34,11 @@ bones/0/rotation = Quaternion(2.66925e-08, 0.707107, 3.09086e-08, 0.707107)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.105483)
 
 [node name="CoreBone" type="PhysicalBone3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.89596e-24, 0, 0, 1, -6.99885e-13, -0.536665, -1.06581e-14)
+transform = Transform3D(1, -3.24185e-14, -2.0117e-21, 3.24185e-14, 1, 6.39488e-14, 1.00585e-21, -1.63425e-13, 1, -7.42517e-13, -0.536664, -6.03961e-14)
 collision_layer = 4
 collision_mask = 4
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.96528e-08, -0.599244, -4.96521e-08)
-body_offset = Transform3D(-4.85702e-16, 8.14604e-08, -1, -5.96243e-09, 1, 8.14603e-08, 1, 5.96243e-09, 4.85702e-16, -8.37517e-10, 0.599244, -4.60799e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.96529e-08, -0.599244, -4.96522e-08)
+body_offset = Transform3D(-4.85702e-16, 8.14604e-08, -1, -5.96243e-09, 1, 8.14603e-08, 1, 5.96243e-09, 4.85702e-16, -8.37503e-10, 0.599244, -4.60799e-08)
 bone_name = "Bone"
 
 [node name="HeadCollision" type="CollisionShape3D" parent="Armature/Skeleton3D/CoreBone" index="0"]
