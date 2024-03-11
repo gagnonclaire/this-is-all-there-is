@@ -27,6 +27,9 @@ script = ExtResource("2_6vsex")
 [node name="Armature" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5416, 0)
 
+[node name="Cube" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.105483)
+
 [node name="CoreBone" type="PhysicalBone3D" parent="Armature/Skeleton3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.580209, 0)
 collision_layer = 4
@@ -36,7 +39,7 @@ body_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555699, 0)
 bone_name = "Bone"
 
 [node name="HeadCollision" type="CollisionShape3D" parent="Armature/Skeleton3D/CoreBone" index="0"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.845323, -0.118703)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.845323, -0.287295)
 shape = SubResource("BoxShape3D_olcqk")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="Armature/Skeleton3D/CoreBone" index="1"]
@@ -44,24 +47,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38213, 0)
 shape = SubResource("CapsuleShape3D_1wngd")
 
 [node name="BodyPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone" index="2"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.9, 0)
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, -0.9, 0)
 
 [node name="human_body1" parent="Armature/Skeleton3D/CoreBone/BodyPivot" index="0" instance=ExtResource("3_dd5gt")]
 
 [node name="LeftFootPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.98805, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.3, -2, 0)
 
 [node name="human_foot1" parent="Armature/Skeleton3D/CoreBone/LeftFootPivot" index="0" instance=ExtResource("4_qseuq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="RightFootPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.98805, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.3, -2, 0)
 
 [node name="human_foot1" parent="Armature/Skeleton3D/CoreBone/RightFootPivot" index="0" instance=ExtResource("4_qseuq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="FrameCamera" type="Camera3D" parent="Armature/Skeleton3D/CoreBone" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907467, -0.306575)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907467, -0.437766)
 
 [node name="InteractRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/FrameCamera" index="0"]
 target_position = Vector3(0, 0, -3)

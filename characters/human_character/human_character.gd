@@ -16,13 +16,12 @@ const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	if main_node.is_host:
-		var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
-		var full_lines: Array = lines_file.get_as_text().split("\n")
-		lines_file.close()
+	var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
+	var full_lines: Array = lines_file.get_as_text().split("\n")
+	lines_file.close()
 
-		# Choose two at random
-		lines = [full_lines[randi() % full_lines.size()], full_lines[randi() % full_lines.size()]]
+	# Choose two at random
+	lines = [full_lines[randi() % full_lines.size()], full_lines[randi() % full_lines.size()]]
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -36,13 +35,12 @@ func _on_speech_timer_timeout():
 	speech_bubble.text = ""
 
 func interacted_with():
+	current_line = (current_line + 1) % 2
 	rpc("speech")
 
 @rpc("any_peer", "call_local")
 func speech():
-	# Increment so it says the other line next time
 	speech_bubble.text = lines[current_line]
-	current_line = (current_line + 1) % 2
 
 	# Start the timer to clear text
 	speech_timer.start()

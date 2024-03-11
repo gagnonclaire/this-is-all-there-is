@@ -15,11 +15,6 @@ func _ready():
 	world_node = WORLD.instantiate()
 	add_child(main_menu_node)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-	#print(is_host)
-
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("menu"):
 		get_tree().quit()

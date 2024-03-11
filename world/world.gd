@@ -32,7 +32,6 @@ func start_server():
 func add_player(peer_id):
 	var player: CharacterBody3D = PLAYER.instantiate()
 	player.name = str(peer_id)
-	#rpc("sync_load_map", current_map)
 	add_child(player)
 
 func remove_player(peer_id):
@@ -40,11 +39,8 @@ func remove_player(peer_id):
 	if player:
 		player.queue_free()
 
-func debug_spawn(position: Vector3):
-	rpc("add_human_npc", position)
-
-@rpc("any_peer", "call_local")
-func add_human_npc(position: Vector3):
+func debug_spawn(position: Vector3, rotation: Vector3):
 	var npc: CharacterBody3D = HUMAN.instantiate()
-	npc.position = position
-	add_child(npc)
+	npc.set_position(position)
+	npc.set_rotation(rotation)
+	add_child(npc, true)

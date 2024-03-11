@@ -1,11 +1,12 @@
 extends CharacterBody3D
 
 const SPEED: float = 5.0
-const SPRINT_MODIFIER: float = 2.0
+const SPRINT_MODIFIER: float = 3.0
 const MAX_STAMINA: float = 100.0
 
 @onready var hud: CanvasLayer = $HUD
 @onready var stamina_vignette: TextureRect = $HUD/Control/StaminaVignette
+@onready var unstuck_vignette: TextureRect = $HUD/Control/UnstuckVignette
 @onready var physics_collision: CollisionShape3D = $PhysicsCollider
 
 # Get references to frame nodes
@@ -20,6 +21,7 @@ const MAX_STAMINA: float = 100.0
 
 @onready var current_stamina: float = MAX_STAMINA
 @onready var is_knocked_out: bool = false
+@onready var unstuck_progress: float = 0.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -36,9 +38,6 @@ func _ready():
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
-		if not main_node.is_host:
-			print(global_position)
-
 		# Add gravity
 		if not is_on_floor():
 			velocity.y -= gravity * delta
@@ -47,9 +46,11 @@ func _physics_process(delta):
 		var current_sprint_mod: float = 1.0
 		if Input.is_action_pressed("sprint") and current_stamina > 0 and not is_knocked_out:
 			current_sprint_mod = SPRINT_MODIFIER
-			current_stamina = clampf(current_stamina - (delta * 25), 0, MAX_STAMINA)
+			current_stamina = clampf(current_stamina - (delta * 10.0), 0, MAX_STAMINA)
+		elif not is_knocked_out:
+			current_stamina = clampf(current_stamina + (delta * 5.0), 0, MAX_STAMINA)
 		else:
-			current_stamina = clampf(current_stamina + (delta * 10), 0, MAX_STAMINA)
+			current_stamina = clampf(current_stamina + (delta * 25.0), 0, MAX_STAMINA)
 
 		# Update stamina vignette
 		stamina_vignette.set_modulate(Color(1, 1, 1, 1 - (current_stamina / MAX_STAMINA)))
@@ -63,6 +64,17 @@ func _physics_process(delta):
 		elif is_knocked_out and current_stamina == MAX_STAMINA:
 			rpc("stop_ragdoll")
 			return
+
+		# Unstuck mechanic, want this to be blocked when knocked out
+		if Input.is_action_pressed("unstuck"):
+			unstuck_progress = clampf(unstuck_progress + (delta * 50.0), 0, 100.0)
+		else:
+			unstuck_progress = clampf(unstuck_progress - (delta * 100.0), 0, 100.0)
+
+		unstuck_vignette.set_modulate(Color(1, 1, 1, (unstuck_progress / 100.0)))
+
+		if unstuck_progress == 100.0:
+			rpc("unstuck")
 
 		# Basic movement
 		var input_dir = Input.get_vector("left", "right", "forward", "backward")
@@ -92,8 +104,10 @@ func _unhandled_input(event):
 					hit_object.interacted_with()
 
 		# Debug events
-		if Input.is_action_just_pressed("debug_spawn"):
-			world_node.debug_spawn(Vector3(randi_range(-25,25), 0, randi_range(-25,25)))
+		if Input.is_action_just_pressed("debug_spawn") and main_node.is_host:
+			var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
+			var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
+			world_node.debug_spawn(random_position, random_rotation)
 
 @rpc("any_peer", "call_local")
 func start_ragdoll():
@@ -116,3 +130,8 @@ func stop_ragdoll():
 	set_global_position(bone_position)
 	physics_collision.set_disabled(false)
 	is_knocked_out = false
+
+@rpc("any_peer", "call_local")
+func unstuck():
+	set_global_position(Vector3.ZERO)
+	unstuck_progress = 0.0
