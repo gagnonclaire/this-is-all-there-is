@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgd0dypjq6ul"]
+
+[ext_resource type="Script" path="res://characters/player_character/player.gd" id="1_wttkl"]
+[ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="2_jio5s"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/reticule.png-dede4b0f0dc2de985978a85e9cd7a9ec.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ccw5d"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/stamina_vignette.png-21104bbd41dc8d7c3309f3100586a5e7.ctex"
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30qq8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("HumanFrame:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("HumanFrame:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kds0n"]
+radius = 0.4
+height = 3.0
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 0
+script = ExtResource("1_wttkl")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Reticule" type="TextureRect" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_1diql")
+stretch_mode = 3
+
+[node name="StaminaVignette" type="TextureRect" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_ccw5d")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_30qq8")
+
+[node name="HumanFrame" parent="." instance=ExtResource("2_jio5s")]
+unique_name_in_owner = true
+
+[node name="PhysicsCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_kds0n")

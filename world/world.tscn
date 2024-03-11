@@ -5,21 +5,22 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_oqlnp"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_or6ky"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vucmu"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [node name="World" type="Node"]
 script = ExtResource("1_axlw3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
 mesh = SubResource("PlaneMesh_oqlnp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
 collision_layer = 5
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_or6ky")
+shape = SubResource("ConcavePolygonShape3D_vucmu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_rdtky")
@@ -28,12 +29,6 @@ environment = ExtResource("2_rdtky")
 transform = Transform3D(1, 0, 0, 0, 0.700212, 0.713935, 0, -0.713935, 0.700212, 0, 4.2619, 0)
 shadow_enabled = true
 
-[node name="NPCSpawn" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://characters/player/player.tscn")
+_spawnable_scenes = PackedStringArray("res://characters/player_character/player.tscn")
 spawn_path = NodePath("..")
-
-[connection signal="timeout" from="NPCSpawn" to="." method="_on_npc_spawn_timeout"]

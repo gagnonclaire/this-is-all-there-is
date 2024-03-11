@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://dash3q2g541do"]
+
+[ext_resource type="PackedScene" uid="uid://cspcqus2t4hnj" path="res://characters/0_parts/human_head.blend" id="1_f76a0"]
+[ext_resource type="Script" path="res://characters/0_frames/human_frame.gd" id="2_6vsex"]
+[ext_resource type="PackedScene" uid="uid://nwyih3hp3q6h" path="res://characters/0_parts/human_body1.blend" id="3_dd5gt"]
+[ext_resource type="PackedScene" uid="uid://8rnoeekqfbn8" path="res://characters/0_parts/human_foot1.blend" id="4_qseuq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_olcqk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1wngd"]
+radius = 0.25
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_trosj"]
+properties/0/path = NodePath("Armature/Skeleton3D/CoreBone:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Armature/Skeleton3D/CoreBone:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Armature/Skeleton3D/CoreBone/FrameCamera:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="HumanFrame" instance=ExtResource("1_f76a0")]
+script = ExtResource("2_6vsex")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5416, 0)
+
+[node name="CoreBone" type="PhysicalBone3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.580209, 0)
+collision_layer = 4
+collision_mask = 4
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.555699, 0)
+body_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555699, 0)
+bone_name = "Bone"
+
+[node name="HeadCollision" type="CollisionShape3D" parent="Armature/Skeleton3D/CoreBone" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.845323, -0.118703)
+shape = SubResource("BoxShape3D_olcqk")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="Armature/Skeleton3D/CoreBone" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38213, 0)
+shape = SubResource("CapsuleShape3D_1wngd")
+
+[node name="BodyPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone" index="2"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.9, 0)
+
+[node name="human_body1" parent="Armature/Skeleton3D/CoreBone/BodyPivot" index="0" instance=ExtResource("3_dd5gt")]
+
+[node name="LeftFootPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.98805, 0)
+
+[node name="human_foot1" parent="Armature/Skeleton3D/CoreBone/LeftFootPivot" index="0" instance=ExtResource("4_qseuq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="RightFootPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.98805, 0)
+
+[node name="human_foot1" parent="Armature/Skeleton3D/CoreBone/RightFootPivot" index="0" instance=ExtResource("4_qseuq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="FrameCamera" type="Camera3D" parent="Armature/Skeleton3D/CoreBone" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907467, -0.306575)
+
+[node name="InteractRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/FrameCamera" index="0"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="1"]
+replication_config = SubResource("SceneReplicationConfig_trosj")

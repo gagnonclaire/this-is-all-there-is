@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://tbxohxkqgd04"
-path="res://.godot/imported/body.blend-fed73bbdf712b621d3a25f919efe59a4.scn"
+uid="uid://8rnoeekqfbn8"
+path="res://.godot/imported/human_foot1.blend-424419979f29ca4b85de9d9303e1f911.scn"
 
 [deps]
 
-source_file="res://characters/models/body.blend"
-dest_files=["res://.godot/imported/body.blend-fed73bbdf712b621d3a25f919efe59a4.scn"]
+source_file="res://characters/0_parts/human_foot1.blend"
+dest_files=["res://.godot/imported/human_foot1.blend-424419979f29ca4b85de9d9303e1f911.scn"]
 
 [params]
 

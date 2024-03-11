@@ -4,14 +4,16 @@ const SPEED: float = 5.0
 const SPRINT_MODIFIER: float = 2.0
 const MAX_STAMINA: float = 100.0
 
-@onready var camera: Camera3D = $HeadPosition/CameraPivot/Camera3D
-@onready var interact_raycast: RayCast3D = $HeadPosition/CameraPivot/Camera3D/InteractRaycast
+@onready var hud: CanvasLayer = $HUD
 @onready var stamina_vignette: TextureRect = $HUD/Control/StaminaVignette
-@onready var player_collision: CollisionShape3D = $CollisionShape3D
+@onready var physics_collision: CollisionShape3D = $PhysicsCollider
 
-@onready var player_skeleton: Skeleton3D = $PlayerSkeleton
-@onready var head_bone: PhysicalBone3D = $PlayerSkeleton/HeadBone
-@onready var body_bone: PhysicalBone3D = $PlayerSkeleton/BodyBone
+# Get references to frame nodes
+@onready var frame: Node3D = $HumanFrame
+@onready var skeleton: Skeleton3D = frame.skeleton
+@onready var core_bone: PhysicalBone3D = frame.core_bone
+@onready var camera: Camera3D = frame.camera
+@onready var interact_raycast: RayCast3D = frame.interact_raycast
 
 @onready var world_node: Node = get_parent()
 @onready var main_node: Node = world_node.get_parent()
@@ -28,21 +30,20 @@ func _enter_tree():
 func _ready():
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		hud.show()
+
 		camera.current = true
-
-		#anim_player_hands.play("IdleHands")
-
-		# Set up bones
-		player_skeleton.add_bone(head_bone.get_bone_id())
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
-		# Add the gravity.
+		if not main_node.is_host:
+			print(global_position)
+
+		# Add gravity
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 
 		# Sprint check and stamina cost/regen
-		print(current_stamina)
 		var current_sprint_mod: float = 1.0
 		if Input.is_action_pressed("sprint") and current_stamina > 0 and not is_knocked_out:
 			current_sprint_mod = SPRINT_MODIFIER
@@ -55,22 +56,15 @@ func _physics_process(delta):
 
 		# Check knockout state, prevent movement
 		if current_stamina == 0:
-			player_skeleton.physical_bones_start_simulation()
-			player_collision.set_disabled(true)
-			is_knocked_out = true
+			rpc("start_ragdoll")
 			return
 		elif is_knocked_out and current_stamina < MAX_STAMINA:
 			return
 		elif is_knocked_out and current_stamina == MAX_STAMINA:
-			player_skeleton.physical_bones_stop_simulation()
-			player_collision.set_disabled(false)
-			is_knocked_out = false
+			rpc("stop_ragdoll")
 			return
 
-
-
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
+		# Basic movement
 		var input_dir = Input.get_vector("left", "right", "forward", "backward")
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
@@ -83,7 +77,7 @@ func _physics_process(delta):
 		move_and_slide()
 
 func _unhandled_input(event):
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() and not is_knocked_out:
 		# Camera movement
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x *.005)
@@ -94,8 +88,31 @@ func _unhandled_input(event):
 		if Input.is_action_just_pressed("interact"):
 			if interact_raycast.is_colliding():
 				var hit_object: PhysicsBody3D = interact_raycast.get_collider()
-				hit_object.interacted_with()
+				if hit_object.is_in_group("interactable"):
+					hit_object.interacted_with()
 
 		# Debug events
 		if Input.is_action_just_pressed("debug_spawn"):
-			world_node.debug_spawn(Vector3(randi_range(-9,9), 0, randi_range(-9,9)))
+			world_node.debug_spawn(Vector3(randi_range(-25,25), 0, randi_range(-25,25)))
+
+@rpc("any_peer", "call_local")
+func start_ragdoll():
+	skeleton.physical_bones_start_simulation()
+	physics_collision.set_disabled(true)
+	is_knocked_out = true
+
+@rpc("any_peer", "call_local")
+func stop_ragdoll():
+	# Get the final position of the core bone
+	var bone_position: Vector3 = core_bone.get_global_position()
+
+	# Weird hack to reset bones
+	# When you start a simulation it seems that all bones reset
+	skeleton.physical_bones_stop_simulation()
+	skeleton.physical_bones_start_simulation()
+	skeleton.physical_bones_stop_simulation()
+
+# Correct position and return to normal
+	set_global_position(bone_position)
+	physics_collision.set_disabled(false)
+	is_knocked_out = false

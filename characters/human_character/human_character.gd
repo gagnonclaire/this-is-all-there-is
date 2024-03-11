@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 const SPEED = 5.0
-const NPC_LINES_PATH: String = "res://characters/npc_lines.txt"
+const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.txt"
 
 @onready var speech_bubble: Label3D = $SpeechBubble
 @onready var speech_timer: Timer = $SpeechTimer
