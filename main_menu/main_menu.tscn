@@ -1,78 +1,124 @@
-[gd_scene load_steps=6 format=3 uid="uid://2wm0f8ckxv6q"]
+[gd_scene load_steps=5 format=3 uid="uid://2wm0f8ckxv6q"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_xgfpv"]
-[ext_resource type="PackedScene" uid="uid://3xyb4255hvgd" path="res://main_menu/menu_scene_1.tscn" id="2_nsujp"]
-[ext_resource type="FontFile" uid="uid://d0kvl1quvdwi6" path="res://fonts/sylfaen.ttf" id="6_bnocc"]
+[ext_resource type="Theme" uid="uid://usdneyjl5qut" path="res://fonts/title_theme.tres" id="2_bsl24"]
 [ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="6_i5klj"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_p22nc"]
-font = ExtResource("6_bnocc")
+[sub_resource type="LabelSettings" id="LabelSettings_a3s81"]
 font_size = 32
-outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_xgfpv")
 
-[node name="MenuScene1" parent="." instance=ExtResource("2_nsujp")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="Title" type="Label" parent="CanvasLayer"]
+offset_left = 237.0
+offset_top = 10.0
+offset_right = 402.0
+offset_bottom = 43.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2_bsl24")
+text = "Sense of Self"
+label_settings = SubResource("LabelSettings_a3s81")
+horizontal_alignment = 1
+justification_flags = 0
+
+[node name="BaseMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_i5klj")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BaseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Title" type="Label" parent="CanvasLayer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Sense of Self"
-label_settings = SubResource("LabelSettings_p22nc")
-horizontal_alignment = 1
-justification_flags = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BaseMenu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 25
 
-[node name="NewGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="NewGameButton" type="Button" parent="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "New Game"
 
-[node name="LoadGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="LoadGameButton" type="Button" parent="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Load Game"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="JoinGameButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="JoinGameButton" type="Button" parent="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join Game"
 
-[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-placeholder_text = "Enter IP Address"
-
-[node name="SettingsButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
 
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/JoinGameButton" to="." method="_on_join_game_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="JoinGameMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 174.0
+offset_top = 44.0
+offset_right = 625.0
+offset_bottom = 286.0
+theme = ExtResource("6_i5klj")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/JoinGameMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/JoinGameMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/JoinGameMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Game hosted on port 9999
+Leave blank to join localhost"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/JoinGameMenu/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/JoinGameMenu/Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Enter IP Address"
+alignment = 1
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/JoinGameMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[connection signal="pressed" from="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer/JoinGameButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BaseMenu/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/JoinGameMenu/Panel/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

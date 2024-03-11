@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cothcbqc1oltw"]
+[gd_scene load_steps=3 format=3 uid="uid://cothcbqc1oltw"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_qitro"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mp6fa"]
+properties/0/path = NodePath(".:world")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Main" type="Node"]
 script = ExtResource("1_qitro")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mp6fa")
