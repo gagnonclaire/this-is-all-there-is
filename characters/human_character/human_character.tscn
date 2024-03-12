@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://btjk0c3rc8lhv"]
+[gd_scene load_steps=5 format=3 uid="uid://btjk0c3rc8lhv"]
 
 [ext_resource type="Script" path="res://characters/human_character/human_character.gd" id="1_q1py3"]
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="2_jcn47"]
-[ext_resource type="FontFile" uid="uid://t4dji8hg75hf" path="res://fonts/ebrima.ttf" id="2_t22c6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85wp3"]
 properties/0/path = NodePath(".:lines")
@@ -26,10 +25,6 @@ height = 3.25
 collision_layer = 2
 script = ExtResource("1_q1py3")
 
-[node name="SpeechTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_85wp3")
 
@@ -38,10 +33,3 @@ replication_config = SubResource("SceneReplicationConfig_85wp3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67311, 0)
 shape = SubResource("CapsuleShape3D_bkryn")
-
-[node name="SpeechBubble" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.53388, 0)
-billboard = 1
-font = ExtResource("2_t22c6")
-
-[connection signal="timeout" from="SpeechTimer" to="." method="_on_speech_timer_timeout"]

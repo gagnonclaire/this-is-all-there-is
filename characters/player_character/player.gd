@@ -9,10 +9,10 @@ const STAMINA_GAIN_MODIFIER_BASE: float = 5.0
 const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
 const VOIP_CONTROLLER: PackedScene = preload("res://characters/player_character/voip_controller.tscn")
 
-@onready var voice_output: AudioStreamPlayer3D = $VoiceOutput
+#@onready var voice_output: AudioStreamPlayer3D = $VoiceOutput
 
 @onready var hud: CanvasLayer = $HUD
-@onready var physics_collision: CollisionShape3D = $PhysicsCollider
+@onready var world_collision: CollisionShape3D = $WorldCollider
 @onready var sever_cooldown_timer: Timer = $SeverCooldown
 @onready var frame: Node3D = $HumanFrame
 @onready var camera: Camera3D = frame.camera
@@ -20,14 +20,13 @@ const VOIP_CONTROLLER: PackedScene = preload("res://characters/player_character/
 @onready var world_node: Node = get_parent()
 @onready var main_node: Node = world_node.get_parent()
 
-@onready var current_stamina: float = MAX_STAMINA
-@onready var unstuck_progress: float = 0.0
-@onready var sever_target: Object = null
+var current_stamina: float = MAX_STAMINA
+var unstuck_progress: float = 0.0
+var sever_target: Object = null
 
-@onready var is_knocked_out: bool = false
-@onready var is_severed: bool = false
-
-@onready var can_switch_cameras: bool = true
+var is_knocked_out: bool = false
+var is_severed: bool = false
+var can_switch_cameras: bool = true
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -52,15 +51,14 @@ func _ready():
 
 func _physics_process(delta: float):
 	if is_multiplayer_authority():
-		# Add gravity
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 
 		do_stamina_change(delta)
-		do_knockout()
+		do_knockout_check()
 
 		# Unstuck mechanic, want this to be blocked when knocked out
-		if Input.is_action_pressed("unstuck"):
+		if Input.is_action_pressed("unstuck") and not is_knocked_out:
 			unstuck_progress = clampf(unstuck_progress + (delta * 50.0), 0, 100.0)
 		else:
 			unstuck_progress = clampf(unstuck_progress - (delta * 100.0), 0, 100.0)
@@ -111,8 +109,8 @@ func _unhandled_input(event):
 		# Camera movement
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x *.005)
-			camera.rotate_x(-event.relative.y *.005)
-			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+			frame.head_pivot.rotate_x(-event.relative.y *.005)
+			frame.head_pivot.rotation.x = clamp(frame.head_pivot.rotation.x, -PI/2, PI/2)
 #endregion
 
 #region Signal Callbacks
@@ -120,7 +118,7 @@ func _on_sever_cooldown_timeout():
 	can_switch_cameras = true
 #endregion
 
-#region Do Functions
+#region Action Functions
 func do_stamina_change(delta: float):
 	var stamina_change = delta * STAMINA_GAIN_MODIFIER_BASE
 
@@ -137,16 +135,28 @@ func do_stamina_change(delta: float):
 	current_stamina = clampf(current_stamina + stamina_change, 0, MAX_STAMINA)
 	hud.stamina_vignette.set_modulate(Color(1, 1, 1, 1 - (current_stamina / MAX_STAMINA)))
 
-func do_knockout():
-	# Check knockout state, prevent movement
+func do_knockout_check():
 	if current_stamina == 0 and not is_knocked_out:
-		if is_severed:
-			un_sever()
-		is_knocked_out = true
-		rpc("start_ragdoll")
+		do_knockout()
 	elif is_knocked_out and current_stamina == MAX_STAMINA:
-		is_knocked_out = false
-		rpc("stop_ragdoll")
+		do_un_knockout()
+
+func do_knockout():
+	if is_severed:
+		un_sever()
+	is_knocked_out = true
+
+	frame.start_ragdoll.rpc()
+	world_collision.set_disabled(true)
+
+func do_un_knockout():
+	# Get core bone so we can update new world position
+	var bone_position: Vector3 = frame.core_bone.get_global_position()
+
+	frame.stop_ragdoll.rpc()
+	set_global_position(bone_position)
+	world_collision.set_disabled(false)
+	is_knocked_out = false
 
 func do_short_raycast_events(target: Object):
 	if Input.is_action_just_pressed("interact") \
@@ -157,32 +167,6 @@ func do_short_raycast_events(target: Object):
 	and target.is_in_group("possessable") \
 	and can_switch_cameras:
 		sever_to(target)
-#endregion
-
-@rpc("any_peer", "call_local")
-func start_ragdoll():
-	frame.skeleton.physical_bones_start_simulation()
-	physics_collision.set_disabled(true)
-
-@rpc("any_peer", "call_local")
-func stop_ragdoll():
-	# Get the final position of the core bone
-	var bone_position: Vector3 = frame.core_bone.get_global_position()
-
-	# Weird hack to reset bones
-	# When you start a simulation it seems that all bones reset
-	frame.skeleton.physical_bones_stop_simulation()
-	frame.skeleton.physical_bones_start_simulation()
-	frame.skeleton.physical_bones_stop_simulation()
-
-# Correct position and return to normal
-	set_global_position(bone_position)
-	physics_collision.set_disabled(false)
-
-@rpc("any_peer", "call_local")
-func unstuck():
-	set_global_position(Vector3.ZERO)
-	unstuck_progress = 0.0
 
 func sever_to(target: Object):
 	camera.current = false
@@ -203,3 +187,13 @@ func un_sever():
 
 	can_switch_cameras = false
 	sever_cooldown_timer.start()
+#endregion
+
+#region RPCs
+@rpc("any_peer", "call_local")
+func unstuck():
+	if is_severed:
+		un_sever()
+	set_global_position(Vector3.ZERO)
+	unstuck_progress = 0.0
+#endregion

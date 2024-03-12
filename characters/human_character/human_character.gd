@@ -3,28 +3,24 @@ extends CharacterBody3D
 const SPEED = 5.0
 const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.txt"
 
-@export var lines: Array
-@export var current_line: int = 0
-
 @onready var frame: Node3D = $HumanFrame
 @onready var camera: Camera3D = frame.camera
-@onready var speech_bubble: Label3D = $SpeechBubble
-@onready var speech_timer: Timer = $SpeechTimer
 
-@onready var world_node: Node = get_parent()
-@onready var main_node: Node = world_node.get_parent()
+@onready var main_node: Node = get_tree().get_root().get_child(0)
+
+var lines: Array
+var current_line: int = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	# Read from lines file
-	var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
-	var full_lines: Array = lines_file.get_as_text().split("\n")
-	lines_file.close()
-
-	# Choose two at random
-	lines = [full_lines[randi() % full_lines.size()], full_lines[randi() % full_lines.size()]]
+	if main_node.is_host:
+		var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
+		var full_lines: Array = lines_file.get_as_text().split("\n")
+		lines = [full_lines[randi() % full_lines.size()], full_lines[randi() % full_lines.size()]]
+		lines_file.close()
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -33,17 +29,11 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func _on_speech_timer_timeout():
-	# Clear text on timeout
-	speech_bubble.text = ""
-
 func interacted_with():
-	rpc("speech")
+	frame.set_speech_label.rpc(lines[current_line])
+	rpc("update_current_line")
 
 @rpc("any_peer", "call_local")
-func speech():
-	current_line = (current_line + 1) % 2
-	speech_bubble.text = lines[current_line]
-
-	# Start the timer to clear text
-	speech_timer.start()
+func update_current_line():
+	if main_node.is_host:
+		current_line = (current_line + 1) % 2
