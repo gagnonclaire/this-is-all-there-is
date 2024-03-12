@@ -7,10 +7,18 @@ extends Node3D
 @onready var short_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/ShortRayCast
 @onready var speech_label: Label3D = $SpeechLabel
 @onready var speech_clear_timer: Timer = $SpeechClearTimer
+@onready var speech_loop_timer: Timer = $SpeechLoopTimer
+@onready var speech_loop_end_timer: Timer = $SpeechLoopEndTimer
 @onready var speech_audio_stream: AudioStreamPlayer3D = $SpeechAudioStream
 
 func _on_speech_clear_timer_timeout():
 	speech_label.set_text("")
+
+func _on_speech_loop_timer_timeout():
+	speech_audio_stream.play()
+
+func _on_speech_loop_end_timer_timeout():
+	speech_loop_timer.stop()
 
 #region Frame Ragdoll Functions
 @rpc("any_peer", "call_local")
@@ -28,11 +36,16 @@ func stop_ragdoll():
 
 @rpc("any_peer", "call_local")
 func set_speech_label(text: String, time: float = 3.0):
-	# Update overhead text and set clear timer
 	speech_label.set_text(text)
+	speech_loop_timer.start()
+
 	speech_clear_timer.set_wait_time(time)
 	speech_clear_timer.start()
 
-	# Play sound on loop for some time based on string length?
+	speech_loop_end_timer.set_wait_time(text.length() / 20.0)
+	speech_loop_end_timer.start()
+
+
+
 
 
