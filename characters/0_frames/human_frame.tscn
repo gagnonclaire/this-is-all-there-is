@@ -32,7 +32,7 @@ packet_sequence = SubResource("OggPacketSequence_33n52")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jdr33"]
 playback_mode = 1
-random_pitch = 1.2
+random_pitch = 1.5
 random_volume_offset_db = 2.0
 streams_count = 1
 stream_0/stream = SubResource("AudioStreamOggVorbis_s5y3l")
@@ -83,15 +83,15 @@ font = ExtResource("2_ad6by")
 [node name="SpeechClearTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="SpeechLoopTimer" type="Timer" parent="."]
+[node name="SpeechAudioLoopTimer" type="Timer" parent="."]
 wait_time = 0.1
 
-[node name="SpeechLoopEndTimer" type="Timer" parent="."]
+[node name="SpeechAudioLoopEndTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="SpeechAudioStream" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_jdr33")
-unit_size = 5.0
+unit_size = 7.0
 bus = &"CharacterSpeech"
 doppler_tracking = 2
 
@@ -164,5 +164,5 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.3, -2, 0)
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [connection signal="timeout" from="SpeechClearTimer" to="." method="_on_speech_clear_timer_timeout"]
-[connection signal="timeout" from="SpeechLoopTimer" to="." method="_on_speech_loop_timer_timeout"]
-[connection signal="timeout" from="SpeechLoopEndTimer" to="." method="_on_speech_loop_end_timer_timeout"]
+[connection signal="timeout" from="SpeechAudioLoopTimer" to="." method="_on_speech_audio_loop_timer_timeout"]
+[connection signal="timeout" from="SpeechAudioLoopEndTimer" to="." method="_on_speech_audio_loop_end_timer_timeout"]

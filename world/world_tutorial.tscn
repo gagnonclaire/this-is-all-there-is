@@ -85,7 +85,7 @@ Exit:	 esc"
 horizontal_alignment = 0
 
 [node name="DebugControlText" type="Label3D" parent="TextWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.34059, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.20871, 0, 0)
 shaded = true
 texture_filter = 0
 text = "Debug Controls:
@@ -93,7 +93,7 @@ Spawn NPC: 	`
 Debug  Cam: 1"
 horizontal_alignment = 0
 
-[node name="DummyText" type="Label3D" parent="TextWalls"]
+[node name="SeverText" type="Label3D" parent="TextWalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.92555, 0, 0)
 shaded = true
 texture_filter = 0
@@ -106,7 +106,12 @@ to your own body
 
 This isn't a real person
 and doesn't cost stamina
-to sever to"
+to sever to
+
+More powerful beings
+ will drain your stamina
+ while you are severed 
+to them"
 horizontal_alignment = 0
 
 [node name="StaminaText" type="Label3D" parent="TextWalls"]
@@ -129,7 +134,7 @@ while knocked out
 "
 horizontal_alignment = 0
 
-[node name="DummyText2" type="Label3D" parent="TextWalls"]
+[node name="InteractText" type="Label3D" parent="TextWalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04977, 0, 0)
 shaded = true
 texture_filter = 0
@@ -138,7 +143,7 @@ at a valid target to
 interact with it"
 horizontal_alignment = 0
 
-[node name="BaseControlText2" type="Label3D" parent="TextWalls"]
+[node name="WakeUpText" type="Label3D" parent="TextWalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86505, 0, 0)
 shaded = true
 texture_filter = 0
@@ -152,6 +157,16 @@ while severed
 Waking up returns 
 you to your body
 in a safe place "
+horizontal_alignment = 0
+
+[node name="ChatText" type="Label3D" parent="TextWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19966, 0, 0)
+shaded = true
+texture_filter = 0
+text = "T opens a text chatentry line
+Enter sends the current message
+B babbles (important)
+"
 horizontal_alignment = 0
 
 [node name="HumanDummyCharacter" parent="." instance=ExtResource("6_pok4k")]

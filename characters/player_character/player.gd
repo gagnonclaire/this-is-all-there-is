@@ -96,6 +96,11 @@ func _unhandled_key_input(_event):
 				hud.text_chat_entry.show()
 				hud.text_chat_entry.grab_focus()
 
+		# Generic speech
+		if Input.is_action_just_pressed("babble") \
+		and not is_knocked_out:
+			frame.start_speach_audio.rpc(1)
+
 		# Other events
 		if Input.is_action_just_pressed("debug_spawn"):
 			rpc_id(1, "debug_spawn")
