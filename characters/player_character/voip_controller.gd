@@ -1,9 +1,14 @@
 extends Node3D
 
+# VOIP is currently on hold, plan is to try steam integration from
+# https://godotsteam.com/tutorials/voice/#__tabbed_1_2
+# Doing raw data transfer via RPCs was not performant
+
+const MAX_AMPLITUDE: float = 0.0
+const INPUT_THRESHOLD: float = 0.005
+
 @onready var input: AudioStreamPlayer3D = $Input
 @onready var player_node: CharacterBody3D = get_parent()
-
-var input_threshold: float = 0.005
 
 var index: int
 var capture: AudioEffectCapture
@@ -44,10 +49,10 @@ func process_recorded_audio():
 
 		for i in range(data.size()):
 			var data_value = (data[i].x + data[i].y) / 2
-			max_amplitude = max(data_value, max_amplitude)
+			max_amplitude = max(data_value, MAX_AMPLITUDE)
 			packed_data[i] = data_value
 
-		if max_amplitude > input_threshold:
+		if max_amplitude > INPUT_THRESHOLD:
 			rpc("send_data", packed_data)
 			if player_node.is_severed:
 				send_data(packed_data)

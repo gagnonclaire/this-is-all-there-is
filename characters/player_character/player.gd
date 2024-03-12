@@ -43,11 +43,12 @@ func _ready():
 
 		camera.current = true
 
-	var voip_controller: Node = VOIP_CONTROLLER.instantiate()
-	voip_controller.owner_id = name.to_int()
-	voip_controller.name = str("voip", voip_controller.owner_id)
-	voip_controller.output = voice_output
-	add_child(voip_controller)
+	# No voip for now, see voip_controller node
+	#var voip_controller: Node = VOIP_CONTROLLER.instantiate()
+	#voip_controller.owner_id = name.to_int()
+	#voip_controller.name = str("voip", voip_controller.owner_id)
+	#voip_controller.output = voice_output
+	#add_child(voip_controller)
 
 func _physics_process(delta: float):
 	if is_multiplayer_authority():
