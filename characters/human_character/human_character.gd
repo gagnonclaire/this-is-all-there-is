@@ -1,12 +1,14 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
+const SEVER_STAMINA_DRAIN_RATE: float = 15.0
+const SPEED = 1.0
 const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.txt"
 
 @onready var frame: Node3D = $HumanFrame
 @onready var camera: Camera3D = frame.camera
 
 @onready var main_node: Node = get_tree().get_root().get_child(0)
+@onready var current_destination: Vector3 = get_global_position()
 
 var lines: Array
 var current_line: int = 0
@@ -25,11 +27,22 @@ func _ready():
 		lines_file.close()
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+	if main_node.is_host:
+		if not is_on_floor():
+			velocity.y -= gravity * delta
 
-	move_and_slide()
+		var direction = global_position.direction_to(current_destination)
+		if global_position.distance_to(current_destination) < 0.1:
+			velocity = Vector3.ZERO
+		else:
+			velocity = direction * SPEED
+
+		move_and_slide()
+
+func _on_destination_update_timer_timeout():
+	if main_node.is_host:
+		current_destination += Vector3(randf_range(-2.5, 2.5), 0, randf_range(-2.5, 2.5))
+		look_at(current_destination)
 
 func interacted_with():
 	frame.set_speech_label.rpc(lines[current_line])

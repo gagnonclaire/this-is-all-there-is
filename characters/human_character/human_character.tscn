@@ -33,3 +33,9 @@ replication_config = SubResource("SceneReplicationConfig_85wp3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67311, 0)
 shape = SubResource("CapsuleShape3D_bkryn")
+
+[node name="DestinationUpdateTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="DestinationUpdateTimer" to="." method="_on_destination_update_timer_timeout"]

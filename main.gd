@@ -1,7 +1,7 @@
 extends Node
 
 const MAIN_MENU: PackedScene = preload("res://main_menu/main_menu.tscn")
-const WORLD: PackedScene = preload("res://world/world_debug.tscn")
+const WORLD: PackedScene = preload("res://world/world_tutorial.tscn")
 
 @export var main_menu_node: Node
 @export var world_node: Node

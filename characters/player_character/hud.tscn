@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpxgt3rbb7fwy"]
+[gd_scene load_steps=7 format=3 uid="uid://bpxgt3rbb7fwy"]
 
 [ext_resource type="Script" path="res://characters/player_character/hud.gd" id="1_n2hy3"]
+[ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="2_mjtls"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
 resource_local_to_scene = true
@@ -27,6 +28,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("2_mjtls")
 
 [node name="Reticule" type="TextureRect" parent="Control"]
 layout_mode = 1
@@ -61,3 +63,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CurveTexture_gbonj")
+
+[node name="TextChatEntry" type="LineEdit" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5313
+offset_top = -52.0
+offset_right = 33.5313
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter to send"
+alignment = 1
+max_length = 64
+expand_to_text_length = true

@@ -35,8 +35,8 @@ func _enter_tree():
 func _ready():
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		hud.show()
 
+		hud.show()
 		camera.current = true
 
 func _physics_process(delta: float):
@@ -48,7 +48,9 @@ func _physics_process(delta: float):
 		do_knockout_check()
 
 		# Unstuck mechanic, want this to be blocked when knocked out
-		if Input.is_action_pressed("unstuck") and not is_knocked_out:
+		if Input.is_action_pressed("unstuck") \
+		and not is_knocked_out \
+		and not hud.text_chat_entry.is_visible():
 			unstuck_progress = clampf(unstuck_progress + (delta * 50.0), 0, 100.0)
 		else:
 			unstuck_progress = clampf(unstuck_progress - (delta * 100.0), 0, 100.0)
@@ -59,32 +61,44 @@ func _physics_process(delta: float):
 			rpc("unstuck")
 
 		# Basic movement
-		var current_sprint_mod: float = 1.0
-		if Input.is_action_pressed("sprint") and not is_knocked_out:
-			current_sprint_mod = SPRINT_MODIFIER
-		var input_dir = Input.get_vector("left", "right", "forward", "backward")
-		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		if direction:
-			velocity.x = direction.x * SPEED * current_sprint_mod
-			velocity.z = direction.z * SPEED * current_sprint_mod
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED * current_sprint_mod)
-			velocity.z = move_toward(velocity.z, 0, SPEED * current_sprint_mod)
+		if not hud.text_chat_entry.is_visible():
+			var current_sprint_mod: float = 1.0
+			if Input.is_action_pressed("sprint") and not is_knocked_out:
+				current_sprint_mod = SPRINT_MODIFIER
+			var input_dir = Input.get_vector("left", "right", "forward", "backward")
+			var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+			if direction:
+				velocity.x = direction.x * SPEED * current_sprint_mod
+				velocity.z = direction.z * SPEED * current_sprint_mod
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED * current_sprint_mod)
+				velocity.z = move_toward(velocity.z, 0, SPEED * current_sprint_mod)
 
 		move_and_slide()
 
 func _unhandled_key_input(_event):
-	if is_multiplayer_authority() and not is_knocked_out:
+	if is_multiplayer_authority() \
+	and not is_knocked_out \
+	and not hud.text_chat_entry.is_visible():
 		# Short Raycast events
 		if frame.short_raycast.is_colliding() \
 		and frame.short_raycast.get_collider().is_in_group("short_raycast_target"):
 			do_short_raycast_events(frame.short_raycast.get_collider())
 
+		# Text chat
+		if Input.is_action_just_pressed("text_chat"):
+			if hud.text_chat_entry.is_visible():
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+				hud.text_chat_entry.clear()
+				hud.text_chat_entry.hide()
+			else:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				hud.text_chat_entry.show()
+				hud.text_chat_entry.grab_focus()
+
 		# Other events
-		if Input.is_action_just_pressed("debug_spawn") and main_node.is_host:
-			var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
-			var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
-			world_node.debug_spawn(random_position, random_rotation)
+		if Input.is_action_just_pressed("debug_spawn"):
+			rpc_id(1, "debug_spawn")
 
 		if Input.is_action_just_pressed("change_camera") \
 		and is_severed \
@@ -95,7 +109,9 @@ func _unhandled_key_input(_event):
 			world_node.toggle_debug_camera()
 
 func _unhandled_input(event):
-	if is_multiplayer_authority() and not is_knocked_out:
+	if is_multiplayer_authority() \
+	and not is_knocked_out \
+	and not hud.text_chat_entry.is_visible():
 		# Camera movement
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x *.005)
@@ -113,11 +129,11 @@ func do_stamina_change(delta: float):
 	var stamina_change = delta * STAMINA_GAIN_MODIFIER_BASE
 
 	if Input.is_action_pressed("sprint") \
-	and not is_severed and not is_knocked_out:
+	and not is_knocked_out:
 		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SPRINT
 
 	if is_severed:
-		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SEVER
+		stamina_change -= delta * sever_target.SEVER_STAMINA_DRAIN_RATE
 
 	if is_knocked_out:
 		stamina_change = delta * STAMINA_GAIN_MODIFIER_OUT
@@ -177,6 +193,13 @@ func un_sever():
 
 	can_switch_cameras = false
 	sever_cooldown_timer.start()
+
+func send_message(message: String):
+	if message.length() > 0:
+		frame.set_speech_label.rpc(message)
+
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	hud.text_chat_entry.hide()
 #endregion
 
 #region RPCs
@@ -186,4 +209,10 @@ func unstuck():
 		un_sever()
 	set_global_position(Vector3.ZERO)
 	unstuck_progress = 0.0
+
+@rpc("any_peer", "call_local")
+func debug_spawn():
+	var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
+	var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
+	world_node.debug_spawn(random_position, random_rotation)
 #endregion
