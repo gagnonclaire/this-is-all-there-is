@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dash3q2g541do"]
+[gd_scene load_steps=11 format=3 uid="uid://dash3q2g541do"]
 
 [ext_resource type="Script" path="res://characters/0_frames/human_frame.gd" id="2_6vsex"]
 [ext_resource type="FontFile" uid="uid://t4dji8hg75hf" path="res://fonts/ebrima.ttf" id="2_ad6by"]
@@ -21,6 +21,12 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath("Armature/Skeleton3D/CoreBone/HeadPivot:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jdr33"]
+playback_mode = 1
+random_pitch = 1.2
+streams_count = 1
+stream_0/weight = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_olcqk"]
 
@@ -67,6 +73,10 @@ font = ExtResource("2_ad6by")
 [node name="SpeechClearTimer" type="Timer" parent="."]
 
 [node name="SpeechAudioStream" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_jdr33")
+autoplay = true
+bus = &"CharacterSpeech"
+doppler_tracking = 2
 
 [node name="Armature" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5416, 0)
@@ -74,25 +84,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5416, 0)
 [node name="Skeleton3D" type="Skeleton3D" parent="Armature"]
 bones/0/name = "Bone"
 bones/0/parent = -1
-bones/0/rest = Transform3D(0, -5.96243e-09, 1, 8.14603e-08, 1, 5.96243e-09, -1, 8.14603e-08, 0, 4.96521e-08, -1.13591, -4.96521e-08)
+bones/0/rest = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, -1.13591, 0)
 bones/0/enabled = true
-bones/0/position = Vector3(4.96521e-08, -1.13591, -4.96521e-08)
-bones/0/rotation = Quaternion(2.66925e-08, 0.707107, 3.09086e-08, 0.707107)
+bones/0/position = Vector3(0, -1.13591, 0)
+bones/0/rotation = Quaternion(0, 0.707107, 0, 0.707107)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
 bones/1/parent = 0
-bones/1/rest = Transform3D(1, -4.51609e-15, 2.38419e-07, 4.51609e-15, 1, 3.67098e-15, -2.38419e-07, -3.67098e-15, 1, -2.29741e-15, 1.1114, 1.07617e-15)
+bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1114, 0)
 bones/1/enabled = true
-bones/1/position = Vector3(-2.29741e-15, 1.1114, 1.07617e-15)
-bones/1/rotation = Quaternion(-1.83549e-15, 1.19209e-07, 2.25804e-15, 1)
+bones/1/position = Vector3(0, 1.1114, 0)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/1/scale = Vector3(1, 1, 1)
 
 [node name="CoreBone" type="PhysicalBone3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(1, -3.24185e-14, -2.0117e-21, 3.24185e-14, 1, 6.39488e-14, 1.00585e-21, -1.63425e-13, 1, -7.42517e-13, -0.536664, -6.03961e-14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.536666, 0)
 collision_layer = 4
 collision_mask = 4
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.96529e-08, -0.599244, -4.96522e-08)
-body_offset = Transform3D(-4.85702e-16, 8.14604e-08, -1, -5.96243e-09, 1, 8.14603e-08, 1, 5.96243e-09, 4.85702e-16, -8.37503e-10, 0.599244, -4.60799e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599244, 0)
+body_offset = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0.599244, 0)
 bone_name = "Bone"
 
 [node name="HeadCollision" type="CollisionShape3D" parent="Armature/Skeleton3D/CoreBone"]
@@ -104,33 +114,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38213, 0)
 shape = SubResource("CapsuleShape3D_1wngd")
 
 [node name="HeadPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38769e-14, 0.428056, 6.9955e-14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.428056, 0)
 
 [node name="HeadMesh" type="MeshInstance3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot"]
-transform = Transform3D(1, 3.24185e-14, 2.0117e-21, -3.24185e-14, 1, -6.39488e-14, -1.00586e-21, 1.63425e-13, 1, 7.49389e-13, 0.211969, -0.105483)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.211969, -0.105483)
 mesh = SubResource("ArrayMesh_fwpqb")
 skeleton = NodePath("")
 
 [node name="FrameCamera" type="Camera3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot"]
-transform = Transform3D(1, -3.28762e-34, 1.00585e-21, -6.43231e-35, 1, 9.9476e-14, 0, 0, 1, -1.08448e-14, 0.572942, -0.437766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.572942, -0.437766)
+doppler_tracking = 2
 
 [node name="ShortRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera"]
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 
 [node name="BodyPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone"]
-transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, -0.9, 0)
+transform = Transform3D(-1.5, 0, 0, 0, 1.5, 0, 0, 0, -1.5, 0, -0.9, 0)
 
 [node name="human_body1" parent="Armature/Skeleton3D/CoreBone/BodyPivot" instance=ExtResource("3_dd5gt")]
 
 [node name="LeftFootPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.3, -2, 0)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.3, -2, 0)
 
 [node name="human_foot1" parent="Armature/Skeleton3D/CoreBone/LeftFootPivot" instance=ExtResource("4_qseuq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="RightFootPivot" type="Node3D" parent="Armature/Skeleton3D/CoreBone"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.3, -2, 0)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.3, -2, 0)
 
 [node name="human_foot1" parent="Armature/Skeleton3D/CoreBone/RightFootPivot" instance=ExtResource("4_qseuq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

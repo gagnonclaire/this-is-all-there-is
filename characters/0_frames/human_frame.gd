@@ -28,10 +28,11 @@ func stop_ragdoll():
 
 @rpc("any_peer", "call_local")
 func set_speech_label(text: String, time: float = 3.0):
+	# Update overhead text and set clear timer
 	speech_label.set_text(text)
-
 	speech_clear_timer.set_wait_time(time)
 	speech_clear_timer.start()
 
+	# Play sound on loop for some time based on string length?
 
 
