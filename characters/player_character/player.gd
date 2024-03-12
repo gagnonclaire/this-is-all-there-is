@@ -4,9 +4,10 @@ const SPEED: float = 5.0
 const SPRINT_MODIFIER: float = 3.0
 const MAX_STAMINA: float = 100.0
 const STAMINA_DRAIN_MODIFIER_SPRINT: float = 25.0
-const STAMINA_DRAIN_MODIFIER_SEVER: float = 10.0
 const STAMINA_GAIN_MODIFIER_BASE: float = 5.0
 const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
+
+const SEVER_STAMINA_DRAIN_RATE: float = 25.0
 
 @onready var hud: CanvasLayer = $HUD
 @onready var world_collision: CollisionShape3D = $WorldCollider
