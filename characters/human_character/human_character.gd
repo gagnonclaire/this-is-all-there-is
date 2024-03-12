@@ -19,7 +19,9 @@ func _ready():
 	if main_node.is_host:
 		var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
 		var full_lines: Array = lines_file.get_as_text().split("\n")
-		lines = [full_lines[randi() % full_lines.size()], full_lines[randi() % full_lines.size()]]
+		var line1: int = randi_range(0, full_lines.size() - 1)
+		var line2: int = randi_range(0, full_lines.size() - 1)
+		lines = [full_lines[line1], full_lines[line2]]
 		lines_file.close()
 
 func _physics_process(delta):
