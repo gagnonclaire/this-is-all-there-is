@@ -4,13 +4,16 @@ extends Node3D
 @onready var core_bone: PhysicalBone3D = $Armature/Skeleton3D/CoreBone
 @onready var head_pivot: Node3D = $Armature/Skeleton3D/CoreBone/HeadPivot
 @onready var camera: Camera3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera
+@onready var sever_camera: Camera3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera
 @onready var interact_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/InteractRayCast
-@onready var sever_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverRayCast
+@onready var sever_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera/SeverRayCast
 @onready var speech_label: Label3D = $SpeechLabel
 @onready var speech_clear_timer: Timer = $SpeechClearTimer
 @onready var speech_audio_loop_timer: Timer = $SpeechAudioLoopTimer
 @onready var speech_audio_loop_end_timer: Timer = $SpeechAudioLoopEndTimer
 @onready var speech_audio_stream: AudioStreamPlayer3D = $SpeechAudioStream
+
+var stamina_drain_multiplier: float = 1.0
 
 func _on_speech_clear_timer_timeout():
 	speech_label.set_text("")

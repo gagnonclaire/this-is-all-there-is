@@ -21,5 +21,3 @@ func _on_timer_timeout():
 func notify_important(message: String):
 	important_notice.set_text(message)
 	important_notice_clear_timer.start()
-
-

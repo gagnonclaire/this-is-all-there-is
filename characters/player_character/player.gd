@@ -3,11 +3,12 @@ extends CharacterBody3D
 const SPEED: float = 5.0
 const SPRINT_MODIFIER: float = 3.0
 const MAX_STAMINA: float = 100.0
-const STAMINA_DRAIN_MODIFIER_SPRINT: float = 25.0
-const STAMINA_DRAIN_MODIFIER_SEVER: float = 25.0
+const STAMINA_DRAIN_MODIFIER_SPRINT: float = 10.0
+const STAMINA_DRAIN_MODIFIER_SEVER: float = 10.0
+const STAMINA_DRAIN_MODIFIER_SEVER_CONTROL: float = 10.0
 const STAMINA_GAIN_MODIFIER_BASE: float = 5.0
 const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
-const SEVER_STAMINA_DRAIN_MULTIPLIER: float = 2.0
+
 const SEVER_RANGE: float = 3.0
 
 @onready var hud: CanvasLayer = $HUD
@@ -15,7 +16,6 @@ const SEVER_RANGE: float = 3.0
 @onready var sever_cooldown_timer: Timer = $SeverCooldown
 @onready var wake_up_cooldown_timer: Timer = $WakeUpCooldown
 @onready var frame: Node3D = $HumanFrame
-@onready var camera: Camera3D = frame.camera
 
 @onready var world_node: Node = get_parent()
 @onready var main_node: Node = world_node.get_parent()
@@ -39,11 +39,13 @@ func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
 func _ready():
+	frame.stamina_drain_multiplier = 2.0
+
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
 		hud.show()
-		camera.current = true
+		frame.camera.current = true
 
 func _physics_process(delta: float):
 	if is_multiplayer_authority():
@@ -68,7 +70,8 @@ func _physics_process(delta: float):
 			wake_up()
 
 		# Basic movement
-		if not hud.text_chat_entry.is_visible():
+		if not hud.text_chat_entry.is_visible() \
+		and (not is_severed or Input.is_action_pressed("sever_control")):
 			var current_sprint_mod: float = 1.0
 			if Input.is_action_pressed("sprint") and not is_knocked_out:
 				current_sprint_mod = SPRINT_MODIFIER
@@ -107,13 +110,10 @@ func _unhandled_key_input(_event):
 		and current_body.frame.sever_raycast.get_collider().is_in_group("sever_raycast_target"):
 			sever_to(current_body.frame.sever_raycast.get_collider())
 
-		# Text chat
-		if Input.is_action_just_pressed("text_chat"):
-			if hud.text_chat_entry.is_visible():
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-				hud.text_chat_entry.clear()
-				hud.text_chat_entry.hide()
-			else:
+		# Talk via text chat
+		if Input.is_action_just_pressed("talk") \
+		and not is_severed:
+			if not hud.text_chat_entry.is_visible():
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				hud.text_chat_entry.show()
 				hud.text_chat_entry.grab_focus()
@@ -127,15 +127,24 @@ func _unhandled_key_input(_event):
 		if Input.is_action_just_pressed("debug_spawn"):
 			rpc_id(1, "debug_spawn")
 
+# Handles severed and unsevered camera movement
+# Need some way to toggle between these two while severd
 func _unhandled_input(event):
 	if is_multiplayer_authority() \
+	and event is InputEventMouseMotion \
 	and not is_knocked_out \
 	and not hud.text_chat_entry.is_visible():
-		# Camera movement
-		if event is InputEventMouseMotion:
+		if is_severed and not Input.is_action_pressed("sever_control"):
+			current_body.frame.sever_camera.rotate_y(-event.relative.x *.005)
+			current_body.frame.sever_camera.rotation.y = clampf(current_body.frame.sever_camera.rotation.y, -PI / 4.5, PI / 4.5)
+			current_body.frame.sever_camera.rotate_x(-event.relative.y *.005)
+			current_body.frame.sever_camera.rotation.x = clampf(current_body.frame.sever_camera.rotation.x, -PI / 4.5, PI / 4.5)
+			current_body.frame.sever_camera.rotation.z = 0
+			print(current_body.frame.sever_camera.get_rotation())
+		else:
 			rotate_y(-event.relative.x *.005)
 			frame.head_pivot.rotate_x(-event.relative.y *.005)
-			frame.head_pivot.rotation.x = clamp(frame.head_pivot.rotation.x, -PI/2, PI/2)
+			frame.head_pivot.rotation.x = clamp(frame.head_pivot.rotation.x, -PI / 2.25, PI / 2.25)
 #endregion
 
 #region Signal Callbacks
@@ -150,12 +159,16 @@ func _on_wake_up_cooldown_timeout():
 func do_stamina_change(delta: float):
 	var stamina_change = delta * STAMINA_GAIN_MODIFIER_BASE
 
+	if Input.is_action_pressed("sever_control") \
+	and not is_knocked_out:
+		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SEVER_CONTROL
+
 	if Input.is_action_pressed("sprint") \
 	and not is_knocked_out:
 		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SPRINT
 
 	if is_severed:
-		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SEVER * current_body.SEVER_STAMINA_DRAIN_MULTIPLIER
+		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SEVER * current_body.frame.stamina_drain_multiplier
 
 	if is_knocked_out:
 		stamina_change = delta * STAMINA_GAIN_MODIFIER_OUT
@@ -190,8 +203,13 @@ func sever_to(target: Object):
 	if target == self:
 		un_sever()
 	else:
-		current_body.frame.camera.current = false
-		target.camera.current = true
+		# When in your own obdy you use your main camera to sever
+		if is_severed:
+			current_body.frame.sever_camera.current = false
+		else:
+			current_body.frame.camera.current = false
+
+		target.frame.sever_camera.current = true
 		target.frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
 
 		is_severed = true
@@ -201,8 +219,8 @@ func sever_to(target: Object):
 		sever_cooldown_timer.start()
 
 func un_sever():
-	current_body.frame.camera.current = false
-	camera.current = true
+	current_body.frame.sever_camera.current = false
+	frame.camera.current = true
 
 	is_severed = false
 	current_body = self

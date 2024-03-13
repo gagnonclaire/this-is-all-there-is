@@ -1,9 +1,6 @@
 extends CharacterBody3D
 
-const SEVER_STAMINA_DRAIN_MULTIPLIER: float = 0.0
-
 @onready var frame: Node3D = $HumanFrame
-@onready var camera: Camera3D = frame.camera
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -11,6 +8,7 @@ var character_name: String = "A Dummy"
 
 func _ready():
 	frame.speech_audio_stream.set_bus("Mute")
+	frame.stamina_drain_multiplier = 0.0
 
 
 func _physics_process(delta):

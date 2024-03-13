@@ -1,11 +1,9 @@
 extends CharacterBody3D
 
-const SEVER_STAMINA_DRAIN_MULTIPLIER: float = 1.0
 const SPEED = 1.0
 const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.txt"
 
 @onready var frame: Node3D = $HumanFrame
-@onready var camera: Camera3D = frame.camera
 
 @onready var main_node: Node = get_tree().get_root().get_child(0)
 @onready var current_destination: Vector3 = get_global_position()
@@ -17,6 +15,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var character_name: String = "A Human"
 
 func _ready():
+	frame.stamina_drain_multiplier = 1.0
+
 	# Read from lines file
 	if main_node.is_host:
 		var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
@@ -35,6 +35,9 @@ func _physics_process(delta):
 		if global_position.distance_to(current_destination) < 0.1:
 			velocity = Vector3.ZERO
 		else:
+			# Smooth camera turning and linear motion
+			var turn_transform = transform.looking_at(current_destination, Vector3.UP)
+			transform  = transform.interpolate_with(turn_transform, delta)
 			velocity = direction * SPEED
 
 		move_and_slide()
@@ -42,7 +45,7 @@ func _physics_process(delta):
 func _on_destination_update_timer_timeout():
 	if main_node.is_host:
 		current_destination += Vector3(randf_range(-2.5, 2.5), 0, randf_range(-2.5, 2.5))
-		look_at(current_destination)
+		#look_at(current_destination)
 
 @rpc("any_peer", "call_local")
 func interacted_with():

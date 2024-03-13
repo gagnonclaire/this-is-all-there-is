@@ -110,8 +110,37 @@ More powerful beings
 to them"
 horizontal_alignment = 0
 
+[node name="SeverText2" type="Label3D" parent="TextWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.657, 0, 0)
+shaded = true
+texture_filter = 0
+text = "Vision and control are
+limited while severed
+
+Hold Space to control
+your body while severed
+
+This costs stamina, even
+when you are in your own body
+
+You will gain more control 
+over your severed target
+as you progess
+
+You can look at your hands 
+while severed with Right Mouse
+to determine if you are in 
+your body or a different 
+one, but this may not 
+always be reliable
+
+You can always wake
+up to return to your
+own body"
+horizontal_alignment = 0
+
 [node name="StaminaText" type="Label3D" parent="TextWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9546, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4513, 0, 0)
 shaded = true
 texture_filter = 0
 text = "Running and severing 

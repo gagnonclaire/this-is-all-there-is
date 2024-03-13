@@ -146,7 +146,10 @@ doppler_tracking = 2
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 
-[node name="SeverRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera"]
+[node name="SeverCamera" type="Camera3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera"]
+doppler_tracking = 2
+
+[node name="SeverRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera"]
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 
