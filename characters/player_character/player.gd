@@ -4,14 +4,16 @@ const SPEED: float = 5.0
 const SPRINT_MODIFIER: float = 3.0
 const MAX_STAMINA: float = 100.0
 const STAMINA_DRAIN_MODIFIER_SPRINT: float = 25.0
+const STAMINA_DRAIN_MODIFIER_SEVER: float = 25.0
 const STAMINA_GAIN_MODIFIER_BASE: float = 5.0
 const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
-
-const SEVER_STAMINA_DRAIN_RATE: float = 25.0
+const SEVER_STAMINA_DRAIN_MULTIPLIER: float = 2.0
+const SEVER_RANGE: float = 3.0
 
 @onready var hud: CanvasLayer = $HUD
 @onready var world_collision: CollisionShape3D = $WorldCollider
 @onready var sever_cooldown_timer: Timer = $SeverCooldown
+@onready var wake_up_cooldown_timer: Timer = $WakeUpCooldown
 @onready var frame: Node3D = $HumanFrame
 @onready var camera: Camera3D = frame.camera
 
@@ -19,15 +21,18 @@ const SEVER_STAMINA_DRAIN_RATE: float = 25.0
 @onready var main_node: Node = world_node.get_parent()
 
 var current_stamina: float = MAX_STAMINA
-var unstuck_progress: float = 0.0
-var sever_target: Object = null
+var wake_progress: float = 0.0
+var current_body: Object = self
 
 var is_knocked_out: bool = false
 var is_severed: bool = false
-var can_switch_cameras: bool = true
+var can_sever: bool = true
+var can_wake_up: bool = true
+
+# Eventually these names will be custom or procedural, this is placeholder
+var character_name: String = "A Player"
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 
 #region Overrides
 func _enter_tree():
@@ -36,7 +41,7 @@ func _enter_tree():
 func _ready():
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+		frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
 		hud.show()
 		camera.current = true
 
@@ -49,17 +54,18 @@ func _physics_process(delta: float):
 		do_knockout_check()
 
 		# Unstuck mechanic, want this to be blocked when knocked out
-		if Input.is_action_pressed("unstuck") \
+		if Input.is_action_pressed("wake_up") \
+		and can_wake_up \
 		and not is_knocked_out \
 		and not hud.text_chat_entry.is_visible():
-			unstuck_progress = clampf(unstuck_progress + (delta * 50.0), 0, 100.0)
+			wake_progress = clampf(wake_progress + (delta * 50.0), 0, 100.0)
 		else:
-			unstuck_progress = clampf(unstuck_progress - (delta * 100.0), 0, 100.0)
+			wake_progress = clampf(wake_progress - (delta * 100.0), 0, 100.0)
 
-		hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (unstuck_progress / 100.0)))
+		hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (wake_progress / 100.0)))
 
-		if unstuck_progress == 100.0:
-			rpc("unstuck")
+		if wake_progress == 100.0:
+			wake_up()
 
 		# Basic movement
 		if not hud.text_chat_entry.is_visible():
@@ -81,10 +87,25 @@ func _unhandled_key_input(_event):
 	if is_multiplayer_authority() \
 	and not is_knocked_out \
 	and not hud.text_chat_entry.is_visible():
-		# Short Raycast events
-		if frame.short_raycast.is_colliding() \
-		and frame.short_raycast.get_collider().is_in_group("short_raycast_target"):
-			do_short_raycast_events(frame.short_raycast.get_collider())
+		# Interact Raycast events
+		# These raycast things are gross and need to be cleaned up
+		# Move the logic somewhere and get rid of all this duplicate code
+		# Seriously Claire this is a pain to work with
+		if Input.is_action_just_pressed("interact") \
+		and frame.interact_raycast.is_colliding():
+			var interact_target: Object = frame.interact_raycast.get_collider()
+			if interact_target.is_in_group("interact_raycast_target") \
+			and interact_target.is_in_group("player"):
+				interact_target.interacted_with.rpc_id(interact_target.name.to_int())
+			elif interact_target.is_in_group("interact_raycast_target"):
+				interact_target.interacted_with.rpc()
+
+		# Sever Raycast events
+		if Input.is_action_just_pressed("sever") \
+		and can_sever \
+		and current_body.frame.sever_raycast.is_colliding() \
+		and current_body.frame.sever_raycast.get_collider().is_in_group("sever_raycast_target"):
+			sever_to(current_body.frame.sever_raycast.get_collider())
 
 		# Text chat
 		if Input.is_action_just_pressed("text_chat"):
@@ -102,17 +123,9 @@ func _unhandled_key_input(_event):
 		and not is_knocked_out:
 			frame.start_speach_audio.rpc(1)
 
-		# Other events
+		# Debug events
 		if Input.is_action_just_pressed("debug_spawn"):
 			rpc_id(1, "debug_spawn")
-
-		if Input.is_action_just_pressed("change_camera") \
-		and is_severed \
-		and can_switch_cameras:
-			un_sever()
-
-		if Input.is_action_just_pressed("debug_camera"):
-			world_node.toggle_debug_camera()
 
 func _unhandled_input(event):
 	if is_multiplayer_authority() \
@@ -127,7 +140,10 @@ func _unhandled_input(event):
 
 #region Signal Callbacks
 func _on_sever_cooldown_timeout():
-	can_switch_cameras = true
+	can_sever = true
+
+func _on_wake_up_cooldown_timeout():
+	can_wake_up = true
 #endregion
 
 #region Action Functions
@@ -139,7 +155,7 @@ func do_stamina_change(delta: float):
 		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SPRINT
 
 	if is_severed:
-		stamina_change -= delta * sever_target.SEVER_STAMINA_DRAIN_RATE
+		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SEVER * current_body.SEVER_STAMINA_DRAIN_MULTIPLIER
 
 	if is_knocked_out:
 		stamina_change = delta * STAMINA_GAIN_MODIFIER_OUT
@@ -170,35 +186,36 @@ func do_un_knockout():
 	world_collision.set_disabled(false)
 	is_knocked_out = false
 
-func do_short_raycast_events(target: Object):
-	if Input.is_action_just_pressed("interact") \
-	and target.is_in_group("interactable"):
-		target.interacted_with()
-	elif Input.is_action_just_pressed("change_camera") \
-	and not is_severed \
-	and target.is_in_group("possessable") \
-	and can_switch_cameras:
-		sever_to(target)
-
 func sever_to(target: Object):
-	camera.current = false
-	target.camera.current = true
+	if target == self:
+		un_sever()
+	else:
+		current_body.frame.camera.current = false
+		target.camera.current = true
+		target.frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
 
-	is_severed = true
-	sever_target = target
+		is_severed = true
+		current_body = target
 
-	can_switch_cameras = false
-	sever_cooldown_timer.start()
+		can_sever = false
+		sever_cooldown_timer.start()
 
 func un_sever():
-	sever_target.camera.current = false
+	current_body.frame.camera.current = false
 	camera.current = true
 
 	is_severed = false
-	sever_target = null
+	current_body = self
 
-	can_switch_cameras = false
+	can_sever = false
 	sever_cooldown_timer.start()
+
+func wake_up():
+	if is_severed:
+		un_sever()
+	set_global_position(Vector3.ZERO)
+	can_wake_up = false
+	wake_up_cooldown_timer.start()
 
 func send_message(message: String):
 	if message.length() > 0:
@@ -209,12 +226,12 @@ func send_message(message: String):
 #endregion
 
 #region RPCs
-@rpc("any_peer", "call_local")
-func unstuck():
-	if is_severed:
-		un_sever()
-	set_global_position(Vector3.ZERO)
-	unstuck_progress = 0.0
+@rpc("any_peer")
+func interacted_with():
+	# Will need to be more clever if interacting via sever is allowed
+	var caller_id: String = str(multiplayer.get_remote_sender_id())
+	var caller_name: String = get_node("../" + caller_id).character_name
+	hud.notify_important(caller_name + " is trying to get your attention")
 
 @rpc("any_peer", "call_local")
 func debug_spawn():
@@ -222,3 +239,6 @@ func debug_spawn():
 	var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
 	world_node.debug_spawn(random_position, random_rotation)
 #endregion
+
+
+

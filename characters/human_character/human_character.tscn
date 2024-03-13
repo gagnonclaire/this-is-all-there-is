@@ -21,13 +21,11 @@ properties/3/replication_mode = 2
 radius = 0.75
 height = 3.25
 
-[node name="HumanCharacter" type="CharacterBody3D" groups=["interactable", "possessable", "short_raycast_target"]]
+[node name="HumanCharacter" type="CharacterBody3D" groups=["interact_raycast_target", "sever_raycast_target"]]
 collision_layer = 2
 script = ExtResource("1_q1py3")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_interval = 0.05
-delta_interval = 0.05
 replication_config = SubResource("SceneReplicationConfig_85wp3")
 
 [node name="HumanFrame" parent="." instance=ExtResource("2_jcn47")]

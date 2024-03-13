@@ -73,8 +73,6 @@ blend_shape_mode = 0
 script = ExtResource("2_6vsex")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_interval = 0.05
-delta_interval = 0.05
 replication_config = SubResource("SceneReplicationConfig_trosj")
 
 [node name="SpeechLabel" type="Label3D" parent="."]
@@ -144,7 +142,11 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.572942, -0.437766)
 doppler_tracking = 2
 
-[node name="ShortRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera"]
+[node name="InteractRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+
+[node name="SeverRayCast" type="RayCast3D" parent="Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera"]
 target_position = Vector3(0, 0, -3)
 collision_mask = 2
 

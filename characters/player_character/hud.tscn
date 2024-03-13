@@ -30,6 +30,24 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_mjtls")
 
+[node name="ImportantNotice" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -236.0
+offset_top = 22.0
+offset_right = 236.0
+offset_bottom = 103.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ClearTimer" type="Timer" parent="Control/ImportantNotice"]
+wait_time = 5.0
+one_shot = true
+
 [node name="Reticule" type="TextureRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
@@ -82,3 +100,5 @@ placeholder_text = "Enter to send"
 alignment = 1
 max_length = 64
 expand_to_text_length = true
+
+[connection signal="timeout" from="Control/ImportantNotice/ClearTimer" to="." method="_on_timer_timeout"]

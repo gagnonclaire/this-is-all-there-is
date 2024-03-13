@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const SEVER_STAMINA_DRAIN_RATE: float = 15.0
+const SEVER_STAMINA_DRAIN_MULTIPLIER: float = 1.0
 const SPEED = 1.0
 const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.txt"
 
@@ -12,9 +12,9 @@ const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.
 
 var lines: Array
 var current_line: int = 0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+var character_name: String = "A Human"
 
 func _ready():
 	# Read from lines file
@@ -44,11 +44,9 @@ func _on_destination_update_timer_timeout():
 		current_destination += Vector3(randf_range(-2.5, 2.5), 0, randf_range(-2.5, 2.5))
 		look_at(current_destination)
 
-func interacted_with():
-	frame.set_speech_label.rpc(lines[current_line])
-	rpc("update_current_line")
-
 @rpc("any_peer", "call_local")
-func update_current_line():
+func interacted_with():
+	frame.set_speech_label(lines[current_line])
+
 	if main_node.is_host:
 		current_line = (current_line + 1) % 2

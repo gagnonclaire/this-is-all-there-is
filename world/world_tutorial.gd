@@ -5,7 +5,6 @@ const HUMAN: PackedScene = preload("res://characters/human_character/human_chara
 const PORT: int = 9999
 
 @onready var main_node: Node = get_parent()
-@onready var debug_camera: Camera3D = $DebugCamera
 
 var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
@@ -45,6 +44,3 @@ func debug_spawn(position: Vector3, rotation: Vector3):
 	npc.set_position(position)
 	npc.set_rotation(rotation)
 	add_child(npc, true)
-
-func toggle_debug_camera():
-	debug_camera.current = not debug_camera.current

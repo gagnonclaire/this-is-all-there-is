@@ -67,10 +67,6 @@ shadow_enabled = true
 _spawnable_scenes = PackedStringArray("res://characters/player_character/player.tscn", "res://characters/human_character/human_character.tscn")
 spawn_path = NodePath("..")
 
-[node name="DebugCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.944852, 0.327498, 0, -0.327498, 0.944852, 0, 5.2445, 16.5445)
-fov = 90.0
-
 [node name="TextWalls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.792228, 2.91054, -1.89132)
 

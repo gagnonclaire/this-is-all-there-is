@@ -4,7 +4,8 @@ extends Node3D
 @onready var core_bone: PhysicalBone3D = $Armature/Skeleton3D/CoreBone
 @onready var head_pivot: Node3D = $Armature/Skeleton3D/CoreBone/HeadPivot
 @onready var camera: Camera3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera
-@onready var short_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/ShortRayCast
+@onready var interact_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/InteractRayCast
+@onready var sever_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverRayCast
 @onready var speech_label: Label3D = $SpeechLabel
 @onready var speech_clear_timer: Timer = $SpeechClearTimer
 @onready var speech_audio_loop_timer: Timer = $SpeechAudioLoopTimer
@@ -39,8 +40,7 @@ func set_speech_label(text: String, time: float = 3.0):
 	speech_label.set_text(text)
 	speech_clear_timer.set_wait_time(time)
 	speech_clear_timer.start()
-
-	rpc("start_speach_audio", text.length() / 20.0)
+	start_speach_audio(text.length() / 20.0)
 
 @rpc("any_peer", "call_local")
 func start_speach_audio(time: float):
