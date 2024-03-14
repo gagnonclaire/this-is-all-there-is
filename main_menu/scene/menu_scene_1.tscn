@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="1_4ynjh"]
 [ext_resource type="Material" uid="uid://bqfuxpjafkup7" path="res://textures/grass/grass.tres" id="2_e1lv3"]
-[ext_resource type="Script" path="res://main_menu/camera_pivot.gd" id="3_3jeul"]
+[ext_resource type="Script" path="res://main_menu/scene/camera_pivot.gd" id="3_3jeul"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/night_environment.tres" id="4_k6wi2"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dmwkp"]

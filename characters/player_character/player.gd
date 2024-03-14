@@ -71,7 +71,7 @@ func _physics_process(delta: float):
 
 		# Basic movement
 		if not hud.text_chat_entry.is_visible() \
-		and (not is_severed or Input.is_action_pressed("sever_control")):
+		and (not is_severed or Input.is_action_pressed("control_self")):
 			var current_sprint_mod: float = 1.0
 			if Input.is_action_pressed("sprint") and not is_knocked_out:
 				current_sprint_mod = SPRINT_MODIFIER
@@ -134,7 +134,7 @@ func _unhandled_input(event):
 	and event is InputEventMouseMotion \
 	and not is_knocked_out \
 	and not hud.text_chat_entry.is_visible():
-		if is_severed and not Input.is_action_pressed("sever_control"):
+		if is_severed and not Input.is_action_pressed("control_self"):
 			current_body.frame.sever_camera.rotate_y(-event.relative.x *.005)
 			current_body.frame.sever_camera.rotation.y = clampf(current_body.frame.sever_camera.rotation.y, -PI / 4.5, PI / 4.5)
 			current_body.frame.sever_camera.rotate_x(-event.relative.y *.005)
@@ -159,7 +159,7 @@ func _on_wake_up_cooldown_timeout():
 func do_stamina_change(delta: float):
 	var stamina_change = delta * STAMINA_GAIN_MODIFIER_BASE
 
-	if Input.is_action_pressed("sever_control") \
+	if Input.is_action_pressed("control_self") \
 	and not is_knocked_out:
 		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SEVER_CONTROL
 

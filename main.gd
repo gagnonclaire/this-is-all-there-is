@@ -3,20 +3,22 @@ extends Node
 const MAIN_MENU: PackedScene = preload("res://main_menu/main_menu.tscn")
 const WORLD: PackedScene = preload("res://world/world_tutorial.tscn")
 
-@onready var main_menu_node: Node = MAIN_MENU.instantiate()
-@onready var world_node: Node = WORLD.instantiate()
+var main_menu_node: Node = MAIN_MENU.instantiate()
+var world_node: Node
 
 var join_address: String = ""
 var is_host: bool = true
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	add_child(main_menu_node)
 
-func _unhandled_input(_event):
-	if Input.is_action_just_pressed("menu"):
-		get_tree().quit()
-
-func load_world():
+func load_world() -> void:
+	world_node = WORLD.instantiate()
 	remove_child(main_menu_node)
 	add_child(world_node)
+
+func return_to_menu() -> void:
+	main_menu_node = MAIN_MENU.instantiate()
+	remove_child(world_node)
+	add_child(main_menu_node)

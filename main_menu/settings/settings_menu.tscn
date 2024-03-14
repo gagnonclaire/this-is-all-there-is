@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx2jfn1vbigx1"]
+
+[ext_resource type="PackedScene" uid="uid://bqaxu444llcm4" path="res://main_menu/settings/keybinding/keybind_menu.tscn" id="1_neqwe"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -256.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabBar" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -64.0
+offset_bottom = 256.0
+grow_horizontal = 2
+
+[node name="KeybindMenu" parent="TabBar" instance=ExtResource("1_neqwe")]
+layout_mode = 2
+
+[connection signal="tab_changed" from="TabBar" to="." method="_on_tab_bar_tab_changed"]
