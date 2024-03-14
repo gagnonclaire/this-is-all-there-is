@@ -5,7 +5,6 @@ const HUMAN: PackedScene = preload("res://characters/human_character/human_chara
 
 @onready var main_node: Node = get_parent()
 
-# Network vars
 var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 var join_address: String = ""
 var port: int = 9999
@@ -28,6 +27,8 @@ func _unhandled_input(_event) -> void:
 		main_node.return_to_menu()
 
 func start_server() -> void:
+	#TODO When you join a game, go back to menu, then start a new game,
+	#TODO this fails to create a server (null enet)
 	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
