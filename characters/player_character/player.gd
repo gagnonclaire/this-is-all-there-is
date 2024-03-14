@@ -35,10 +35,10 @@ var character_name: String = "A Player"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #region Overrides
-func _enter_tree():
+func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
 
-func _ready():
+func _ready() -> void:
 	frame.stamina_drain_multiplier = 2.0
 
 	if is_multiplayer_authority():
@@ -47,7 +47,22 @@ func _ready():
 		hud.show()
 		frame.camera.current = true
 
-func _physics_process(delta: float):
+func _process(delta: float) -> void:
+	# Wake up
+	if Input.is_action_pressed("wake_up") \
+	and can_wake_up \
+	and not is_knocked_out \
+	and not hud.text_chat_entry.is_visible():
+		wake_progress = clampf(wake_progress + (delta * 50.0), 0, 100.0)
+	else:
+		wake_progress = clampf(wake_progress - (delta * 100.0), 0, 100.0)
+
+	hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (wake_progress / 100.0)))
+
+	if wake_progress == 100.0:
+		wake_up()
+
+func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
 		if not is_on_floor():
 			velocity.y -= gravity * delta
@@ -55,46 +70,34 @@ func _physics_process(delta: float):
 		do_stamina_change(delta)
 		do_knockout_check()
 
-		# Unstuck mechanic, want this to be blocked when knocked out
-		if Input.is_action_pressed("wake_up") \
-		and can_wake_up \
-		and not is_knocked_out \
-		and not hud.text_chat_entry.is_visible():
-			wake_progress = clampf(wake_progress + (delta * 50.0), 0, 100.0)
-		else:
-			wake_progress = clampf(wake_progress - (delta * 100.0), 0, 100.0)
+		# Basic movement, starts with slowdown
+		velocity.x = move_toward(velocity.x, 0, SPEED / 5)
+		velocity.z = move_toward(velocity.z, 0, SPEED / 5)
 
-		hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (wake_progress / 100.0)))
-
-		if wake_progress == 100.0:
-			wake_up()
-
-		# Basic movement
 		if not hud.text_chat_entry.is_visible() \
 		and (not is_severed or Input.is_action_pressed("control_self")):
+			# Sprint modifier
 			var current_sprint_mod: float = 1.0
 			if Input.is_action_pressed("sprint") and not is_knocked_out:
 				current_sprint_mod = SPRINT_MODIFIER
+
 			var input_dir = Input.get_vector("left", "right", "forward", "backward")
 			var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 			if direction:
 				velocity.x = direction.x * SPEED * current_sprint_mod
 				velocity.z = direction.z * SPEED * current_sprint_mod
-			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED * current_sprint_mod)
-				velocity.z = move_toward(velocity.z, 0, SPEED * current_sprint_mod)
 
 		move_and_slide()
 
+#TODO fix me please i am so bad
 func _unhandled_key_input(_event):
 	if is_multiplayer_authority() \
 	and not is_knocked_out \
 	and not hud.text_chat_entry.is_visible():
 		# Interact Raycast events
-		# These raycast things are gross and need to be cleaned up
-		# Move the logic somewhere and get rid of all this duplicate code
-		# Seriously Claire this is a pain to work with
 		if Input.is_action_just_pressed("interact") \
+		and (not is_severed or Input.is_action_pressed("control_self")) \
 		and frame.interact_raycast.is_colliding():
 			var interact_target: Object = frame.interact_raycast.get_collider()
 			if interact_target.is_in_group("interact_raycast_target") \
@@ -120,6 +123,7 @@ func _unhandled_key_input(_event):
 
 		# Generic speech
 		if Input.is_action_just_pressed("babble") \
+		and (not is_severed or Input.is_action_pressed("control_self")) \
 		and not is_knocked_out:
 			frame.start_speach_audio.rpc(1)
 

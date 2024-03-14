@@ -15,9 +15,6 @@ const MENU_SCENE_1: PackedScene = preload("res://main_menu/scene/menu_scene_1.ts
 func _ready() -> void:
 	add_child(MENU_SCENE_1.instantiate())
 
-	# Close server
-	multiplayer.multiplayer_peer = null
-
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):
 		get_tree().quit()

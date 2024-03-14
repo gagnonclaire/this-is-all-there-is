@@ -37,7 +37,7 @@ func _physics_process(delta):
 		else:
 			# Smooth camera turning and linear motion
 			var turn_transform = transform.looking_at(current_destination, Vector3.UP)
-			transform  = transform.interpolate_with(turn_transform, delta)
+			transform  = transform.interpolate_with(turn_transform, delta * 5)
 			velocity = direction * SPEED
 
 		move_and_slide()
