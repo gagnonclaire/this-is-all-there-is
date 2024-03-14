@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Sense of Self"
+config/name="This Is All There Is"
+config/description="So make it count."
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://q0vdf2h3ahi8"
-path="res://.godot/imported/main_menu_street.blend-13d9dfb604687ab11c41163c36261dd2.scn"
+uid="uid://3ys7ovhhdcpy"
+path="res://.godot/imported/roadside_base.blend-80ad33138308a95791dcc6ff2c741b8e.scn"
 
 [deps]
 
-source_file="res://main_menu/scene/main_menu_street.blend"
-dest_files=["res://.godot/imported/main_menu_street.blend-13d9dfb604687ab11c41163c36261dd2.scn"]
+source_file="res://main_menu/scenes/roadside_scene/roadside_base.blend"
+dest_files=["res://.godot/imported/roadside_base.blend-80ad33138308a95791dcc6ff2c741b8e.scn"]
 
 [params]
 

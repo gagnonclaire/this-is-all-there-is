@@ -1,6 +1,6 @@
 extends Node
 
-const MENU_SCENE_1: PackedScene = preload("res://main_menu/scene/menu_scene_1.tscn")
+const MENU_SCENE_ROADSIDE: PackedScene = preload("res://main_menu/scenes/roadside_scene/roadside.tscn")
 
 @onready var main_node: Node = get_parent()
 @onready var sub_menus: Control = $CanvasLayer/TopMenu/SubMenus
@@ -13,7 +13,7 @@ const MENU_SCENE_1: PackedScene = preload("res://main_menu/scene/menu_scene_1.ts
 @onready var address_entry: LineEdit = $CanvasLayer/TopMenu/SubMenus/JoinGameMenu/Panel/VBoxContainer/MarginContainer/AddressEntry
 
 func _ready() -> void:
-	add_child(MENU_SCENE_1.instantiate())
+	add_child(MENU_SCENE_ROADSIDE.instantiate())
 
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):

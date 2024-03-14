@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="2_qwsaq"]
 [ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://textures/concrete/concrete_n.png" id="3_klis8"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="4_nptsg"]
-[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/night_environment.tres" id="5_w77aq"]
+[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/environment_scenes/night_environment.tres" id="5_dlbpj"]
 [ext_resource type="PackedScene" uid="uid://c7iyqw5jtnns8" path="res://characters/human_dummy_character/human_dummy_character.tscn" id="6_pok4k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdgxy"]
@@ -57,7 +57,7 @@ collision_mask = 5
 shape = SubResource("ConcavePolygonShape3D_be5le")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("5_w77aq")
+environment = ExtResource("5_dlbpj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.700212, 0.713935, 0, -0.713935, 0.700212, 0, 4.2619, 0)

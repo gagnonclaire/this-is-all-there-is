@@ -1,11 +1,11 @@
 [gd_resource type="Environment" load_steps=5 format=3 uid="uid://cv4hq6xsapkq5"]
 
-[ext_resource type="Texture2D" uid="uid://bklcxj0knl54b" path="res://textures/sky/night_sky.png" id="1_dxwr2"]
+[ext_resource type="Texture2D" uid="uid://bklcxj0knl54b" path="res://textures/sky/night_sky.png" id="1_17q8f"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_mi36w"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lhfrk"]
-panorama = ExtResource("1_dxwr2")
+panorama = ExtResource("1_17q8f")
 
 [sub_resource type="Sky" id="Sky_ls477"]
 sky_material = SubResource("PanoramaSkyMaterial_lhfrk")

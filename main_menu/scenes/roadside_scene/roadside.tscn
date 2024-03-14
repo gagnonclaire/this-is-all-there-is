@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://ec62586b0fv8"]
+
+[ext_resource type="PackedScene" uid="uid://3ys7ovhhdcpy" path="res://main_menu/scenes/roadside_scene/roadside_base.blend" id="1_1n34r"]
+[ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="2_pp1lq"]
+[ext_resource type="Material" uid="uid://bqfuxpjafkup7" path="res://textures/grass/grass.tres" id="3_gfom1"]
+[ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="3_jnl6q"]
+[ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://textures/concrete/concrete_n.png" id="4_603ap"]
+[ext_resource type="Script" path="res://main_menu/scenes/camera_pivot.gd" id="4_hj0el"]
+[ext_resource type="PackedScene" uid="uid://dncfkbcj6hlre" path="res://world/environment_scenes/night_environment.tscn" id="5_m6wk7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4b31r"]
+resource_name = "street"
+albedo_color = Color(0.960784, 0.752941, 0.588235, 1)
+albedo_texture = ExtResource("3_jnl6q")
+normal_enabled = true
+normal_texture = ExtResource("4_603ap")
+uv1_triplanar = true
+
+[node name="roadside_base" instance=ExtResource("1_1n34r")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_pp1lq")
+surface_material_override/1 = SubResource("StandardMaterial3D_4b31r")
+surface_material_override/2 = ExtResource("3_gfom1")
+
+[node name="Camera3D" type="Camera3D" parent="." index="1"]
+transform = Transform3D(2.055, 0, -3.43176, 0, 4, 0, 3.43176, 0, 2.055, -118.976, 34.2298, 92.5809)
+script = ExtResource("4_hj0el")
+
+[node name="NightEnvironment" parent="." index="2" instance=ExtResource("5_m6wk7")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="3"]
+transform = Transform3D(0.0880424, -0.743727, 0.66266, 0, 0.665243, 0.746627, -0.996117, -0.0657348, 0.0585696, 0, 46.4468, 0)
+shadow_enabled = true
