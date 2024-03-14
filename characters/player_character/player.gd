@@ -42,25 +42,25 @@ func _ready() -> void:
 	frame.stamina_drain_multiplier = 2.0
 
 	if is_multiplayer_authority():
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
 		hud.show()
 		frame.camera.current = true
 
 func _process(delta: float) -> void:
-	# Wake up
-	if Input.is_action_pressed("wake_up") \
-	and can_wake_up \
-	and not is_knocked_out \
-	and not hud.text_chat_entry.is_visible():
-		wake_progress = clampf(wake_progress + (delta * 50.0), 0, 100.0)
-	else:
-		wake_progress = clampf(wake_progress - (delta * 100.0), 0, 100.0)
+	if is_multiplayer_authority():
+		# Wake up
+		if Input.is_action_pressed("wake_up") \
+		and can_wake_up \
+		and not is_knocked_out \
+		and not hud.text_chat_entry.is_visible():
+			wake_progress = clampf(wake_progress + (delta * 50.0), 0, 100.0)
+		else:
+			wake_progress = clampf(wake_progress - (delta * 100.0), 0, 100.0)
 
-	hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (wake_progress / 100.0)))
+		hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (wake_progress / 100.0)))
 
-	if wake_progress == 100.0:
-		wake_up()
+		if wake_progress == 100.0:
+			wake_up()
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
@@ -117,7 +117,7 @@ func _unhandled_key_input(_event):
 		if Input.is_action_just_pressed("talk") \
 		and not is_severed:
 			if not hud.text_chat_entry.is_visible():
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				main_node.free_mouse()
 				hud.text_chat_entry.show()
 				hud.text_chat_entry.grab_focus()
 
@@ -243,7 +243,7 @@ func send_message(message: String):
 	if message.length() > 0:
 		frame.set_speech_label.rpc(message)
 
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	main_node.capture_mouse()
 	hud.text_chat_entry.hide()
 #endregion
 

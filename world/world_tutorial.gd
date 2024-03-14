@@ -2,37 +2,41 @@ extends Node
 
 const PLAYER: PackedScene = preload("res://characters/player_character/player.tscn")
 const HUMAN: PackedScene = preload("res://characters/human_character/human_character.tscn")
-const PORT: int = 9999
 
 @onready var main_node: Node = get_parent()
 
+# Network vars
 var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
+var join_address: String = ""
+var port: int = 9999
+var is_host: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if main_node.is_host:
+	if is_host:
 		start_server()
 	else:
-		enet_peer.create_client(main_node.join_address, PORT)
-		multiplayer.multiplayer_peer = enet_peer
+		start_client()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _exit_tree() -> void:
+	multiplayer.multiplayer_peer.close()
+
 func _process(_delta) -> void:
 	pass
 
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		main_node.return_to_menu()
 
 func start_server() -> void:
-	# This is thworing a bunch of multiplayer peer errors
-	# when you exit to main menu then start another server
-	enet_peer.create_server(PORT)
+	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	add_player(multiplayer.get_unique_id())
+
+func start_client() -> void:
+	enet_peer.create_client(join_address, port)
+	multiplayer.multiplayer_peer = enet_peer
 
 func add_player(peer_id) -> void:
 	var player: CharacterBody3D = PLAYER.instantiate()

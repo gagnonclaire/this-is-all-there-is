@@ -21,24 +21,18 @@ func _unhandled_input(_event) -> void:
 
 func _on_new_game_button_pressed() -> void:
 	close_all_menus()
-	main_node.is_host = true
-	print("Hosting new game on port 9999")
-	main_node.load_world()
+	main_node.host_multiplayer_world()
 
 func _on_load_game_button_pressed() -> void:
 	switch_to(load_game_menu)
 
-#region Join Game
 func _on_join_game_button_pressed() -> void:
 	switch_to(join_game_menu)
 
 func _on_join_button_pressed() -> void:
-	main_node.is_host = false
+	close_all_menus()
 	main_node.join_address = address_entry.text
-
-	print("Joining game at ", main_node.join_address, ":9999")
-	main_node.load_world()
-#endregion
+	main_node.join_multiplayer_world()
 
 func _on_settings_button_pressed() -> void:
 	switch_to(settings_menu)
