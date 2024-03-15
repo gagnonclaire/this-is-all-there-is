@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://btjk0c3rc8lhv"]
 
-[ext_resource type="Script" path="res://characters/human_character/human_character.gd" id="1_q1py3"]
+[ext_resource type="Script" path="res://characters/3_character_human/human_character.gd" id="1_q1py3"]
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="2_jcn47"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85wp3"]

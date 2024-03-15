@@ -1,7 +1,7 @@
 extends Node
 
-const PLAYER: PackedScene = preload("res://characters/player_character/player.tscn")
-const HUMAN: PackedScene = preload("res://characters/human_character/human_character.tscn")
+const PLAYER: PackedScene = preload("res://characters/3_character_player/player.tscn")
+const HUMAN: PackedScene = preload("res://characters/3_character_human/human_character.tscn")
 
 @onready var main_node: Node = get_parent()
 

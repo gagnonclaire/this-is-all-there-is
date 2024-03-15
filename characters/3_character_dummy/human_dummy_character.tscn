@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7iyqw5jtnns8"]
 
-[ext_resource type="Script" path="res://characters/human_dummy_character/human_dummy_character.gd" id="1_be3uj"]
+[ext_resource type="Script" path="res://characters/3_character_dummy/human_dummy_character.gd" id="1_be3uj"]
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="1_u671w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v60g7"]

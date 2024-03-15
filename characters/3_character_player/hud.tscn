@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpxgt3rbb7fwy"]
 
-[ext_resource type="Script" path="res://characters/player_character/hud.gd" id="1_n2hy3"]
+[ext_resource type="Script" path="res://characters/3_character_player/hud.gd" id="1_n2hy3"]
 [ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="2_mjtls"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]

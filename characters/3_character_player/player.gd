@@ -164,7 +164,8 @@ func do_stamina_change(delta: float):
 	var stamina_change = delta * STAMINA_GAIN_MODIFIER_BASE
 
 	if Input.is_action_pressed("control_self") \
-	and not is_knocked_out:
+	and not is_knocked_out \
+	and is_severed:
 		stamina_change -= delta * STAMINA_DRAIN_MODIFIER_SEVER_CONTROL
 
 	if Input.is_action_pressed("sprint") \

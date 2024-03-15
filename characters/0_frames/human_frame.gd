@@ -1,19 +1,48 @@
+# Functional human frame meant to be instantiated as a child
+# of a character node
+# The frame used by the player character
+#
+# Exposes its own functional nodes and the nodes of its
+# children for access by its parent
+#
+# Has some of its own functionality that is global to
+# all characters using this frame
+
 extends Node3D
 
-@onready var skeleton: Skeleton3D = $FullBody/Skeleton3D
-@onready var core_bone: PhysicalBone3D = $FullBody/Skeleton3D/CoreBone
-@onready var head_pivot: Node3D = $FullBody/Skeleton3D/CoreBone/HeadPivot
-@onready var camera: Camera3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera
-@onready var sever_camera: Camera3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera
-@onready var interact_raycast: RayCast3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera/InteractRayCast
-@onready var sever_raycast: RayCast3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera/SeverRayCast
+# Preload camera
+const CAMERA_SCENE: PackedScene = preload("res://characters/2_parts_cameras/basic_camera.tscn")
+
+# Exposed full body nodes
+@onready var full_body: Node3D = $FullHumanBody
+@onready var skeleton: Skeleton3D = full_body.skeleton
+@onready var core_bone: PhysicalBone3D = full_body.core_bone
+@onready var head_pivot: Node3D = full_body.head_pivot
+
+# Exposed camera nodes
+var camera: Camera3D
+var sever_camera: Camera3D
+var interact_raycast: RayCast3D
+var sever_raycast: RayCast3D
+
+# Exposed frame nodes
 @onready var speech_label: Label3D = $SpeechLabel
 @onready var speech_clear_timer: Timer = $SpeechClearTimer
 @onready var speech_audio_loop_timer: Timer = $SpeechAudioLoopTimer
 @onready var speech_audio_loop_end_timer: Timer = $SpeechAudioLoopEndTimer
 @onready var speech_audio_stream: AudioStreamPlayer3D = $SpeechAudioStream
 
+#TODO everything below here is garbage
 var stamina_drain_multiplier: float = 1.0
+
+func _ready() -> void:
+	# Create camera under the head pivot and expose its nodes
+	var camera_node: Node3D = CAMERA_SCENE.instantiate()
+	head_pivot.add_child(camera_node)
+	camera = camera_node.camera
+	sever_camera = camera_node.sever_camera
+	interact_raycast = camera_node.interact_raycast
+	sever_raycast = camera_node.sever_raycast
 
 func _on_speech_clear_timer_timeout():
 	speech_label.set_text("")

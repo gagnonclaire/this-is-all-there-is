@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgd0dypjq6ul"]
 
-[ext_resource type="Script" path="res://characters/player_character/player.gd" id="1_wttkl"]
-[ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="2_jio5s"]
-[ext_resource type="PackedScene" uid="uid://bpxgt3rbb7fwy" path="res://characters/player_character/hud.tscn" id="2_scleb"]
+[ext_resource type="Script" path="res://characters/3_character_player/player.gd" id="1_jnvml"]
+[ext_resource type="PackedScene" uid="uid://bpxgt3rbb7fwy" path="res://characters/3_character_player/hud.tscn" id="2_yvp3s"]
+[ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="3_uwo5d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kds0n"]
 height = 3.0
@@ -17,11 +17,11 @@ properties/1/replication_mode = 2
 
 [node name="Player" type="CharacterBody3D" groups=["interact_raycast_target", "player", "sever_raycast_target"]]
 collision_layer = 2
-script = ExtResource("1_wttkl")
+script = ExtResource("1_jnvml")
 
-[node name="HUD" parent="." instance=ExtResource("2_scleb")]
+[node name="HUD" parent="." instance=ExtResource("2_yvp3s")]
 
-[node name="HumanFrame" parent="." instance=ExtResource("2_jio5s")]
+[node name="HumanFrame" parent="." instance=ExtResource("3_uwo5d")]
 
 [node name="WorldCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

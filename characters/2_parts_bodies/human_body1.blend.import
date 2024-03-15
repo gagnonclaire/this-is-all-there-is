@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b7k7crrilq0jl"
-path="res://.godot/imported/human_body1.blend-9719a247fa3be900d18df000ca32c8e0.scn"
+path="res://.godot/imported/human_body1.blend-a85ed997b166c28881559b0cf8550ad0.scn"
 
 [deps]
 
-source_file="res://characters/1_parts_bodies/human_body1.blend"
-dest_files=["res://.godot/imported/human_body1.blend-9719a247fa3be900d18df000ca32c8e0.scn"]
+source_file="res://characters/2_parts_bodies/human_body1.blend"
+dest_files=["res://.godot/imported/human_body1.blend-a85ed997b166c28881559b0cf8550ad0.scn"]
 
 [params]
 
