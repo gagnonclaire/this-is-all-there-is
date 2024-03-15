@@ -1,12 +1,12 @@
 extends Node3D
 
-@onready var skeleton: Skeleton3D = $Armature/Skeleton3D
-@onready var core_bone: PhysicalBone3D = $Armature/Skeleton3D/CoreBone
-@onready var head_pivot: Node3D = $Armature/Skeleton3D/CoreBone/HeadPivot
-@onready var camera: Camera3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera
-@onready var sever_camera: Camera3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera
-@onready var interact_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/InteractRayCast
-@onready var sever_raycast: RayCast3D = $Armature/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera/SeverRayCast
+@onready var skeleton: Skeleton3D = $FullBody/Skeleton3D
+@onready var core_bone: PhysicalBone3D = $FullBody/Skeleton3D/CoreBone
+@onready var head_pivot: Node3D = $FullBody/Skeleton3D/CoreBone/HeadPivot
+@onready var camera: Camera3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera
+@onready var sever_camera: Camera3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera
+@onready var interact_raycast: RayCast3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera/InteractRayCast
+@onready var sever_raycast: RayCast3D = $FullBody/Skeleton3D/CoreBone/HeadPivot/FrameCamera/SeverCamera/SeverRayCast
 @onready var speech_label: Label3D = $SpeechLabel
 @onready var speech_clear_timer: Timer = $SpeechClearTimer
 @onready var speech_audio_loop_timer: Timer = $SpeechAudioLoopTimer
