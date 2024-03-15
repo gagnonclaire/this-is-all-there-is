@@ -18,6 +18,7 @@ const CAMERA_SCENE: PackedScene = preload("res://characters/2_parts_cameras/basi
 @onready var skeleton: Skeleton3D = full_body.skeleton
 @onready var core_bone: PhysicalBone3D = full_body.core_bone
 @onready var head_pivot: Node3D = full_body.head_pivot
+@onready var camera_pivot: Node3D = full_body.camera_pivot
 
 # Exposed camera nodes
 var camera: Camera3D
@@ -38,7 +39,7 @@ var stamina_drain_multiplier: float = 1.0
 func _ready() -> void:
 	# Create camera under the head pivot and expose its nodes
 	var camera_node: Node3D = CAMERA_SCENE.instantiate()
-	head_pivot.add_child(camera_node)
+	camera_pivot.add_child(camera_node)
 	camera = camera_node.camera
 	sever_camera = camera_node.sever_camera
 	interact_raycast = camera_node.interact_raycast

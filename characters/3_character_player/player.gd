@@ -147,8 +147,8 @@ func _unhandled_input(event):
 			print(current_body.frame.sever_camera.get_rotation())
 		else:
 			rotate_y(-event.relative.x *.005)
-			frame.head_pivot.rotate_x(-event.relative.y *.005)
-			frame.head_pivot.rotation.x = clamp(frame.head_pivot.rotation.x, -PI / 2.25, PI / 2.25)
+			frame.camera_pivot.rotate_x(-event.relative.y *.005)
+			frame.camera_pivot.rotation.x = clamp(frame.camera_pivot.rotation.x, -PI / 2.25, PI / 2.25)
 #endregion
 
 #region Signal Callbacks
@@ -237,6 +237,7 @@ func wake_up():
 	if is_severed:
 		un_sever()
 	set_global_position(Vector3.ZERO)
+	current_stamina = MAX_STAMINA
 	can_wake_up = false
 	wake_up_cooldown_timer.start()
 

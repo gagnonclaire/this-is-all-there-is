@@ -10,7 +10,6 @@ func _ready():
 	frame.speech_audio_stream.set_bus("Mute")
 	frame.stamina_drain_multiplier = 0.0
 
-
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3tqs78f5crlk"]
+
+[ext_resource type="PackedScene" uid="uid://b3wgavt730pe8" path="res://characters/2_parts_heads/human_head_1.blend" id="1_muqoa"]
+
+[node name="human_head2" instance=ExtResource("1_muqoa")]
