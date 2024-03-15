@@ -27,8 +27,8 @@ func _unhandled_input(_event) -> void:
 		main_node.return_to_menu()
 
 func start_server() -> void:
-	#TODO When you join a game, go back to menu, then start a new game,
-	#TODO this fails to create a server (null enet)
+	#TODO When you start or join a game, go back to menu, then start a
+	#TODO new game, we fail to create a server here (null enet_peer)
 	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
