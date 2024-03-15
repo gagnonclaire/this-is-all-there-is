@@ -1,2 +1,6 @@
-# sense-of-self (working title)
-Godot 4 project about the boundary between the self and the other
+# This Is All There Is
+Godot 4 multiplayer project
+
+It used to be called Sense of Self
+
+The name will probably change again
