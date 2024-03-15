@@ -21,8 +21,9 @@ func _ready():
 	if world_node.is_host:
 		var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
 		var full_lines: Array = lines_file.get_as_text().split("\n")
-		var line1: int = randi_range(0, full_lines.size() - 1)
-		var line2: int = randi_range(0, full_lines.size() - 1)
+		# Use -2 to account for base 0 counting and extra blank line
+		var line1: int = randi_range(0, full_lines.size() - 2)
+		var line2: int = randi_range(0, full_lines.size() - 2)
 		lines = [full_lines[line1], full_lines[line2]]
 		lines_file.close()
 
