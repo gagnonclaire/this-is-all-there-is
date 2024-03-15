@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 const SPEED = 1.0
-const NPC_LINES_PATH: String = "res://characters/human_character/human_dialogue.txt"
+const NPC_LINES_PATH: String = "res://characters/3_character_human/human_dialogue.txt"
 
 @onready var frame: Node3D = $HumanFrame
 

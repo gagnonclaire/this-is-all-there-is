@@ -81,8 +81,8 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.3, -2, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_fkdda")
 
-[node name="ColorTimer" type="Timer" parent="."]
+[node name="BodyUpdateTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
-[connection signal="timeout" from="ColorTimer" to="." method="_on_color_timer_timeout"]
+[connection signal="timeout" from="BodyUpdateTimer" to="." method="_on_body_update_timer_timeout"]

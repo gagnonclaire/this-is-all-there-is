@@ -27,29 +27,35 @@ preload("res://characters/2_parts_bodies/human_body_2.tscn")]
 @onready var left_foot: Node3D = $Skeleton3D/CoreBone/LeftFootPivot
 @onready var right_foot: Node3D = $Skeleton3D/CoreBone/RightFootPivot
 
+# Part scenes
+var body_node: Node3D = null
+
 func _ready() -> void:
-	# Set up synced vars only on the authority, it will
-	# then push it to other peers
 	if is_multiplayer_authority():
 		body_type = randi_range(0, BODY_ARRAY.size() - 1)
 		body_top_color = Color(randf(), randf(), randf(), 1)
 		body_bottom_color = Color(randf(), randf(), randf(), 1)
 
-	var body_node = BODY_ARRAY[body_type].instantiate()
-	body_pivot.add_child(body_node)
+	#update_body()
 
-#TODO Find a way to apply synced colors without this timer hack
-func _on_color_timer_timeout():
-	update_colors()
+#TODO Replace this timer hack with an actual way to load colors after sync
+#TODO Cause they are syncing just fine but never updating after that
+func _on_body_update_timer_timeout():
+	update_body()
 
-func update_colors() -> void:
-	var body_top_material = StandardMaterial3D.new()
-	var body_bottom_material = StandardMaterial3D.new()
-	body_top_material.set_albedo(body_top_color)
-	body_bottom_material.set_albedo(body_bottom_color)
+func update_body() -> void:
+	if !body_node:
+		body_node = BODY_ARRAY[body_type].instantiate()
+		body_pivot.add_child(body_node)
 
-	var body_mesh: MeshInstance3D = body_pivot.get_child(0).get_child(0)
-	body_mesh.set_surface_override_material(0, body_top_material)
-	body_mesh.set_surface_override_material(1, body_bottom_material)
+		var body_top_material = StandardMaterial3D.new()
+		var body_bottom_material = StandardMaterial3D.new()
+		body_top_material.set_albedo(body_top_color)
+		body_bottom_material.set_albedo(body_bottom_color)
+
+		var body_mesh: MeshInstance3D = body_pivot.get_child(0).get_child(0)
+		body_mesh.set_surface_override_material(0, body_top_material)
+		body_mesh.set_surface_override_material(1, body_bottom_material)
+
 
 
