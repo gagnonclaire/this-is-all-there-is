@@ -23,10 +23,9 @@ const FOOT_ARRAY: Array[PackedScene] = \
 @export var head_type: int = 0
 @export var hand_type: int = 0
 @export var foot_type: int = 0
-@export var head_color: Color = Color(1, 1, 1, 1)
+@export var skin_color: Color = Color(1, 1, 1, 1)
 @export var body_top_color: Color = Color(1, 1, 1, 1)
 @export var body_bottom_color: Color = Color(1, 1, 1, 1)
-@export var hand_color: Color = Color(1, 1, 1, 1)
 @export var foot_color: Color = Color(1, 1, 1, 1)
 
 # Exposed nodes
@@ -55,10 +54,9 @@ func _ready() -> void:
 		hand_type = randi_range(0, HAND_ARRAY.size() - 1)
 		foot_type = randi_range(0, FOOT_ARRAY.size() - 1)
 
-		head_color = Color(randf(), randf(), randf(), 1)
+		skin_color = Color(randf(), randf(), randf(), 1)
 		body_top_color = Color(randf(), randf(), randf(), 1)
 		body_bottom_color = Color(randf(), randf(), randf(), 1)
-		hand_color = Color(randf(), randf(), randf(), 1)
 		foot_color = Color(randf(), randf(), randf(), 1)
 
 #TODO Replace this timer hack with an actual way to load colors after sync
@@ -73,7 +71,7 @@ func update_body() -> void:
 		head_node = HEAD_ARRAY[head_type].instantiate()
 		head_pivot.add_child(head_node)
 		var head_material = StandardMaterial3D.new()
-		head_material.set_albedo(head_color)
+		head_material.set_albedo(skin_color)
 		var head_mesh: MeshInstance3D = head_pivot.get_child(0).get_child(0)
 		head_mesh.set_surface_override_material(0, head_material)
 
@@ -94,15 +92,15 @@ func update_body() -> void:
 		left_hand_pivot.add_child(left_hand_node)
 		right_hand_pivot.add_child(right_hand_node)
 		var hand_material = StandardMaterial3D.new()
-		hand_material.set_albedo(hand_color)
+		hand_material.set_albedo(skin_color)
 		var left_hand_mesh: MeshInstance3D = left_hand_pivot.get_child(0).get_child(0)
 		var right_hand_mesh: MeshInstance3D = right_hand_pivot.get_child(0).get_child(0)
 		left_hand_mesh.set_surface_override_material(0, hand_material)
 		right_hand_mesh.set_surface_override_material(0, hand_material)
 
 		# Feet
-		left_foot_node = HAND_ARRAY[foot_type].instantiate()
-		right_foot_node = HAND_ARRAY[foot_type].instantiate()
+		left_foot_node = FOOT_ARRAY[foot_type].instantiate()
+		right_foot_node = FOOT_ARRAY[foot_type].instantiate()
 		left_foot_pivot.add_child(left_foot_node)
 		right_foot_pivot.add_child(right_foot_node)
 		var foot_material = StandardMaterial3D.new()

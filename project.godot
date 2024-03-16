@@ -21,6 +21,10 @@ config/icon="res://icon.svg"
 
 driver/enable_input=true
 
+[autoload]
+
+Events="*res://singleton_scripts/events.gd"
+
 [display]
 
 window/size/viewport_width=640

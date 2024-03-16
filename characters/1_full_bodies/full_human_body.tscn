@@ -23,12 +23,24 @@ properties/3/replication_mode = 2
 properties/4/path = NodePath(".:body_bottom_color")
 properties/4/spawn = true
 properties/4/replication_mode = 2
-properties/5/path = NodePath(".:head_color")
+properties/5/path = NodePath("Skeleton3D/CoreBone/CameraPivot:rotation")
 properties/5/spawn = true
-properties/5/replication_mode = 1
-properties/6/path = NodePath("Skeleton3D/CoreBone/CameraPivot:rotation")
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:head_type")
 properties/6/spawn = true
-properties/6/replication_mode = 1
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:hand_type")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+properties/8/path = NodePath(".:foot_type")
+properties/8/spawn = true
+properties/8/replication_mode = 2
+properties/9/path = NodePath(".:skin_color")
+properties/9/spawn = true
+properties/9/replication_mode = 2
+properties/10/path = NodePath(".:foot_color")
+properties/10/spawn = true
+properties/10/replication_mode = 2
 
 [node name="FullHumanBody" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5416, 0)
@@ -59,33 +71,33 @@ body_offset = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0.599244, 0)
 bone_name = "Bone"
 
 [node name="HeadCollision" type="CollisionShape3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.56317, -0.182468)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 1.11484, -0.182468)
 shape = SubResource("BoxShape3D_olcqk")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.856745, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.446335, 0)
 shape = SubResource("CapsuleShape3D_1wngd")
 
 [node name="HeadPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.624674, 0.0129146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17634, 0.0129146)
 
 [node name="CameraPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.113707, 0.0379728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.665373, 0.0379728)
 
 [node name="BodyPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.469513, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.0591025, 0)
 
 [node name="LeftHandPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.3, -1.08144, 0)
+transform = Transform3D(-4.37114e-08, 8.74228e-08, -1, 0, -1, -8.74228e-08, -1, -3.82137e-15, 4.37114e-08, -0.75, -0.481909, 0)
 
 [node name="RightHandPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.3, -1.08144, 0)
+transform = Transform3D(4.37114e-08, 0, 1, 0, -1, 0, -1, 0, 4.37114e-08, 0.75, -0.481909, 0)
 
 [node name="LeftFootPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.3, -2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -2, 0)
 
 [node name="RightFootPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.3, -2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -2, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_fkdda")

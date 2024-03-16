@@ -3,6 +3,8 @@ extends Node
 const PLAYER: PackedScene = preload("res://characters/3_character_player/player.tscn")
 const HUMAN: PackedScene = preload("res://characters/3_character_human/human_character.tscn")
 
+@export var crodots: int
+
 @onready var main_node: Node = get_parent()
 
 var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
@@ -13,6 +15,9 @@ var is_host: bool = false
 func _ready() -> void:
 	if is_host:
 		start_server()
+		crodots = 0
+		Events.connect("crodots_gained", _on_crodots_gained)
+		Events.connect("crodots_lost", _on_crodots_lost)
 	else:
 		start_client()
 
@@ -25,6 +30,12 @@ func _process(_delta) -> void:
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):
 		main_node.return_to_menu()
+
+func _on_crodots_gained(amount: int) -> void:
+	crodots += amount
+
+func _on_crodots_lost(amount: int) -> void:
+	crodots -= amount
 
 func start_server() -> void:
 	#TODO When you start or join a game, go back to menu, then start a

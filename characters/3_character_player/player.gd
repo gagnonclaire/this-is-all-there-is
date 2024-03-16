@@ -100,10 +100,7 @@ func _unhandled_key_input(_event):
 		and (not is_severed or Input.is_action_pressed("control_self")) \
 		and frame.interact_raycast.is_colliding():
 			var interact_target: Object = frame.interact_raycast.get_collider()
-			if interact_target.is_in_group("interact_raycast_target") \
-			and interact_target.is_in_group("player"):
-				interact_target.interacted_with.rpc_id(interact_target.name.to_int())
-			elif interact_target.is_in_group("interact_raycast_target"):
+			if interact_target.is_in_group("interact_raycast_target"):
 				interact_target.interacted_with.rpc()
 
 		# Sever Raycast events
@@ -253,9 +250,10 @@ func send_message(message: String):
 @rpc("any_peer")
 func interacted_with():
 	# Will need to be more clever if interacting via sever is allowed
-	var caller_id: String = str(multiplayer.get_remote_sender_id())
-	var caller_name: String = get_node("../" + caller_id).character_name
-	hud.notify_important(caller_name + " is trying to get your attention")
+	if is_multiplayer_authority():
+		var caller_id: String = str(multiplayer.get_remote_sender_id())
+		var caller_name: String = get_node("../" + caller_id).character_name
+		hud.notify_important(caller_name + " is trying to get your attention")
 
 @rpc("any_peer", "call_local")
 func debug_spawn():
