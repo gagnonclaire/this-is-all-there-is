@@ -47,6 +47,8 @@ func _ready() -> void:
 		frame.camera.current = true
 
 func _process(delta: float) -> void:
+	check_context_indicators()
+
 	if is_multiplayer_authority():
 		# Wake up
 		if Input.is_action_pressed("wake_up") \
@@ -154,6 +156,26 @@ func _on_sever_cooldown_timeout():
 
 func _on_wake_up_cooldown_timeout():
 	can_wake_up = true
+#endregion
+
+#region Dynamic Context Indicators
+func check_context_indicators() -> void:
+	#TODO Break this and similar long conditionals out into
+	#TODO "can_<x>" helper functions
+	if is_multiplayer_authority() \
+	and not is_knocked_out \
+	and not hud.text_chat_entry.is_visible():
+		if current_body.frame.interact_raycast.is_colliding() \
+		and current_body.frame.interact_raycast.get_collider().is_in_group("interact_raycast_target"):
+			hud.show_interact_context_indicator(true)
+		else:
+			hud.show_interact_context_indicator(false)
+
+		if current_body.frame.sever_raycast.is_colliding() \
+		and current_body.frame.sever_raycast.get_collider().is_in_group("sever_raycast_target"):
+			hud.show_sever_context_indicator(true)
+		else:
+			hud.show_sever_context_indicator(false)
 #endregion
 
 #region Action Functions

@@ -16,8 +16,8 @@ func _ready() -> void:
 	if is_host:
 		start_server()
 		crodots = 0
-		Events.connect("crodots_gained", _on_crodots_gained)
-		Events.connect("crodots_lost", _on_crodots_lost)
+		EventsManager.connect("crodots_gained", _on_crodots_gained)
+		EventsManager.connect("crodots_lost", _on_crodots_lost)
 	else:
 		start_client()
 

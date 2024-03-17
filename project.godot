@@ -23,12 +23,13 @@ driver/enable_input=true
 
 [autoload]
 
-Events="*res://singleton_scripts/events.gd"
+EventsManager="*res://singleton_scripts/events_manager.gd"
+KeybindManager="*res://singleton_scripts/keybind_manager.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=320
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/size/mode=2
 window/stretch/mode="viewport"
 

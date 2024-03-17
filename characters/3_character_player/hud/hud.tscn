@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpxgt3rbb7fwy"]
+[gd_scene load_steps=10 format=3 uid="uid://bpxgt3rbb7fwy"]
 
-[ext_resource type="Script" path="res://characters/3_character_player/hud.gd" id="1_n2hy3"]
-[ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="2_mjtls"]
+[ext_resource type="Script" path="res://characters/3_character_player/hud/hud.gd" id="1_jv0iq"]
+[ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="2_abagx"]
+[ext_resource type="LabelSettings" uid="uid://dwvvsn6nrpaak" path="res://characters/3_character_player/hud/context_label_settings.tres" id="3_3gore"]
+[ext_resource type="Script" path="res://characters/3_character_player/hud/interact_context.gd" id="4_b6rb5"]
+[ext_resource type="Script" path="res://characters/3_character_player/hud/sever_context.gd" id="5_2jktu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
 resource_local_to_scene = true
@@ -18,7 +21,7 @@ curve = SubResource("Curve_cnevg")
 
 [node name="HUD" type="CanvasLayer"]
 visible = false
-script = ExtResource("1_n2hy3")
+script = ExtResource("1_jv0iq")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -28,7 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("2_mjtls")
+theme = ExtResource("2_abagx")
 
 [node name="ImportantNotice" type="Label" parent="Control"]
 layout_mode = 1
@@ -101,4 +104,32 @@ alignment = 1
 max_length = 64
 expand_to_text_length = true
 
-[connection signal="timeout" from="Control/ImportantNotice/ClearTimer" to="." method="_on_timer_timeout"]
+[node name="ContextIndicators" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 6.0
+offset_right = 29.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractContext" type="Label" parent="Control/ContextIndicators"]
+visible = false
+layout_mode = 2
+label_settings = ExtResource("3_3gore")
+horizontal_alignment = 1
+script = ExtResource("4_b6rb5")
+
+[node name="SeverContext" type="Label" parent="Control/ContextIndicators"]
+visible = false
+layout_mode = 2
+label_settings = ExtResource("3_3gore")
+horizontal_alignment = 1
+script = ExtResource("5_2jktu")
+
+[connection signal="timeout" from="Control/ImportantNotice/ClearTimer" to="." method="_on_clear_timer_timeout"]

@@ -20,7 +20,7 @@ offset_right = -64.0
 offset_bottom = 256.0
 grow_horizontal = 2
 
-[node name="KeybindMenu" parent="TabBar" instance=ExtResource("1_neqwe")]
+[node name="Keybinds" parent="TabBar" instance=ExtResource("1_neqwe")]
 layout_mode = 2
 
 [connection signal="tab_changed" from="TabBar" to="." method="_on_tab_bar_tab_changed"]

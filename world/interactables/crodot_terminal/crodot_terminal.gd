@@ -11,4 +11,4 @@ func _process(_delta):
 @rpc("any_peer", "call_local")
 func interacted_with():
 	if is_multiplayer_authority():
-		Events.emit_signal("crodots_gained", 1)
+		EventsManager.emit_signal("crodots_gained", 1)
