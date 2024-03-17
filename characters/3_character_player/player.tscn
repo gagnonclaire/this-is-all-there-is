@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="3_uwo5d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kds0n"]
-height = 3.0
+height = 3.5
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30qq8"]
 properties/0/path = NodePath(".:position")
@@ -24,7 +24,7 @@ script = ExtResource("1_jnvml")
 [node name="HumanFrame" parent="." instance=ExtResource("3_uwo5d")]
 
 [node name="WorldCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 shape = SubResource("CapsuleShape3D_kds0n")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
