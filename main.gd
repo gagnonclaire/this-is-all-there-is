@@ -1,7 +1,7 @@
 extends Node
 
 const MAIN_MENU: PackedScene = preload("res://main_menu/main_menu.tscn")
-const WORLD: PackedScene = preload("res://world/world_tutorial.tscn")
+const WORLD: PackedScene = preload("res://worlds/tutorial/world_tutorial.tscn")
 
 const PORT: int = 9999
 

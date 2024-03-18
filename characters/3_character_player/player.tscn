@@ -27,7 +27,7 @@ script = ExtResource("1_jnvml")
 [node name="HumanFrame" parent="." instance=ExtResource("3_uwo5d")]
 
 [node name="WorldCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -0.17498)
 shape = SubResource("CapsuleShape3D_kds0n")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

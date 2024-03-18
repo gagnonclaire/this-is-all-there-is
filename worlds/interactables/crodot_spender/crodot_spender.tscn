@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdt6di8fhsboy"]
 
-[ext_resource type="Script" path="res://world/interactables/crodot_spender/crodot_spender.gd" id="1_58nxs"]
+[ext_resource type="Script" path="res://worlds/interactables/crodot_spender/crodot_spender.gd" id="1_58nxs"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dggir"]
 size = Vector3(1, 1, 0.25)
