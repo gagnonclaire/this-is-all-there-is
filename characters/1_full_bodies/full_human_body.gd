@@ -32,7 +32,9 @@ const FOOT_ARRAY: Array[PackedScene] = \
 @onready var skeleton: Skeleton3D = $Skeleton3D
 @onready var core_bone: PhysicalBone3D = $Skeleton3D/CoreBone
 @onready var head_pivot: Node3D = $Skeleton3D/CoreBone/HeadPivot
-@onready var camera_pivot: Node3D = $Skeleton3D/CoreBone/CameraPivot
+@onready var head_mesh_pivot: Node3D = $Skeleton3D/CoreBone/HeadPivot/HeadMeshPivot
+@onready var hair_mesh_pivot: Node3D = $Skeleton3D/CoreBone/HeadPivot/HairMeshPivot
+@onready var camera_pivot: Node3D = $Skeleton3D/CoreBone/HeadPivot/CameraPivot
 @onready var body_pivot: Node3D = $Skeleton3D/CoreBone/BodyPivot
 @onready var left_hand_pivot: Node3D = $Skeleton3D/CoreBone/LeftHandPivot
 @onready var right_hand_pivot: Node3D = $Skeleton3D/CoreBone/RightHandPivot
@@ -41,7 +43,7 @@ const FOOT_ARRAY: Array[PackedScene] = \
 
 # Part scenes
 var body_node: Node3D = null
-var head_node: Node3D = null
+var head_mesh_node: Node3D = null
 var left_hand_node: Node3D = null
 var right_hand_node: Node3D = null
 var left_foot_node: Node3D = null
@@ -68,11 +70,11 @@ func _on_body_update_timer_timeout():
 func update_body() -> void:
 	if !body_node:
 		# Head
-		head_node = HEAD_ARRAY[head_type].instantiate()
-		head_pivot.add_child(head_node)
+		head_mesh_node = HEAD_ARRAY[head_type].instantiate()
+		head_mesh_pivot.add_child(head_mesh_node)
 		var head_material = StandardMaterial3D.new()
 		head_material.set_albedo(skin_color)
-		var head_mesh: MeshInstance3D = head_pivot.get_child(0).get_child(0)
+		var head_mesh: MeshInstance3D = head_mesh_pivot.get_child(0).get_child(0)
 		head_mesh.set_surface_override_material(0, head_material)
 
 		# Body

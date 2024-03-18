@@ -12,12 +12,14 @@ const SPEED = 1.0
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var examine_text: String = "A Dummy"
+
 func _ready():
 	frame.stamina_drain_multiplier = 1.0
 
 	if world_node.is_host:
 		character_name = ProceduralGeneration.get_human_name()
-		frame.examine_text = character_name
+		examine_text = character_name
 		character_lines = ProceduralGeneration.get_human_lines(randi_range(2,3))
 
 #TODO Use a navmesh for wander
@@ -50,4 +52,4 @@ func interacted_with():
 
 
 func _on_name_update_timer_timeout():
-	frame.examine_text = character_name
+	examine_text = character_name

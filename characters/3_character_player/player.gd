@@ -18,13 +18,18 @@ const SEVER_RANGE: float = 3.0
 @onready var sever_cooldown_timer: Timer = $SeverCooldown
 @onready var wake_up_cooldown_timer: Timer = $WakeUpCooldown
 @onready var frame: Node3D = $HumanFrame
+@onready var hold_point: Node3D = $HoldPoint
 
 @onready var world_node: Node = get_parent()
 @onready var main_node: Node = world_node.get_parent()
 
+var examine_text: String = ""
+
 var current_stamina: float = MAX_STAMINA
 var current_wake_progress: float = 0.0
-var current_body: Object = self
+
+var current_body: CharacterBody3D = self
+var held_object: PhysicsBody3D = null
 
 var is_knocked_out: bool = false
 var is_severed: bool = false
@@ -41,7 +46,7 @@ func _enter_tree() -> void:
 #TODO These things should be done somewhere else to be more scalable
 func _ready() -> void:
 	frame.stamina_drain_multiplier = 2.0
-	frame.examine_text = character_name
+	examine_text = character_name
 
 	if is_multiplayer_authority():
 		frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
@@ -83,8 +88,19 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
+	# World object are synchronized by the host
+	if held_object:
+		rpc_id(1, "move_object_to", held_object.name, hold_point.get_global_position())
+
+@rpc("any_peer", "call_local")
+func move_object_to(object_name: StringName, destination: Vector3):
+	if world_node.is_host:
+		var object_to_move: PhysicsBody3D = world_node.get_node(NodePath("Box"))
+		var object_translate: Vector3 = destination - object_to_move.global_position
+		object_to_move.move_and_collide(object_translate)
+
 #TODO Fix me please I am so bad
-func _unhandled_key_input(_event):
+func _unhandled_input(event):
 	if is_multiplayer_authority() \
 	and not is_knocked_out \
 	and not hud.text_chat_entry.is_visible():
@@ -117,27 +133,35 @@ func _unhandled_key_input(_event):
 		and not is_knocked_out:
 			frame.start_speach_audio.rpc(1)
 
+		# Object grabbing
+		if Input.is_action_just_pressed("grab") \
+		and (not is_severed or Input.is_action_pressed("control_self")) \
+		and not is_knocked_out \
+		and current_body.frame.interact_raycast.is_colliding() \
+		and current_body.frame.interact_raycast.get_collider().is_in_group("grab_target"):
+			held_object = current_body.frame.interact_raycast.get_collider()
+		if Input.is_action_just_released("grab") \
+		and held_object:
+			held_object = null
+
 		# Debug events
 		if Input.is_action_just_pressed("debug_spawn"):
 			rpc_id(1, "debug_spawn")
 
-#TODO Needs to also be broken out to its own function
-func _unhandled_input(event):
-	if is_multiplayer_authority() \
-	and event is InputEventMouseMotion \
-	and not is_knocked_out \
-	and not hud.text_chat_entry.is_visible():
-		#TODO this needs to rotate the head pivot as well, and then body rotation can follow that
-		if is_severed and not Input.is_action_pressed("control_self"):
-			current_body.frame.sever_camera.rotate_y(-event.relative.x *.005)
-			current_body.frame.sever_camera.rotation.y = clampf(current_body.frame.sever_camera.rotation.y, -PI / 4.5, PI / 4.5)
-			current_body.frame.sever_camera.rotate_x(-event.relative.y *.005)
-			current_body.frame.sever_camera.rotation.x = clampf(current_body.frame.sever_camera.rotation.x, -PI / 4.5, PI / 4.5)
-			current_body.frame.sever_camera.rotation.z = 0
-		else:
-			rotate_y(-event.relative.x *.005)
-			frame.camera_pivot.rotate_x(-event.relative.y *.005)
-			frame.camera_pivot.rotation.x = clamp(frame.camera_pivot.rotation.x, -PI / 2.25, PI / 2.25)
+		if event is InputEventMouseMotion \
+		and not is_knocked_out \
+		and not hud.text_chat_entry.is_visible():
+			#TODO this needs to rotate the head pivot as well, and then body rotation can follow that
+			if is_severed and not Input.is_action_pressed("control_self"):
+				current_body.frame.sever_camera.rotate_y(-event.relative.x *.005)
+				current_body.frame.sever_camera.rotation.y = clampf(current_body.frame.sever_camera.rotation.y, -PI / 4.5, PI / 4.5)
+				current_body.frame.sever_camera.rotate_x(-event.relative.y *.005)
+				current_body.frame.sever_camera.rotation.x = clampf(current_body.frame.sever_camera.rotation.x, -PI / 4.5, PI / 4.5)
+				current_body.frame.sever_camera.rotation.z = 0
+			else:
+				rotate_y(-event.relative.x *.005)
+				frame.head_pivot.rotate_x(-event.relative.y *.005)
+				frame.head_pivot.rotation.x = clamp(frame.head_pivot.rotation.x, -PI / 2.25, PI / 2.25)
 
 #region Dynamic Context Indicators
 #TODO Move each check and action into its own function
@@ -158,7 +182,7 @@ func check_context_indicators() -> void:
 		# Examine targets use the interact raycast
 		if current_body.frame.interact_raycast.is_colliding() \
 		and current_body.frame.interact_raycast.get_collider().is_in_group("examine_target"):
-			hud.show_examine_context_indicator(current_body.frame.interact_raycast.get_collider().frame.examine_text)
+			hud.show_examine_context_indicator(current_body.frame.interact_raycast.get_collider().examine_text)
 		else:
 			hud.show_examine_context_indicator("")
 

@@ -24,24 +24,24 @@ properties/3/replication_mode = 2
 properties/4/path = NodePath(".:body_bottom_color")
 properties/4/spawn = true
 properties/4/replication_mode = 2
-properties/5/path = NodePath("Skeleton3D/CoreBone/CameraPivot:rotation")
+properties/5/path = NodePath(".:head_type")
 properties/5/spawn = true
 properties/5/replication_mode = 2
-properties/6/path = NodePath(".:head_type")
+properties/6/path = NodePath(".:hand_type")
 properties/6/spawn = true
 properties/6/replication_mode = 2
-properties/7/path = NodePath(".:hand_type")
+properties/7/path = NodePath(".:foot_type")
 properties/7/spawn = true
 properties/7/replication_mode = 2
-properties/8/path = NodePath(".:foot_type")
+properties/8/path = NodePath(".:skin_color")
 properties/8/spawn = true
 properties/8/replication_mode = 2
-properties/9/path = NodePath(".:skin_color")
+properties/9/path = NodePath(".:foot_color")
 properties/9/spawn = true
 properties/9/replication_mode = 2
-properties/10/path = NodePath(".:foot_color")
+properties/10/path = NodePath("Skeleton3D/CoreBone/HeadPivot:rotation")
 properties/10/spawn = true
-properties/10/replication_mode = 2
+properties/10/replication_mode = 1
 
 [node name="FullHumanBody" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5416, 0)
@@ -80,10 +80,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.446335, 0)
 shape = SubResource("CapsuleShape3D_1wngd")
 
 [node name="HeadPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17634, 0.0129146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762985, 0.0129146)
 
-[node name="CameraPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.831468, -0.101266)
+[node name="HeadMeshPivot" type="Node3D" parent="Skeleton3D/CoreBone/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321635, 0)
+
+[node name="HairMeshPivot" type="Node3D" parent="Skeleton3D/CoreBone/HeadPivot"]
+
+[node name="CameraPivot" type="Node3D" parent="Skeleton3D/CoreBone/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154369, 0)
 
 [node name="BodyPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.0591025, 0)

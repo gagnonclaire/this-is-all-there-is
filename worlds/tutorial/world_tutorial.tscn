@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=17 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" path="res://worlds/tutorial/world_tutorial.gd" id="1_blfti"]
 [ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="2_eu6j3"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://worlds/interactables/crodot_terminal/crodot_terminal.tscn" id="7_5p3ca"]
 [ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://worlds/interactables/crodot_spender/crodot_spender.tscn" id="8_ng4tu"]
 [ext_resource type="PackedScene" uid="uid://brc3yn7tl125l" path="res://worlds/structures/tutorial_structure_main/tutorial_structure.tscn" id="9_s4sg1"]
+[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://worlds/interactables/box/box.tscn" id="10_dwqla"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdgxy"]
 resource_name = "street"
@@ -215,3 +216,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89313, 0, -7.39891)
 
 [node name="tutorial_structure" parent="." instance=ExtResource("9_s4sg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21159, -0.217798, -4.49238)
+
+[node name="Box" parent="." instance=ExtResource("10_dwqla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -10)

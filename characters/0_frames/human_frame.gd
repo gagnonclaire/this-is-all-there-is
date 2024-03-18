@@ -33,9 +33,6 @@ var sever_camera: Camera3D
 var interact_raycast: RayCast3D
 var sever_raycast: RayCast3D
 
-# Universal frame nodes
-var examine_text: String = ""
-
 #TODO everything below here is garbage
 var stamina_drain_multiplier: float = 1.0
 
