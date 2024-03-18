@@ -95,7 +95,7 @@ func _physics_process(delta: float) -> void:
 @rpc("any_peer", "call_local")
 func move_object_to(object_name: StringName, destination: Vector3):
 	if world_node.is_host:
-		var object_to_move: PhysicsBody3D = world_node.get_node(NodePath("Box"))
+		var object_to_move: PhysicsBody3D = world_node.get_node(NodePath(object_name))
 		var object_translate: Vector3 = destination - object_to_move.global_position
 		object_to_move.move_and_collide(object_translate)
 
