@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cf0qsj06yfvpe"]
 
-[ext_resource type="Script" path="res://worlds/interactables/box/box.gd" id="1_h53gi"]
+[ext_resource type="Script" path="res://worlds/world_objects/box/box.gd" id="1_cjtd4"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h8wmq"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
@@ -10,16 +10,16 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_oovvf"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/replication_mode = 2
 
 [node name="Box" type="RigidBody3D" groups=["examine_target", "grab_target"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 7
 collision_mask = 5
-script = ExtResource("1_h53gi")
+script = ExtResource("1_cjtd4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_h8wmq")

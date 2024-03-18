@@ -6,10 +6,10 @@
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="4_6x2ky"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://worlds/environment_scenes/night_environment.tres" id="5_0gs26"]
 [ext_resource type="PackedScene" uid="uid://c7iyqw5jtnns8" path="res://characters/3_character_dummy/human_dummy_character.tscn" id="6_8s8qh"]
-[ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://worlds/interactables/crodot_terminal/crodot_terminal.tscn" id="7_5p3ca"]
-[ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://worlds/interactables/crodot_spender/crodot_spender.tscn" id="8_ng4tu"]
+[ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://worlds/world_objects/crodot_terminal/crodot_terminal.tscn" id="7_dg8c6"]
+[ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://worlds/world_objects/crodot_spender/crodot_spender.tscn" id="8_0hyep"]
 [ext_resource type="PackedScene" uid="uid://brc3yn7tl125l" path="res://worlds/structures/tutorial_structure_main/tutorial_structure.tscn" id="9_s4sg1"]
-[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://worlds/interactables/box/box.tscn" id="10_dwqla"]
+[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://worlds/world_objects/box/box.tscn" id="10_slotn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdgxy"]
 resource_name = "street"
@@ -208,14 +208,14 @@ horizontal_alignment = 0
 [node name="HumanDummyCharacter" parent="." instance=ExtResource("6_8s8qh")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.43591, 0, -2.10258)
 
-[node name="CrodotTerminal" parent="." instance=ExtResource("7_5p3ca")]
+[node name="CrodotTerminal" parent="." instance=ExtResource("7_dg8c6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
 
-[node name="CrodotSpender" parent="." instance=ExtResource("8_ng4tu")]
+[node name="CrodotSpender" parent="." instance=ExtResource("8_0hyep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89313, 0, -7.39891)
 
 [node name="tutorial_structure" parent="." instance=ExtResource("9_s4sg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21159, -0.217798, -4.49238)
 
-[node name="Box" parent="." instance=ExtResource("10_dwqla")]
+[node name="Box" parent="." instance=ExtResource("10_slotn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -10)

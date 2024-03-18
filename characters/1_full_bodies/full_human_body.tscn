@@ -88,7 +88,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321635, 0)
 [node name="HairMeshPivot" type="Node3D" parent="Skeleton3D/CoreBone/HeadPivot"]
 
 [node name="CameraPivot" type="Node3D" parent="Skeleton3D/CoreBone/HeadPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154369, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307247, -0.416756)
 
 [node name="BodyPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.0591025, 0)

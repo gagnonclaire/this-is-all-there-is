@@ -9,3 +9,4 @@ extends Node3D
 @onready var sever_camera: Camera3D = $Camera/SeverCamera
 @onready var interact_raycast: RayCast3D = $Camera/SeverCamera/SeverRayCast
 @onready var sever_raycast: RayCast3D = $Camera/SeverCamera/SeverRayCast
+@onready var hold_point: Node3D = $Camera/HoldPoint

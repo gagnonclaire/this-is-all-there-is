@@ -18,10 +18,6 @@ const SEVER_RANGE: float = 3.0
 @onready var sever_cooldown_timer: Timer = $SeverCooldown
 @onready var wake_up_cooldown_timer: Timer = $WakeUpCooldown
 @onready var frame: Node3D = $HumanFrame
-@onready var hold_point: Node3D = $HoldPoint
-
-@onready var world_node: Node = get_parent()
-@onready var main_node: Node = world_node.get_parent()
 
 var examine_text: String = ""
 
@@ -29,7 +25,7 @@ var current_stamina: float = MAX_STAMINA
 var current_wake_progress: float = 0.0
 
 var current_body: CharacterBody3D = self
-var held_object: PhysicsBody3D = null
+var held_object: RigidBody3D = null
 
 var is_knocked_out: bool = false
 var is_severed: bool = false
@@ -88,17 +84,6 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
-	# World object are synchronized by the host
-	if held_object:
-		rpc_id(1, "move_object_to", held_object.name, hold_point.get_global_position())
-
-@rpc("any_peer", "call_local")
-func move_object_to(object_name: StringName, destination: Vector3):
-	if world_node.is_host:
-		var object_to_move: PhysicsBody3D = world_node.get_node(NodePath(object_name))
-		var object_translate: Vector3 = destination - object_to_move.global_position
-		object_to_move.move_and_collide(object_translate)
-
 #TODO Fix me please I am so bad
 func _unhandled_input(event):
 	if is_multiplayer_authority() \
@@ -123,7 +108,7 @@ func _unhandled_input(event):
 		if Input.is_action_just_pressed("talk") \
 		and not is_severed:
 			if not hud.text_chat_entry.is_visible():
-				main_node.free_mouse()
+				EventsManager.free_mouse()
 				hud.text_chat_entry.show()
 				hud.text_chat_entry.grab_focus()
 
@@ -140,8 +125,11 @@ func _unhandled_input(event):
 		and current_body.frame.interact_raycast.is_colliding() \
 		and current_body.frame.interact_raycast.get_collider().is_in_group("grab_target"):
 			held_object = current_body.frame.interact_raycast.get_collider()
+			held_object.pick_up_by.rpc_id(1, name)
+
 		if Input.is_action_just_released("grab") \
 		and held_object:
+			held_object.drop.rpc_id(1)
 			held_object = null
 
 		# Debug events
@@ -309,7 +297,7 @@ func send_message(message: String):
 	if message.length() > 0:
 		frame.set_speech_label.rpc(message)
 
-	main_node.capture_mouse()
+	EventsManager.capture_mouse()
 	hud.text_chat_entry.hide()
 
 #TODO Will need to be more clever if interacting via sever is allowed
@@ -324,7 +312,7 @@ func interacted_with():
 func debug_spawn():
 	var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
 	var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
-	world_node.debug_spawn(random_position, random_rotation)
+	EventsManager.world_node.debug_spawn(random_position, random_rotation)
 
 
 

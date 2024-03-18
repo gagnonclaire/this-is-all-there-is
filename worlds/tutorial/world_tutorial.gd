@@ -8,12 +8,9 @@ const HUMAN: PackedScene = preload("res://characters/3_character_human/human_cha
 @onready var main_node: Node = get_parent()
 
 var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-var join_address: String = ""
-var port: int = 9999
-var is_host: bool = false
 
 func _ready() -> void:
-	if is_host:
+	if MultiplayerControls.is_host:
 		start_server()
 		crodots = 0
 		EventsManager.connect("crodots_gained", _on_crodots_gained)
@@ -40,14 +37,14 @@ func _on_crodots_lost(amount: int) -> void:
 func start_server() -> void:
 	#TODO When you start or join a game, go back to menu, then start a
 	#TODO new game, we fail to create a server here (null enet_peer)
-	enet_peer.create_server(port)
+	enet_peer.create_server(MultiplayerControls.port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	add_player(multiplayer.get_unique_id())
 
 func start_client() -> void:
-	enet_peer.create_client(join_address, port)
+	enet_peer.create_client(MultiplayerControls.join_address, MultiplayerControls.port)
 	multiplayer.multiplayer_peer = enet_peer
 
 func add_player(peer_id) -> void:

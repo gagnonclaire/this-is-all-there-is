@@ -32,6 +32,7 @@ var camera: Camera3D
 var sever_camera: Camera3D
 var interact_raycast: RayCast3D
 var sever_raycast: RayCast3D
+var hold_point: Node3D
 
 #TODO everything below here is garbage
 var stamina_drain_multiplier: float = 1.0
@@ -44,6 +45,7 @@ func _ready() -> void:
 	sever_camera = camera_node.sever_camera
 	interact_raycast = camera_node.interact_raycast
 	sever_raycast = camera_node.sever_raycast
+	hold_point = camera_node.hold_point
 
 func _on_speech_clear_timer_timeout():
 	speech_label.set_text("")
