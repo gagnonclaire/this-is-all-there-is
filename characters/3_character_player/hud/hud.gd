@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var stamina_vignette: TextureRect = $Control/StaminaVignette
 @onready var unstuck_vignette: TextureRect = $Control/UnstuckVignette
 @onready var text_chat_entry: LineEdit = $Control/TextChatEntry
+@onready var examine_context_indicator: Label = $Control/ExamineContext
 @onready var interact_context_indicator: Label = $Control/ContextIndicators/InteractContext
 @onready var sever_context_indicator: Label = $Control/ContextIndicators/SeverContext
 
@@ -29,6 +30,10 @@ func notify_important(message: String) -> void:
 		important_notice_clear_timer.start()
 
 # Dynamic context labels, placed under reticule
+func show_examine_context_indicator(examine_text: String) -> void:
+	if is_multiplayer_authority():
+		examine_context_indicator.set_text(examine_text)
+
 func show_interact_context_indicator(show_indicator: bool = true) -> void:
 	if is_multiplayer_authority():
 		interact_context_indicator.set_visible(show_indicator)

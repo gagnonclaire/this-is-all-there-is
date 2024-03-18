@@ -1,32 +1,26 @@
 extends CharacterBody3D
 
 const SPEED = 1.0
-const NPC_LINES_PATH: String = "res://characters/3_character_human/human_dialogue.txt"
+
+@export var character_name: String = ""
+@export var character_lines: Array # Array[String] cannot sync, maybe used a PackedStringArray for lines?
+@export var current_line: int = 0
 
 @onready var frame: Node3D = $HumanFrame
-
 @onready var world_node: Node = get_parent()
 @onready var current_destination: Vector3 = get_global_position()
 
-var lines: Array
-var current_line: int = 0
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-var character_name: String = "A Human"
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	frame.stamina_drain_multiplier = 1.0
 
-	# Read from lines file
 	if world_node.is_host:
-		var lines_file: FileAccess = FileAccess.open(NPC_LINES_PATH, FileAccess.READ)
-		var full_lines: Array = lines_file.get_as_text().split("\n")
-		# Use -2 to account for base 0 counting and extra blank line
-		var line1: int = randi_range(0, full_lines.size() - 2)
-		var line2: int = randi_range(0, full_lines.size() - 2)
-		lines = [full_lines[line1], full_lines[line2]]
-		lines_file.close()
+		character_name = ProceduralGeneration.get_human_name()
+		frame.examine_text = character_name
+		character_lines = ProceduralGeneration.get_human_lines(randi_range(2,3))
 
+#TODO Use a navmesh for wander
 func _physics_process(delta):
 	if world_node.is_host:
 		if not is_on_floor():
@@ -49,7 +43,11 @@ func _on_destination_update_timer_timeout():
 
 @rpc("any_peer", "call_local")
 func interacted_with():
-	frame.set_speech_label(lines[current_line])
+	frame.set_speech_label(character_lines[current_line])
 
 	if world_node.is_host:
-		current_line = (current_line + 1) % 2
+		current_line = (current_line + 1) % character_lines.size()
+
+
+func _on_name_update_timer_timeout():
+	frame.examine_text = character_name

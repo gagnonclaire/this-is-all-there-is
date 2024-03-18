@@ -9,13 +9,13 @@ script = ExtResource("1_ex1ob")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.572942, -0.437766)
 doppler_tracking = 2
 
-[node name="InteractRayCast" type="RayCast3D" parent="Camera"]
-target_position = Vector3(0, 0, -3)
-collision_mask = 2
-
 [node name="SeverCamera" type="Camera3D" parent="Camera"]
 doppler_tracking = 2
 
 [node name="SeverRayCast" type="RayCast3D" parent="Camera/SeverCamera"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+
+[node name="InteractRayCast" type="RayCast3D" parent="Camera/SeverCamera"]
 target_position = Vector3(0, 0, -3)
 collision_mask = 2

@@ -20,18 +20,21 @@ const CAMERA_SCENE: PackedScene = preload("res://characters/2_parts_cameras/basi
 @onready var head_pivot: Node3D = full_body.head_pivot
 @onready var camera_pivot: Node3D = full_body.camera_pivot
 
-# Exposed camera nodes
-var camera: Camera3D
-var sever_camera: Camera3D
-var interact_raycast: RayCast3D
-var sever_raycast: RayCast3D
-
 # Exposed frame nodes
 @onready var speech_label: Label3D = $SpeechLabel
 @onready var speech_clear_timer: Timer = $SpeechClearTimer
 @onready var speech_audio_loop_timer: Timer = $SpeechAudioLoopTimer
 @onready var speech_audio_loop_end_timer: Timer = $SpeechAudioLoopEndTimer
 @onready var speech_audio_stream: AudioStreamPlayer3D = $SpeechAudioStream
+
+# Exposed camera nodes
+var camera: Camera3D
+var sever_camera: Camera3D
+var interact_raycast: RayCast3D
+var sever_raycast: RayCast3D
+
+# Universal frame nodes
+var examine_text: String = ""
 
 #TODO everything below here is garbage
 var stamina_drain_multiplier: float = 1.0

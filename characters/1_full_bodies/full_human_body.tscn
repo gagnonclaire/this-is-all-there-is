@@ -82,7 +82,7 @@ shape = SubResource("CapsuleShape3D_1wngd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17634, 0.0129146)
 
 [node name="CameraPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.665373, 0.0379728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.831468, -0.101266)
 
 [node name="BodyPivot" type="Node3D" parent="Skeleton3D/CoreBone"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.0591025, 0)

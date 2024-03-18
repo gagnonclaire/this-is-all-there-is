@@ -11,6 +11,8 @@ const STAMINA_GAIN_MODIFIER_OUT: float = 15.0
 
 const SEVER_RANGE: float = 3.0
 
+@export var character_name: String = "A Player"
+
 @onready var hud: CanvasLayer = $HUD
 @onready var world_collision: CollisionShape3D = $WorldCollider
 @onready var sever_cooldown_timer: Timer = $SeverCooldown
@@ -21,49 +23,38 @@ const SEVER_RANGE: float = 3.0
 @onready var main_node: Node = world_node.get_parent()
 
 var current_stamina: float = MAX_STAMINA
-var wake_progress: float = 0.0
+var current_wake_progress: float = 0.0
 var current_body: Object = self
 
 var is_knocked_out: bool = false
 var is_severed: bool = false
-var can_sever: bool = true
-var can_wake_up: bool = true
 
-# Eventually these names will be custom or procedural, this is placeholder
-var character_name: String = "A Player"
+var can_sever: bool = true
+var wake_up_on_cooldown: bool = true
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-#region Overrides
+# Player node name is equal to peer id
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
 
+#TODO These things should be done somewhere else to be more scalable
 func _ready() -> void:
 	frame.stamina_drain_multiplier = 2.0
+	frame.examine_text = character_name
 
 	if is_multiplayer_authority():
 		frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
-		hud.show()
 		frame.camera.current = true
 
+		hud.show()
+
+#TODO Move phsycics process things that aren't actually physics based to here
 func _process(delta: float) -> void:
 	check_context_indicators()
+	check_wake_up(delta)
 
-	if is_multiplayer_authority():
-		# Wake up
-		if Input.is_action_pressed("wake_up") \
-		and can_wake_up \
-		and not is_knocked_out \
-		and not hud.text_chat_entry.is_visible():
-			wake_progress = clampf(wake_progress + (delta * 50.0), 0, 100.0)
-		else:
-			wake_progress = clampf(wake_progress - (delta * 100.0), 0, 100.0)
-
-		hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (wake_progress / 100.0)))
-
-		if wake_progress == 100.0:
-			wake_up()
-
+#TODO Do this on a lower lever
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
 		if not is_on_floor():
@@ -92,7 +83,7 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
-#TODO fix me please i am so bad
+#TODO Fix me please I am so bad
 func _unhandled_key_input(_event):
 	if is_multiplayer_authority() \
 	and not is_knocked_out \
@@ -130,41 +121,28 @@ func _unhandled_key_input(_event):
 		if Input.is_action_just_pressed("debug_spawn"):
 			rpc_id(1, "debug_spawn")
 
-# Handles severed and unsevered camera movement
-# Need some way to toggle between these two while severd
+#TODO Needs to also be broken out to its own function
 func _unhandled_input(event):
 	if is_multiplayer_authority() \
 	and event is InputEventMouseMotion \
 	and not is_knocked_out \
 	and not hud.text_chat_entry.is_visible():
+		#TODO this needs to rotate the head pivot as well, and then body rotation can follow that
 		if is_severed and not Input.is_action_pressed("control_self"):
 			current_body.frame.sever_camera.rotate_y(-event.relative.x *.005)
 			current_body.frame.sever_camera.rotation.y = clampf(current_body.frame.sever_camera.rotation.y, -PI / 4.5, PI / 4.5)
 			current_body.frame.sever_camera.rotate_x(-event.relative.y *.005)
 			current_body.frame.sever_camera.rotation.x = clampf(current_body.frame.sever_camera.rotation.x, -PI / 4.5, PI / 4.5)
 			current_body.frame.sever_camera.rotation.z = 0
-			print(current_body.frame.sever_camera.get_rotation())
 		else:
 			rotate_y(-event.relative.x *.005)
 			frame.camera_pivot.rotate_x(-event.relative.y *.005)
 			frame.camera_pivot.rotation.x = clamp(frame.camera_pivot.rotation.x, -PI / 2.25, PI / 2.25)
-#endregion
-
-#region Signal Callbacks
-func _on_sever_cooldown_timeout():
-	can_sever = true
-
-func _on_wake_up_cooldown_timeout():
-	can_wake_up = true
-#endregion
 
 #region Dynamic Context Indicators
+#TODO Move each check and action into its own function
 func check_context_indicators() -> void:
-	#TODO Break this and similar long conditionals out into
-	#TODO "can_<x>" helper functions
-	if is_multiplayer_authority() \
-	and not is_knocked_out \
-	and not hud.text_chat_entry.is_visible():
+	if can_check_context_indicators():
 		if current_body.frame.interact_raycast.is_colliding() \
 		and current_body.frame.interact_raycast.get_collider().is_in_group("interact_raycast_target"):
 			hud.show_interact_context_indicator(true)
@@ -176,9 +154,60 @@ func check_context_indicators() -> void:
 			hud.show_sever_context_indicator(true)
 		else:
 			hud.show_sever_context_indicator(false)
+
+		# Examine targets use the interact raycast
+		if current_body.frame.interact_raycast.is_colliding() \
+		and current_body.frame.interact_raycast.get_collider().is_in_group("examine_target"):
+			hud.show_examine_context_indicator(current_body.frame.interact_raycast.get_collider().frame.examine_text)
+		else:
+			hud.show_examine_context_indicator("")
+
+func can_check_context_indicators():
+	return is_multiplayer_authority() \
+	and not is_knocked_out \
+	and not hud.text_chat_entry.is_visible()
 #endregion
 
-#region Action Functions
+#region Wake Up Mechanics
+func check_wake_up(delta: float) -> void:
+	if is_multiplayer_authority():
+		if Input.is_action_pressed("wake_up") \
+		and can_wake_up \
+		and not is_knocked_out \
+		and not hud.text_chat_entry.is_visible():
+			current_wake_progress = clampf(current_wake_progress + (delta * 50.0), 0, 100.0)
+		else:
+			current_wake_progress = clampf(current_wake_progress - (delta * 100.0), 0, 100.0)
+
+		hud.unstuck_vignette.set_modulate(Color(1, 1, 1, (current_wake_progress / 100.0)))
+
+		if current_wake_progress == 100.0:
+			wake_up()
+
+func can_wake_up():
+	return is_multiplayer_authority() \
+	and not wake_up_on_cooldown \
+	and not is_knocked_out \
+	and not hud.text_chat_entry.is_visible()
+
+func wake_up():
+	if is_severed:
+		un_sever()
+	set_global_position(Vector3.ZERO)
+	set_global_rotation(Vector3.ZERO)
+	current_stamina = MAX_STAMINA
+	current_wake_progress = 100.0
+	wake_up_on_cooldown = true
+	wake_up_cooldown_timer.start()
+
+func _on_wake_up_cooldown_timeout():
+	wake_up_on_cooldown = false
+#endregion
+
+#TODO Below here is no-man's land, this all needs to be refactored
+func _on_sever_cooldown_timeout():
+	can_sever = true
+
 func do_stamina_change(delta: float):
 	var stamina_change = delta * STAMINA_GAIN_MODIFIER_BASE
 
@@ -252,26 +281,16 @@ func un_sever():
 	can_sever = false
 	sever_cooldown_timer.start()
 
-func wake_up():
-	if is_severed:
-		un_sever()
-	set_global_position(Vector3.ZERO)
-	current_stamina = MAX_STAMINA
-	can_wake_up = false
-	wake_up_cooldown_timer.start()
-
 func send_message(message: String):
 	if message.length() > 0:
 		frame.set_speech_label.rpc(message)
 
 	main_node.capture_mouse()
 	hud.text_chat_entry.hide()
-#endregion
 
-#region RPCs
+#TODO Will need to be more clever if interacting via sever is allowed
 @rpc("any_peer")
 func interacted_with():
-	# Will need to be more clever if interacting via sever is allowed
 	if is_multiplayer_authority():
 		var caller_id: String = str(multiplayer.get_remote_sender_id())
 		var caller_name: String = get_node("../" + caller_id).character_name
@@ -282,7 +301,6 @@ func debug_spawn():
 	var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
 	var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
 	world_node.debug_spawn(random_position, random_rotation)
-#endregion
 
 
 
