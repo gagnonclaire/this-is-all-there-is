@@ -19,7 +19,7 @@ func _physics_process(delta):
 @rpc("any_peer", "call_local")
 func pick_up_by(character_name: StringName):
 	if MultiplayerManager.is_host:
-		holding_character = EventsManager.get_player_node(character_name)
+		holding_character = EventsManager.get_character_node(character_name)
 		set_linear_damp(ProjectSettings.get_setting("physics/3d/default_linear_damp"))
 		set_angular_damp(1.0)
 

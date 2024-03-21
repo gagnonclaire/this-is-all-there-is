@@ -13,10 +13,11 @@ func free_mouse() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 #endregion
 
-#TODO Find a more robust way to get player node
-#TODO Main issue is we just assume there is a world at this point
-func get_player_node(name: StringName) -> Node:
-	return get_node(NodePath(str(WORLD_PATH, name)))
+#TODO Find a more robust way to get this node
+#TODO Main issue is we just assume there is a world at this point and
+#TODO that the character is a direct child of it
+func get_character_node(character_name: StringName) -> Node:
+	return get_node(NodePath(str(WORLD_PATH, character_name)))
 
 #TODO Hate how this is relying on the world node to have this functionality
 #TODO Maybe once I move away from debug controls it will get better
