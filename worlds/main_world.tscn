@@ -1,22 +1,22 @@
 [gd_scene load_steps=17 format=3 uid="uid://lsgwlj0xx1g0"]
 
-[ext_resource type="Script" path="res://worlds/tutorial/world_tutorial.gd" id="1_blfti"]
-[ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="2_eu6j3"]
-[ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://textures/concrete/concrete_n.png" id="3_72rpd"]
-[ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="4_6x2ky"]
-[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://worlds/environment_scenes/night_environment.tres" id="5_0gs26"]
-[ext_resource type="PackedScene" uid="uid://c7iyqw5jtnns8" path="res://characters/3_character_dummy/human_dummy_character.tscn" id="6_8s8qh"]
-[ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://worlds/world_objects/crodot_terminal/crodot_terminal.tscn" id="7_dg8c6"]
-[ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://worlds/world_objects/crodot_spender/crodot_spender.tscn" id="8_0hyep"]
-[ext_resource type="PackedScene" uid="uid://brc3yn7tl125l" path="res://worlds/structures/tutorial_structure_main/tutorial_structure.tscn" id="9_s4sg1"]
-[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://worlds/world_objects/box/box.tscn" id="10_slotn"]
+[ext_resource type="Script" path="res://worlds/main_world.gd" id="1_g8b6e"]
+[ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="2_1shut"]
+[ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://textures/concrete/concrete_n.png" id="3_xk743"]
+[ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="4_cx3ej"]
+[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://worlds/environment_scenes/night_environment.tres" id="5_aq31u"]
+[ext_resource type="PackedScene" uid="uid://c7iyqw5jtnns8" path="res://characters/3_character_dummy/human_dummy_character.tscn" id="6_8fkrh"]
+[ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://worlds/world_objects/crodot_terminal/crodot_terminal.tscn" id="7_lqdna"]
+[ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://worlds/world_objects/crodot_spender/crodot_spender.tscn" id="8_halu2"]
+[ext_resource type="PackedScene" uid="uid://brc3yn7tl125l" path="res://worlds/structures/tutorial_structure_main/tutorial_structure.tscn" id="9_cx0ob"]
+[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://worlds/world_objects/box/box.tscn" id="10_8ytrx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdgxy"]
 resource_name = "street"
 albedo_color = Color(0.8, 0.8, 0.8, 1)
-albedo_texture = ExtResource("2_eu6j3")
+albedo_texture = ExtResource("2_1shut")
 normal_enabled = true
-normal_texture = ExtResource("3_72rpd")
+normal_texture = ExtResource("3_xk743")
 uv1_scale = Vector3(1000, 1000, 1000)
 uv1_triplanar = true
 
@@ -27,7 +27,7 @@ material = SubResource("StandardMaterial3D_kdgxy")
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_b8onm"]
-material = ExtResource("4_6x2ky")
+material = ExtResource("4_cx3ej")
 height = 30.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_be5le"]
@@ -38,8 +38,8 @@ properties/0/path = NodePath(".:crodots")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="World_Tutorial" type="Node" groups=["world"]]
-script = ExtResource("1_blfti")
+[node name="MainWorld" type="Node" groups=["world"]]
+script = ExtResource("1_g8b6e")
 
 [node name="Plane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
@@ -66,7 +66,7 @@ collision_mask = 5
 shape = SubResource("ConcavePolygonShape3D_be5le")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("5_0gs26")
+environment = ExtResource("5_aq31u")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.700212, 0.713935, 0, -0.713935, 0.700212, 0, 4.2619, 0)
@@ -205,17 +205,17 @@ B babbles (important)
 "
 horizontal_alignment = 0
 
-[node name="HumanDummyCharacter" parent="." instance=ExtResource("6_8s8qh")]
+[node name="HumanDummyCharacter" parent="." instance=ExtResource("6_8fkrh")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.43591, 0, -2.10258)
 
-[node name="CrodotTerminal" parent="." instance=ExtResource("7_dg8c6")]
+[node name="CrodotTerminal" parent="." instance=ExtResource("7_lqdna")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
 
-[node name="CrodotSpender" parent="." instance=ExtResource("8_0hyep")]
+[node name="CrodotSpender" parent="." instance=ExtResource("8_halu2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89313, 0, -7.39891)
 
-[node name="tutorial_structure" parent="." instance=ExtResource("9_s4sg1")]
+[node name="tutorial_structure" parent="." instance=ExtResource("9_cx0ob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21159, -0.217798, -4.49238)
 
-[node name="Box" parent="." instance=ExtResource("10_slotn")]
+[node name="Box" parent="." instance=ExtResource("10_8ytrx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -10)

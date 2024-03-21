@@ -5,12 +5,9 @@ const HUMAN: PackedScene = preload("res://characters/3_character_human/human_cha
 
 @export var crodots: int
 
-@onready var main_node: Node = get_parent()
-
-var enet_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-
+#TODO This should mostl be handled in the multiplayer manager
 func _ready() -> void:
-	if MultiplayerControls.is_host:
+	if MultiplayerManager.is_host:
 		start_server()
 		crodots = 0
 		EventsManager.connect("crodots_gained", _on_crodots_gained)
@@ -18,15 +15,13 @@ func _ready() -> void:
 	else:
 		start_client()
 
+#TODO This should all be handled in the multiplayer manager
 func _exit_tree() -> void:
 	multiplayer.multiplayer_peer.close()
 
-func _process(_delta) -> void:
-	pass
-
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):
-		main_node.return_to_menu()
+		LoadManager.switch_to_main_menu()
 
 func _on_crodots_gained(amount: int) -> void:
 	crodots += amount
@@ -34,18 +29,21 @@ func _on_crodots_gained(amount: int) -> void:
 func _on_crodots_lost(amount: int) -> void:
 	crodots -= amount
 
+#TODO Everything below here (minus debug_spawn) should be handled
+#TODO by the multiplayer manager
 func start_server() -> void:
 	#TODO When you start or join a game, go back to menu, then start a
 	#TODO new game, we fail to create a server here (null enet_peer)
-	enet_peer.create_server(MultiplayerControls.port)
-	multiplayer.multiplayer_peer = enet_peer
+	#TODO Moving everything to the multiplayer manager might fix this
+	MultiplayerManager.enet_peer.create_server(MultiplayerManager.port)
+	multiplayer.multiplayer_peer = MultiplayerManager.enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	add_player(multiplayer.get_unique_id())
 
 func start_client() -> void:
-	enet_peer.create_client(MultiplayerControls.join_address, MultiplayerControls.port)
-	multiplayer.multiplayer_peer = enet_peer
+	MultiplayerManager.enet_peer.create_client(MultiplayerManager.join_address, MultiplayerManager.port)
+	multiplayer.multiplayer_peer = MultiplayerManager.enet_peer
 
 func add_player(peer_id) -> void:
 	var player: CharacterBody3D = PLAYER.instantiate()

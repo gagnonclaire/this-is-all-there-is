@@ -47,6 +47,7 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		frame.sever_raycast.set_target_position(Vector3(0, 0, -SEVER_RANGE))
 		frame.camera.current = true
+		EventsManager.capture_mouse()
 
 		hud.show()
 
@@ -312,7 +313,7 @@ func interacted_with():
 func debug_spawn():
 	var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
 	var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
-	EventsManager.world_node.debug_spawn(random_position, random_rotation)
+	EventsManager.debug_spawn(random_position, random_rotation)
 
 
 

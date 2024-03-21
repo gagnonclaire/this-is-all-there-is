@@ -26,7 +26,8 @@ driver/enable_input=true
 EventsManager="*res://singleton_scripts/events_manager.gd"
 KeybindManager="*res://singleton_scripts/keybind_manager.gd"
 ProceduralGeneration="*res://singleton_scripts/procedural_generation/procedural_generation.gd"
-MultiplayerControls="*res://singleton_scripts/multiplayer_controls.gd"
+MultiplayerManager="*res://singleton_scripts/multiplayer_manager.gd"
+LoadManager="*res://singleton_scripts/load_manager.gd"
 
 [display]
 
