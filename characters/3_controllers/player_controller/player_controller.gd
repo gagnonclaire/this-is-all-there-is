@@ -8,9 +8,9 @@ extends Node
 @onready var hud: CanvasLayer = $HUD
 @onready var primary_frame: CharacterBody3D = $HumanFrame
 @onready var awaken_cooldown_timer: Timer = $AwakenCooldown
+@onready var character_name: String = str("Player ", str(name))
 
 # Controller attributes
-var character_name: String = str("Player ", str(name))
 var awaken_progress: float = 0.0
 var awaken_on_cooldown: bool = false
 var sever_range: float = 3.0
@@ -49,6 +49,9 @@ func _physics_process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_multiplayer_authority():
 		_process_text_chat()
+		_process_babble()
+		_process_interact()
+		_process_sever()
 		_process_grab_and_drop()
 		_process_camera_control(event)
 #endregion
@@ -127,14 +130,38 @@ func _process_camera_control(event: InputEvent) -> void:
 		current_frame.head_pivot.rotate_x(-event.relative.y *.005)
 		current_frame.head_pivot.rotation.x = clamp( \
 			current_frame.head_pivot.rotation.x, -PI / 2.25, PI / 2.25)
+
+func _process_interact() -> void:
+	if not current_frame.is_knocked_out \
+	and not hud.is_text_chat_open():
+		if Input.is_action_just_pressed("interact") \
+		and current_frame.interact_raycast.is_colliding() \
+		and current_frame.interact_raycast.get_collider(). \
+		is_in_group("interact_target"):
+			current_frame.interact_raycast.get_collider().interacted_with.rpc()
+
+func _process_sever() -> void:
+	if not current_frame.is_knocked_out \
+	and not hud.is_text_chat_open():
+		if Input.is_action_just_pressed("sever") \
+		and current_frame.sever_raycast.is_colliding() \
+		and current_frame.sever_raycast.get_collider(). \
+		is_in_group("sever_target"):
+			sever_to(current_frame.sever_raycast.get_collider())
+
+func _process_babble() -> void:
+	if not current_frame.is_knocked_out \
+	and not hud.is_text_chat_open():
+		if Input.is_action_just_pressed("babble"):
+			current_frame.start_speach_audio.rpc(1)
 #endregion
 
 #region Awaken mechanics
 ##############################################################################
-func _can_awaken():
+func _can_awaken() -> bool:
 	return not (awaken_on_cooldown or hud.is_text_chat_open())
 
-func _awaken():
+func _awaken() -> void:
 	current_frame = primary_frame
 	current_frame.set_global_position(Vector3.ZERO)
 	current_frame.set_global_rotation(Vector3.ZERO)
@@ -143,51 +170,19 @@ func _awaken():
 	awaken_on_cooldown = true
 	awaken_cooldown_timer.start()
 
-func _on_awaken_cooldown_timeout():
+func _on_awaken_cooldown_timeout() -> void:
 	awaken_on_cooldown = false
 #endregion
 
 #region Sever mechanics
 ##############################################################################
-func sever_to(target_frame: CharacterBody3D):
-	current_frame.camera.currnet = false
+func sever_to(target_frame: CharacterBody3D) -> void:
+	current_frame.camera.current = false
 	current_frame = target_frame
-	current_frame.camera.currnet = true
+	current_frame.camera.current = true
 	current_frame.sever_raycast.set_target_position( \
 		Vector3(0, 0, -sever_range))
 #endregion
-
-#TODO Fix me please I am so bad
-#func _unhandled_key_input(event):
-	#if is_multiplayer_authority() \
-	#and not current_frame.is_knocked_out \
-	#and not hud.is_text_chat_open():
-		## Interact Raycast events
-		#if Input.is_action_just_pressed("interact") \
-		#and (not is_severed or Input.is_action_pressed("control_self")) \
-		#and current_frame.interact_raycast.is_colliding():
-			#var interact_target: Object = current_frame.interact_raycast.get_collider()
-			#if interact_target.is_in_group("interact_raycast_target"):
-				#interact_target.interacted_with.rpc()
-#
-		## Sever Raycast events
-		#if Input.is_action_just_pressed("sever") \
-		#and can_sever \
-		#and current_frame.sever_raycast.is_colliding() \
-		#and current_frame.sever_raycast.get_collider().is_in_group("sever_raycast_target"):
-			#sever_to(current_frame.sever_raycast.get_collider())
-#
-		## Generic speech
-		#if Input.is_action_just_pressed("babble") \
-		#and (not is_severed or Input.is_action_pressed("control_self")) \
-		#and not current_frame.is_knocked_out:
-			#current_frame.start_speach_audio.rpc(1)
-#
-#
-#
-		## Debug events
-		#if Input.is_action_just_pressed("debug_spawn"):
-			#rpc_id(1, "debug_spawn")
 
 #region Dynamic Context Indicators
 ##############################################################################
@@ -195,13 +190,13 @@ func sever_to(target_frame: CharacterBody3D):
 func _process_context_indicators() -> void:
 	if can_check_context_indicators():
 		if current_frame.interact_raycast.is_colliding() \
-		and current_frame.interact_raycast.get_collider().is_in_group("interact_raycast_target"):
+		and current_frame.interact_raycast.get_collider().is_in_group("interact_target"):
 			hud.show_interact_context_indicator(true)
 		else:
 			hud.show_interact_context_indicator(false)
 
 		if current_frame.sever_raycast.is_colliding() \
-		and current_frame.sever_raycast.get_collider().is_in_group("sever_raycast_target"):
+		and current_frame.sever_raycast.get_collider().is_in_group("sever_target"):
 			hud.show_sever_context_indicator(true)
 		else:
 			hud.show_sever_context_indicator(false)
@@ -213,24 +208,20 @@ func _process_context_indicators() -> void:
 		else:
 			hud.show_examine_context_indicator("")
 
-func can_check_context_indicators():
+func can_check_context_indicators() -> bool:
 	return is_multiplayer_authority() \
 	and not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open()
 #endregion
 
-
-
-#TODO Will need to be more clever if interacting via sever is allowed
-@rpc("any_peer")
-func interacted_with():
+func interacted_with(caller_id: String) -> void:
 	if is_multiplayer_authority():
-		var caller_id: String = str(multiplayer.get_remote_sender_id())
 		var caller_name: String = get_node("../" + caller_id).character_name
 		hud.notify_important(caller_name + " is trying to get your attention")
 
+#TODO MOVE THIS HOLY SHIT
 @rpc("any_peer", "call_local")
-func debug_spawn():
+func debug_spawn() -> void:
 	var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
 	var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
 	EventsManager.debug_spawn(random_position, random_rotation)

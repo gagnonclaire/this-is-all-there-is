@@ -34,7 +34,7 @@ properties/2/path = NodePath(".:examine_text")
 properties/2/spawn = true
 properties/2/replication_mode = 2
 
-[node name="HumanFrame" type="CharacterBody3D"]
+[node name="HumanFrame" type="CharacterBody3D" groups=["examine_target", "interact_target", "sever_target"]]
 collision_layer = 2
 script = ExtResource("2_6vsex")
 

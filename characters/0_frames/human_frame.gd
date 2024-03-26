@@ -147,3 +147,8 @@ func stop_ragdoll() -> void:
 	skeleton.physical_bones_start_simulation()
 	skeleton.physical_bones_stop_simulation()
 #endregion
+
+#TODO This is pretty fragile, assumes parent has this function
+@rpc("any_peer", "call_local")
+func interacted_with():
+	get_parent().interacted_with(str(multiplayer.get_remote_sender_id()))
