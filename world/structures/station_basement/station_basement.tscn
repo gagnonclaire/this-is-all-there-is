@@ -1,10 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwr5xsdqoo1sb"]
+[gd_scene load_steps=11 format=3 uid="uid://cwr5xsdqoo1sb"]
 
 [ext_resource type="PackedScene" uid="uid://61fpp3k6tfck" path="res://world/structures/station_basement/station_basement_base.tscn" id="1_h4y4k"]
 [ext_resource type="PackedScene" uid="uid://du3nccq1fpe58" path="res://world/structures/station_basement/station_basement_skirt.tscn" id="2_d8l2d"]
-[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://world/world_objects/box/box.tscn" id="3_681m2"]
-[ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://world/world_objects/crodot_terminal/crodot_terminal.tscn" id="4_tpini"]
-[ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://world/world_objects/crodot_spender/crodot_spender.tscn" id="5_ev8fh"]
+[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://world/interactables/box/box.tscn" id="3_nu2py"]
+[ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://world/interactables/crodot_terminal/crodot_terminal.tscn" id="4_vbe33"]
+[ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://world/interactables/crodot_spender/crodot_spender.tscn" id="5_xqqdp"]
+[ext_resource type="PackedScene" uid="uid://jor0y2bfw8rs" path="res://world/logic/safe_volume.tscn" id="6_56atp"]
+[ext_resource type="Texture2D" uid="uid://cfnsq4uvlyx2u" path="res://textures/grass/grass.png" id="7_je4l5"]
+[ext_resource type="Texture2D" uid="uid://crlxsui0mk67g" path="res://textures/grass/grass_n.png" id="8_43x4w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r7t20"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3oek"]
+resource_name = "ground"
+albedo_texture = ExtResource("7_je4l5")
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.909804, 0.603922, 1, 1)
+emission_energy_multiplier = 0.05
+emission_texture = ExtResource("8_43x4w")
+normal_enabled = true
+normal_texture = ExtResource("8_43x4w")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+texture_filter = 0
 
 [node name="StationBasement" type="Node3D"]
 
@@ -13,17 +33,25 @@
 [node name="station_basement_skirt" parent="." instance=ExtResource("2_d8l2d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.97318, 0)
 
-[node name="Box" parent="." instance=ExtResource("3_681m2")]
+[node name="Box" parent="." instance=ExtResource("3_nu2py")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -8)
 
-[node name="Box2" parent="." instance=ExtResource("3_681m2")]
+[node name="Box2" parent="." instance=ExtResource("3_nu2py")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81987, 0.5, -8)
 
-[node name="Box3" parent="." instance=ExtResource("3_681m2")]
+[node name="Box3" parent="." instance=ExtResource("3_nu2py")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.40562, 1.5, -8)
 
-[node name="CrodotTerminal" parent="." instance=ExtResource("4_tpini")]
+[node name="CrodotTerminal" parent="." instance=ExtResource("4_vbe33")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
 
-[node name="CrodotSpender" parent="." instance=ExtResource("5_ev8fh")]
+[node name="CrodotSpender" parent="." instance=ExtResource("5_xqqdp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -11)
+
+[node name="SafeVolume" parent="." instance=ExtResource("6_56atp")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8.01151, -2.13136, 7.94395)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SafeVolume"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("BoxMesh_r7t20")
+surface_material_override/0 = SubResource("StandardMaterial3D_m3oek")

@@ -3,6 +3,9 @@ extends Node
 signal crodots_gained(amount: int)
 signal crodots_lost(amount: int)
 
+signal safe_volume_entered()
+signal safe_volume_exited()
+
 const WORLD_PATH: String = "/root/Main/MainWorld/"
 
 #region Mouse Capture Controls

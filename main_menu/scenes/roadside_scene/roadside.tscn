@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="3_jnl6q"]
 [ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://textures/concrete/concrete_n.png" id="4_603ap"]
 [ext_resource type="Script" path="res://main_menu/scenes/camera_pivot.gd" id="4_hj0el"]
-[ext_resource type="PackedScene" uid="uid://dncfkbcj6hlre" path="res://world/environment_scenes/night_environment.tscn" id="5_m6wk7"]
+[ext_resource type="PackedScene" uid="uid://dncfkbcj6hlre" path="res://world/environments/night_environment.tscn" id="5_m6wk7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4b31r"]
 resource_name = "street"

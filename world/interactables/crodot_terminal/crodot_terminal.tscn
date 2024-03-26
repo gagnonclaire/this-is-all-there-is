@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmx4uw4o5q3q2"]
 
-[ext_resource type="Script" path="res://world/world_objects/crodot_terminal/crodot_terminal.gd" id="1_0dikt"]
+[ext_resource type="Script" path="res://world/interactables/crodot_terminal/crodot_terminal.gd" id="1_087nj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wppd3"]
 
@@ -21,7 +21,7 @@ mesh = SubResource("BoxMesh_wppd3")
 
 [node name="TerminalBody" type="StaticBody3D" parent="Terminal" groups=["interact_target"]]
 collision_layer = 7
-script = ExtResource("1_0dikt")
+script = ExtResource("1_087nj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terminal/TerminalBody"]
 shape = SubResource("ConcavePolygonShape3D_j8xh1")

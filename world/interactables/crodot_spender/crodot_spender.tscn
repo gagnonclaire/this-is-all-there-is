@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdt6di8fhsboy"]
 
-[ext_resource type="Script" path="res://world/world_objects/crodot_spender/crodot_spender.gd" id="1_58nxs"]
+[ext_resource type="Script" path="res://world/interactables/crodot_spender/crodot_spender.gd" id="1_lv2t6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dggir"]
 size = Vector3(1, 1, 0.25)
@@ -24,7 +24,7 @@ mesh = SubResource("BoxMesh_dggir")
 
 [node name="SpenderBody" type="StaticBody3D" parent="Spender" groups=["interact_target"]]
 collision_layer = 7
-script = ExtResource("1_58nxs")
+script = ExtResource("1_lv2t6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spender/SpenderBody"]
 shape = SubResource("ConcavePolygonShape3D_iar8w")
