@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://lsgwlj0xx1g0"]
 
-[ext_resource type="Script" path="res://worlds/main_world.gd" id="1_g8b6e"]
-[ext_resource type="PackedScene" uid="uid://cwr5xsdqoo1sb" path="res://worlds/structures/station_basement/station_basement.tscn" id="3_7kvcj"]
-[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://worlds/environment_scenes/night_environment.tres" id="5_aq31u"]
+[ext_resource type="Script" path="res://world/main_world.gd" id="1_vn3ld"]
+[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/environment_scenes/night_environment.tres" id="2_ebyi7"]
+[ext_resource type="PackedScene" uid="uid://cwr5xsdqoo1sb" path="res://world/structures/station_basement/station_basement.tscn" id="3_amdga"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7xoik"]
 properties/0/path = NodePath(".:crodots")
@@ -10,10 +10,10 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [node name="MainWorld" type="Node" groups=["world"]]
-script = ExtResource("1_g8b6e")
+script = ExtResource("1_vn3ld")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("5_aq31u")
+environment = ExtResource("2_ebyi7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.700212, 0.713935, 0, -0.713935, 0.700212, 0, 4.2619, 0)
@@ -28,4 +28,4 @@ replication_config = SubResource("SceneReplicationConfig_7xoik")
 
 [node name="Station" type="Node3D" parent="."]
 
-[node name="StationBasement" parent="Station" instance=ExtResource("3_7kvcj")]
+[node name="StationBasement" parent="Station" instance=ExtResource("3_amdga")]

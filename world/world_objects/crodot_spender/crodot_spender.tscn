@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdt6di8fhsboy"]
 
-[ext_resource type="Script" path="res://worlds/world_objects/crodot_spender/crodot_spender.gd" id="1_58nxs"]
+[ext_resource type="Script" path="res://world/world_objects/crodot_spender/crodot_spender.gd" id="1_58nxs"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dggir"]
 size = Vector3(1, 1, 0.25)
@@ -22,7 +22,7 @@ data = PackedVector3Array(0, 0.625, 0.1, 0.0098, 0.625, 0.0995, 0, 0.375, 0.1, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65713, 0)
 mesh = SubResource("BoxMesh_dggir")
 
-[node name="SpenderBody" type="StaticBody3D" parent="Spender" groups=["interact_raycast_target"]]
+[node name="SpenderBody" type="StaticBody3D" parent="Spender" groups=["interact_target"]]
 collision_layer = 7
 script = ExtResource("1_58nxs")
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://61fpp3k6tfck"]
 
-[ext_resource type="PackedScene" uid="uid://bohrw45rg68lq" path="res://worlds/structures/station_basement/station_basement_base.blend" id="1_de6a0"]
+[ext_resource type="PackedScene" uid="uid://bohrw45rg68lq" path="res://world/structures/station_basement/station_basement_base.blend" id="1_de6a0"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="2_svvhu"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rolw7"]

@@ -30,4 +30,3 @@ func drop():
 		set_gravity_scale(1.0)
 		set_linear_damp(ProjectSettings.get_setting("physics/3d/default_linear_damp"))
 		set_angular_damp(ProjectSettings.get_setting("physics/3d/default_angular_damp"))
-

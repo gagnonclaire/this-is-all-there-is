@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dv8fwwd8nju5o"
-path="res://.godot/imported/station_basement_skirt.blend-7e7866ab9d0f871007284035ed37e209.scn"
+path="res://.godot/imported/station_basement_skirt.blend-d0b61e30bbb2550a80795fe9e10bfb2d.scn"
 
 [deps]
 
-source_file="res://worlds/structures/station_basement/station_basement_skirt.blend"
-dest_files=["res://.godot/imported/station_basement_skirt.blend-7e7866ab9d0f871007284035ed37e209.scn"]
+source_file="res://world/structures/station_basement/station_basement_skirt.blend"
+dest_files=["res://.godot/imported/station_basement_skirt.blend-d0b61e30bbb2550a80795fe9e10bfb2d.scn"]
 
 [params]
 

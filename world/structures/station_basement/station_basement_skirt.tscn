@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://du3nccq1fpe58"]
 
-[ext_resource type="PackedScene" uid="uid://dv8fwwd8nju5o" path="res://worlds/structures/station_basement/station_basement_skirt.blend" id="1_p88gg"]
+[ext_resource type="PackedScene" uid="uid://dv8fwwd8nju5o" path="res://world/structures/station_basement/station_basement_skirt.blend" id="1_p88gg"]
 [ext_resource type="Material" uid="uid://bqfuxpjafkup7" path="res://textures/grass/grass.tres" id="2_152if"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8k78g"]

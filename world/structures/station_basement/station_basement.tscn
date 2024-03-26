@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwr5xsdqoo1sb"]
+
+[ext_resource type="PackedScene" uid="uid://61fpp3k6tfck" path="res://world/structures/station_basement/station_basement_base.tscn" id="1_h4y4k"]
+[ext_resource type="PackedScene" uid="uid://du3nccq1fpe58" path="res://world/structures/station_basement/station_basement_skirt.tscn" id="2_d8l2d"]
+[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://world/world_objects/box/box.tscn" id="3_681m2"]
+[ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://world/world_objects/crodot_terminal/crodot_terminal.tscn" id="4_tpini"]
+[ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://world/world_objects/crodot_spender/crodot_spender.tscn" id="5_ev8fh"]
+
+[node name="StationBasement" type="Node3D"]
+
+[node name="StationBasementBase" parent="." instance=ExtResource("1_h4y4k")]
+
+[node name="station_basement_skirt" parent="." instance=ExtResource("2_d8l2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.97318, 0)
+
+[node name="Box" parent="." instance=ExtResource("3_681m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -8)
+
+[node name="Box2" parent="." instance=ExtResource("3_681m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81987, 0.5, -8)
+
+[node name="Box3" parent="." instance=ExtResource("3_681m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.40562, 1.5, -8)
+
+[node name="CrodotTerminal" parent="." instance=ExtResource("4_tpini")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+
+[node name="CrodotSpender" parent="." instance=ExtResource("5_ev8fh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -11)

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbxvk3p3lorcg"
-path="res://.godot/imported/tutorial_structure.blend-c56bf24730805334ed817e4fb6647245.scn"
+uid="uid://bohrw45rg68lq"
+path="res://.godot/imported/station_basement_base.blend-60a414311acf50fbc30ac9f3541ff7f0.scn"
 
 [deps]
 
-source_file="res://worlds/structures/tutorial_structure_main/tutorial_structure.blend"
-dest_files=["res://.godot/imported/tutorial_structure.blend-c56bf24730805334ed817e4fb6647245.scn"]
+source_file="res://world/structures/station_basement/station_basement_base.blend"
+dest_files=["res://.godot/imported/station_basement_base.blend-60a414311acf50fbc30ac9f3541ff7f0.scn"]
 
 [params]
 

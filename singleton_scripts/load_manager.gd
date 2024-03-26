@@ -1,7 +1,7 @@
 extends Node
 
 const _MAIN_MENU: PackedScene = preload("res://main_menu/main_menu.tscn")
-const _MAIN_WORLD: PackedScene = preload("res://worlds/main_world.tscn")
+const _MAIN_WORLD: PackedScene = preload("res://world/main_world.tscn")
 
 @onready var _main_node: Node = get_node("/root/Main")
 
