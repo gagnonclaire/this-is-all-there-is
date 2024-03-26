@@ -29,7 +29,7 @@ func _unhandled_input(_event) -> void:
 
 func _on_new_game_button_pressed() -> void:
 	_close_all_menus()
-	MultiplayerManager.is_host = true
+	MultiplayerManager.start_server()
 	LoadManager.switch_to_main_world()
 
 func _on_load_game_button_pressed() -> void:
@@ -41,6 +41,7 @@ func _on_join_game_button_pressed() -> void:
 func _on_join_button_pressed() -> void:
 	_close_all_menus()
 	MultiplayerManager.join_address = address_entry.text
+	MultiplayerManager.start_client()
 	LoadManager.switch_to_main_world()
 
 func _on_settings_button_pressed() -> void:

@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=16 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" path="res://worlds/main_world.gd" id="1_g8b6e"]
 [ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="2_1shut"]
 [ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://textures/concrete/concrete_n.png" id="3_xk743"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="4_cx3ej"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://worlds/environment_scenes/night_environment.tres" id="5_aq31u"]
-[ext_resource type="PackedScene" uid="uid://c7iyqw5jtnns8" path="res://characters/3_character_dummy/human_dummy_character.tscn" id="6_8fkrh"]
 [ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://worlds/world_objects/crodot_terminal/crodot_terminal.tscn" id="7_lqdna"]
 [ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://worlds/world_objects/crodot_spender/crodot_spender.tscn" id="8_halu2"]
 [ext_resource type="PackedScene" uid="uid://brc3yn7tl125l" path="res://worlds/structures/tutorial_structure_main/tutorial_structure.tscn" id="9_cx0ob"]
@@ -73,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 0.700212, 0.713935, 0, -0.713935, 0.700212, 
 shadow_enabled = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://characters/3_character_player/player.tscn", "res://characters/3_character_human/human_character.tscn")
+_spawnable_scenes = PackedStringArray("res://characters/3_controllers/player_controller/player_controller.tscn", "res://characters/0_frames/human_frame.tscn", "")
 spawn_path = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -204,9 +203,6 @@ Enter sends the current message
 B babbles (important)
 "
 horizontal_alignment = 0
-
-[node name="HumanDummyCharacter" parent="." instance=ExtResource("6_8fkrh")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.43591, 0, -2.10258)
 
 [node name="CrodotTerminal" parent="." instance=ExtResource("7_lqdna")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)

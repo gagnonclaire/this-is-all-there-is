@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgd0dypjq6ul"]
+
+[ext_resource type="Script" path="res://characters/3_controllers/player_controller/player_controller.gd" id="1_adys7"]
+[ext_resource type="PackedScene" uid="uid://bpxgt3rbb7fwy" path="res://characters/3_controllers/player_controller/hud/hud.tscn" id="2_qby78"]
+[ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="3_15m66"]
+
+[node name="PlayerController" type="Node" groups=["examine_target", "interact_raycast_target", "player", "sever_raycast_target"]]
+script = ExtResource("1_adys7")
+
+[node name="HUD" parent="." instance=ExtResource("2_qby78")]
+
+[node name="HumanFrame" parent="." instance=ExtResource("3_15m66")]
+
+[node name="SeverCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="WakeUpCooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="SeverCooldown" to="." method="_on_sever_cooldown_timeout"]
+[connection signal="timeout" from="WakeUpCooldown" to="." method="_on_wake_up_cooldown_timeout"]
