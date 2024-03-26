@@ -1,16 +1,16 @@
 extends Node
 
-const PLAYER_CONTROLLER: PackedScene = preload("res://characters/3_controllers/player_controller/player_controller.tscn")
-const LOST_HUMAN_CONTROLLER: PackedScene = preload("res://characters/3_controllers/human_npc_controllers/lost_controller.tscn")
+const _PLAYER_CONTROLLER: PackedScene = preload("res://characters/3_controllers/player_controller/player_controller.tscn")
+const _LOST_HUMAN_CONTROLLER: PackedScene = preload("res://characters/3_controllers/human_npc_controllers/lost_controller.tscn")
 
 @export var crodots: int
 
 #TODO This should mostl be handled in the multiplayer manager
 func _ready() -> void:
 	if is_multiplayer_authority():
-		multiplayer.peer_connected.connect(add_player)
-		multiplayer.peer_disconnected.connect(remove_player)
-		add_player(multiplayer.get_unique_id())
+		multiplayer.peer_connected.connect(_add_player)
+		multiplayer.peer_disconnected.connect(_remove_player)
+		_add_player(multiplayer.get_unique_id())
 
 		crodots = 0
 		EventsManager.connect("crodots_gained", _on_crodots_gained)
@@ -30,18 +30,18 @@ func _on_crodots_gained(amount: int) -> void:
 func _on_crodots_lost(amount: int) -> void:
 	crodots -= amount
 
-func add_player(peer_id) -> void:
-	var player: Node = PLAYER_CONTROLLER.instantiate()
+func _add_player(peer_id) -> void:
+	var player: Node = _PLAYER_CONTROLLER.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
 
-func remove_player(peer_id) -> void:
+func _remove_player(peer_id) -> void:
 	var player: Node = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()
 
 func debug_spawn(position: Vector3, rotation: Vector3) -> void:
-	var npc: Node = LOST_HUMAN_CONTROLLER.instantiate()
+	var npc: Node = _LOST_HUMAN_CONTROLLER.instantiate()
 	add_child(npc, true)
 	npc.frame.set_position(position)
 	npc.frame.set_rotation(rotation)

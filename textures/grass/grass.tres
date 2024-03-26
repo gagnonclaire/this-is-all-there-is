@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bqfuxpjafkup7"]
 
-[ext_resource type="Texture2D" uid="uid://cfnsq4uvlyx2u" path="res://textures/ground.png" id="1_rhbcf"]
-[ext_resource type="Texture2D" uid="uid://crlxsui0mk67g" path="res://textures/ground_n.png" id="2_0cxms"]
+[ext_resource type="Texture2D" uid="uid://cfnsq4uvlyx2u" path="res://textures/grass/grass.png" id="1_rhbcf"]
+[ext_resource type="Texture2D" uid="uid://crlxsui0mk67g" path="res://textures/grass/grass_n.png" id="2_0cxms"]
 
 [resource]
 resource_name = "ground"
@@ -9,5 +9,6 @@ albedo_texture = ExtResource("1_rhbcf")
 metallic_specular = 0.0
 normal_enabled = true
 normal_texture = ExtResource("2_0cxms")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 texture_filter = 0

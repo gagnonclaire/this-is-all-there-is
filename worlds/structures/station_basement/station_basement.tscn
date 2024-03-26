@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwr5xsdqoo1sb"]
+
+[ext_resource type="PackedScene" uid="uid://61fpp3k6tfck" path="res://worlds/structures/station_basement/station_basement_base.tscn" id="1_wyxiv"]
+[ext_resource type="PackedScene" uid="uid://du3nccq1fpe58" path="res://worlds/structures/station_basement/station_basement_skirt.tscn" id="2_x7dab"]
+[ext_resource type="PackedScene" uid="uid://cf0qsj06yfvpe" path="res://worlds/world_objects/box/box.tscn" id="3_41x36"]
+
+[node name="StationBasement" type="Node3D"]
+
+[node name="StationBasementBase" parent="." instance=ExtResource("1_wyxiv")]
+
+[node name="station_basement_skirt" parent="." instance=ExtResource("2_x7dab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.97318, 0)
+
+[node name="Box" parent="." instance=ExtResource("3_41x36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -8)
+
+[node name="Box2" parent="." instance=ExtResource("3_41x36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81987, 0.5, -8)
+
+[node name="Box3" parent="." instance=ExtResource("3_41x36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.40562, 1.5, -8)
