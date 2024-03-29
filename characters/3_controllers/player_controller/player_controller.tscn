@@ -12,7 +12,7 @@ script = ExtResource("1_adys7")
 [node name="HumanFrame" parent="." instance=ExtResource("3_15m66")]
 
 [node name="AwakenCooldown" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="AwakenCooldown" to="." method="_on_awaken_cooldown_timeout"]

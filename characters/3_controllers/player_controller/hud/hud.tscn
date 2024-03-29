@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bpxgt3rbb7fwy"]
+[gd_scene load_steps=12 format=3 uid="uid://bpxgt3rbb7fwy"]
 
 [ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/hud.gd" id="1_wrxkh"]
 [ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="2_e0rp3"]
+[ext_resource type="Theme" uid="uid://usdneyjl5qut" path="res://fonts/title_theme.tres" id="3_nys7l"]
 [ext_resource type="LabelSettings" uid="uid://dwvvsn6nrpaak" path="res://characters/3_controllers/player_controller/hud/context_label_settings.tres" id="3_v68xt"]
 [ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/interact_context.gd" id="4_aqe3r"]
+[ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/safe_indicator.gd" id="4_jur2e"]
 [ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/sever_context.gd" id="5_ftxta"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
@@ -32,6 +34,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_e0rp3")
+
+[node name="SafeIndicator" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -157.0
+offset_top = 11.0
+offset_right = 157.0
+offset_bottom = 98.0
+grow_horizontal = 2
+theme = ExtResource("3_nys7l")
+horizontal_alignment = 1
+script = ExtResource("4_jur2e")
 
 [node name="ImportantNotice" type="Label" parent="Control"]
 layout_mode = 1

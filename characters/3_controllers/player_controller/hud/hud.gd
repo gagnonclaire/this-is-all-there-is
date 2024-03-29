@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@onready var _safe_indicator: Label = $Control/SafeIndicator
 @onready var _important_notice: Label = $Control/ImportantNotice
 @onready var _stamina_vignette: TextureRect = $Control/StaminaVignette
 @onready var _awaken_vignette: TextureRect = $Control/AwakenVignette
@@ -36,6 +37,9 @@ func _on_clear_timer_timeout() -> void:
 #endregion
 
 #region Hud text information
+func show_safe_indicator(show_indicator: bool = true) -> void:
+	_safe_indicator.set_visible(show_indicator)
+
 func notify_important(message: String) -> void:
 	if is_multiplayer_authority():
 		_important_notice.set_text(message)

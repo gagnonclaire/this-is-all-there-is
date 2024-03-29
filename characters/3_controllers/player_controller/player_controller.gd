@@ -112,6 +112,7 @@ func _process_rest(delta: float) -> void:
 	#hud.modulate_awaken_vignette(rest_progress / 100.0)
 
 	if rest_progress == 100.0:
+		current_home = current_frame.get_global_position()
 		_awaken()
 
 func _process_stamina() -> void:
@@ -186,7 +187,7 @@ func _can_awaken() -> bool:
 
 func _awaken() -> void:
 	current_frame = primary_frame
-	current_frame.set_global_position(Vector3.ZERO)
+	current_frame.set_global_position(current_home)
 	current_frame.set_global_rotation(Vector3.ZERO)
 
 	awaken_progress = 100.0
@@ -196,11 +197,15 @@ func _awaken() -> void:
 func _on_awaken_cooldown_timeout() -> void:
 	awaken_on_cooldown = false
 
-func _on_safe_volume_entered() -> void:
-	is_in_safe_volume = true
+func _on_safe_volume_entered(body: Node3D) -> void:
+	if body.get_parent().name.to_int() == get_multiplayer_authority():
+		is_in_safe_volume = true
+		hud.show_safe_indicator(true)
 
-func _on_safe_volume_exited() -> void:
-	is_in_safe_volume = false
+func _on_safe_volume_exited(body: Node3D) -> void:
+	if body.get_parent().name.to_int() == get_multiplayer_authority():
+		is_in_safe_volume = false
+		hud.show_safe_indicator(false)
 #endregion
 
 #region Sever mechanics

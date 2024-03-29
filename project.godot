@@ -130,6 +130,7 @@ menu={
 3d_physics/layer_1="PhysicsCollisions"
 3d_physics/layer_2="Interactables"
 3d_physics/layer_3="BonesCollisions"
+3d_physics/layer_4="SafeVolumes"
 
 [rendering]
 
