@@ -21,7 +21,8 @@ stream_0/stream = SubResource("AudioStreamOggVorbis_s5y3l")
 stream_0/weight = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_avcik"]
-height = 3.5
+radius = 0.75
+height = 2.25
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o1gmq"]
 properties/0/path = NodePath(".:position")
@@ -62,7 +63,7 @@ doppler_tracking = 2
 [node name="HumanBody" parent="." groups=["examine_target", "interact_target", "sever_target"] instance=ExtResource("3_x5jif")]
 
 [node name="WorldCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -0.17498)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 shape = SubResource("CapsuleShape3D_avcik")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

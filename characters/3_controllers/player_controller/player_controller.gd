@@ -18,6 +18,7 @@ var awaken_on_cooldown: bool = false
 var sever_range: float = 3.0
 var current_frame: CharacterBody3D = null
 var current_home: Vector3 = Vector3.ZERO
+var current_home_rotation: Vector3 = Vector3.ZERO
 
 #region Controller and default Frame setup
 ##############################################################################
@@ -113,6 +114,7 @@ func _process_rest(delta: float) -> void:
 
 	if rest_progress == 100.0:
 		current_home = current_frame.get_global_position()
+		current_home_rotation = current_frame.get_global_rotation()
 		_awaken()
 
 func _process_stamina() -> void:
@@ -188,7 +190,7 @@ func _can_awaken() -> bool:
 func _awaken() -> void:
 	current_frame = primary_frame
 	current_frame.set_global_position(current_home)
-	current_frame.set_global_rotation(Vector3.ZERO)
+	current_frame.set_global_rotation(current_home_rotation)
 
 	awaken_progress = 100.0
 	awaken_on_cooldown = true

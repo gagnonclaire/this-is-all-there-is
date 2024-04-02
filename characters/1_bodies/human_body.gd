@@ -8,7 +8,7 @@
 extends Node3D
 
 # Preload all part type meshes
-const BODY_ARRAY: Array[PackedScene] = \
+const TORSO_ARRAY: Array[PackedScene] = \
 [ preload("res://characters/2_parts/torsos/human_torso_1.tscn"), \
 preload("res://characters/2_parts/torsos/human_torso_2.tscn")]
 const HEAD_ARRAY: Array[PackedScene] = \
@@ -19,13 +19,13 @@ const FOOT_ARRAY: Array[PackedScene] = \
 [ preload("res://characters/2_parts/feet/human_foot_1.tscn")]
 
 # Synced variables
-@export var body_type: int = 0
+@export var torso_type: int = 0
 @export var head_type: int = 0
 @export var hand_type: int = 0
 @export var foot_type: int = 0
 @export var skin_color: Color = Color(1, 1, 1, 1)
-@export var body_top_color: Color = Color(1, 1, 1, 1)
-@export var body_bottom_color: Color = Color(1, 1, 1, 1)
+@export var torso_top_color: Color = Color(1, 1, 1, 1)
+@export var torso_bottom_color: Color = Color(1, 1, 1, 1)
 @export var foot_color: Color = Color(1, 1, 1, 1)
 
 # Exposed nodes
@@ -35,14 +35,14 @@ const FOOT_ARRAY: Array[PackedScene] = \
 @onready var head_mesh_pivot: Node3D = $Skeleton3D/CoreBone/HeadPivot/HeadMeshPivot
 @onready var hair_mesh_pivot: Node3D = $Skeleton3D/CoreBone/HeadPivot/HairMeshPivot
 @onready var camera_pivot: Node3D = $Skeleton3D/CoreBone/HeadPivot/CameraPivot
-@onready var body_pivot: Node3D = $Skeleton3D/CoreBone/BodyPivot
+@onready var torso_pivot: Node3D = $Skeleton3D/CoreBone/TorsoPivot
 @onready var left_hand_pivot: Node3D = $Skeleton3D/CoreBone/LeftHandPivot
 @onready var right_hand_pivot: Node3D = $Skeleton3D/CoreBone/RightHandPivot
 @onready var left_foot_pivot: Node3D = $Skeleton3D/CoreBone/LeftFootPivot
 @onready var right_foot_pivot: Node3D = $Skeleton3D/CoreBone/RightFootPivot
 
 # Part scenes
-var body_node: Node3D = null
+var torso_node: Node3D = null
 var head_mesh_node: Node3D = null
 var left_hand_node: Node3D = null
 var right_hand_node: Node3D = null
@@ -51,14 +51,14 @@ var right_foot_node: Node3D = null
 
 func _ready() -> void:
 	if is_multiplayer_authority():
-		body_type = randi_range(0, BODY_ARRAY.size() - 1)
+		torso_type = randi_range(0, TORSO_ARRAY.size() - 1)
 		head_type = randi_range(0, HEAD_ARRAY.size() - 1)
 		hand_type = randi_range(0, HAND_ARRAY.size() - 1)
 		foot_type = randi_range(0, FOOT_ARRAY.size() - 1)
 
 		skin_color = Color(randf(), randf(), randf(), 1)
-		body_top_color = Color(randf(), randf(), randf(), 1)
-		body_bottom_color = Color(randf(), randf(), randf(), 1)
+		torso_top_color = Color(randf(), randf(), randf(), 1)
+		torso_bottom_color = Color(randf(), randf(), randf(), 1)
 		foot_color = Color(randf(), randf(), randf(), 1)
 
 #TODO Replace this timer hack with an actual way to load colors after sync
@@ -68,7 +68,7 @@ func _on_body_update_timer_timeout():
 
 #TODO Rewrite this so its not just a bunch of duplicate code
 func update_body() -> void:
-	if !body_node:
+	if !torso_node:
 		# Head
 		head_mesh_node = HEAD_ARRAY[head_type].instantiate()
 		head_mesh_pivot.add_child(head_mesh_node)
@@ -78,15 +78,15 @@ func update_body() -> void:
 		head_mesh.set_surface_override_material(0, head_material)
 
 		# Body
-		body_node = BODY_ARRAY[body_type].instantiate()
-		body_pivot.add_child(body_node)
-		var body_top_material = StandardMaterial3D.new()
-		var body_bottom_material = StandardMaterial3D.new()
-		body_top_material.set_albedo(body_top_color)
-		body_bottom_material.set_albedo(body_bottom_color)
-		var body_mesh: MeshInstance3D = body_pivot.get_child(0).get_child(0)
-		body_mesh.set_surface_override_material(0, body_top_material)
-		body_mesh.set_surface_override_material(1, body_bottom_material)
+		torso_node = TORSO_ARRAY[torso_type].instantiate()
+		torso_pivot.add_child(torso_node)
+		var torso_top_material = StandardMaterial3D.new()
+		var torso_bottom_material = StandardMaterial3D.new()
+		torso_top_material.set_albedo(torso_top_color)
+		torso_bottom_material.set_albedo(torso_bottom_color)
+		var torso_mesh: MeshInstance3D = torso_pivot.get_child(0).get_child(0)
+		torso_mesh.set_surface_override_material(0, torso_top_material)
+		torso_mesh.set_surface_override_material(1, torso_bottom_material)
 
 		# Hands
 		left_hand_node = HAND_ARRAY[hand_type].instantiate()

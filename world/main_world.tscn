@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world/main_world.gd" id="1_vn3ld"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/environments/night_environment.tres" id="2_pwq27"]
-[ext_resource type="PackedScene" uid="uid://cwr5xsdqoo1sb" path="res://world/structures/station_basement/station_basement.tscn" id="3_amdga"]
+[ext_resource type="PackedScene" uid="uid://i2uptxaa4rfx" path="res://world/structures/station/station.tscn" id="3_8s1tw"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7xoik"]
 properties/0/path = NodePath(".:crodots")
@@ -26,6 +26,6 @@ spawn_path = NodePath("..")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7xoik")
 
-[node name="Station" type="Node3D" parent="."]
+[node name="StationPivot" type="Node3D" parent="."]
 
-[node name="StationBasement" parent="Station" instance=ExtResource("3_amdga")]
+[node name="Station" parent="StationPivot" instance=ExtResource("3_8s1tw")]

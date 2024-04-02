@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbxvk3p3lorcg"
-path="res://.godot/imported/tutorial_structure.blend-a14f4d4961bd3cb7b68e55e40badab61.scn"
+uid="uid://bxmtmk5xcq0ib"
+path="res://.godot/imported/station_base.blend-91c8332cdcc96618020940ecf4ade7e0.scn"
 
 [deps]
 
-source_file="res://world/structures/tutorial_structure_main/tutorial_structure.blend"
-dest_files=["res://.godot/imported/tutorial_structure.blend-a14f4d4961bd3cb7b68e55e40badab61.scn"]
+source_file="res://world/structures/station/station_base.blend"
+dest_files=["res://.godot/imported/station_base.blend-91c8332cdcc96618020940ecf4ade7e0.scn"]
 
 [params]
 

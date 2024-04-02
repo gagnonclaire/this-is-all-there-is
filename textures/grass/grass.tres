@@ -9,6 +9,5 @@ albedo_texture = ExtResource("1_rhbcf")
 metallic_specular = 0.0
 normal_enabled = true
 normal_texture = ExtResource("2_0cxms")
-uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 texture_filter = 0
