@@ -69,8 +69,14 @@ func _physics_process(delta: float) -> void:
 		_stamina_change(delta)
 		_knockout_check()
 
-		# Trend towards no movement
 		velocity = velocity.lerp(Vector3(0, velocity.y, 0), 0.25)
+
+		# Drop any held object if it is far away from the frame
+		if held_object:
+			var object_pos: Vector3 = held_object.get_global_position()
+			var hold_point_pos: Vector3 = hold_point.get_global_position()
+			if object_pos.distance_squared_to(hold_point_pos) > 5.0:
+				held_object.drop.rpc_id(1)
 
 		move_and_slide()
 
