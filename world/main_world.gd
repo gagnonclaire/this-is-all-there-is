@@ -1,7 +1,6 @@
 extends Node
 
 const _PLAYER_CONTROLLER: PackedScene = preload("res://characters/3_controllers/player_controller/player_controller.tscn")
-const _LOST_HUMAN_CONTROLLER: PackedScene = preload("res://characters/3_controllers/human_npc_controllers/lost_controller.tscn")
 
 @export var crodots: int
 
@@ -39,9 +38,3 @@ func _remove_player(peer_id) -> void:
 	var player: Node = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()
-
-func debug_spawn(position: Vector3, rotation: Vector3) -> void:
-	var npc: Node = _LOST_HUMAN_CONTROLLER.instantiate()
-	add_child(npc, true)
-	npc.frame.set_position(position)
-	npc.frame.set_rotation(rotation)

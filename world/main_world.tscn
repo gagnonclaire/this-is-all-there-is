@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=6 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" path="res://world/main_world.gd" id="1_vn3ld"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/environments/night_environment.tres" id="2_pwq27"]
 [ext_resource type="PackedScene" uid="uid://i2uptxaa4rfx" path="res://world/structures/station/station.tscn" id="3_8s1tw"]
+[ext_resource type="PackedScene" uid="uid://b2wpbof10k2qe" path="res://world/structures/lost_field.tscn" id="4_scxpt"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7xoik"]
 properties/0/path = NodePath(".:crodots")
@@ -20,7 +21,7 @@ transform = Transform3D(1, 0, 0, 0, 0.700212, 0.713935, 0, -0.713935, 0.700212, 
 shadow_enabled = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://characters/3_controllers/player_controller/player_controller.tscn", "res://characters/0_frames/human_frame.tscn")
+_spawnable_scenes = PackedStringArray("res://characters/3_controllers/player_controller/player_controller.tscn")
 spawn_path = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -29,3 +30,5 @@ replication_config = SubResource("SceneReplicationConfig_7xoik")
 [node name="StationPivot" type="Node3D" parent="."]
 
 [node name="Station" parent="StationPivot" instance=ExtResource("3_8s1tw")]
+
+[node name="LostField" parent="." instance=ExtResource("4_scxpt")]

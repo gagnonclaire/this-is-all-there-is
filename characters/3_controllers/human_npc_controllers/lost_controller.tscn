@@ -7,12 +7,12 @@
 properties/0/path = NodePath(".:character_name")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath(".:character_lines")
+properties/1/path = NodePath(".:current_line")
 properties/1/spawn = true
 properties/1/replication_mode = 2
-properties/2/path = NodePath(".:current_line")
+properties/2/path = NodePath(".:character_lines")
 properties/2/spawn = true
-properties/2/replication_mode = 2
+properties/2/replication_mode = 1
 
 [node name="LostController" type="Node" groups=["examine_target", "interact_raycast_target", "sever_raycast_target"]]
 script = ExtResource("1_ekr4b")

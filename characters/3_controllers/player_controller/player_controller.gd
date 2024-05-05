@@ -188,7 +188,9 @@ func _can_awaken() -> bool:
 	return not (awaken_on_cooldown or hud.is_text_chat_open())
 
 func _awaken() -> void:
+	current_frame.camera.current = false
 	current_frame = primary_frame
+	current_frame.camera.current = true
 	current_frame.set_global_position(current_home)
 	current_frame.set_global_rotation(current_home_rotation)
 
@@ -254,10 +256,3 @@ func interacted_with(caller_id: String) -> void:
 	if is_multiplayer_authority():
 		var caller_name: String = get_node("../" + caller_id).character_name
 		hud.notify_important(caller_name + " is trying to get your attention")
-
-#TODO MOVE THIS HOLY SHIT
-@rpc("any_peer", "call_local")
-func debug_spawn() -> void:
-	var random_position: Vector3 = Vector3(randf_range(-50,50), 0, randf_range(-50,50))
-	var random_rotation: Vector3 = Vector3(0, randf_range(-50,50), 0)
-	EventsManager.debug_spawn(random_position, random_rotation)

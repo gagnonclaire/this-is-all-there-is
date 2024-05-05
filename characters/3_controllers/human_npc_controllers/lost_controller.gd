@@ -9,7 +9,7 @@ extends Node
 @onready var frame: CharacterBody3D = $HumanFrame
 
 #TODO Use navmesh stuff here
-@onready var current_destination: Vector3 = frame.global_position
+var current_destination: Vector3
 
 #region NPC setup
 func _ready() -> void:
@@ -38,6 +38,7 @@ func _on_destination_update_timer_timeout() -> void:
 	if is_multiplayer_authority():
 		current_destination += Vector3(randf_range(-2.5, 2.5), 0, randf_range(-2.5, 2.5))
 
+@rpc("any_peer", "call_local")
 func interacted_with(_caller_id) -> void:
 	frame.set_speech_label(character_lines[current_line])
 

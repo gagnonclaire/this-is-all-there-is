@@ -21,9 +21,3 @@ func free_mouse() -> void:
 #TODO that the character is a direct child of it
 func get_player_controller(controller_name: StringName) -> Node:
 	return get_node(NodePath(str(WORLD_PATH, controller_name)))
-
-#TODO Hate how this is relying on the world node to have this functionality
-#TODO Maybe once I move away from debug controls it will get better
-func debug_spawn(position: Vector3, rotation: Vector3) -> void:
-	var world: Node = get_node(NodePath(WORLD_PATH))
-	world.debug_spawn(position, rotation)
