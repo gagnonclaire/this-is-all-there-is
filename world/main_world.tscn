@@ -32,3 +32,4 @@ replication_config = SubResource("SceneReplicationConfig_7xoik")
 [node name="Station" parent="StationPivot" instance=ExtResource("3_8s1tw")]
 
 [node name="LostField" parent="." instance=ExtResource("4_scxpt")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 34, 4, 20)
