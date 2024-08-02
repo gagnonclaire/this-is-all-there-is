@@ -50,9 +50,10 @@ func _process(delta: float) -> void:
 		_process_rest(delta)
 		_process_stamina()
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
 		_process_movement()
+		_move_held_object(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_multiplayer_authority():
@@ -122,7 +123,7 @@ func _process_stamina() -> void:
 		- current_frame.get_current_stamina_percent())
 #endregion
 
-#region Input loop processors
+#region Text chat
 ##############################################################################
 func _process_text_chat() -> void:
 	if Input.is_action_just_pressed(KeybindManager.TALK) \
@@ -135,27 +136,60 @@ func _process_text_chat() -> void:
 			current_frame.set_speech_label.rpc(hud.get_text_entered())
 
 		hud.close_text_chat()
+#endregion
 
+#region Object grabbing
+##############################################################################
 func _process_grab_and_drop() -> void:
+	_grab_object()
+	_drop_object()
+
+func _grab_object() -> void:
 	if Input.is_action_just_pressed(KeybindManager.GRAB) \
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("grab_target"):
 		current_frame.held_object = current_frame.interact_raycast.get_collider()
-		current_frame.held_object.pick_up_by.rpc_id(1, name)
 
+func _drop_object() -> void:
 	if Input.is_action_just_released(KeybindManager.GRAB) \
 	and current_frame.held_object:
-		current_frame.held_object.drop.rpc_id(1)
+		current_frame.held_object.reset_damping.rpc_id(1)
 		current_frame.held_object = null
 
+func _move_held_object (delta: float) -> void:
+	if current_frame.held_object:
+		var destination: Vector3 = current_frame.hold_point.get_global_position()
+		var current_position: Vector3 = current_frame.held_object.get_global_position()
+		var distance: float = current_position.distance_to(destination)
+		var direction: Vector3 = current_position.direction_to(destination)
+		var speed: float = clampf(distance / delta, 0.0, 1000.0)
+		current_frame.held_object.move_object.rpc_id(1, distance, direction, speed)
+
+func _rotate_held_object(event: InputEvent) -> void:
+	if current_frame.held_object \
+	and Input.is_action_pressed(KeybindManager.ROTATE):
+		var torque: Vector3 = Vector3(event.relative.y, event.relative.x, 0)
+		var direction: Vector3 = (current_frame.head_pivot.global_position - current_frame.held_object.global_position)
+		var z_view: Vector3 = direction / direction.length()
+		var x_view: Vector3 = (Vector3.UP.cross(z_view)) / (Vector3.UP.cross(z_view)).length()
+		var y_view: Vector3 = z_view.cross(x_view)
+		var rotation_basis: Basis = Basis(x_view, y_view, z_view)
+		current_frame.held_object.rotate_object.rpc_id(1, rotation_basis * torque)
+#endregion
+
+#region Other processes
+##############################################################################
 func _process_camera_control(event: InputEvent) -> void:
 	if event is InputEventMouseMotion \
 	and not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open():
-		current_frame.rotate_y(-event.relative.x *.005)
-		current_frame.head_pivot.rotate_x(-event.relative.y *.005)
-		current_frame.head_pivot.rotation.x = clamp( \
+		if not (current_frame.held_object and Input.is_action_pressed(KeybindManager.ROTATE)):
+			current_frame.rotate_y(-event.relative.x *.005)
+			current_frame.head_pivot.rotate_x(-event.relative.y *.005)
+			current_frame.head_pivot.rotation.x = clamp( \
 			current_frame.head_pivot.rotation.x, -PI / 2.25, PI / 2.25)
+		else:
+			_rotate_held_object(event) # This probably shouldn't be here...
 
 func _process_interact() -> void:
 	if not current_frame.is_knocked_out \
