@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=9 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" path="res://world/main_world.gd" id="1_vn3ld"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/environments/night_environment.tres" id="2_pwq27"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b2wpbof10k2qe" path="res://world/structures/lost_field.tscn" id="4_scxpt"]
 [ext_resource type="PackedScene" uid="uid://bj88dcw6o5o8x" path="res://ui/floating_text.tscn" id="5_hmp3s"]
 [ext_resource type="PackedScene" uid="uid://bvrg5gsnhakob" path="res://world/structures/corporation/corporation_base_1.tscn" id="6_soqds"]
+[ext_resource type="PackedScene" uid="uid://b5ol557mccvdr" path="res://world/interactables/light/buy_light.tscn" id="7_acgxa"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7xoik"]
 properties/0/path = NodePath(".:crodots")
@@ -44,3 +45,6 @@ default_text = "Hello"
 
 [node name="corporation_base_1" parent="CorporationPivot" instance=ExtResource("6_soqds")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.288, -1.97229, 27.244)
+
+[node name="BuyLight" parent="." instance=ExtResource("7_acgxa")]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, -4.00445, 0.019505, -0.00462341)

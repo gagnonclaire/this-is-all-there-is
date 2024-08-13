@@ -149,6 +149,10 @@ func _grab_object() -> void:
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("grab_target"):
 		current_frame.held_object = current_frame.interact_raycast.get_collider()
+		current_frame.held_object.set_original_transform.rpc_id(
+			1,
+			current_frame.hold_point.get_global_transform()
+		)
 
 func _drop_object() -> void:
 	if Input.is_action_just_released(KeybindManager.GRAB) \
@@ -160,10 +164,18 @@ func _move_held_object (delta: float) -> void:
 	if current_frame.held_object:
 		var destination: Vector3 = current_frame.hold_point.get_global_position()
 		var current_position: Vector3 = current_frame.held_object.get_global_position()
+
 		var distance: float = current_position.distance_to(destination)
 		var direction: Vector3 = current_position.direction_to(destination)
 		var speed: float = clampf(distance / delta, 0.0, 1000.0)
-		current_frame.held_object.move_object.rpc_id(1, distance, direction, speed)
+
+		current_frame.held_object.move_object.rpc_id(
+			1,
+			distance,
+			direction,
+			speed,
+			current_frame.hold_point.get_global_transform()
+		)
 
 func _rotate_held_object(event: InputEvent) -> void:
 	if current_frame.held_object \
@@ -174,7 +186,11 @@ func _rotate_held_object(event: InputEvent) -> void:
 		var x_view: Vector3 = (Vector3.UP.cross(z_view)) / (Vector3.UP.cross(z_view)).length()
 		var y_view: Vector3 = z_view.cross(x_view)
 		var rotation_basis: Basis = Basis(x_view, y_view, z_view)
-		current_frame.held_object.rotate_object.rpc_id(1, rotation_basis * torque)
+		current_frame.held_object.rotate_object.rpc_id(
+			1,
+			rotation_basis * torque,
+			current_frame.hold_point.get_global_transform()
+		)
 #endregion
 
 #region Other processes
