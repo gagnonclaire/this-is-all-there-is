@@ -37,7 +37,8 @@ func move_object(
 		apply_force(direction * speed)
 
 		var target_transform = hold_transform * relative_transform
-		global_transform.basis =global_transform.basis.slerp(target_transform.basis, 0.1)
+		# Causes bad stuttering in multiplayer
+		#global_transform.basis = global_transform.basis.slerp(target_transform.basis, 0.1)
 
 @rpc("any_peer", "call_local")
 func rotate_object(torque: Vector3, hold_transform: Transform3D) -> void:
