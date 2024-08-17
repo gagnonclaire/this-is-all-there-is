@@ -11,14 +11,15 @@ points = PackedVector3Array(0.075, 0.075, 0.125, 0.075, -0.075, 0.125, 0.075, 0.
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iupk1"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/replication_mode = 2
 
 [node name="Light" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 0
+continuous_cd = true
 script = ExtResource("1_1216b")
 examine_text = "A light"
 size_mod = 0.25
