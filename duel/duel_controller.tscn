@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj5rrlgmg0sa6"]
+
+[ext_resource type="PackedScene" uid="uid://dvuogptxucnb1" path="res://world/structures/station/table_1.tscn" id="1_i735w"]
+
+[node name="DuelController" type="Node"]
+
+[node name="DuelBoard" type="Node3D" parent="."]
+
+[node name="table_1" parent="DuelBoard" instance=ExtResource("1_i735w")]

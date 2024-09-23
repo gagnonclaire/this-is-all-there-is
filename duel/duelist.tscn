@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0k70xs40ef4b"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7owqw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_w8orx"]
+radius = 0.1
+height = 0.1
+
+[node name="Duelist" type="Node3D"]
+
+[node name="Jumper" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Jumper"]
+mesh = SubResource("SphereMesh_7owqw")
+
+[node name="Eye" type="MeshInstance3D" parent="Jumper/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515028, 0)
+mesh = SubResource("SphereMesh_w8orx")

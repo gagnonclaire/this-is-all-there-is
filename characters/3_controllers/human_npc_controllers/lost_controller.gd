@@ -23,16 +23,18 @@ func _ready() -> void:
 #TODO This should hook into frame controls rather than hijacking them
 func _physics_process(delta) -> void:
 	if is_multiplayer_authority():
-		var direction = frame.global_position.direction_to(current_destination)
+		var direction: Vector3 = frame.global_position.direction_to(current_destination)
+		var new_velocity: Vector3 = frame.velocity
+
 		if frame.global_position.distance_to(current_destination) < 0.1:
-			frame.velocity = Vector3.ZERO
+			new_velocity = Vector3.ZERO
 		else:
 			# Smooth camera turning and linear motion
 			var turn_transform = frame.transform.looking_at(current_destination, Vector3.UP)
 			frame.transform  = frame.transform.interpolate_with(turn_transform, delta * 5)
-			frame.velocity = direction
+			new_velocity = direction
 
-		frame.move_and_slide()
+		frame.set_frame_movement(new_velocity)
 
 func _on_destination_update_timer_timeout() -> void:
 	if is_multiplayer_authority():
