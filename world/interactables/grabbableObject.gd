@@ -24,6 +24,7 @@ func _ready() -> void:
 func set_original_transform(hold_transform: Transform3D) -> void:
 	if is_multiplayer_authority():
 		relative_transform = hold_transform.affine_inverse() * global_transform
+	can_sleep = false
 
 @rpc("any_peer", "call_local")
 func move_object(
@@ -36,7 +37,6 @@ func move_object(
 		set_linear_damp(clampf(10.0 - (distance / 10.0), 0.1, 10.0))
 		apply_force(direction * speed)
 
-		var target_transform = hold_transform * relative_transform
 		# Causes bad stuttering in multiplayer
 		#global_transform.basis = global_transform.basis.slerp(target_transform.basis, 0.1)
 
@@ -53,3 +53,4 @@ func reset_damping() -> void:
 	if is_multiplayer_authority():
 		set_linear_damp(ProjectSettings.get_setting("physics/3d/default_linear_damp"))
 		set_angular_damp(ProjectSettings.get_setting("physics/3d/default_angular_damp"))
+	can_sleep = false

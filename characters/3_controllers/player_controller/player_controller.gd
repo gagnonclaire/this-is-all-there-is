@@ -149,15 +149,14 @@ func _grab_object() -> void:
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("grab_target"):
 		current_frame.held_object = current_frame.interact_raycast.get_collider()
-		current_frame.held_object.set_original_transform.rpc_id(
-			1,
+		current_frame.held_object.set_original_transform.rpc(
 			current_frame.hold_point.get_global_transform()
 		)
 
 func _drop_object() -> void:
 	if Input.is_action_just_released(KeybindManager.GRAB) \
 	and current_frame.held_object:
-		current_frame.held_object.reset_damping.rpc_id(1)
+		current_frame.held_object.reset_damping.rpc()
 		current_frame.held_object = null
 
 func _move_held_object (delta: float) -> void:
@@ -200,8 +199,8 @@ func _process_camera_control(event: InputEvent) -> void:
 	and not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open():
 		if not (current_frame.held_object and Input.is_action_pressed(KeybindManager.ROTATE)):
-			current_frame.rotate_y(-event.relative.x *.005)
-			current_frame.head_pivot.rotate_x(-event.relative.y *.005)
+			current_frame.rotate_y(-event.relative.x *.0025)
+			current_frame.head_pivot.rotate_x(-event.relative.y *.0025)
 			current_frame.head_pivot.rotation.x = clamp( \
 			current_frame.head_pivot.rotation.x, -PI / 2.25, PI / 2.25)
 		else:
