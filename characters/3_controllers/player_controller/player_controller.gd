@@ -19,6 +19,7 @@ var sever_range: float = 3.0
 var current_frame: CharacterBody3D = null
 var current_home: Vector3 = Vector3.ZERO
 var current_home_rotation: Vector3 = Vector3.ZERO
+var current_hold_point: Node3D
 
 #region Controller and default Frame setup
 ##############################################################################
@@ -29,6 +30,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	current_frame = primary_frame
 	current_frame.examine_text = character_name
+	current_hold_point = current_frame.hold_point
 
 	if is_multiplayer_authority():
 		EventsManager.capture_mouse()
@@ -50,10 +52,9 @@ func _process(delta: float) -> void:
 		_process_rest(delta)
 		_process_stamina()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_multiplayer_authority():
 		_process_movement()
-		_move_held_object(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_multiplayer_authority():
@@ -61,7 +62,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_process_babble()
 		_process_interact()
 		_process_sever()
-		_process_grab_and_drop()
+		_process_grab()
 		_process_camera_control(event)
 #endregion
 
@@ -87,6 +88,9 @@ func _process_movement() -> void:
 			# Send the movement instructions to the frame authority
 			current_frame.set_frame_movement.rpc_id( \
 				current_frame.get_multiplayer_authority(), new_velocity)
+
+			if current_frame.held_object:
+				current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
 
 func _process_awaken(delta: float) -> void:
 	if Input.is_action_pressed(KeybindManager.AWAKEN) \
@@ -138,59 +142,22 @@ func _process_text_chat() -> void:
 		hud.close_text_chat()
 #endregion
 
-#region Object grabbing
-##############################################################################
-func _process_grab_and_drop() -> void:
-	_grab_object()
-	_drop_object()
-
-func _grab_object() -> void:
+func _process_grab() -> void:
 	if Input.is_action_just_pressed(KeybindManager.GRAB) \
 	and current_frame.interact_raycast.is_colliding() \
-	and current_frame.interact_raycast.get_collider().is_in_group("grab_target"):
+	and current_frame.interact_raycast.get_collider().is_in_group("grab_target") \
+	and current_frame.held_object == null:
 		current_frame.held_object = current_frame.interact_raycast.get_collider()
-		current_frame.held_object.set_original_transform.rpc(
-			current_frame.hold_point.get_global_transform()
-		)
-
-func _drop_object() -> void:
-	if Input.is_action_just_released(KeybindManager.GRAB) \
+		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
+		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
+		current_frame.held_object.set_grabbed.rpc_id(1, true)
+	elif Input.is_action_just_released(KeybindManager.GRAB) \
 	and current_frame.held_object:
-		current_frame.held_object.reset_damping.rpc()
+		current_frame.held_object.set_grabbed.rpc_id(1, false)
 		current_frame.held_object = null
-
-func _move_held_object (delta: float) -> void:
-	if current_frame.held_object:
-		var destination: Vector3 = current_frame.hold_point.get_global_position()
-		var current_position: Vector3 = current_frame.held_object.get_global_position()
-
-		var distance: float = current_position.distance_to(destination)
-		var direction: Vector3 = current_position.direction_to(destination)
-		var speed: float = clampf(distance / delta, 0.0, 1000.0)
-
-		current_frame.held_object.move_object.rpc_id(
-			1,
-			distance,
-			direction,
-			speed,
-			current_frame.hold_point.get_global_transform()
-		)
-
-func _rotate_held_object(event: InputEvent) -> void:
-	if current_frame.held_object \
-	and Input.is_action_pressed(KeybindManager.ROTATE):
-		var torque: Vector3 = Vector3(event.relative.y, event.relative.x, 0)
-		var direction: Vector3 = (current_frame.head_pivot.global_position - current_frame.held_object.global_position)
-		var z_view: Vector3 = direction / direction.length()
-		var x_view: Vector3 = (Vector3.UP.cross(z_view)) / (Vector3.UP.cross(z_view)).length()
-		var y_view: Vector3 = z_view.cross(x_view)
-		var rotation_basis: Basis = Basis(x_view, y_view, z_view)
-		current_frame.held_object.rotate_object.rpc_id(
-			1,
-			rotation_basis * torque,
-			current_frame.hold_point.get_global_transform()
-		)
-#endregion
+	elif current_frame.held_object:
+		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
+		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
 
 #region Other processes
 ##############################################################################
@@ -204,7 +171,16 @@ func _process_camera_control(event: InputEvent) -> void:
 			current_frame.head_pivot.rotation.x = clamp( \
 			current_frame.head_pivot.rotation.x, -PI / 2.25, PI / 2.25)
 		else:
-			_rotate_held_object(event) # This probably shouldn't be here...
+			# This probably shouldn't be here...
+			if current_frame.held_object \
+			and Input.is_action_pressed(KeybindManager.ROTATE):
+				var torque: Vector3 = Vector3(event.relative.y, event.relative.x, 0)
+				var direction: Vector3 = (current_frame.head_pivot.global_position - current_frame.held_object.global_position)
+				var z_view: Vector3 = direction / direction.length()
+				var x_view: Vector3 = (Vector3.UP.cross(z_view)) / (Vector3.UP.cross(z_view)).length()
+				var y_view: Vector3 = z_view.cross(x_view)
+				var rotation_basis: Basis = Basis(x_view, y_view, z_view)
+				current_frame.held_object.rotate_object.rpc_id(1, rotation_basis * torque)
 
 func _process_interact() -> void:
 	if not current_frame.is_knocked_out \
