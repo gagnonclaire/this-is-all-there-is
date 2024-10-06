@@ -41,6 +41,10 @@ window/stretch/mode="viewport"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/board_creator_inspector/plugin.cfg", "res://addons/board_creator_plugin/plugin.cfg")
+
 [input]
 
 forward={
