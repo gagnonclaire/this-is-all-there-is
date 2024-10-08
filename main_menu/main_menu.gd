@@ -56,7 +56,7 @@ func _switch_to_menu(item: Node) -> void:
 	item.set_visible(not item.is_visible())
 
 	for menu in menus:
-		if menu != item:
+		if not menu == item:
 			menu.hide()
 
 func _close_all_menus() -> void:

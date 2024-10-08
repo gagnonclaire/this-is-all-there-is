@@ -9,18 +9,18 @@ func _can_handle(object):
 func _parse_begin(object):
 	var btn_clear = Button.new()
 	btn_clear.set_text("Clear")
-	btn_clear.pressed.connect(object.Clear)
+	btn_clear.pressed.connect(object.clear)
 	add_custom_control(btn_clear)
 
-	var btn_grow = Button.new()
-	btn_grow.set_text("Grow")
-	btn_grow.pressed.connect(object.Grow)
-	add_custom_control(btn_grow)
+	var btn_create = Button.new()
+	btn_create.set_text("Create")
+	btn_create.pressed.connect(object.create)
+	add_custom_control(btn_create)
 
-	var btn_shrink = Button.new()
-	btn_shrink.set_text("Shrink")
-	btn_shrink.pressed.connect(object.Shrink)
-	add_custom_control(btn_shrink)
+	var btn_delete = Button.new()
+	btn_delete.set_text("Delete")
+	btn_delete.pressed.connect(object.delete)
+	add_custom_control(btn_delete)
 
 	var btn_growArea = Button.new()
 	btn_growArea.set_text("Grow Area")
@@ -37,10 +37,10 @@ func _parse_begin(object):
 	btn_save.pressed.connect(object.Save)
 	add_custom_control(btn_save)
 
-	var btn_load = Button.new()
-	btn_load.set_text("Load")
-	btn_load.pressed.connect(object.Load)
-	add_custom_control(btn_load)
+	var btn_load_tile = Button.new()
+	btn_load_tile.set_text("Load Tile")
+	btn_load_tile.pressed.connect(object.load_tile)
+	add_custom_control(btn_load_tile)
 
 	var btn_saveJSON = Button.new()
 	btn_saveJSON.set_text("Save JSON")

@@ -68,7 +68,7 @@ func _on_body_update_timer_timeout():
 
 #TODO Rewrite this so its not just a bunch of duplicate code
 func update_body() -> void:
-	if !torso_node:
+	if not torso_node:
 		# Head
 		head_mesh_node = HEAD_ARRAY[head_type].instantiate()
 		head_mesh_pivot.add_child(head_mesh_node)

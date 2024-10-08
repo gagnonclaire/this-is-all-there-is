@@ -1,8 +1,6 @@
 @tool
 class_name Tile
-extends Node
+extends Node3D
 
-var position: Vector3i
-
-func Load(load_position: Vector3i):
+func load(load_position: Vector3i):
 	position = load_position

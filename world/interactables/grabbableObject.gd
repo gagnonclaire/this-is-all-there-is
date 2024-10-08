@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		set_linear_damp(clampf(10.0 - (distance / 10.0), 0.1, 10.0))
 		apply_force(direction * speed)
 
-		if !_is_colliding:
+		if not _is_colliding:
 			var target_basis: Basis = (_pointing_towards * _rotation_transform).basis
 			global_basis = global_basis.slerp(target_basis, 0.1)
 
@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 func set_grabbed(grabbed: bool) -> void:
 	if is_multiplayer_authority():
 		_is_grabbed = grabbed
-		can_sleep = !grabbed
+		can_sleep = not grabbed
 
 		if (grabbed):
 			_rotation_transform = _pointing_towards.affine_inverse() * global_transform
