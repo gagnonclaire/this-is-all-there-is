@@ -4,3 +4,4 @@
 
 [node name="BoardCreator" type="Node3D"]
 script = ExtResource("1_tfjaa")
+position = Vector3i(1, 3, 0)
