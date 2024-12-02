@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=11 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" path="res://world/main_world.gd" id="1_vn3ld"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://world/environments/night_environment.tres" id="2_pwq27"]
 [ext_resource type="PackedScene" uid="uid://i2uptxaa4rfx" path="res://world/structures/station/station.tscn" id="3_8s1tw"]
+[ext_resource type="PackedScene" uid="uid://dlsqndxj4i5qn" path="res://world/interactables/moveable_wall/moveable_wall.tscn" id="4_eppvn"]
 [ext_resource type="PackedScene" uid="uid://b2wpbof10k2qe" path="res://world/structures/lost_field.tscn" id="4_scxpt"]
 [ext_resource type="PackedScene" uid="uid://bj88dcw6o5o8x" path="res://ui/floating_text.tscn" id="5_hmp3s"]
+[ext_resource type="PackedScene" uid="uid://y6xl1pw02yba" path="res://world/interactables/moveable_wall/buy_moveable_wall.tscn" id="5_x4hke"]
 [ext_resource type="PackedScene" uid="uid://bvrg5gsnhakob" path="res://world/structures/corporation/corporation_base_1.tscn" id="6_soqds"]
 [ext_resource type="PackedScene" uid="uid://b5ol557mccvdr" path="res://world/interactables/light/buy_light.tscn" id="7_acgxa"]
 
@@ -34,6 +36,15 @@ replication_config = SubResource("SceneReplicationConfig_7xoik")
 
 [node name="Station" parent="StationPivot" instance=ExtResource("3_8s1tw")]
 
+[node name="BuyLight" parent="StationPivot" instance=ExtResource("7_acgxa")]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, -4.00445, 0.019505, -0.00462341)
+
+[node name="BuyMoveableWall" parent="StationPivot" instance=ExtResource("5_x4hke")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, -2)
+
+[node name="MoveableWall" parent="StationPivot" instance=ExtResource("4_eppvn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 5, -3)
+
 [node name="LostField" parent="." instance=ExtResource("4_scxpt")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 36, 4, 20)
 
@@ -45,6 +56,3 @@ default_text = "Hello"
 
 [node name="corporation_base_1" parent="CorporationPivot" instance=ExtResource("6_soqds")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.288, -1.97229, 27.244)
-
-[node name="BuyLight" parent="." instance=ExtResource("7_acgxa")]
-transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, -4.00445, 0.019505, -0.00462341)

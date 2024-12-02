@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 ## Mouse over text.
-@export var examine_text: String = "An Object"
+@export var examine_text: String = "A Grabbable Object"
 
 ## Modifies physics for various object sizes.
 ## Smaller numbers adjust for smaller objects.

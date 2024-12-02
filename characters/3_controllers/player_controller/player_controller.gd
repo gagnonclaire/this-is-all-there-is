@@ -6,7 +6,7 @@ extends Node
 
 # Exposed controller nodes
 @onready var hud: CanvasLayer = $HUD
-@onready var primary_frame: CharacterBody3D = $HumanFrame
+@onready var primary_frame: HumanFrame = $HumanFrame
 @onready var awaken_cooldown_timer: Timer = $AwakenCooldown
 @onready var character_name: String = str("Player ", str(name))
 
@@ -16,7 +16,7 @@ var is_in_safe_volume: bool = false
 var awaken_progress: float = 0.0
 var awaken_on_cooldown: bool = false
 var sever_range: float = 3.0
-var current_frame: CharacterBody3D = null
+var current_frame: HumanFrame = null
 var current_home: Vector3 = Vector3.ZERO
 var current_home_rotation: Vector3 = Vector3.ZERO
 var current_hold_point: Node3D
@@ -62,9 +62,45 @@ func _unhandled_input(event: InputEvent) -> void:
 		_process_babble()
 		_process_interact()
 		_process_sever()
-		_process_grab()
+		_process_grab_object()
+		_process_move_object()
 		_process_camera_control(event)
 #endregion
+
+func _process_grab_object() -> void:
+	if Input.is_action_just_pressed(KeybindManager.GRAB) \
+	and current_frame.interact_raycast.is_colliding() \
+	and current_frame.interact_raycast.get_collider().is_in_group("grab_target") \
+	and current_frame.held_object == null:
+		current_frame.held_object = current_frame.interact_raycast.get_collider()
+		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
+		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
+		current_frame.held_object.set_grabbed.rpc_id(1, true)
+	elif Input.is_action_just_released(KeybindManager.GRAB) \
+	and current_frame.held_object:
+		current_frame.held_object.set_grabbed.rpc_id(1, false)
+		current_frame.held_object = null
+	elif current_frame.held_object:
+		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
+		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
+
+func _process_move_object() -> void:
+	if Input.is_action_just_pressed(KeybindManager.INTERACT) \
+	and current_frame.interact_raycast.is_colliding() \
+	and current_frame.interact_raycast.get_collider().is_in_group("move_target") \
+	and current_frame.held_moveable_object == null:
+		current_frame.held_moveable_object = current_frame.interact_raycast.get_collider()
+		current_frame.held_moveable_object.spawn_ghost()
+		current_frame.held_moveable_object.set_move_point(current_hold_point.global_position)
+		current_frame.held_moveable_object.set_moving(true)
+	elif Input.is_action_just_pressed(KeybindManager.INTERACT) \
+	and current_frame.held_moveable_object:
+		current_frame.held_moveable_object.place_object.rpc_id(1, current_hold_point.global_position)
+		current_frame.held_moveable_object.set_moving(false)
+		current_frame.held_moveable_object.despawn_ghost()
+		current_frame.held_moveable_object = null
+	elif current_frame.held_moveable_object:
+		current_frame.held_moveable_object.set_move_point(current_hold_point.global_position)
 
 #region Process loop processors
 ##############################################################################
@@ -91,6 +127,8 @@ func _process_movement() -> void:
 
 			if current_frame.held_object:
 				current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
+			if current_frame.held_moveable_object:
+				current_frame.held_moveable_object.set_move_point(current_hold_point.global_position)
 
 func _process_awaken(delta: float) -> void:
 	if Input.is_action_pressed(KeybindManager.AWAKEN) \
@@ -141,23 +179,6 @@ func _process_text_chat() -> void:
 
 		hud.close_text_chat()
 #endregion
-
-func _process_grab() -> void:
-	if Input.is_action_just_pressed(KeybindManager.GRAB) \
-	and current_frame.interact_raycast.is_colliding() \
-	and current_frame.interact_raycast.get_collider().is_in_group("grab_target") \
-	and current_frame.held_object == null:
-		current_frame.held_object = current_frame.interact_raycast.get_collider()
-		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
-		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
-		current_frame.held_object.set_grabbed.rpc_id(1, true)
-	elif Input.is_action_just_released(KeybindManager.GRAB) \
-	and current_frame.held_object:
-		current_frame.held_object.set_grabbed.rpc_id(1, false)
-		current_frame.held_object = null
-	elif current_frame.held_object:
-		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
-		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
 
 #region Other processes
 ##############################################################################

@@ -3,7 +3,6 @@ Forget I said that
 You're not real
 Did you make any new friends today?
 It's real quiet tonight
-Leave me alone
 Wake up
 Look at your hands
 Nevermind, it doesn't matter
@@ -209,7 +208,7 @@ I have done many crimes
 This doesn't concern you
 Why are you like this
 I need to be alone right now
-You should leave
+I think you should leave
 I have places to be
 Don't ask me where I'm going
 What do you sell here?
@@ -321,3 +320,9 @@ I once told a joke so funny that HR wanted to hear it in person
 I'm literally me
 I'm an expert
 Did you find what you were looking for?
+It's nothing I can't handle
+You need to leave
+You give up so easily
+It's not me, it's you
+It's not you, it's me
+My motives are entirely selfish

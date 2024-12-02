@@ -1,6 +1,7 @@
 # Base functional component to a human character
 # Handles basic movement, built to be called by a controller
 
+class_name HumanFrame
 extends CharacterBody3D
 
 # Preload camera
@@ -44,6 +45,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # Relationship tracker vars
 var held_object: RigidBody3D = null
+var held_moveable_object: MoveableObject = null
 
 #region Instantiation
 ##############################################################################

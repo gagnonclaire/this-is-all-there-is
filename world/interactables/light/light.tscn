@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bn2vy6s1f4vf5"]
 
-[ext_resource type="Script" path="res://world/interactables/grabbableObject.gd" id="1_1216b"]
+[ext_resource type="Script" path="res://world/interactables/grabbable_object.gd" id="1_1216b"]
 [ext_resource type="PackedScene" uid="uid://b3f6el575l0ii" path="res://world/interactables/object_synchronizer.tscn" id="2_livd3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vltux"]
