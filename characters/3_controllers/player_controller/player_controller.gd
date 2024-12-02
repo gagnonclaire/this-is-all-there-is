@@ -95,7 +95,7 @@ func _process_move_object() -> void:
 		current_frame.held_moveable_object.set_moving(true)
 	elif Input.is_action_just_pressed(KeybindManager.INTERACT) \
 	and current_frame.held_moveable_object:
-		current_frame.held_moveable_object.place_object.rpc_id(1, current_hold_point.global_position)
+		current_frame.held_moveable_object.place_object()
 		current_frame.held_moveable_object.set_moving(false)
 		current_frame.held_moveable_object.despawn_ghost()
 		current_frame.held_moveable_object = null
