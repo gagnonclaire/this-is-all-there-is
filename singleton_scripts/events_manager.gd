@@ -1,7 +1,7 @@
 extends Node
 
-signal crodots_gained(amount: int)
-signal crodots_lost(amount: int)
+signal credits_gained(amount: int)
+signal credits_lost(amount: int)
 
 signal safe_volume_entered()
 signal safe_volume_exited()
