@@ -147,6 +147,7 @@ func start_speach_audio(time: float) -> void:
 ##############################################################################
 @rpc("any_peer", "call_local")
 func start_ragdoll() -> void:
+	#TODO Bones collision on "physics" layer for simplicity?
 	skeleton.physical_bones_start_simulation()
 
 @rpc("any_peer", "call_local")

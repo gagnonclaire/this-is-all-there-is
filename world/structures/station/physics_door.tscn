@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkh47xh6h4owx"]
+
+[ext_resource type="Script" path="res://world/structures/station/moving_door.gd" id="1_4pda3"]
+[ext_resource type="PackedScene" uid="uid://b3f6el575l0ii" path="res://world/interactables/object_synchronizer.tscn" id="2_6onjd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83p25"]
+albedo_color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fdi44"]
+material = SubResource("StandardMaterial3D_83p25")
+size = Vector3(0.17, 3.635, 0.165)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qwpf0"]
+data = PackedVector3Array(-0.085, 1.8175, 0.0825, 0.085, 1.8175, 0.0825, -0.085, -1.8175, 0.0825, 0.085, 1.8175, 0.0825, 0.085, -1.8175, 0.0825, -0.085, -1.8175, 0.0825, 0.085, 1.8175, -0.0825, -0.085, 1.8175, -0.0825, 0.085, -1.8175, -0.0825, -0.085, 1.8175, -0.0825, -0.085, -1.8175, -0.0825, 0.085, -1.8175, -0.0825, 0.085, 1.8175, 0.0825, 0.085, 1.8175, -0.0825, 0.085, -1.8175, 0.0825, 0.085, 1.8175, -0.0825, 0.085, -1.8175, -0.0825, 0.085, -1.8175, 0.0825, -0.085, 1.8175, -0.0825, -0.085, 1.8175, 0.0825, -0.085, -1.8175, -0.0825, -0.085, 1.8175, 0.0825, -0.085, -1.8175, 0.0825, -0.085, -1.8175, -0.0825, 0.085, 1.8175, 0.0825, -0.085, 1.8175, 0.0825, 0.085, 1.8175, -0.0825, -0.085, 1.8175, 0.0825, -0.085, 1.8175, -0.0825, 0.085, 1.8175, -0.0825, -0.085, -1.8175, 0.0825, 0.085, -1.8175, 0.0825, -0.085, -1.8175, -0.0825, 0.085, -1.8175, 0.0825, 0.085, -1.8175, -0.0825, -0.085, -1.8175, -0.0825)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upkv8"]
+albedo_color = Color(0.658824, 0.509804, 0.403922, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fow6e"]
+material = SubResource("StandardMaterial3D_upkv8")
+size = Vector3(1.625, 3.497, 0.092)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o0wix"]
+points = PackedVector3Array(-0.8125, -1.7485, -0.046, -0.8125, -1.7485, 0.046, -0.8125, 1.7485, -0.046, 0.8125, -1.7485, -0.046, 0.8125, -1.7485, 0.046, -0.8125, 1.7485, 0.046, 0.8125, 1.7485, -0.046, 0.8125, 1.7485, 0.046)
+
+[node name="PhysicsDoor" type="Node3D"]
+
+[node name="Door" type="Node3D" parent="."]
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.831589, 0, 0)
+node_a = NodePath("../Anchor/StaticBody3D")
+node_b = NodePath("../MovingDoor")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+
+[node name="Anchor" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.835113, 1.74166, 0)
+mesh = SubResource("BoxMesh_fdi44")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Door/Anchor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/Anchor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_qwpf0")
+
+[node name="MovingDoor" type="RigidBody3D" parent="Door"]
+script = ExtResource("1_4pda3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door/MovingDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0212071, 1.76328, 0)
+mesh = SubResource("BoxMesh_fow6e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/MovingDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0212071, 1.76328, 0)
+shape = SubResource("ConvexPolygonShape3D_o0wix")
+
+[node name="ObjectSynchronizer" parent="Door/MovingDoor" instance=ExtResource("2_6onjd")]
+root_path = NodePath("../..")

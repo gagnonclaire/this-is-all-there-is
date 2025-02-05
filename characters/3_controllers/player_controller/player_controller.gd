@@ -45,6 +45,9 @@ func _ready() -> void:
 
 #region Control loops
 ##############################################################################
+
+#TODO add scroll wheel control to move hold point
+
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
 		_process_context_indicators()
