@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://6ss12auai5u"]
+
+[ext_resource type="PackedScene" uid="uid://bk5wxolqffsgw" path="res://characters/pawn/doorway.tscn" id="1_uh8s1"]
+[ext_resource type="Texture2D" uid="uid://d0mi5nfpaqvao" path="res://textures/concrete/concrete.png" id="2_g2814"]
+[ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://textures/concrete/concrete_n.png" id="3_ga5xc"]
+[ext_resource type="PackedScene" uid="uid://wetkfijb3nk0" path="res://characters/pawn/pawn.tscn" id="3_vh8pw"]
+[ext_resource type="Script" path="res://characters/pawn/door.gd" id="4_ak5e2"]
+[ext_resource type="PackedScene" uid="uid://b3f6el575l0ii" path="res://world/interactables/object_synchronizer.tscn" id="5_e6cem"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1iv1u"]
+size = Vector3(1.05, 1.95, 0.09)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5m54"]
+resource_name = "street"
+albedo_texture = ExtResource("2_g2814")
+normal_enabled = true
+normal_texture = ExtResource("3_ga5xc")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fo8vd"]
+points = PackedVector3Array(-0.8125, -1.7485, -0.046, -0.8125, -1.7485, 0.046, -0.8125, 1.7485, -0.046, 0.8125, -1.7485, -0.046, 0.8125, -1.7485, 0.046, -0.8125, 1.7485, 0.046, 0.8125, 1.7485, -0.046, 0.8125, 1.7485, 0.046)
+
+[node name="ConcreteDoorway" type="Node3D"]
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.525389, 0, 0)
+node_a = NodePath("../Door")
+node_b = NodePath("../doorway")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = -2.0944
+
+[node name="Door" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0333664, 0)
+script = ExtResource("4_ak5e2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_1iv1u")
+surface_material_override/0 = SubResource("StandardMaterial3D_f5m54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0212071, 1.76328, 0)
+shape = SubResource("ConvexPolygonShape3D_fo8vd")
+
+[node name="ObjectSynchronizer" parent="Door" instance=ExtResource("5_e6cem")]
+root_path = NodePath("../..")
+
+[node name="pawn" parent="." instance=ExtResource("3_vh8pw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="doorway" parent="." instance=ExtResource("1_uh8s1")]

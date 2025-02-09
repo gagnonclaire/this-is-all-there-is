@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://byjr4wxffuvna"]
+[gd_scene load_steps=12 format=3 uid="uid://byjr4wxffuvna"]
 
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="1_bksa6"]
 [ext_resource type="PackedScene" uid="uid://dna1620pgbmc4" path="res://world/structures/wall_1.tscn" id="2_ea1lk"]
-[ext_resource type="PackedScene" uid="uid://dkh47xh6h4owx" path="res://world/structures/station/physics_door.tscn" id="3_bocgh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_me0u1"]
 
@@ -240,6 +239,3 @@ mesh = SubResource("BoxMesh_me0u1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceWall3/MeshInstance3D4/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_aypea")
-
-[node name="PhysicsDoor" parent="." instance=ExtResource("3_bocgh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.70535, -12.4906, -12.7196)
