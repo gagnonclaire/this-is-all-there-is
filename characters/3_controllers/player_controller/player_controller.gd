@@ -65,21 +65,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		_process_babble()
 		_process_interact()
 		_process_sever()
-		_process_grab_object()
-		_process_move_object()
+		_process_grab_object(event)
+		_process_move_object(event)
 		_process_camera_control(event)
 #endregion
 
-func _process_grab_object() -> void:
-	if Input.is_action_just_pressed(KeybindManager.GRAB) \
+func _process_grab_object(event: InputEvent) -> void:
+	if event.is_action_pressed(KeybindManager.GRAB) \
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("grab_target") \
 	and current_frame.held_object == null:
+		print()
 		current_frame.held_object = current_frame.interact_raycast.get_collider()
 		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
 		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
 		current_frame.held_object.set_grabbed.rpc_id(1, true)
-	elif Input.is_action_just_released(KeybindManager.GRAB) \
+	elif event.is_action_released(KeybindManager.GRAB) \
 	and current_frame.held_object:
 		current_frame.held_object.set_grabbed.rpc_id(1, false)
 		current_frame.held_object = null
@@ -87,7 +88,7 @@ func _process_grab_object() -> void:
 		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
 		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
 
-func _process_move_object() -> void:
+func _process_move_object(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(KeybindManager.INTERACT) \
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("move_target") \

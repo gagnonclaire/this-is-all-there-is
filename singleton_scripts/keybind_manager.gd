@@ -28,9 +28,9 @@ func get_input_actions() -> Array[StringName]:
 	return game_actions
 
 func get_first_input_event(input_action: StringName) -> InputEvent:
-		var input_events: Array[InputEvent] = InputMap.action_get_events(input_action)
+	var input_events: Array[InputEvent] = InputMap.action_get_events(input_action)
 
-		if input_events.size() == 0:
-			return null
-		else:
-			return input_events[0]
+	if input_events.size() == 0:
+		return null
+	else:
+		return input_events[0]

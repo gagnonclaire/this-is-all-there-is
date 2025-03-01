@@ -134,10 +134,10 @@ func set_speech_label(text: String, time: float = 3.0) -> void:
 	speech_label.set_text(text)
 	speech_clear_timer.set_wait_time(time)
 	speech_clear_timer.start()
-	start_speach_audio(text.length() / 20.0)
+	start_speech_audio(text.length() / 20.0)
 
 @rpc("any_peer", "call_local")
-func start_speach_audio(time: float) -> void:
+func start_speech_audio(time: float) -> void:
 	speech_audio_loop_timer.start()
 	speech_audio_loop_end_timer.set_wait_time(time)
 	speech_audio_loop_end_timer.start()
