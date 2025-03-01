@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+#TODO Extend grabbable object, expanding grabbable object as needed
+
 ## Mouse over text.
 @export var examine_text: String = "A Door"
 
