@@ -17,6 +17,52 @@ const BABBLE: StringName = "babble"
 const CONTROL_SELF: StringName = "control_self"
 const MENU: StringName = "menu"
 
+#TODO: Add support for multiple binds
+const _DEFAULT_MAPPINGS: Dictionary = {
+	FORWARD: Key.KEY_W,
+	LEFT: Key.KEY_A,
+	RIGHT: Key.KEY_D,
+	BACKWARD: Key.KEY_S,
+	SPRINT: Key.KEY_SHIFT,
+	INTERACT: Key.KEY_E,
+	REST: Key.KEY_R,
+	SEVER: Key.KEY_F1,
+	AWAKEN: Key.KEY_X,
+	GRAB: MouseButton.MOUSE_BUTTON_LEFT,
+	ROTATE: MouseButton.MOUSE_BUTTON_RIGHT,
+	TALK: Key.KEY_T,
+	TALK_ENTRY: Key.KEY_ENTER, #TODO: Add Kp Enter
+	BABBLE: Key.KEY_B,
+	CONTROL_SELF: Key.KEY_SPACE,
+	MENU: Key.KEY_ESCAPE,
+}
+
+var _override_mappings: Dictionary = {}
+
+func _ready() -> void:
+	# Lowest key enum is 'Space' at 32
+	# can use that to check for mouse (0-9) vs. key
+	for mapping in _DEFAULT_MAPPINGS:
+		var event: InputEvent
+		InputMap.add_action(mapping)
+
+		if _override_mappings.has(mapping):
+			if _override_mappings[mapping] >= 32:
+				event = InputEventKey.new()
+				event.set_keycode(_override_mappings[mapping])
+			else:
+				event = InputEventMouseButton.new()
+				event.set_button_index(_override_mappings[mapping])
+		else:
+			if _DEFAULT_MAPPINGS[mapping] >= 32:
+				event = InputEventKey.new()
+				event.set_keycode(_DEFAULT_MAPPINGS[mapping])
+			else:
+				event = InputEventMouseButton.new()
+				event.set_button_index(_DEFAULT_MAPPINGS[mapping])
+
+		InputMap.action_add_event(mapping, event)
+
 func get_input_actions() -> Array[StringName]:
 	var full_actions: Array[StringName] = InputMap.get_actions()
 	var game_actions: Array[StringName] = []
