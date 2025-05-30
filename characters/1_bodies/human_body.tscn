@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://mj4qdlfjjcmc"]
 
-[ext_resource type="Script" path="res://characters/1_bodies/human_body.gd" id="1_s6gov"]
+[ext_resource type="Script" uid="uid://b0aeiouuntoaj" path="res://characters/1_bodies/human_body.gd" id="1_s6gov"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_olcqk"]
 size = Vector3(0.75, 0.75, 0.75)

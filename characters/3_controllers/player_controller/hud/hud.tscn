@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://bpxgt3rbb7fwy"]
 
-[ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/hud.gd" id="1_wrxkh"]
+[ext_resource type="Script" uid="uid://duahf06mwevry" path="res://characters/3_controllers/player_controller/hud/hud.gd" id="1_wrxkh"]
 [ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="2_e0rp3"]
 [ext_resource type="Theme" uid="uid://usdneyjl5qut" path="res://fonts/title_theme.tres" id="3_nys7l"]
 [ext_resource type="LabelSettings" uid="uid://dwvvsn6nrpaak" path="res://characters/3_controllers/player_controller/hud/context_label_settings.tres" id="3_v68xt"]
-[ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/interact_context.gd" id="4_aqe3r"]
-[ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/safe_indicator.gd" id="4_jur2e"]
-[ext_resource type="Script" path="res://characters/3_controllers/player_controller/hud/sever_context.gd" id="5_ftxta"]
+[ext_resource type="Script" uid="uid://bte3wdpuj2p2t" path="res://characters/3_controllers/player_controller/hud/interact_context.gd" id="4_aqe3r"]
+[ext_resource type="Script" uid="uid://cwm70bdce1qnn" path="res://characters/3_controllers/player_controller/hud/safe_indicator.gd" id="4_jur2e"]
+[ext_resource type="Script" uid="uid://bnkec7tmumm4x" path="res://characters/3_controllers/player_controller/hud/sever_context.gd" id="5_ftxta"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
 resource_local_to_scene = true

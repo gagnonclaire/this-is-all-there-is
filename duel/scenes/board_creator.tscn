@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bha6uxi7idv01"]
 
-[ext_resource type="Script" path="res://duel/scripts/pre_production/board_creator.gd" id="1_tfjaa"]
+[ext_resource type="Script" uid="uid://u7jxf4j5gimk" path="res://duel/scripts/pre_production/board_creator.gd" id="1_tfjaa"]
 
 [node name="BoardCreator" type="Node3D"]
 script = ExtResource("1_tfjaa")

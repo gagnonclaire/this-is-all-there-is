@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmx4uw4o5q3q2"]
 
-[ext_resource type="Script" path="res://world/interactables/credit_terminal/credit_terminal.gd" id="1_x6em7"]
+[ext_resource type="Script" uid="uid://cm8jebiw0fip5" path="res://world/interactables/credit_terminal/credit_terminal.gd" id="1_x6em7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wppd3"]
 

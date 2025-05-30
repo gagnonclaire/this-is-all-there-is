@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwesvebjeenmm"]
 
-[ext_resource type="Script" path="res://main_menu/settings/keybinding/binding_button.gd" id="1_odux1"]
+[ext_resource type="Script" uid="uid://bye6ai4fre3u6" path="res://main_menu/settings/keybinding/binding_button.gd" id="1_odux1"]
 
 [node name="BindingButton" type="Button"]
 offset_right = 96.0

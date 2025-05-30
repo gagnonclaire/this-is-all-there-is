@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://btjk0c3rc8lhv"]
 
-[ext_resource type="Script" path="res://characters/3_controllers/human_npc_controllers/lost_controller.gd" id="1_ekr4b"]
+[ext_resource type="Script" uid="uid://ctbm7hrown3dp" path="res://characters/3_controllers/human_npc_controllers/lost_controller.gd" id="1_ekr4b"]
 [ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="2_cok4c"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85wp3"]
