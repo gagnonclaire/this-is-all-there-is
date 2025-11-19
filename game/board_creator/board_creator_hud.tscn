@@ -1,0 +1,206 @@
+[gd_scene load_steps=12 format=3 uid="uid://jaefdlicw8we"]
+
+[ext_resource type="Script" uid="uid://dkbjvi0ed5os" path="res://game/board_creator/board_creator_hud.gd" id="1_o4kd2"]
+[ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://fonts/body_theme.tres" id="2_puonp"]
+[ext_resource type="Theme" uid="uid://usdneyjl5qut" path="res://fonts/title_theme.tres" id="3_14u70"]
+
+[sub_resource type="GDScript" id="GDScript_r6c85"]
+script/source = "extends Label
+
+const SAFE_TEXT: String = \"You feel safe here \\nHold [$] to rest\"
+
+func _ready():
+	var rest_input_event: InputEvent \\
+	= KeybindManager.get_first_input_event(KeybindManager.REST)
+
+	set_text(SAFE_TEXT.replace(\"$\", rest_input_event.as_text()))
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/reticule.png-dede4b0f0dc2de985978a85e9cd7a9ec.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ccw5d"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/stamina_vignette.png-21104bbd41dc8d7c3309f3100586a5e7.ctex"
+
+[sub_resource type="Curve" id="Curve_cnevg"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_gbonj"]
+curve = SubResource("Curve_cnevg")
+
+[sub_resource type="LabelSettings" id="LabelSettings_hoyrr"]
+font_size = 14
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_2ihcq"]
+script/source = "extends Label
+
+const INTERACT_TEXT: String = \"[$] Interact\"
+
+func _ready():
+	var interact_input_event: InputEvent \\
+	= KeybindManager.get_first_input_event(KeybindManager.INTERACT)
+
+	set_text(INTERACT_TEXT.replace(\"$\", interact_input_event.as_text()))
+"
+
+[sub_resource type="GDScript" id="GDScript_1oprw"]
+script/source = "extends Label
+
+const SEVER_TEXT: String = \"[$] Sever\"
+
+func _ready():
+	var sever_input_event: InputEvent \\
+	= KeybindManager.get_first_input_event(KeybindManager.SEVER)
+
+	set_text(SEVER_TEXT.replace(\"$\", sever_input_event.as_text()))
+"
+
+[node name="HUD" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_o4kd2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_puonp")
+
+[node name="SafeIndicator" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -157.0
+offset_top = 11.0
+offset_right = 157.0
+offset_bottom = 98.0
+grow_horizontal = 2
+theme = ExtResource("3_14u70")
+horizontal_alignment = 1
+script = SubResource("GDScript_r6c85")
+
+[node name="ImportantNotice" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -236.0
+offset_top = 22.0
+offset_right = 236.0
+offset_bottom = 103.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ClearTimer" type="Timer" parent="Control/ImportantNotice"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Reticule" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 38.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = SubResource("CompressedTexture2D_1diql")
+
+[node name="StaminaVignette" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_ccw5d")
+
+[node name="AwakenVignette" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CurveTexture_gbonj")
+
+[node name="TextChatEntry" type="LineEdit" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5313
+offset_top = -52.0
+offset_right = 33.5313
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+placeholder_text = "Enter to send"
+alignment = 1
+max_length = 64
+expand_to_text_length = true
+
+[node name="ExamineContext" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.5
+offset_top = -31.0
+offset_right = 105.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_hoyrr")
+horizontal_alignment = 1
+
+[node name="ContextIndicators" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 6.0
+offset_right = 29.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractContext" type="Label" parent="Control/ContextIndicators"]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_hoyrr")
+horizontal_alignment = 1
+script = SubResource("GDScript_2ihcq")
+
+[node name="SeverContext" type="Label" parent="Control/ContextIndicators"]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_hoyrr")
+horizontal_alignment = 1
+script = SubResource("GDScript_1oprw")
+
+[connection signal="timeout" from="Control/ImportantNotice/ClearTimer" to="." method="_on_clear_timer_timeout"]

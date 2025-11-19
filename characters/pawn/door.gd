@@ -19,7 +19,6 @@ func _ready() -> void:
 	add_to_group("grab_target")
 	add_to_group("examine_target")
 
-
 	set_collision_layer_value(1, true)
 	set_collision_layer_value(2, true)
 	set_collision_layer_value(3, true)
@@ -45,6 +44,7 @@ func _set_locked(locked: bool) -> void:
 		if locked:
 			examine_text = "A Locked Door"
 			set_freeze_enabled(true)
+			remove_from_group("grab_target")
 
 			_rotation_transform = Transform3D()
 			set_linear_damp(ProjectSettings.get_setting("physics/3d/default_linear_damp"))
@@ -52,6 +52,7 @@ func _set_locked(locked: bool) -> void:
 		else:
 			examine_text = "A Door"
 			set_freeze_enabled(false)
+			add_to_group("grab_target")
 
 @rpc("any_peer", "call_local")
 func set_grabbed(grabbed: bool) -> void:
@@ -75,12 +76,14 @@ func set_move_point(point: Vector3) -> void:
 @rpc("any_peer", "call_local")
 func set_point_direction(pointing_transform: Transform3D) -> void:
 	if is_multiplayer_authority():
-		return
+		_pointing_towards = pointing_transform
 
 @rpc("any_peer", "call_local")
 func rotate_object(torque: Vector3) -> void:
 	if is_multiplayer_authority():
-		return
+		set_angular_damp(10 / size_mod)
+		apply_torque(torque * size_mod)
+		_rotation_transform = _pointing_towards.affine_inverse() * global_transform
 
 @rpc("any_peer", "call_local")
 func interacted_with():

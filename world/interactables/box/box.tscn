@@ -21,7 +21,6 @@ uv1_triplanar = true
 texture_filter = 0
 
 [node name="Box" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_kwnqi")

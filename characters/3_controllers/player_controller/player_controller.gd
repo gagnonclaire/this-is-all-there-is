@@ -88,7 +88,7 @@ func _process_grab_object(event: InputEvent) -> void:
 		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
 		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
 
-func _process_move_object(event: InputEvent) -> void:
+func _process_move_object(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed(KeybindManager.INTERACT) \
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("move_target") \

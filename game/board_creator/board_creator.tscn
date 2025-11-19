@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bha6uxi7idv01"]
+
+[ext_resource type="Script" uid="uid://u7jxf4j5gimk" path="res://game/board_creator/board_creator.gd" id="1_tfjaa"]
+[ext_resource type="PackedScene" uid="uid://ec62586b0fv8" path="res://main_menu/scenes/roadside_scene/roadside.tscn" id="2_1cclm"]
+
+[node name="BoardCreator" type="Node"]
+script = ExtResource("1_tfjaa")
+
+[node name="Board" type="Node3D" parent="."]
+
+[node name="roadside_base" parent="Board" instance=ExtResource("2_1cclm")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -6.8275337, -6.4569573, 1.3679073)

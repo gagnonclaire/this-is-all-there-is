@@ -11,13 +11,11 @@ extends Node
 #TODO Use navmesh stuff here
 var current_destination: Vector3
 
-#region NPC setup
 func _ready() -> void:
 	if is_multiplayer_authority():
 		character_name = ProceduralGeneration.get_human_name()
 		frame.examine_text = character_name
 		character_lines = ProceduralGeneration.get_human_lines(randi_range(2,3))
-#endregion
 
 #TODO Use a navmesh for wander
 #TODO This should hook into frame controls rather than hijacking them

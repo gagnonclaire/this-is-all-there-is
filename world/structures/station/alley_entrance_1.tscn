@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://byjr4wxffuvna"]
+[gd_scene load_steps=11 format=3 uid="uid://byjr4wxffuvna"]
 
-[ext_resource type="PackedScene" uid="uid://dash3q2g541do" path="res://characters/0_frames/human_frame.tscn" id="1_bksa6"]
 [ext_resource type="PackedScene" uid="uid://dna1620pgbmc4" path="res://world/structures/wall_1.tscn" id="2_ea1lk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_me0u1"]
@@ -33,9 +32,6 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 
 [node name="wall_1" parent="." instance=ExtResource("2_ea1lk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26101, -0.834008, -5)
-
-[node name="HumanFrame" parent="." instance=ExtResource("1_bksa6")]
-transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 0.094806, -0.866917, -3.91084)
 
 [node name="EntranceStairs" type="Node3D" parent="."]
 

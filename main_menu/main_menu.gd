@@ -44,6 +44,10 @@ func _on_join_button_pressed() -> void:
 	MultiplayerManager.start_client()
 	LoadManager.switch_to_main_world()
 
+func _on_board_creator_button_pressed():
+	_close_all_menus()
+	LoadManager.switch_to_board_creator()
+
 func _on_settings_button_pressed() -> void:
 	_switch_to_menu(settings_menu)
 

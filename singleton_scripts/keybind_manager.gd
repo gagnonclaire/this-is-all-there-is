@@ -16,6 +16,7 @@ const TALK_ENTRY: StringName = "talk_entry"
 const BABBLE: StringName = "babble"
 const CONTROL_SELF: StringName = "control_self"
 const MENU: StringName = "menu"
+const TOGGLE_MOUSE_CAPTURE: StringName = "toggle_mouse_capture"
 
 #TODO: Add support for multiple binds
 const _DEFAULT_MAPPINGS: Dictionary = {
@@ -35,6 +36,7 @@ const _DEFAULT_MAPPINGS: Dictionary = {
 	BABBLE: Key.KEY_B,
 	CONTROL_SELF: Key.KEY_SPACE,
 	MENU: Key.KEY_ESCAPE,
+	TOGGLE_MOUSE_CAPTURE: Key.KEY_ALT,
 }
 
 var _override_mappings: Dictionary = {}

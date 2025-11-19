@@ -1,20 +1,27 @@
 extends Node
 
-signal credits_gained(amount: int)
-signal credits_lost(amount: int)
-
-signal safe_volume_entered()
-signal safe_volume_exited()
+#signal credits_gained(amount: int)
+#signal credits_lost(amount: int)
+#
+#signal safe_volume_entered()
+#signal safe_volume_exited()
 
 const WORLD_PATH: String = "/root/Main/MainWorld/"
 
-#region Mouse Capture Controls
 func capture_mouse() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func free_mouse() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-#endregion
+
+func toggle_mouse() -> void:
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		free_mouse()
+	else:
+		capture_mouse()
+
+func is_mouse_captured() -> bool:
+	return Input.mouse_mode ==Input.MOUSE_MODE_CAPTURED
 
 #TODO Find a more robust way to get this node
 #TODO Main issue is we just assume there is a world at this point and

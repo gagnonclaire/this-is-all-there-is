@@ -111,10 +111,3 @@ func update_body() -> void:
 		var right_foot_mesh: MeshInstance3D = right_foot_pivot.get_child(0).get_child(0)
 		left_foot_mesh.set_surface_override_material(0, foot_material)
 		right_foot_mesh.set_surface_override_material(0, foot_material)
-
-
-
-
-
-
-

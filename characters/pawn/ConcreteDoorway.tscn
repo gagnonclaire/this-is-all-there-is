@@ -18,11 +18,11 @@ normal_texture = ExtResource("3_ga5xc")
 uv1_triplanar = true
 texture_filter = 0
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_20b6i"]
+points = PackedVector3Array(0.5428571, 0.9904762, 0.06333333, -0.54047614, -0.9904762, -0.06047619, -0.54047614, -0.9904762, 0.06333333, -0.54047614, 0.9904762, -0.06047619, 0.5428571, -0.9904762, -0.06047619, 0.5428571, -0.9904762, 0.06333333, -0.54047614, 0.9904762, 0.06333333, 0.5428571, 0.9904762, -0.06047619)
+
 [sub_resource type="BoxMesh" id="BoxMesh_27jo3"]
 size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fo8vd"]
-points = PackedVector3Array(-0.8125, -1.7485, -0.046, -0.8125, -1.7485, 0.046, -0.8125, 1.7485, -0.046, 0.8125, -1.7485, -0.046, 0.8125, -1.7485, 0.046, -0.8125, 1.7485, 0.046, 0.8125, 1.7485, -0.046, 0.8125, 1.7485, 0.046)
 
 [node name="ConcreteDoorway" type="Node3D"]
 
@@ -35,21 +35,21 @@ angular_limit/upper = 2.0944
 angular_limit/lower = 0.0
 
 [node name="Door" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0333664, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.525389, 0.024997532, 0)
 script = ExtResource("4_ak5e2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52738726, 1, 0)
 mesh = SubResource("BoxMesh_1iv1u")
 surface_material_override/0 = SubResource("StandardMaterial3D_f5m54")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359384, 0.952277, 0)
-mesh = SubResource("BoxMesh_27jo3")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0212071, 1.76328, 0)
-shape = SubResource("ConvexPolygonShape3D_fo8vd")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52738726, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_20b6i")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88677126, 0.952277, 0)
+mesh = SubResource("BoxMesh_27jo3")
 
 [node name="ObjectSynchronizer" parent="Door" instance=ExtResource("5_e6cem")]
 root_path = NodePath("../..")

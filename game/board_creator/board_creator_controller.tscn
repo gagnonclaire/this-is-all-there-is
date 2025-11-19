@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://by6vhvydavkad"]
+
+[ext_resource type="Script" uid="uid://cahbueog4hakg" path="res://game/board_creator/board_creator_controller.gd" id="1_pell0"]
+
+[node name="BoardController" type="Node"]
+script = ExtResource("1_pell0")
+
+[node name="BoardCreatorCamera" type="Camera3D" parent="."]
+fov = 90.0
