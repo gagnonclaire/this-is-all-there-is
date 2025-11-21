@@ -37,7 +37,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/board_creator_plugin/plugin.cfg")
+enabled=PackedStringArray()
 
 [layer_names]
 

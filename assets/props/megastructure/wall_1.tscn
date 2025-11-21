@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://p8bxxdv84qnb"]
+
+[ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="1_kiso3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh5bj"]
+size = Vector3(15, 25, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vc5y2"]
+size = Vector3(5, 26, 5)
+
+[node name="Wall1" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99507296, 0.09914608, 0, -0.09914608, 0.99507296, -10, 11.75, -1.332694)
+mesh = SubResource("BoxMesh_dh5bj")
+surface_material_override/0 = ExtResource("1_kiso3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99507296, 0.09914608, 0, -0.09914608, 0.99507296, 0, 11.75, -1.332694)
+mesh = SubResource("BoxMesh_vc5y2")
+surface_material_override/0 = ExtResource("1_kiso3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99507296, 0.09914608, 0, -0.09914608, 0.99507296, 10, 11.75, -1.332694)
+mesh = SubResource("BoxMesh_dh5bj")
+surface_material_override/0 = ExtResource("1_kiso3")

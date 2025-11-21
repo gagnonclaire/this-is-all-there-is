@@ -13,8 +13,8 @@ dest_files=["res://.godot/imported/pine1.blend-9007d76615b9a1dfbe6155cb3a8fbc71.
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="Node3D"
+nodes/root_name="Pine"
 nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
