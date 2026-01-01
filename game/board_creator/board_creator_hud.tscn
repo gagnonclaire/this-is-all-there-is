@@ -59,7 +59,6 @@ func _ready():
 "
 
 [node name="HUD" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_o4kd2")
 
 [node name="Control" type="Control" parent="."]
@@ -88,6 +87,7 @@ horizontal_alignment = 1
 script = SubResource("GDScript_r6c85")
 
 [node name="ImportantNotice" type="Label" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -122,6 +122,7 @@ scale = Vector2(0.1, 0.1)
 texture = SubResource("CompressedTexture2D_1diql")
 
 [node name="StaminaVignette" type="TextureRect" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,6 +132,7 @@ grow_vertical = 2
 texture = SubResource("CompressedTexture2D_ccw5d")
 
 [node name="AwakenVignette" type="TextureRect" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,6 +162,7 @@ max_length = 64
 expand_to_text_length = true
 
 [node name="ExamineContext" type="Label" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -176,6 +179,7 @@ label_settings = SubResource("LabelSettings_hoyrr")
 horizontal_alignment = 1
 
 [node name="ContextIndicators" type="VBoxContainer" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

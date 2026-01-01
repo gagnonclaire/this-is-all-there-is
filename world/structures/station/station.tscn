@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://i2uptxaa4rfx"]
+[gd_scene load_steps=10 format=3 uid="uid://i2uptxaa4rfx"]
 
 [ext_resource type="PackedScene" uid="uid://d1anf1pb68lgs" path="res://world/structures/station/station_base.tscn" id="1_1782g"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="2_i8ih5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cdt6di8fhsboy" path="res://world/interactables/credit_spender/credit_spender.tscn" id="5_buqad"]
 [ext_resource type="PackedScene" uid="uid://cmx4uw4o5q3q2" path="res://world/interactables/credit_terminal/credit_terminal.tscn" id="6_rk411"]
 [ext_resource type="PackedScene" uid="uid://dxg618j1g0qga" path="res://world/structures/nature/pine_1.tscn" id="7_73cmv"]
+[ext_resource type="PackedScene" uid="uid://dapfuq8s8q4yk" path="res://world/structures/station/neon_sign_1.tscn" id="8_shtf4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_trqev"]
 size = Vector3(3, 0.25, 3)
@@ -52,3 +53,6 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 6, 4, -3)
 
 [node name="Pine2" parent="." instance=ExtResource("7_73cmv")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.09, 4, 1.15923)
+
+[node name="NeonSign1" parent="." instance=ExtResource("8_shtf4")]
+transform = Transform3D(-5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, -5.9604645e-08, -4.8684616, 6.1827736, -2.9709826)

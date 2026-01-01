@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://by6vhvydavkad"]
+[gd_scene load_steps=3 format=3 uid="uid://by6vhvydavkad"]
 
 [ext_resource type="Script" uid="uid://cahbueog4hakg" path="res://game/board_creator/board_creator_controller.gd" id="1_pell0"]
+[ext_resource type="PackedScene" uid="uid://jaefdlicw8we" path="res://game/board_creator/board_creator_hud.tscn" id="2_gqons"]
 
 [node name="BoardController" type="Node"]
 script = ExtResource("1_pell0")
 
 [node name="BoardCreatorCamera" type="Camera3D" parent="."]
 fov = 90.0
+
+[node name="HUD" parent="." instance=ExtResource("2_gqons")]

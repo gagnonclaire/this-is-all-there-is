@@ -12,7 +12,7 @@
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://textures/concrete/concrete.tres" id="10_u58d0"]
 [ext_resource type="PackedScene" uid="uid://di4wv0xnyq3ht" path="res://world/interactables/box/box.tscn" id="11_4v50d"]
 [ext_resource type="PackedScene" uid="uid://6ss12auai5u" path="res://characters/pawn/ConcreteDoorway.tscn" id="12_cuqwb"]
-[ext_resource type="PackedScene" uid="uid://p8bxxdv84qnb" path="res://assets/props/megastructure/wall_1.tscn" id="13_2bho7"]
+[ext_resource type="PackedScene" uid="uid://p8bxxdv84qnb" path="res://world/megastructure/wall_1.tscn" id="13_2bho7"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7xoik"]
 properties/0/path = NodePath(".:credits")
