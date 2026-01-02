@@ -34,8 +34,8 @@ func _ready() -> void:
 
 	if is_multiplayer_authority():
 		EventsManager.capture_mouse()
-		EventsManager.connect("safe_volume_entered", _on_safe_volume_entered)
-		EventsManager.connect("safe_volume_exited", _on_safe_volume_exited)
+		#EventsManager.connect("safe_volume_entered", _on_safe_volume_entered)
+		#EventsManager.connect("safe_volume_exited", _on_safe_volume_exited)
 
 		current_frame.sever_raycast.set_target_position( \
 			Vector3(0, 0, -sever_range))
@@ -189,7 +189,8 @@ func _process_text_chat() -> void:
 func _process_camera_control(event: InputEvent) -> void:
 	if event is InputEventMouseMotion \
 	and not current_frame.is_knocked_out \
-	and not hud.is_text_chat_open():
+	and not hud.is_text_chat_open() \
+	and EventsManager.is_mouse_captured():
 		if not (current_frame.held_object and Input.is_action_pressed(KeybindManager.ROTATE)):
 			current_frame.rotate_y(-event.relative.x *.0025)
 			current_frame.head_pivot.rotate_x(-event.relative.y *.0025)

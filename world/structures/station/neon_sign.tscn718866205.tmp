@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dapfuq8s8q4yk"]
+
+[ext_resource type="Script" uid="uid://ci34qf7vlbacf" path="res://world/structures/station/neon_sign.gd" id="1_lmrlc"]
+[ext_resource type="Material" uid="uid://cwl0lm0fhliup" path="res://world/structures/station/neon_sign_medium1.tres" id="2_o0sqn"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dcus8"]
+size = Vector2(4, 1)
+
+[node name="NeonSign" type="Node3D"]
+script = ExtResource("1_lmrlc")
+sign_texture = ExtResource("2_o0sqn")
+glow_color = null
+glow_rate = null
+flicker_multiplier = null
+base_brightness = null
+energy_multiplier = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_dcus8")

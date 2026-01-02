@@ -12,8 +12,8 @@ func _ready() -> void:
 		_add_player(multiplayer.get_unique_id())
 
 		credits = 0
-		EventsManager.connect("credits_gained", _on_credits_gained)
-		EventsManager.connect("credits_lost", _on_credits_lost)
+		#EventsManager.connect("credits_gained", _on_credits_gained)
+		#EventsManager.connect("credits_lost", _on_credits_lost)
 
 #TODO This should all be handled in the multiplayer manager
 func _exit_tree() -> void:
@@ -22,6 +22,8 @@ func _exit_tree() -> void:
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):
 		LoadManager.switch_to_main_menu()
+	if Input.is_action_just_pressed(KeybindManager.TOGGLE_MOUSE_CAPTURE):
+		EventsManager.toggle_mouse()
 
 func _on_credits_gained(amount: int) -> void:
 	credits += amount

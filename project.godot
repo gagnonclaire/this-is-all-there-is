@@ -28,6 +28,7 @@ KeybindManager="*res://singleton_scripts/keybind_manager.gd"
 ProceduralGeneration="*res://singleton_scripts/procedural_generation/procedural_generation.gd"
 MultiplayerManager="*res://singleton_scripts/multiplayer_manager.gd"
 LoadManager="*res://singleton_scripts/load_manager.gd"
+CollisionLayerManager="*res://singleton_scripts/collision_layer_manager.gd"
 
 [display]
 
