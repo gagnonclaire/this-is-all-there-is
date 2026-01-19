@@ -14,3 +14,9 @@ func board_filenames() -> PackedStringArray:
 		user_data.make_dir("boards")
 
 	return filenames
+
+func board_name_available(board_name: String) -> bool:
+	if board_name.is_empty():
+		return false
+	else:
+		return not board_filenames().has(board_name + BOARD_FILE_EXTENSION)

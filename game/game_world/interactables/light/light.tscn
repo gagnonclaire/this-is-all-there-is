@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn2vy6s1f4vf5"]
+
+[ext_resource type="Script" uid="uid://bkds5hqp5yugv" path="res://game/game_world/interactables/grabbable_object.gd" id="1_1216b"]
+[ext_resource type="PackedScene" uid="uid://b3f6el575l0ii" path="res://game/game_world/interactables/object_synchronizer.tscn" id="2_livd3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vltux"]
+size = Vector3(0.15, 0.15, 0.25)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tugg1"]
+points = PackedVector3Array(0.075, 0.075, 0.125, 0.075, -0.075, 0.125, 0.075, 0.075, -0.125, -0.075, 0.075, 0.125, -0.075, -0.075, 0.125, 0.075, -0.075, -0.125, -0.075, 0.075, -0.125, -0.075, -0.075, -0.125)
+
+[node name="Light" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 0
+continuous_cd = true
+script = ExtResource("1_1216b")
+examine_text = "A light"
+size_mod = 0.25
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vltux")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_tugg1")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.121584)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 25.0
+
+[node name="ObjectSynchronizer" parent="." instance=ExtResource("2_livd3")]

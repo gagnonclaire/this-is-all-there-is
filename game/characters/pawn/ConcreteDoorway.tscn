@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://assets/textures/concrete/concrete_n.png" id="3_ga5xc"]
 [ext_resource type="PackedScene" uid="uid://wetkfijb3nk0" path="res://game/characters/pawn/pawn.tscn" id="3_vh8pw"]
 [ext_resource type="Script" uid="uid://lme2bjg55vcp" path="res://game/characters/pawn/door.gd" id="4_ak5e2"]
-[ext_resource type="PackedScene" uid="uid://b3f6el575l0ii" path="res://game/world/interactables/object_synchronizer.tscn" id="5_e6cem"]
+[ext_resource type="PackedScene" uid="uid://b3f6el575l0ii" path="res://game/game_world/interactables/object_synchronizer.tscn" id="5_e6cem"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1iv1u"]
 size = Vector3(1.05, 1.95, 0.09)

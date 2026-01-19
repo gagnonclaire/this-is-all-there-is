@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwesvebjeenmm"]
+
+[ext_resource type="Script" uid="uid://bye6ai4fre3u6" path="res://game/ui/menus/settings_menu/keybind_menu/keybind_item.gd" id="1_h6irw"]
+
+[node name="KeybindItem" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_h6irw")
+
+[node name="KeybindLabel" type="Label" parent="."]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeybindEntry" type="Button" parent="."]
+layout_mode = 2
+
+[node name="KeybindDefault" type="Button" parent="."]
+layout_mode = 2
+text = "Reset to default"
+
+[node name="KeybindCaptureCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="pressed" from="KeybindEntry" to="." method="_on_keybind_entry_pressed"]
+[connection signal="pressed" from="KeybindDefault" to="." method="_on_keybind_default_pressed"]
+[connection signal="timeout" from="KeybindCaptureCooldown" to="." method="_on_keybind_capture_cooldown_timeout"]

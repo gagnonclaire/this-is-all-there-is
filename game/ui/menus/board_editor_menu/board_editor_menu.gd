@@ -10,7 +10,7 @@ func _ready() -> void:
 	populate_board_item_list()
 
 func _on_create_new_board_button_pressed() -> void:
-	if board_name_available(board_name_entry.text):
+	if BoardSaveLoad.board_name_available(board_name_entry.text):
 		SceneChange.switch_to_board_creator(board_name_entry.text)
 	else:
 		board_name_entry.text = ""
@@ -21,6 +21,3 @@ func populate_board_item_list() -> void:
 		var board_item: BoardListItem = BOARD_ITEM_SCENE.instantiate()
 		board_item.board_name = board_filename
 		board_list.add_child(board_item)
-
-func board_name_available(board_name: String) -> bool:
-	return not BoardSaveLoad.board_filenames().has(board_name + BoardSaveLoad.BOARD_FILE_EXTENSION)

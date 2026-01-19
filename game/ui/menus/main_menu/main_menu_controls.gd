@@ -2,8 +2,7 @@ class_name MainMenuControls
 extends HBoxContainer
 
 @onready var sub_menu_container: MarginContainer = $SubMenuContainer
-@onready var new_game_menu: PanelContainer = $SubMenuContainer/NewGameMenu
-@onready var load_game_menu: PanelContainer = $SubMenuContainer/LoadGameMenu
+@onready var start_game_menu: PanelContainer = $SubMenuContainer/StartGameMenu
 @onready var join_game_menu: PanelContainer = $SubMenuContainer/JoinGameMenu
 @onready var board_editor_menu: PanelContainer = $SubMenuContainer/BoardEditorMenu
 @onready var settings_menu: PanelContainer = $SubMenuContainer/SettingsMenu
@@ -11,11 +10,8 @@ extends HBoxContainer
 func _ready() -> void:
 	close_all_menus()
 
-func _on_new_game_button_pressed() -> void:
-	switch_to(new_game_menu)
-
-func _on_load_game_button_pressed() -> void:
-	switch_to(load_game_menu)
+func _on_start_game_button_pressed() -> void:
+	switch_to(start_game_menu)
 
 func _on_join_game_button_pressed() -> void:
 	switch_to(join_game_menu)

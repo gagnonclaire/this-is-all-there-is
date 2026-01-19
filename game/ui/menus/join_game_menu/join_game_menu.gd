@@ -4,5 +4,4 @@ extends PanelContainer
 @onready var address_entry: LineEdit = $VBoxContainer/MarginContainer/AddressEntry
 
 func _on_join_game_button_pressed() -> void:
-	MultiplayerManager.start_client(address_entry.text)
-	SceneChange.switch_to_main_world()
+	SceneChange.switch_to_join_game_world(address_entry.text)

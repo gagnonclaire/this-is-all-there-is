@@ -31,6 +31,7 @@ MultiplayerManager="*res://game/singleton_utilities/multiplayer_manager.gd"
 SceneChange="*res://game/singleton_utilities/scene_change.gd"
 CollisionLayerManager="*res://game/singleton_utilities/collision_layer_manager.gd"
 BoardSaveLoad="*res://game/singleton_utilities/board_save_load.gd"
+GameSaveLoad="*res://game/singleton_utilities/game_save_load.gd"
 
 [display]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dncfkbcj6hlre"]
+
+[ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://game/game_world/environments/night_environment.tres" id="1_4hskn"]
+
+[node name="NightEnvironment" type="WorldEnvironment"]
+environment = ExtResource("1_4hskn")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dav87jmp5jv24"]
+
+[ext_resource type="Script" uid="uid://bavtgmbcnfnal" path="res://game/ui/menus/game_start_menu/game_list_item.gd" id="1_3qk4a"]
+
+[node name="GameListItem" type="HBoxContainer"]
+script = ExtResource("1_3qk4a")
+
+[node name="GameName" type="Label" parent="."]
+layout_mode = 2
+
+[node name="LoadGameButton" type="Button" parent="."]
+layout_mode = 2
+text = "Load Game"
+
+[node name="LoadHostGameButton" type="Button" parent="."]
+layout_mode = 2
+text = "Host game"
+
+[connection signal="pressed" from="LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="LoadHostGameButton" to="." method="_on_load_host_game_button_pressed"]
