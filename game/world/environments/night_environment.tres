@@ -1,0 +1,26 @@
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://cv4hq6xsapkq5"]
+
+[ext_resource type="Texture2D" uid="uid://bklcxj0knl54b" path="res://assets/textures/sky/night_sky.png" id="1_17q8f"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_mi36w"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lhfrk"]
+panorama = ExtResource("1_17q8f")
+filter = false
+
+[sub_resource type="Sky" id="Sky_ls477"]
+sky_material = SubResource("PanoramaSkyMaterial_lhfrk")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_ls477")
+ambient_light_source = 3
+ambient_light_color = Color(0.517647, 0.411765, 0.701961, 1)
+ambient_light_energy = 16.0
+ssao_enabled = true
+glow_enabled = true
+glow_map = SubResource("AnimatedTexture_mi36w")
+fog_enabled = true
+fog_light_color = Color(0.458824, 0.411765, 0.509804, 1)
+fog_light_energy = 0.63
+fog_sky_affect = 0.0

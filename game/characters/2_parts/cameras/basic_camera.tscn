@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://1se83fjbknl8"]
+
+[ext_resource type="Script" uid="uid://fpdrdxkmqp3r" path="res://game/characters/2_parts/cameras/basic_camera.gd" id="1_1raql"]
+
+[node name="BasicCamera" type="Node3D"]
+script = ExtResource("1_1raql")
+
+[node name="Camera" type="Camera3D" parent="."]
+doppler_tracking = 2
+
+[node name="HoldPoint" type="Node3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.01406)
+
+[node name="InteractRayCast" type="RayCast3D" parent="Camera"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+debug_shape_thickness = 1
+
+[node name="SeverRayCast" type="RayCast3D" parent="Camera"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+debug_shape_thickness = 1

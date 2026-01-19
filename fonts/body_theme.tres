@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ce6cpfne6646l"]
-
-[ext_resource type="FontFile" uid="uid://t4dji8hg75hf" path="res://fonts/ebrima.ttf" id="1_5moym"]
-
-[resource]
-default_font = ExtResource("1_5moym")
-default_font_size = 16

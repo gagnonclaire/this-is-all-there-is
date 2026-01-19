@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddaup4ambd1bu"]
-
-[ext_resource type="PackedScene" uid="uid://c20j7eemr77su" path="res://characters/2_parts/feet/human_foot_1.blend" id="1_mm6bj"]
-
-[node name="HumanFoot1" instance=ExtResource("1_mm6bj")]

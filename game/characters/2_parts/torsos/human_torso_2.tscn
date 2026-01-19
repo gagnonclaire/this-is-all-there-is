@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cie0nvk7ig0ww"]
+
+[ext_resource type="PackedScene" uid="uid://ibx8tins7ygh" path="res://game/characters/2_parts/torsos/human_torso_2.blend" id="1_6olrb"]
+
+[node name="HumanTorso2" instance=ExtResource("1_6olrb")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

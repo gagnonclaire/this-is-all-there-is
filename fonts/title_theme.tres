@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://usdneyjl5qut"]
-
-[ext_resource type="FontFile" uid="uid://d0kvl1quvdwi6" path="res://fonts/sylfaen.ttf" id="1_kgn72"]
-
-[resource]
-default_font = ExtResource("1_kgn72")
-default_font_size = 32

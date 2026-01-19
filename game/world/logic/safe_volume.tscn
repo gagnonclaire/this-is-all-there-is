@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://jor0y2bfw8rs"]
+
+[ext_resource type="Script" uid="uid://dkqkob1sobxa2" path="res://game/world/logic/safe_volume.gd" id="1_p2sf4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bus5u"]
+size = Vector3(5, 5, 5)
+
+[node name="SafeVolume" type="Node3D"]
+script = ExtResource("1_p2sf4")
+
+[node name="Area3D" type="Area3D" parent="." groups=["safe_volume"]]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_bus5u")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

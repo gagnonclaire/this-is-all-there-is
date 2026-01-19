@@ -13,22 +13,24 @@ config_version=5
 config/name="This Is All There Is"
 config/description="So make it count"
 config/version="0.0.1"
-run/main_scene="res://main.tscn"
+run/main_scene="res://game/main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [audio]
 
+buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 driver/enable_input=true
 
 [autoload]
 
-EventsManager="*res://singleton_scripts/events_manager.gd"
-KeybindManager="*res://singleton_scripts/keybind_manager.gd"
-ProceduralGeneration="*res://singleton_scripts/procedural_generation/procedural_generation.gd"
-MultiplayerManager="*res://singleton_scripts/multiplayer_manager.gd"
-LoadManager="*res://singleton_scripts/load_manager.gd"
-CollisionLayerManager="*res://singleton_scripts/collision_layer_manager.gd"
+EventsManager="*res://game/singleton_utilities/events_manager.gd"
+Keybinds="*res://game/singleton_utilities/keybinds.gd"
+ProceduralGeneration="*res://game/singleton_utilities/procedural_generation/procedural_generation.gd"
+MultiplayerManager="*res://game/singleton_utilities/multiplayer_manager.gd"
+SceneChange="*res://game/singleton_utilities/scene_change.gd"
+CollisionLayerManager="*res://game/singleton_utilities/collision_layer_manager.gd"
+BoardSaveLoad="*res://game/singleton_utilities/board_save_load.gd"
 
 [display]
 

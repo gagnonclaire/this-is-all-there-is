@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4pw1u2l01bu5"]
+
+[ext_resource type="Script" uid="uid://bac6yfyirshiq" path="res://game/board_editor/tile.gd" id="1_bwjjt"]
+[ext_resource type="Material" uid="uid://bqfuxpjafkup7" path="res://assets/textures/grass/grass.tres" id="2_lqhyi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mp5de"]
+
+[node name="Tile" type="Node3D"]
+script = ExtResource("1_bwjjt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_mp5de")
+surface_material_override/0 = ExtResource("2_lqhyi")

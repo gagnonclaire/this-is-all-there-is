@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c88og6k2g82p6"]
+
+[ext_resource type="Script" uid="uid://bm8owv4u0tc7j" path="res://game/ui/menus/board_editor_menu/board_list_item.gd" id="1_odwr4"]
+
+[node name="BoardListItem" type="HBoxContainer"]
+script = ExtResource("1_odwr4")
+
+[node name="BoardName" type="Label" parent="."]
+layout_mode = 2
+
+[node name="LoadBoardButton" type="Button" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="LoadBoardButton" to="." method="_on_load_board_button_pressed"]

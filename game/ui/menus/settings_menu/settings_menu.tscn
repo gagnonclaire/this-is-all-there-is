@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx2jfn1vbigx1"]
+
+[ext_resource type="PackedScene" uid="uid://bqaxu444llcm4" path="res://game/ui/menus/settings_menu/keybind_menu/keybind_menu.tscn" id="1_neqwe"]
+
+[node name="SettingsMenu" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SettingsTabs" type="TabContainer" parent="."]
+layout_mode = 2
+current_tab = 0
+
+[node name="KeybindMenu" parent="SettingsTabs" instance=ExtResource("1_neqwe")]
+layout_mode = 2
+metadata/_tab_index = 0
