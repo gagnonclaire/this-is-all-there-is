@@ -75,7 +75,6 @@ func _process_grab_object(event: InputEvent) -> void:
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("grab_target") \
 	and current_frame.held_object == null:
-		print()
 		current_frame.held_object = current_frame.interact_raycast.get_collider()
 		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
 		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)

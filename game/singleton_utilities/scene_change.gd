@@ -18,7 +18,7 @@ func switch_to_start_game_world(game_name: String, host: bool) -> void:
 
 	var game_world: GameWorld = GAME_WORLD.instantiate()
 	game_world.game_name = game_name
-	_main_node.add_child(GAME_WORLD.instantiate())
+	_main_node.add_child(game_world)
 
 func switch_to_join_game_world(address: String) -> void:
 	_unload_main_children()

@@ -13,3 +13,8 @@ func _on_load_game_button_pressed() -> void:
 
 func _on_load_host_game_button_pressed():
 	SceneChange.switch_to_start_game_world(game_name, true)
+
+func _on_delete_game_button_pressed():
+	GameSaveLoad.delete_game(game_name)
+	get_parent().remove_child(self)
+	queue_free()

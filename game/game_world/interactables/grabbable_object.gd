@@ -14,6 +14,7 @@ var _pointing_towards: Transform3D
 var _rotation_transform: Transform3D = Transform3D()
 
 func _ready() -> void:
+	add_to_group(GameSaveLoad.PERSIST_DATA_GROUP)
 	add_to_group("grab_target")
 	add_to_group("examine_target")
 
@@ -46,6 +47,21 @@ func _physics_process(delta: float) -> void:
 		if not _is_colliding:
 			var target_basis: Basis = (_pointing_towards * _rotation_transform).basis
 			global_basis = global_basis.slerp(target_basis, 0.1)
+
+func on_save_game(saved_data: Array) -> void:
+	var data_to_save = SavedObjectData.new()
+	data_to_save.scene_path = scene_file_path
+	data_to_save.global_position = global_position
+	data_to_save.global_rotation = global_rotation
+	saved_data.append(data_to_save)
+
+func on_before_load_game():
+	get_parent().remove_child(self)
+	queue_free()
+
+func on_load_game(saved_data: SavedObjectData) -> void:
+	global_position = saved_data.global_position
+	global_rotation = saved_data.global_rotation
 
 @rpc("any_peer", "call_local")
 func set_grabbed(grabbed: bool) -> void:

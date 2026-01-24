@@ -7,8 +7,11 @@ const _PLAYER_CONTROLLER: PackedScene = preload("res://game/characters/3_control
 
 var game_name: String
 
-#TODO This should mostl be handled in the multiplayer manager
+#TODO This should mostly be handled in the multiplayer manager
 func _ready() -> void:
+	if not GameSaveLoad.game_name_available(game_name):
+		GameSaveLoad.load_game(game_name, self)
+
 	if is_multiplayer_authority():
 		multiplayer.peer_connected.connect(_add_player)
 		multiplayer.peer_disconnected.connect(_remove_player)
@@ -24,6 +27,7 @@ func _exit_tree() -> void:
 
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):
+		GameSaveLoad.save_game(game_name)
 		SceneChange.switch_to_main_menu()
 	if Input.is_action_just_pressed(Keybinds.TOGGLE_MOUSE_CAPTURE):
 		EventsManager.toggle_mouse()

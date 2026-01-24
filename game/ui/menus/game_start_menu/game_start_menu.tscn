@@ -33,6 +33,7 @@ text = "Host new game"
 
 [node name="GameListScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="GameList" type="VBoxContainer" parent="VBoxContainer/GameListScrollContainer"]
 layout_mode = 2
