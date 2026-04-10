@@ -3,7 +3,7 @@ extends PanelContainer
 
 const GAME_ITEM_SCENE: PackedScene = preload("res://game/ui/menus/game_start_menu/game_list_item.tscn")
 
-@onready var game_name_entry: LineEdit = $VBoxContainer/StartNewGameContainer2/GameNameEntry
+@onready var game_name_entry: LineEdit = $VBoxContainer/StartNewGameContainer/GameNameEntry
 @onready var game_list: VBoxContainer = $VBoxContainer/GameListScrollContainer/GameList
 
 func _ready() -> void:

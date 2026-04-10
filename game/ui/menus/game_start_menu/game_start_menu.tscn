@@ -10,22 +10,22 @@ script = ExtResource("1_5nwvv")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="StartNewGameContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="StartNewGameContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="GameNameEntry" type="LineEdit" parent="VBoxContainer/StartNewGameContainer2"]
+[node name="GameNameEntry" type="LineEdit" parent="VBoxContainer/StartNewGameContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 placeholder_text = "New game name"
 
-[node name="GameStartButton" type="Button" parent="VBoxContainer/StartNewGameContainer2"]
+[node name="GameStartButton" type="Button" parent="VBoxContainer/StartNewGameContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Start new game"
 
-[node name="GameStartHostButton" type="Button" parent="VBoxContainer/StartNewGameContainer2"]
+[node name="GameStartHostButton" type="Button" parent="VBoxContainer/StartNewGameContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -38,5 +38,5 @@ size_flags_vertical = 3
 [node name="GameList" type="VBoxContainer" parent="VBoxContainer/GameListScrollContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="VBoxContainer/StartNewGameContainer2/GameStartButton" to="." method="_on_game_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/StartNewGameContainer2/GameStartHostButton" to="." method="_on_game_start_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartNewGameContainer/GameStartButton" to="." method="_on_game_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartNewGameContainer/GameStartHostButton" to="." method="_on_game_start_host_button_pressed"]
