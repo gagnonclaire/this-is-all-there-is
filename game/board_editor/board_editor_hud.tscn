@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dkbjvi0ed5os" path="res://game/board_editor/board_editor_hud.gd" id="1_o4kd2"]
 [ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://assets/fonts/body_theme.tres" id="2_puonp"]
 [ext_resource type="Theme" uid="uid://usdneyjl5qut" path="res://assets/fonts/title_theme.tres" id="3_14u70"]
+[ext_resource type="Texture2D" uid="uid://dmidx7th1t6xv" path="res://assets/textures/hud/reticule.png" id="4_c5ncs"]
 
 [sub_resource type="GDScript" id="GDScript_r6c85"]
 script/source = "extends Label
@@ -15,10 +16,6 @@ func _ready():
 
 	set_text(SAFE_TEXT.replace(\"$\", rest_input_event.as_text()))
 "
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1diql"]
-resource_local_to_scene = true
-load_path = "res://.godot/imported/reticule.png-dede4b0f0dc2de985978a85e9cd7a9ec.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ccw5d"]
 resource_local_to_scene = true
@@ -119,7 +116,7 @@ offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.1, 0.1)
-texture = SubResource("CompressedTexture2D_1diql")
+texture = ExtResource("4_c5ncs")
 
 [node name="StaminaVignette" type="TextureRect" parent="Control"]
 visible = false

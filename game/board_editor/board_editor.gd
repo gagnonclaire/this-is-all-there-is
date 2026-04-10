@@ -4,21 +4,69 @@ extends Node
 const BOARD_CREATOR_CONTROLLER: PackedScene = preload("res://game/board_editor/board_editor_controller.tscn")
 const TILE_PREFAB: PackedScene = preload("res://game/board_editor/tile.tscn")
 
+@onready var grid_map: GridMap = $Board/GridMap
+@onready var selection_grid_map: GridMap = $Board/SelectionGridMap
+
 var board_name = "new_board"
+var current_height: int = 0
 var current_position: Vector3i = Vector3i(0,0,0)
 var old_position: Vector3i = Vector3i(0,0,0)
 var tiles: Dictionary = {} # Vector3i keyed tile dictionary
 
+var _board_render_size: int = 100
+
 func _ready() -> void:
+	render_board_grid(current_height)
+
 	if board_already_exists():
 		load_board()
 
 	var controller: Node = BOARD_CREATOR_CONTROLLER.instantiate()
 	add_child(controller)
 
+func _input(event) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		print("Mouse click detected")
+		var camera = get_viewport().get_camera_3d()
+		var mouse_pos = get_viewport().get_mouse_position()
+
+		var from = camera.project_ray_origin(mouse_pos)
+		var to = from + camera.project_ray_normal(mouse_pos) * 1000.0
+
+		var space_state = grid_map.get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(from, to, 1)
+		var result = space_state.intersect_ray(query)
+
+		if result:
+			var collider = result["collider"]
+
+			if collider is GridMap:
+				var cell_pos = collider.local_to_map(result["position"])
+				var tile_id = collider.get_cell_item(cell_pos)
+
+				if tile_id == 0:
+					selection_grid_map.clear()
+					selection_grid_map.set_cell_item(cell_pos, 0)
+
 func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("menu"):
 		SceneChange.switch_to_main_menu()
+
+	if Input.is_action_just_pressed("board_editor_decrease_height"):
+		current_height -= 1
+		render_board_grid(current_height)
+
+	if Input.is_action_just_pressed("board_editor_increase_height"):
+		current_height += 1
+		render_board_grid(current_height)
+
+func render_board_grid(height: int) -> void:
+	grid_map.clear()
+	selection_grid_map.clear()
+
+	for l in _board_render_size:
+		for w in _board_render_size:
+			grid_map.set_cell_item(Vector3i(l, height, w), 0)
 
 func board_already_exists() -> bool:
 	var board_filenames: PackedStringArray = BoardSaveLoad.board_filenames()

@@ -20,6 +20,9 @@ const CONTROL_SELF: StringName = "control_self"
 const MENU: StringName = "menu"
 const TOGGLE_MOUSE_CAPTURE: StringName = "toggle_mouse_capture"
 
+const BOARD_EDITOR_DECREASE_HEIGHT: StringName = "board_editor_decrease_height"
+const BOARD_EDITOR_INCREASE_HEIGHT: StringName = "board_editor_increase_height"
+
 #TODO: Add support for multiple binds
 const _DEFAULT_KEYBINDS: Dictionary = {
 	FORWARD: Key.KEY_W,
@@ -34,11 +37,13 @@ const _DEFAULT_KEYBINDS: Dictionary = {
 	GRAB: MouseButton.MOUSE_BUTTON_LEFT,
 	ROTATE: MouseButton.MOUSE_BUTTON_RIGHT,
 	TALK: Key.KEY_T,
-	TALK_ENTRY: Key.KEY_ENTER, #TODO: Add Kp Enter
+	TALK_ENTRY: Key.KEY_ENTER, #TODO: Add Kp Enter when multiple binds are supported
 	BABBLE: Key.KEY_B,
 	CONTROL_SELF: Key.KEY_SPACE,
 	MENU: Key.KEY_ESCAPE,
 	TOGGLE_MOUSE_CAPTURE: Key.KEY_ALT,
+	BOARD_EDITOR_DECREASE_HEIGHT: Key.KEY_Q,
+	BOARD_EDITOR_INCREASE_HEIGHT: Key.KEY_E,
 }
 
 var keybinds: Dictionary
