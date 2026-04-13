@@ -18,10 +18,15 @@ const TALK_ENTRY: StringName = "talk_entry"
 const BABBLE: StringName = "babble"
 const CONTROL_SELF: StringName = "control_self"
 const MENU: StringName = "menu"
+
+const TOGGLE_BOARD_OVERLAY: StringName = "toggle_board_overlay"
 const TOGGLE_MOUSE_CAPTURE: StringName = "toggle_mouse_capture"
 
-const BOARD_EDITOR_DECREASE_HEIGHT: StringName = "board_editor_decrease_height"
-const BOARD_EDITOR_INCREASE_HEIGHT: StringName = "board_editor_increase_height"
+const BOARD_EDITOR_DECREASE_GRID_HEIGHT: StringName = "board_editor_decrease_grid_height"
+const BOARD_EDITOR_INCREASE_GRID_HEIGHT: StringName = "board_editor_increase_grid_height"
+
+const FLYING_CONTROLLER_UP: StringName = "flying_controller_up"
+const FLYING_CONTROLLER_DOWN: StringName = "flying_controller_down"
 
 #TODO: Add support for multiple binds
 const _DEFAULT_KEYBINDS: Dictionary = {
@@ -41,9 +46,12 @@ const _DEFAULT_KEYBINDS: Dictionary = {
 	BABBLE: Key.KEY_B,
 	CONTROL_SELF: Key.KEY_SPACE,
 	MENU: Key.KEY_ESCAPE,
+	TOGGLE_BOARD_OVERLAY: Key.KEY_X,
 	TOGGLE_MOUSE_CAPTURE: Key.KEY_ALT,
-	BOARD_EDITOR_DECREASE_HEIGHT: Key.KEY_Q,
-	BOARD_EDITOR_INCREASE_HEIGHT: Key.KEY_E,
+	BOARD_EDITOR_DECREASE_GRID_HEIGHT: Key.KEY_Q,
+	BOARD_EDITOR_INCREASE_GRID_HEIGHT: Key.KEY_E,
+	FLYING_CONTROLLER_UP: Key.KEY_SPACE,
+	FLYING_CONTROLLER_DOWN: Key.KEY_CTRL,
 }
 
 var keybinds: Dictionary

@@ -8,12 +8,12 @@ const TILE_PREFAB: PackedScene = preload("res://game/board_editor/tile.tscn")
 @onready var selection_grid_map: GridMap = $Board/SelectionGridMap
 
 var board_name = "new_board"
-var current_height: int = 0
+var current_height: int = -1
 var current_position: Vector3i = Vector3i(0,0,0)
 var old_position: Vector3i = Vector3i(0,0,0)
 var tiles: Dictionary = {} # Vector3i keyed tile dictionary
 
-var _board_render_size: int = 100
+var _board_render_size: int = 25
 
 func _ready() -> void:
 	render_board_grid(current_height)
@@ -26,7 +26,6 @@ func _ready() -> void:
 
 func _input(event) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		print("Mouse click detected")
 		var camera = get_viewport().get_camera_3d()
 		var mouse_pos = get_viewport().get_mouse_position()
 
@@ -49,14 +48,14 @@ func _input(event) -> void:
 					selection_grid_map.set_cell_item(cell_pos, 0)
 
 func _unhandled_input(_event) -> void:
-	if Input.is_action_just_pressed("menu"):
+	if Input.is_action_just_pressed(Keybinds.MENU):
 		SceneChange.switch_to_main_menu()
 
-	if Input.is_action_just_pressed("board_editor_decrease_height"):
+	if Input.is_action_just_pressed(Keybinds.BOARD_EDITOR_DECREASE_GRID_HEIGHT):
 		current_height -= 1
 		render_board_grid(current_height)
 
-	if Input.is_action_just_pressed("board_editor_increase_height"):
+	if Input.is_action_just_pressed(Keybinds.BOARD_EDITOR_INCREASE_GRID_HEIGHT):
 		current_height += 1
 		render_board_grid(current_height)
 
@@ -64,8 +63,8 @@ func render_board_grid(height: int) -> void:
 	grid_map.clear()
 	selection_grid_map.clear()
 
-	for l in _board_render_size:
-		for w in _board_render_size:
+	for l in range(-_board_render_size, _board_render_size):
+		for w in range(-_board_render_size, _board_render_size):
 			grid_map.set_cell_item(Vector3i(l, height, w), 0)
 
 func board_already_exists() -> bool:

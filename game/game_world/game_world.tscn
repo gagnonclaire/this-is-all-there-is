@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=19 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" uid="uid://dvtaeqgn42g5o" path="res://game/game_world/game_world.gd" id="1_vn3ld"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://game/game_world/environments/night_environment.tres" id="2_pwq27"]
+[ext_resource type="PackedScene" uid="uid://0gwji15ps27y" path="res://game/board_overlay/board_overlay.tscn" id="3_7tuyl"]
 [ext_resource type="PackedScene" uid="uid://i2uptxaa4rfx" path="res://game/game_world/structures/station/station.tscn" id="3_8s1tw"]
 [ext_resource type="PackedScene" uid="uid://dlsqndxj4i5qn" path="res://game/game_world/interactables/moveable_wall/moveable_wall.tscn" id="4_eppvn"]
+[ext_resource type="PackedScene" uid="uid://yy5iqy1bu8hx" path="res://game/controllers/board_controller/board_controller.tscn" id="4_ioamd"]
 [ext_resource type="PackedScene" uid="uid://b2wpbof10k2qe" path="res://game/game_world/structures/lost_field.tscn" id="4_scxpt"]
 [ext_resource type="PackedScene" uid="uid://bj88dcw6o5o8x" path="res://game/ui/floating_text/floating_text.tscn" id="5_hmp3s"]
 [ext_resource type="PackedScene" uid="uid://y6xl1pw02yba" path="res://game/game_world/interactables/moveable_wall/buy_moveable_wall.tscn" id="5_x4hke"]
@@ -42,6 +44,11 @@ spawn_path = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7xoik")
+
+[node name="BoardOverlay" parent="." instance=ExtResource("3_7tuyl")]
+visible = false
+
+[node name="BoardController" parent="." instance=ExtResource("4_ioamd")]
 
 [node name="StationPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63821, -4.17942, 12.4443)

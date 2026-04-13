@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ec62586b0fv8"]
+[gd_scene load_steps=10 format=3 uid="uid://ec62586b0fv8"]
 
 [ext_resource type="PackedScene" uid="uid://3ys7ovhhdcpy" path="res://game/scenes/roadside_scene/roadside_base.blend" id="1_1n34r"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://assets/textures/concrete/concrete.tres" id="2_pp1lq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://baaqhbucv8aq5" path="res://assets/textures/concrete/concrete_n.png" id="4_603ap"]
 [ext_resource type="Script" uid="uid://bdld7akvf6dpq" path="res://game/scenes/roadside_scene/camera_pivot.gd" id="4_hj0el"]
 [ext_resource type="PackedScene" uid="uid://dncfkbcj6hlre" path="res://game/game_world/environments/night_environment.tscn" id="5_m6wk7"]
+[ext_resource type="PackedScene" uid="uid://dnbjtbi3467qy" path="res://game/game_world/structures/megalith/wall1.blend" id="8_xeio8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4b31r"]
 resource_name = "street"
@@ -33,3 +34,9 @@ script = ExtResource("4_hj0el")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="3"]
 transform = Transform3D(0.0880424, -0.743727, 0.66266, 0, 0.665243, 0.746627, -0.996117, -0.0657348, 0.0585696, 0, 46.4468, 0)
 shadow_enabled = true
+
+[node name="wall1" parent="." index="4" instance=ExtResource("8_xeio8")]
+transform = Transform3D(21.789051, 0, 45.002632, 0, 49.999992, 0, -45.002632, 0, 21.789051, 278.96185, -288.7248, 672.9623)
+
+[node name="wall2" parent="." index="5" instance=ExtResource("8_xeio8")]
+transform = Transform3D(34.56998, 0, 36.123627, 0, 49.99999, 0, -36.123627, 0, 34.56998, 877.752, -288.7248, -189.75558)

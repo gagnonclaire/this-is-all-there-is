@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://yy5iqy1bu8hx"]
+
+[ext_resource type="Script" uid="uid://cb04587awatft" path="res://game/controllers/board_controller/board_controller.gd" id="1_wk66j"]
+[ext_resource type="PackedScene" uid="uid://bfrw3qq4lsmec" path="res://game/controllers/board_controller/board_controller_hud.tscn" id="2_wk66j"]
+
+[node name="BoardController" type="Node"]
+script = ExtResource("1_wk66j")
+
+[node name="BoardControllerHUD" parent="." instance=ExtResource("2_wk66j")]
+visible = false
+
+[node name="BoardControllerPosition" type="Node3D" parent="."]
+
+[node name="BoardControllerCamera" type="Camera3D" parent="BoardControllerPosition"]
+fov = 90.0

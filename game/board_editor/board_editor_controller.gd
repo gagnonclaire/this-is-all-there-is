@@ -1,13 +1,16 @@
 class_name BoardEditorController
 extends Node
 
-@onready var board_creator_camera: Camera3D = $BoardCreatorCamera
+@onready var board_editor_position: Node3D = $BoardEditorPosition
+@onready var board_editor_camera: Camera3D = $BoardEditorPosition/BoardEditorCamera
+
 var camera_speed = 10
 var camera_sensitivity = 0.0025
+var camera_rotation_clamp = PI / 2.25
 
 func _ready() -> void:
 	EventsManager.capture_mouse()
-	board_creator_camera.make_current()
+	board_editor_camera.make_current()
 
 func _process(delta: float) -> void:
 	if EventsManager.is_mouse_captured():
@@ -20,44 +23,30 @@ func _unhandled_input(event: InputEvent) -> void:
 		EventsManager.toggle_mouse()
 
 func move_camera(delta: float) -> void:
+	var height_adjustment = 0
 	var input_direction = Input.get_vector(
 		Keybinds.LEFT,
 		Keybinds.RIGHT,
 		Keybinds.FORWARD,
 		Keybinds.BACKWARD,
 	).normalized()
-	var move_direction = Vector3(input_direction.x, 0, input_direction.y)
+
+	if Input.is_action_pressed(Keybinds.FLYING_CONTROLLER_UP):
+		height_adjustment += 1
+	if Input.is_action_pressed(Keybinds.FLYING_CONTROLLER_DOWN):
+		height_adjustment -= 1
+
+	var move_direction = Vector3(input_direction.x, height_adjustment, input_direction.y)
 
 	if move_direction:
-		board_creator_camera.translate_object_local(move_direction * delta * camera_speed)
+		board_editor_position.translate_object_local(move_direction * delta * camera_speed)
 
 func rotate_camera(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		board_creator_camera.global_rotate(
-			Vector3i(0, 1, 0),
-			-event.relative.x * camera_sensitivity,
+		board_editor_position.rotate_y(-event.relative.x *.0025)
+		board_editor_camera.rotate_x(-event.relative.y *.0025)
+		board_editor_camera.rotation.x = clamp(
+			board_editor_camera.rotation.x,
+			-camera_rotation_clamp,
+			camera_rotation_clamp
 		)
-		board_creator_camera.rotate_object_local(
-			Vector3i(1, 0, 0),
-			-event.relative.y * camera_sensitivity,
-		)
-		clamp_camera_rotation()
-
-func normalized_camera_direction() -> Vector3:
-	var camera_basis = board_creator_camera.transform.basis
-	var input_direction = Input.get_vector(
-		Keybinds.LEFT,
-		Keybinds.RIGHT,
-		Keybinds.FORWARD,
-		Keybinds.BACKWARD,
-	)
-	var input_direction_vector = Vector3(input_direction.x, 0, input_direction.y)
-
-	return (camera_basis * input_direction_vector).normalized()
-
-func clamp_camera_rotation() -> void:
-	board_creator_camera.rotation.x = clamp(
-		board_creator_camera.rotation.x,
-		-PI / 2.25,
-		PI / 2.25,
-	)
