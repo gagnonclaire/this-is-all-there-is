@@ -17,7 +17,7 @@ var _ghost: StaticBody3D
 ## 	Scroll to rotate
 ## 	Right click to cancel
 ## 	Left click to accept
-func _ready() -> void:
+func _ready():
 	add_to_group("move_target")
 	add_to_group("examine_target")
 
@@ -25,11 +25,11 @@ func _ready() -> void:
 	set_collision_layer_value(2, true)
 	set_collision_layer_value(3, true)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float):
 	if _is_moving and _ghost:
 		_ghost.global_position = _move_point
 
-func spawn_ghost() -> void:
+func spawn_ghost():
 	_ghost = StaticBody3D.new()
 	var ghost_mesh: MeshInstance3D = $MeshInstance3D.duplicate()
 	var ghost_mesh_material: StandardMaterial3D = StandardMaterial3D.new()
@@ -43,24 +43,24 @@ func spawn_ghost() -> void:
 	_ghost.add_child(ghost_mesh)
 	add_child(_ghost)
 
-func despawn_ghost() -> void:
+func despawn_ghost():
 	_ghost.queue_free()
 
-func set_moving(moving: bool) -> void:
+func set_moving(moving: bool):
 	_is_moving = moving
 
-func set_move_point(point: Vector3) -> void:
+func set_move_point(point: Vector3):
 	_move_point = point
 
 ## TODO
-func rotate_object(change: float) -> void:
+func rotate_object(change: float):
 	_ghost.rotate_y(change)
 
-func place_object() -> void:
+func place_object():
 	place_object_rpc.rpc_id(1, _move_point, _rotation)
 
 @rpc("any_peer", "call_local")
-func place_object_rpc(point: Vector3, new_rotation: float) -> void:
+func place_object_rpc(point: Vector3, new_rotation: float):
 	if is_multiplayer_authority():
 		_rotation = new_rotation
 		global_position = point

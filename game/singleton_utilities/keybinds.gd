@@ -56,16 +56,16 @@ const _DEFAULT_KEYBINDS: Dictionary = {
 
 var keybinds: Dictionary
 
-func _ready() -> void:
+func _ready():
 	_load_or_create_keybinds()
 
-func _load_or_create_keybinds() -> void:
+func _load_or_create_keybinds():
 	if FileAccess.file_exists(KEYBIND_CONFIG):
 		load_keybinds()
 	else:
 		_create_default_keybinds()
 
-func _create_default_keybinds() -> void:
+func _create_default_keybinds():
 	keybinds.clear()
 	if FileAccess.file_exists(KEYBIND_CONFIG):
 		var keybind_config: ConfigFile = ConfigFile.new()
@@ -94,11 +94,11 @@ func _event_from_key(key: int) -> InputEvent:
 
 	return null
 
-func _set_all_keybinds() -> void:
+func _set_all_keybinds():
 	for keybind in keybinds:
 		_set_keybind(keybind, keybinds[keybind])
 
-func _set_keybind(input_action: StringName, event_key: int) -> void:
+func _set_keybind(input_action: StringName, event_key: int):
 	if not InputMap.has_action(input_action):
 		InputMap.add_action(input_action)
 
@@ -127,14 +127,14 @@ func get_input_actions() -> Array[StringName]:
 
 	return game_actions
 
-func save_keybinds() -> void:
+func save_keybinds():
 	var keybind_config: ConfigFile = ConfigFile.new()
 	for keybind in keybinds:
 		keybind_config.set_value(keybind, "key", keybinds[keybind])
 
 	keybind_config.save(KEYBIND_CONFIG)
 
-func load_keybinds() -> void:
+func load_keybinds():
 	keybinds.clear()
 	var keybind_config: ConfigFile = ConfigFile.new()
 	var load_error = keybind_config.load(KEYBIND_CONFIG)
@@ -147,7 +147,7 @@ func load_keybinds() -> void:
 
 	_set_all_keybinds()
 
-func update_action(input_action: StringName, event: InputEvent) -> void:
+func update_action(input_action: StringName, event: InputEvent):
 	var event_key: int
 	if event is InputEventKey:
 		event_key = event.physical_keycode
@@ -158,9 +158,9 @@ func update_action(input_action: StringName, event: InputEvent) -> void:
 		keybinds[input_action] = event_key
 		_set_keybind(input_action, event_key)
 
-func reset_all_keybinds() -> void:
+func reset_all_keybinds():
 	_create_default_keybinds()
 
-func reset_keybind(action: StringName) -> void:
+func reset_keybind(action: StringName):
 	var default_action_key: int = _DEFAULT_KEYBINDS[action]
 	update_action(action, _event_from_key(default_action_key))

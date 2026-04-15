@@ -4,10 +4,10 @@ const GAME_DIRECTORY: String = "user://games/"
 const GAME_FILE_EXTENSION: String = ".tres"
 const PERSIST_DATA_GROUP: String = "persist_data"
 
-func _ready() -> void:
+func _ready():
 	_init_games_directory()
 
-func _init_games_directory() -> void:
+func _init_games_directory():
 	var user_data: DirAccess = DirAccess.open("user://")
 	if not user_data.dir_exists("games"):
 		user_data.make_dir("games")
@@ -28,7 +28,7 @@ func game_name_available(game_name: String) -> bool:
 func full_game_path(game_name) -> String:
 	return GAME_DIRECTORY + game_name + GAME_FILE_EXTENSION
 
-func save_game(game_name: String) -> void:
+func save_game(game_name: String):
 	var saved_game := SavedGame.new()
 	saved_game.save_version = 1
 
@@ -38,7 +38,7 @@ func save_game(game_name: String) -> void:
 
 	ResourceSaver.save(saved_game, GAME_DIRECTORY + game_name + GAME_FILE_EXTENSION)
 
-func load_game(game_name: String, parent_node: Node) -> void:
+func load_game(game_name: String, parent_node: Node):
 	if game_name_available(game_name):
 		return
 
@@ -60,7 +60,7 @@ func load_game(game_name: String, parent_node: Node) -> void:
 		if restored_node.has_method("on_load_game"):
 			restored_node.on_load_game(item)
 
-func delete_game(game_name: String) -> void:
+func delete_game(game_name: String):
 	if not game_name_available(game_name):
 		var user_data: DirAccess = DirAccess.open("user://")
 		user_data.remove(GAME_DIRECTORY + game_name + GAME_FILE_EXTENSION)

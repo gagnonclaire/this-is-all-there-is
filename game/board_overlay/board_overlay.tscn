@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://0gwji15ps27y"]
+[gd_scene load_steps=11 format=3 uid="uid://0gwji15ps27y"]
 
 [ext_resource type="Script" uid="uid://cj7scti677g5b" path="res://game/board_overlay/board_overlay.gd" id="1_gcjhx"]
+[ext_resource type="PackedScene" uid="uid://yy5iqy1bu8hx" path="res://game/controllers/board_controller/board_controller.tscn" id="2_kax4n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5xsd"]
 transparency = 1
@@ -42,6 +43,8 @@ item/0/navigation_layers = 1
 [node name="BoardOverlay" type="Node3D"]
 script = ExtResource("1_gcjhx")
 
+[node name="BoardController" parent="." instance=ExtResource("2_kax4n")]
+
 [node name="OverlayGridMap" type="GridMap" parent="."]
 mesh_library = SubResource("MeshLibrary_8o2ih")
 physics_material = SubResource("PhysicsMaterial_l5xsd")
@@ -55,3 +58,5 @@ mesh_library = SubResource("MeshLibrary_4ichq")
 cell_size = Vector3(1, 1, 1)
 collision_layer = 0
 collision_mask = 0
+
+[connection signal="add_character" from="BoardController" to="." method="_on_board_controller_add_character"]

@@ -15,7 +15,7 @@ var tiles: Dictionary = {} # Vector3i keyed tile dictionary
 
 var _board_render_size: int = 25
 
-func _ready() -> void:
+func _ready():
 	render_board_grid(current_height)
 
 	if board_already_exists():
@@ -24,7 +24,7 @@ func _ready() -> void:
 	var controller: Node = BOARD_CREATOR_CONTROLLER.instantiate()
 	add_child(controller)
 
-func _input(event) -> void:
+func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var camera = get_viewport().get_camera_3d()
 		var mouse_pos = get_viewport().get_mouse_position()
@@ -47,7 +47,7 @@ func _input(event) -> void:
 					selection_grid_map.clear()
 					selection_grid_map.set_cell_item(cell_pos, 0)
 
-func _unhandled_input(_event) -> void:
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed(Keybinds.MENU):
 		SceneChange.switch_to_main_menu()
 
@@ -59,7 +59,7 @@ func _unhandled_input(_event) -> void:
 		current_height += 1
 		render_board_grid(current_height)
 
-func render_board_grid(height: int) -> void:
+func render_board_grid(height: int):
 	grid_map.clear()
 	selection_grid_map.clear()
 
@@ -79,7 +79,7 @@ func clear_board():
 		tiles[position].free()
 	tiles.clear()
 
-func create() -> void:
+func create():
 	if not tiles.has(current_position):
 		var tile: Tile = TILE_PREFAB.instantiate()
 		tile.load(current_position)

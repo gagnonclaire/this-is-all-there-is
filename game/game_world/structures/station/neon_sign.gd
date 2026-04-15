@@ -19,7 +19,7 @@ extends Node3D
 @export var minimum_brightness: float = 2.0
 @export	var energy: float = 2.0
 
-func _ready() -> void:
+func _ready():
 	color_picker.color = glow_color
 	sign_texture.emission = glow_color
 	neon_sign_mesh.set_surface_override_material(0, sign_texture)
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 	neon_sign_editor.hide()
 
-func _process(_delta) -> void:
+func _process(_delta):
 	var glow_factor = Time.get_ticks_msec() / (glow * 100.0)
 	var energy_flicker = flicker * (randf() - 0.5)
 	var energy_offset = minimum_brightness + energy_flicker
@@ -38,19 +38,19 @@ func _process(_delta) -> void:
 
 	sign_texture.emission_energy_multiplier = current_energy
 
-func _on_glow_value_changed(value) -> void:
+func _on_glow_value_changed(value):
 	glow = value
 
-func _on_flicker_value_changed(value) -> void:
+func _on_flicker_value_changed(value):
 	flicker = value
 
-func _on_minimum_brightness_value_changed(value) -> void:
+func _on_minimum_brightness_value_changed(value):
 	minimum_brightness = value
 
-func _on_energy_value_changed(value) -> void:
+func _on_energy_value_changed(value):
 	energy = value
 
-func _on_color_picker_color_changed(color) -> void:
+func _on_color_picker_color_changed(color):
 	sign_texture.emission = color
 
 func _on_exit_button_button_up():
@@ -58,6 +58,6 @@ func _on_exit_button_button_up():
 	neon_sign_editor.hide()
 	#update values to multiplayer peers
 
-func show_editor() -> void:
+func show_editor():
 	EventsManager.free_mouse()
 	neon_sign_editor.show()

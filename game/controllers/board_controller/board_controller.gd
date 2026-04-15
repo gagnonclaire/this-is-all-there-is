@@ -1,6 +1,8 @@
 class_name BoardController
 extends Node
 
+signal add_character()
+
 @onready var board_controller_hud: CanvasLayer = $BoardControllerHUD
 @onready var board_controller_position: Node3D = $BoardControllerPosition
 @onready var board_controller_camera: Camera3D = $BoardControllerPosition/BoardControllerCamera
@@ -10,32 +12,21 @@ var camera_speed: float = 10
 var camera_sensitivity: float = 0.0025
 var camera_rotation_clamp: float = PI / 2.25
 
-func _process(delta: float) -> void:
+func _process(delta: float):
 	if not active:
 		return
 
 	if EventsManager.is_mouse_captured():
 		move_camera(delta)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent):
 	if not active:
 		return
 
 	if event is InputEventMouseMotion and EventsManager.is_mouse_captured():
 		rotate_camera(event)
-	if Input.is_action_just_pressed(Keybinds.TOGGLE_MOUSE_CAPTURE):
-		EventsManager.toggle_mouse()
 
-func make_active() -> void:
-	active = true
-	board_controller_hud.show()
-	board_controller_camera.make_current()
-
-func make_inactive() -> void:
-	active = false
-	board_controller_hud.hide()
-
-func move_camera(delta: float) -> void:
+func move_camera(delta: float):
 	if not active:
 		return
 
@@ -57,7 +48,7 @@ func move_camera(delta: float) -> void:
 	if move_direction:
 		board_controller_position.translate_object_local(move_direction * delta * camera_speed)
 
-func rotate_camera(event: InputEvent) -> void:
+func rotate_camera(event: InputEvent):
 	if not active:
 		return
 
@@ -69,3 +60,6 @@ func rotate_camera(event: InputEvent) -> void:
 			-camera_rotation_clamp,
 			camera_rotation_clamp
 		)
+
+func _on_board_controller_hud_add_character():
+	emit_signal("add_character")

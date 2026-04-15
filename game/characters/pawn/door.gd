@@ -14,7 +14,7 @@ var _moving_towards: Vector3
 var _pointing_towards: Transform3D
 var _rotation_transform: Transform3D = Transform3D()
 
-func _ready() -> void:
+func _ready():
 	add_to_group("grab_target")
 	add_to_group("examine_target")
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 	set_collision_mask_value(1, true)
 	set_collision_mask_value(3, true)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float):
 	if is_multiplayer_authority() and _is_grabbed and !is_freeze_enabled():
 		var distance: float = global_position.distance_to(_moving_towards)
 		var direction: Vector3 = global_position.direction_to(_moving_towards)
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		remove_from_group("interact_target")
 
-func _set_locked(locked: bool) -> void:
+func _set_locked(locked: bool):
 	if is_multiplayer_authority():
 		if locked:
 			examine_text = "A Locked Door"
@@ -54,7 +54,7 @@ func _set_locked(locked: bool) -> void:
 			add_to_group("grab_target")
 
 @rpc("any_peer", "call_local")
-func set_grabbed(grabbed: bool) -> void:
+func set_grabbed(grabbed: bool):
 	if is_multiplayer_authority():
 		_is_grabbed = grabbed
 		can_sleep = !grabbed
@@ -68,17 +68,17 @@ func set_grabbed(grabbed: bool) -> void:
 			set_angular_damp(1)
 
 @rpc("any_peer", "call_local")
-func set_move_point(point: Vector3) -> void:
+func set_move_point(point: Vector3):
 	if is_multiplayer_authority():
 		_moving_towards = point
 
 @rpc("any_peer", "call_local")
-func set_point_direction(pointing_transform: Transform3D) -> void:
+func set_point_direction(pointing_transform: Transform3D):
 	if is_multiplayer_authority():
 		_pointing_towards = pointing_transform
 
 @rpc("any_peer", "call_local")
-func rotate_object(torque: Vector3) -> void:
+func rotate_object(torque: Vector3):
 	if is_multiplayer_authority():
 		set_angular_damp(10 / size_mod)
 		apply_torque(torque * size_mod)

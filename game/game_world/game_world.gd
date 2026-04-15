@@ -2,7 +2,6 @@ class_name GameWorld
 extends Node
 
 @onready var board_overlay: BoardOverlay = $BoardOverlay
-@onready var board_controller: BoardController = $BoardController
 
 const _PLAYER_CONTROLLER: PackedScene = preload("res://game/characters/3_controllers/player_controller/player_controller.tscn")
 
@@ -12,7 +11,7 @@ var game_name: String
 var main_player
 
 #TODO This should mostly be handled in the multiplayer manager
-func _ready() -> void:
+func _ready():
 	if not GameSaveLoad.game_name_available(game_name):
 		GameSaveLoad.load_game(game_name, self)
 
@@ -26,10 +25,10 @@ func _ready() -> void:
 		#EventsManager.connect("credits_lost", _on_credits_lost)
 
 #TODO This should all be handled in the multiplayer manager
-func _exit_tree() -> void:
+func _exit_tree():
 	multiplayer.multiplayer_peer.close()
 
-func _unhandled_input(_event) -> void:
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed("menu"):
 		GameSaveLoad.save_game(game_name)
 		SceneChange.switch_to_main_menu()
@@ -38,22 +37,20 @@ func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed(Keybinds.TOGGLE_BOARD_OVERLAY):
 		toggle_board_mode()
 
-func toggle_board_mode() -> void:
-	if board_controller.active:
-		board_controller.make_inactive()
-		board_overlay.hide()
+func toggle_board_mode():
+	if board_overlay.active:
+		board_overlay.make_inactive()
 		main_player.current_frame.camera.make_current()
 	else:
-		board_controller.make_active()
-		board_overlay.show()
+		board_overlay.make_active()
 
-func _on_credits_gained(amount: int) -> void:
+func _on_credits_gained(amount: int):
 	credits += amount
 
-func _on_credits_lost(amount: int) -> void:
+func _on_credits_lost(amount: int):
 	credits -= amount
 
-func _add_player(peer_id) -> void:
+func _add_player(peer_id):
 	var player: Node = _PLAYER_CONTROLLER.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
@@ -61,7 +58,7 @@ func _add_player(peer_id) -> void:
 	if multiplayer.is_server():
 		main_player = player
 
-func _remove_player(peer_id) -> void:
+func _remove_player(peer_id):
 	var player: Node = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()

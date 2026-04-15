@@ -48,10 +48,10 @@ var held_moveable_object: MoveableObject = null
 
 #region Instantiation
 ##############################################################################
-func _ready() -> void:
+func _ready():
 	_instantiate_camera()
 
-func _instantiate_camera() -> void:
+func _instantiate_camera():
 	var camera_node: Node3D = CAMERA_SCENE.instantiate()
 	camera_pivot.add_child(camera_node)
 	camera = camera_node.camera
@@ -62,7 +62,7 @@ func _instantiate_camera() -> void:
 
 #region Movement controls
 ##############################################################################
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float):
 	if is_multiplayer_authority():
 		if not is_on_floor():
 			velocity.y -= gravity * delta
@@ -84,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 @rpc("authority", "call_local")
-func set_frame_movement(new_velocity: Vector3) -> void:
+func set_frame_movement(new_velocity: Vector3):
 	if is_multiplayer_authority():
 		velocity = new_velocity
 #endregion
@@ -94,7 +94,7 @@ func set_frame_movement(new_velocity: Vector3) -> void:
 func get_current_stamina_percent() -> float:
 	return current_stamina / maximum_stamina
 
-func _stamina_change(delta: float) -> void:
+func _stamina_change(delta: float):
 	var stamina_change = delta * stamina_gain_base
 	stamina_change += int(is_knocked_out) * (delta \
 		* stamina_gain_recovery)
@@ -104,7 +104,7 @@ func _stamina_change(delta: float) -> void:
 	current_stamina = clampf(current_stamina + stamina_change, \
 		0, maximum_stamina)
 
-func _knockout_check() -> void:
+func _knockout_check():
 	if current_stamina == 0 and not is_knocked_out:
 		start_ragdoll.rpc()
 		world_collider.set_disabled(true)
@@ -119,24 +119,24 @@ func _knockout_check() -> void:
 
 #region Speech controls
 ##############################################################################
-func _on_speech_clear_timer_timeout() -> void:
+func _on_speech_clear_timer_timeout():
 	speech_label.set_text("")
 
-func _on_speech_audio_loop_timer_timeout() -> void:
+func _on_speech_audio_loop_timer_timeout():
 	speech_audio_stream.play()
 
-func _on_speech_audio_loop_end_timer_timeout() -> void:
+func _on_speech_audio_loop_end_timer_timeout():
 	speech_audio_loop_timer.stop()
 
 @rpc("any_peer", "call_local")
-func set_speech_label(text: String, time: float = 3.0) -> void:
+func set_speech_label(text: String, time: float = 3.0):
 	speech_label.set_text(text)
 	speech_clear_timer.set_wait_time(time)
 	speech_clear_timer.start()
 	start_speech_audio(text.length() / 20.0)
 
 @rpc("any_peer", "call_local")
-func start_speech_audio(time: float) -> void:
+func start_speech_audio(time: float):
 	speech_audio_loop_timer.start()
 	speech_audio_loop_end_timer.set_wait_time(time)
 	speech_audio_loop_end_timer.start()
@@ -145,12 +145,12 @@ func start_speech_audio(time: float) -> void:
 #region Ragdoll controls
 ##############################################################################
 @rpc("any_peer", "call_local")
-func start_ragdoll() -> void:
+func start_ragdoll():
 	#TODO Bones collision on "physics" layer for simplicity?
 	skeleton.physical_bones_start_simulation()
 
 @rpc("any_peer", "call_local")
-func stop_ragdoll() -> void:
+func stop_ragdoll():
 	# Weird hack to reset bones
 	# When you start a simulation it seems that all bones reset
 	skeleton.physical_bones_stop_simulation()

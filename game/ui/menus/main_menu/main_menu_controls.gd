@@ -7,28 +7,28 @@ extends HBoxContainer
 @onready var board_editor_menu: PanelContainer = $SubMenuContainer/BoardEditorMenu
 @onready var settings_menu: PanelContainer = $SubMenuContainer/SettingsMenu
 
-func _ready() -> void:
+func _ready():
 	close_all_menus()
 
-func _on_start_game_button_pressed() -> void:
+func _on_start_game_button_pressed():
 	switch_to(start_game_menu)
 
-func _on_join_game_button_pressed() -> void:
+func _on_join_game_button_pressed():
 	switch_to(join_game_menu)
 
 func _on_board_editor_button_pressed():
 	switch_to(board_editor_menu)
 
-func _on_settings_button_pressed() -> void:
+func _on_settings_button_pressed():
 	switch_to(settings_menu)
 
-func _on_exit_button_pressed() -> void:
+func _on_exit_button_pressed():
 	get_tree().quit()
 
-func switch_to(item: PanelContainer) -> void:
+func switch_to(item: PanelContainer):
 	close_all_menus()
 	item.show()
 
-func close_all_menus() -> void:
+func close_all_menus():
 	for menu in sub_menu_container.get_children():
 		menu.hide()

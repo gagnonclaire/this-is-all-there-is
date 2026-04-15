@@ -7,9 +7,10 @@
 script = ExtResource("1_wk66j")
 
 [node name="BoardControllerHUD" parent="." instance=ExtResource("2_wk66j")]
-visible = false
 
 [node name="BoardControllerPosition" type="Node3D" parent="."]
 
 [node name="BoardControllerCamera" type="Camera3D" parent="BoardControllerPosition"]
 fov = 90.0
+
+[connection signal="add_character" from="BoardControllerHUD" to="." method="_on_board_controller_hud_add_character"]

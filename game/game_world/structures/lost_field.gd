@@ -2,13 +2,13 @@ extends Node3D
 
 const _LOST_CONTROLLER: PackedScene = preload("res://game/characters/3_controllers/human_npc_controllers/lost_controller.tscn")
 
-func _on_lost_spawn_timer_timeout() -> void:
+func _on_lost_spawn_timer_timeout():
 	if is_multiplayer_authority():
 		#lost_npc_spawn.rpc()
 		lost_npc_spawn()
 
 #@rpc("any_peer", "call_local")
-func lost_npc_spawn() -> void:
+func lost_npc_spawn():
 	var random_position: Vector3 = Vector3(randf_range(-25,25), 0, randf_range(-25,25))
 	var random_rotation: Vector3 = Vector3(0, randf_range(-2,2), 0)
 

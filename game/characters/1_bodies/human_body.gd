@@ -49,7 +49,7 @@ var right_hand_node: Node3D = null
 var left_foot_node: Node3D = null
 var right_foot_node: Node3D = null
 
-func _ready() -> void:
+func _ready():
 	if is_multiplayer_authority():
 		torso_type = randi_range(0, TORSO_ARRAY.size() - 1)
 		head_type = randi_range(0, HEAD_ARRAY.size() - 1)
@@ -67,7 +67,7 @@ func _on_body_update_timer_timeout():
 	update_body()
 
 #TODO Rewrite this so its not just a bunch of duplicate code
-func update_body() -> void:
+func update_body():
 	if not torso_node:
 		# Head
 		head_mesh_node = HEAD_ARRAY[head_type].instantiate()

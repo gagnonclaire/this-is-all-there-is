@@ -9,18 +9,18 @@ extends CanvasLayer
 @onready var _interact_context_indicator: Label = $Control/ContextIndicators/InteractContext
 @onready var _sever_context_indicator: Label = $Control/ContextIndicators/SeverContext
 
-func _input(_event: InputEvent) -> void:
+func _input(_event: InputEvent):
 	if is_multiplayer_authority() \
 	and is_text_chat_open():
 		if Input.is_action_just_pressed("talk_entry"):
 			_text_chat_entry.release_focus()
 
 #region Text chat controllers
-func open_text_chat() -> void:
+func open_text_chat():
 	_text_chat_entry.show()
 	_text_chat_entry.grab_focus()
 
-func close_text_chat() -> void:
+func close_text_chat():
 	_text_chat_entry.hide()
 	_text_chat_entry.clear()
 	_text_chat_entry.release_focus()
@@ -31,38 +31,38 @@ func is_text_chat_open() -> bool:
 func get_text_entered() -> String:
 	return _text_chat_entry.text
 
-func _on_clear_timer_timeout() -> void:
+func _on_clear_timer_timeout():
 	if is_multiplayer_authority():
 		_important_notice.set_text("")
 #endregion
 
 #region Hud text information
-func show_safe_indicator(show_indicator: bool = true) -> void:
+func show_safe_indicator(show_indicator: bool = true):
 	_safe_indicator.set_visible(show_indicator)
 
-func notify_important(message: String) -> void:
+func notify_important(message: String):
 	if is_multiplayer_authority():
 		_important_notice.set_text(message)
 #endregion
 
 #region Context indicators
-func show_examine_context_indicator(examine_text: String) -> void:
+func show_examine_context_indicator(examine_text: String):
 	if is_multiplayer_authority():
 		_examine_context_indicator.set_text(examine_text)
 
-func show_interact_context_indicator(show_indicator: bool = true) -> void:
+func show_interact_context_indicator(show_indicator: bool = true):
 	if is_multiplayer_authority():
 		_interact_context_indicator.set_visible(show_indicator)
 
-func show_sever_context_indicator(show_indicator: bool = true) -> void:
+func show_sever_context_indicator(show_indicator: bool = true):
 	if is_multiplayer_authority():
 		_sever_context_indicator.set_visible(show_indicator)
 #endregion
 
 #region Vignette modulation controls
-func modulate_stamina_vignette(transparency: float) -> void:
+func modulate_stamina_vignette(transparency: float):
 	_stamina_vignette.set_modulate(Color(1.0, 1.0, 1.0, (transparency)))
 
-func modulate_awaken_vignette(transparency: float) -> void:
+func modulate_awaken_vignette(transparency: float):
 	_awaken_vignette.set_modulate(Color(1.0, 1.0, 1.0, (transparency)))
 #endregion

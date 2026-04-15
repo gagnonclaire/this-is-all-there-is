@@ -6,11 +6,11 @@ const BOARD_EDITOR: PackedScene = preload("res://game/board_editor/board_editor.
 
 @onready var _main_node: Node = get_node("/root/Main")
 
-func switch_to_main_menu() -> void:
+func switch_to_main_menu():
 	_unload_main_children()
 	_main_node.add_child(MAIN_MENU.instantiate())
 
-func switch_to_start_game_world(game_name: String, host: bool) -> void:
+func switch_to_start_game_world(game_name: String, host: bool):
 	_unload_main_children()
 
 	if host:
@@ -20,19 +20,19 @@ func switch_to_start_game_world(game_name: String, host: bool) -> void:
 	game_world.game_name = game_name
 	_main_node.add_child(game_world)
 
-func switch_to_join_game_world(address: String) -> void:
+func switch_to_join_game_world(address: String):
 	_unload_main_children()
 
 	MultiplayerManager.start_client(address)
 	_main_node.add_child(GAME_WORLD.instantiate())
 
-func switch_to_board_creator(board_name) -> void:
+func switch_to_board_creator(board_name):
 	_unload_main_children()
 
 	var board_editor: BoardEditor = BOARD_EDITOR.instantiate()
 	board_editor.board_name = board_name
 	_main_node.add_child(BOARD_EDITOR.instantiate())
 
-func _unload_main_children() -> void:
+func _unload_main_children():
 	for child in _main_node.get_children():
 		child.queue_free()

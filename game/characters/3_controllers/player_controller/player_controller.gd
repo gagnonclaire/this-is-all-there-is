@@ -23,11 +23,11 @@ var current_hold_point: Node3D
 
 #region Controller and default Frame setup
 ##############################################################################
-func _enter_tree() -> void:
+func _enter_tree():
 	# Called before any children _enter_tree calls
 	set_multiplayer_authority(str(name).to_int())
 
-func _ready() -> void:
+func _ready():
 	current_frame = primary_frame
 	current_frame.examine_text = character_name
 	current_hold_point = current_frame.hold_point
@@ -48,18 +48,18 @@ func _ready() -> void:
 
 #TODO add scroll wheel control to move hold point
 
-func _process(delta: float) -> void:
+func _process(delta: float):
 	if is_multiplayer_authority():
 		_process_context_indicators()
 		_process_awaken(delta)
 		_process_rest(delta)
 		_process_stamina()
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float):
 	if is_multiplayer_authority():
 		_process_movement()
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent):
 	if is_multiplayer_authority():
 		_process_text_chat()
 		_process_babble()
@@ -70,7 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_process_camera_control(event)
 #endregion
 
-func _process_grab_object(event: InputEvent) -> void:
+func _process_grab_object(event: InputEvent):
 	if event.is_action_pressed(Keybinds.GRAB) \
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("grab_target") \
@@ -87,7 +87,7 @@ func _process_grab_object(event: InputEvent) -> void:
 		current_frame.held_object.set_move_point.rpc_id(1, current_hold_point.global_position)
 		current_frame.held_object.set_point_direction.rpc_id(1, current_hold_point.global_transform)
 
-func _process_move_object(_event: InputEvent) -> void:
+func _process_move_object(_event: InputEvent):
 	if Input.is_action_just_pressed(Keybinds.INTERACT) \
 	and current_frame.interact_raycast.is_colliding() \
 	and current_frame.interact_raycast.get_collider().is_in_group("move_target") \
@@ -107,7 +107,7 @@ func _process_move_object(_event: InputEvent) -> void:
 
 #region Process loop processors
 ##############################################################################
-func _process_movement() -> void:
+func _process_movement():
 	if not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open():
 		var sprint_mod: float = max(1.0, \
@@ -133,7 +133,7 @@ func _process_movement() -> void:
 			if current_frame.held_moveable_object:
 				current_frame.held_moveable_object.set_move_point(current_hold_point.global_position)
 
-func _process_awaken(delta: float) -> void:
+func _process_awaken(delta: float):
 	if Input.is_action_pressed(Keybinds.AWAKEN) \
 	and _can_awaken():
 		awaken_progress = clampf(awaken_progress + (delta * 50.0), 0, 100.0)
@@ -147,7 +147,7 @@ func _process_awaken(delta: float) -> void:
 
 #TODO Need to pull fade functionality somewhere and make it callable
 #TODO by rest and awaken as needed
-func _process_rest(delta: float) -> void:
+func _process_rest(delta: float):
 	if Input.is_action_pressed(Keybinds.REST) \
 	and current_frame == primary_frame \
 	and is_in_safe_volume \
@@ -163,14 +163,14 @@ func _process_rest(delta: float) -> void:
 		current_home_rotation = current_frame.get_global_rotation()
 		_awaken()
 
-func _process_stamina() -> void:
+func _process_stamina():
 	hud.modulate_stamina_vignette(1.0 \
 		- current_frame.get_current_stamina_percent())
 #endregion
 
 #region Text chat
 ##############################################################################
-func _process_text_chat() -> void:
+func _process_text_chat():
 	if Input.is_action_just_pressed(Keybinds.TALK) \
 	and not hud.is_text_chat_open():
 		hud.open_text_chat()
@@ -185,7 +185,7 @@ func _process_text_chat() -> void:
 
 #region Other processes
 ##############################################################################
-func _process_camera_control(event: InputEvent) -> void:
+func _process_camera_control(event: InputEvent):
 	if event is InputEventMouseMotion \
 	and not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open() \
@@ -207,7 +207,7 @@ func _process_camera_control(event: InputEvent) -> void:
 				var rotation_basis: Basis = Basis(x_view, y_view, z_view)
 				current_frame.held_object.rotate_object.rpc_id(1, rotation_basis * torque)
 
-func _process_interact() -> void:
+func _process_interact():
 	if not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open():
 		if Input.is_action_just_pressed(Keybinds.INTERACT) \
@@ -216,7 +216,7 @@ func _process_interact() -> void:
 		is_in_group("interact_target"):
 			current_frame.interact_raycast.get_collider().interacted_with.rpc()
 
-func _process_sever() -> void:
+func _process_sever():
 	if not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open():
 		if Input.is_action_just_pressed(Keybinds.SEVER) \
@@ -225,7 +225,7 @@ func _process_sever() -> void:
 		is_in_group("sever_target"):
 			sever_to(current_frame.sever_raycast.get_collider())
 
-func _process_babble() -> void:
+func _process_babble():
 	if not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open():
 		if Input.is_action_just_pressed(Keybinds.BABBLE):
@@ -237,7 +237,7 @@ func _process_babble() -> void:
 func _can_awaken() -> bool:
 	return not (awaken_on_cooldown or hud.is_text_chat_open())
 
-func _awaken() -> void:
+func _awaken():
 	current_frame.camera.current = false
 	current_frame = primary_frame
 	current_frame.camera.current = true
@@ -248,15 +248,15 @@ func _awaken() -> void:
 	awaken_on_cooldown = true
 	awaken_cooldown_timer.start()
 
-func _on_awaken_cooldown_timeout() -> void:
+func _on_awaken_cooldown_timeout():
 	awaken_on_cooldown = false
 
-func _on_safe_volume_entered(body: Node3D) -> void:
+func _on_safe_volume_entered(body: Node3D):
 	if body.get_parent().name.to_int() == get_multiplayer_authority():
 		is_in_safe_volume = true
 		hud.show_safe_indicator(true)
 
-func _on_safe_volume_exited(body: Node3D) -> void:
+func _on_safe_volume_exited(body: Node3D):
 	if body.get_parent().name.to_int() == get_multiplayer_authority():
 		is_in_safe_volume = false
 		hud.show_safe_indicator(false)
@@ -264,7 +264,7 @@ func _on_safe_volume_exited(body: Node3D) -> void:
 
 #region Sever mechanics
 ##############################################################################
-func sever_to(target_frame: CharacterBody3D) -> void:
+func sever_to(target_frame: CharacterBody3D):
 	current_frame.camera.current = false
 	current_frame = target_frame
 	current_frame.camera.current = true
@@ -275,7 +275,7 @@ func sever_to(target_frame: CharacterBody3D) -> void:
 #region Dynamic Context Indicators
 ##############################################################################
 #TODO Move each check and action into its own function
-func _process_context_indicators() -> void:
+func _process_context_indicators():
 	if can_check_context_indicators():
 		if current_frame.interact_raycast.is_colliding() \
 		and current_frame.interact_raycast.get_collider().is_in_group("interact_target"):
@@ -302,7 +302,7 @@ func can_check_context_indicators() -> bool:
 	and not hud.is_text_chat_open()
 #endregion
 
-func interacted_with(caller_id: String) -> void:
+func interacted_with(caller_id: String):
 	if is_multiplayer_authority():
 		var caller_name: String = get_node("../" + caller_id).character_name
 		hud.notify_important(caller_name + " is trying to get your attention")

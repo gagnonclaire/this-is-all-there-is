@@ -5,10 +5,10 @@ extends HBoxContainer
 
 var game_name: String
 
-func _ready() -> void:
+func _ready():
 	game_name_label.text = game_name
 
-func _on_load_game_button_pressed() -> void:
+func _on_load_game_button_pressed():
 	SceneChange.switch_to_start_game_world(game_name, false)
 
 func _on_load_host_game_button_pressed():

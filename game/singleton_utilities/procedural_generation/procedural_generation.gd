@@ -7,7 +7,7 @@ var human_names: Array[String]
 var human_lines: Array[String]
 
 #region Source File Read On Startup
-func _ready() -> void:
+func _ready():
 	human_names = load_array_from_text(HUMAN_NAMES_PATH)
 	human_lines = load_array_from_text(HUMAN_LINES_PATH)
 

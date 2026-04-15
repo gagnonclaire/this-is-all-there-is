@@ -11,7 +11,7 @@ extends Node
 #TODO Use navmesh stuff here
 var current_destination: Vector3
 
-func _ready() -> void:
+func _ready():
 	if is_multiplayer_authority():
 		character_name = ProceduralGeneration.get_human_name()
 		frame.examine_text = character_name
@@ -19,7 +19,7 @@ func _ready() -> void:
 
 #TODO Use a navmesh for wander
 #TODO This should hook into frame controls rather than hijacking them
-func _physics_process(delta) -> void:
+func _physics_process(delta):
 	if is_multiplayer_authority():
 		var direction: Vector3 = frame.global_position.direction_to(current_destination)
 		var new_velocity: Vector3 = frame.velocity
@@ -34,16 +34,16 @@ func _physics_process(delta) -> void:
 
 		frame.set_frame_movement(new_velocity)
 
-func _on_destination_update_timer_timeout() -> void:
+func _on_destination_update_timer_timeout():
 	if is_multiplayer_authority():
 		current_destination += Vector3(randf_range(-2.5, 2.5), 0, randf_range(-2.5, 2.5))
 
 @rpc("any_peer", "call_local")
-func interacted_with(_caller_id) -> void:
+func interacted_with(_caller_id):
 	frame.set_speech_label(character_lines[current_line])
 
 	if is_multiplayer_authority():
 		current_line = (current_line + 1) % character_lines.size()
 
-func _on_name_update_timer_timeout() -> void:
+func _on_name_update_timer_timeout():
 	frame.examine_text = character_name

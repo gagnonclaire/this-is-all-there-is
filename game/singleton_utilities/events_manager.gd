@@ -8,13 +8,13 @@ extends Node
 
 const WORLD_PATH: String = "/root/Main/MainWorld/"
 
-func capture_mouse() -> void:
+func capture_mouse():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func free_mouse() -> void:
+func free_mouse():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func toggle_mouse() -> void:
+func toggle_mouse():
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		free_mouse()
 	else:

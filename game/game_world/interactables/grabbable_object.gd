@@ -13,7 +13,7 @@ var _moving_towards: Vector3
 var _pointing_towards: Transform3D
 var _rotation_transform: Transform3D = Transform3D()
 
-func _ready() -> void:
+func _ready():
 	add_to_group(GameSaveLoad.PERSIST_DATA_GROUP)
 	add_to_group("grab_target")
 	add_to_group("examine_target")
@@ -30,13 +30,13 @@ func _ready() -> void:
 	body_entered.connect(_body_entered)
 	body_exited.connect(_body_exited)
 
-func _body_entered(_body) -> void:
+func _body_entered(_body):
 	_is_colliding = true
 
-func _body_exited(_body) -> void:
+func _body_exited(_body):
 	_is_colliding = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float):
 	if is_multiplayer_authority() and _is_grabbed:
 		var distance: float = global_position.distance_to(_moving_towards)
 		var direction: Vector3 = global_position.direction_to(_moving_towards)
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 			var target_basis: Basis = (_pointing_towards * _rotation_transform).basis
 			global_basis = global_basis.slerp(target_basis, 0.1)
 
-func on_save_game(saved_data: Array) -> void:
+func on_save_game(saved_data: Array):
 	var data_to_save = SavedObjectData.new()
 	data_to_save.scene_path = scene_file_path
 	data_to_save.global_position = global_position
@@ -59,12 +59,12 @@ func on_before_load_game():
 	get_parent().remove_child(self)
 	queue_free()
 
-func on_load_game(saved_data: SavedObjectData) -> void:
+func on_load_game(saved_data: SavedObjectData):
 	global_position = saved_data.global_position
 	global_rotation = saved_data.global_rotation
 
 @rpc("any_peer", "call_local")
-func set_grabbed(grabbed: bool) -> void:
+func set_grabbed(grabbed: bool):
 	if is_multiplayer_authority():
 		_is_grabbed = grabbed
 		can_sleep = not grabbed
@@ -78,17 +78,17 @@ func set_grabbed(grabbed: bool) -> void:
 			set_angular_damp(ProjectSettings.get_setting("physics/3d/default_angular_damp"))
 
 @rpc("any_peer", "call_local")
-func set_move_point(point: Vector3) -> void:
+func set_move_point(point: Vector3):
 	if is_multiplayer_authority():
 		_moving_towards = point
 
 @rpc("any_peer", "call_local")
-func set_point_direction(pointing_transform: Transform3D) -> void:
+func set_point_direction(pointing_transform: Transform3D):
 	if is_multiplayer_authority():
 		_pointing_towards = pointing_transform
 
 @rpc("any_peer", "call_local")
-func rotate_object(torque: Vector3) -> void:
+func rotate_object(torque: Vector3):
 	if is_multiplayer_authority():
 		set_angular_damp(10 / size_mod)
 		apply_torque(torque * size_mod)
