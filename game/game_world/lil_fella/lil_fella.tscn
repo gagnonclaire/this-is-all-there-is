@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://buhks4fcefyyp"]
+
+[ext_resource type="Script" uid="uid://fay1bg0tqby2" path="res://game/game_world/lil_fella/lil_fella.gd" id="1_32fdf"]
+[ext_resource type="PackedScene" uid="uid://d3rk1iqaw3ud8" path="res://game/characters/pawn/pawn.blend" id="2_32fdf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_32fdf"]
+margin = 1.0
+radius = 0.1
+height = 0.33
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_32fdf"]
+height = 0.01
+radius = 0.05
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_32fdf"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="LilFella" type="RigidBody3D"]
+lock_rotation = true
+script = ExtResource("1_32fdf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0)
+shape = SubResource("CapsuleShape3D_32fdf")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_32fdf")
+max_results = 1
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30196476, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_32fdf")
+
+[node name="pawn" parent="." instance=ExtResource("2_32fdf")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="UpdateTargetTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="UpdateTargetTimer" to="." method="_on_update_target_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://lsgwlj0xx1g0"]
+[gd_scene load_steps=19 format=3 uid="uid://lsgwlj0xx1g0"]
 
 [ext_resource type="Script" uid="uid://dvtaeqgn42g5o" path="res://game/game_world/game_world.gd" id="1_vn3ld"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://game/game_world/environments/night_environment.tres" id="2_pwq27"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://di4wv0xnyq3ht" path="res://game/game_world/interactables/box/box.tscn" id="11_4v50d"]
 [ext_resource type="PackedScene" uid="uid://6ss12auai5u" path="res://game/characters/pawn/ConcreteDoorway.tscn" id="12_cuqwb"]
 [ext_resource type="PackedScene" uid="uid://p8bxxdv84qnb" path="res://game/game_world/megastructure/wall_1.tscn" id="13_2bho7"]
+[ext_resource type="PackedScene" uid="uid://buhks4fcefyyp" path="res://game/game_world/lil_fella/lil_fella.tscn" id="15_ioamd"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7xoik"]
 properties/0/path = NodePath(".:credits")
@@ -102,3 +103,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 26, 
 
 [node name="Wall2" parent="BigWallPivot" instance=ExtResource("13_2bho7")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 61, 0, 56)
+
+[node name="LilFella" parent="." instance=ExtResource("15_ioamd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.445352, -0.11318493, -6.0276136)
