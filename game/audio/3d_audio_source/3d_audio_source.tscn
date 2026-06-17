@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://djnorel57ee4o"]
+
+[ext_resource type="Script" uid="uid://jxh0jnp1mo5r" path="res://game/audio/3d_audio_source/audio_source_3d.gd" id="1_1siy2"]
+
+[node name="AudioSource3D" type="Node3D"]
+script = ExtResource("1_1siy2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="TargetRayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30244628, 0)
+target_position = Vector3(0, 0, 0)

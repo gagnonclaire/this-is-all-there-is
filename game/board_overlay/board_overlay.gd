@@ -44,19 +44,21 @@ func _unhandled_input(event):
 		current_height += 1
 		render_board_grid(current_height)
 
-func make_active():
+# should make a base improved camera object that has the active and transition
+# calls built in
+func make_active(transition_from_position: Vector3, transition_from_rotation: Vector3):
 	active = true
-	board_controller.active = true
-	board_controller.board_controller_hud.show()
+	board_controller.transition_to_camera(transition_from_position, transition_from_rotation)
+	board_controller.show_hud()
+
 	grid_map.show()
 	selection_grid_map.show()
-	board_controller.board_controller_camera.make_current()
-
 
 func make_inactive():
 	active = false
-	board_controller.active = false
-	board_controller.board_controller_hud.hide()
+	board_controller.deactivate_camera()
+	board_controller.hide_hud()
+
 	grid_map.hide()
 	selection_grid_map.hide()
 

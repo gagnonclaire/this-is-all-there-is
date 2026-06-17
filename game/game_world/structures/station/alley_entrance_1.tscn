@@ -147,6 +147,16 @@ mesh = SubResource("BoxMesh_me0u1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stairwell/MeshInstance3D9/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_2byn7")
 
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Stairwell"]
+transform = Transform3D(2.1894613e-07, -9.715772e-09, 2.9509, -5.86771, 0.0770572, 0, -6.99287, -0.0646587, -1.2898793e-07, 0.22639143, -15.478076, -21.991472)
+mesh = SubResource("BoxMesh_me0u1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stairwell/MeshInstance3D10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stairwell/MeshInstance3D10/StaticBody3D"]
+transform = Transform3D(1, -4.65661e-10, 0, 7.62939e-06, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_2byn7")
+
 [node name="EntranceWall" type="Node3D" parent="."]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="EntranceWall"]
@@ -235,3 +245,13 @@ mesh = SubResource("BoxMesh_me0u1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceWall3/MeshInstance3D4/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_aypea")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.1894613e-07, -9.715772e-09, 2.9509, -5.86771, 0.0770572, 0, -6.99287, -0.0646587, -1.2898793e-07, 0.22639143, -21.340586, -28.97525)
+mesh = SubResource("BoxMesh_me0u1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D10/StaticBody3D"]
+transform = Transform3D(1, -4.65661e-10, 0, 7.62939e-06, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_2byn7")

@@ -8,6 +8,7 @@ const _PLAYER_CONTROLLER: PackedScene = preload("res://game/characters/3_control
 @export var credits: int
 
 var game_name: String
+var player_controller: Node
 var main_player
 
 #TODO This should mostly be handled in the multiplayer manager
@@ -42,7 +43,10 @@ func toggle_board_mode():
 		board_overlay.make_inactive()
 		main_player.current_frame.camera.make_current()
 	else:
-		board_overlay.make_active()
+		board_overlay.make_active(
+			player_controller.current_frame.camera.global_position,
+			player_controller.current_frame.camera.global_rotation
+		)
 
 func _on_credits_gained(amount: int):
 	credits += amount
@@ -54,6 +58,8 @@ func _add_player(peer_id):
 	var player: Node = _PLAYER_CONTROLLER.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
+
+	player_controller = player
 
 	if multiplayer.is_server():
 		main_player = player

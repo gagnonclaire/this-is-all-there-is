@@ -1,11 +1,11 @@
 class_name  LilFella
 extends RigidBody3D
 
-@onready var target_ray_cast: RayCast3D = $RayCast3D
-@onready var ground_cast: ShapeCast3D = $ShapeCast3D
+@onready var target_ray_cast: RayCast3D = $TargetRayCast3D
+@onready var ground_ray_cast: RayCast3D = $GroundRayCast3D
 
 @export var follow_distance: float = 300
-@export var stop_distance: float = 5
+@export var stop_distance: float = 25
 @export var speed: float = 1
 
 var follow_target: Node3D = null
@@ -21,12 +21,12 @@ func update_target():
 	var minimum_distance: float = follow_distance
 
 	for node: Node3D in can_be_followed_nodes:
-		var distance_to_node: float = global_position.distance_squared_to(node.global_position + Vector3(0, .2, 0))
+		var distance_to_node: float = global_position.distance_squared_to(node.global_position)
 
 		if distance_to_node > minimum_distance or distance_to_node > follow_distance:
 			continue
 
-		target_ray_cast.target_position = to_local(node.global_position)
+		target_ray_cast.target_position = to_local(node.global_position+ Vector3(0, 1, 0))
 		target_ray_cast.force_raycast_update()
 		var collider = target_ray_cast.get_collider()
 
@@ -44,13 +44,13 @@ func update_target():
 
 func move_towards_target(delta: float):
 	# needs to not add force if already moving upwards
-	if randi_range(1, 100) > 75 and ground_cast.is_colliding():
-		apply_force(Vector3(0, randi_range(50, 100), 0))
+	if randi_range(1, 100) > 75 and ground_ray_cast.is_colliding():
+		apply_force(Vector3(0, randi_range(50, 75), 0))
 
 	if global_position.distance_squared_to(follow_target.global_position) < stop_distance:
 		return
 
-	apply_force(-basis.z * speed * delta * 300)
+	apply_force(-basis.z * speed * delta * 200)
 
 
 func _on_update_target_timer_timeout():
