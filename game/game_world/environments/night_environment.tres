@@ -1,4 +1,4 @@
-[gd_resource type="Environment" load_steps=5 format=3 uid="uid://cv4hq6xsapkq5"]
+[gd_resource type="Environment" format=3 uid="uid://cv4hq6xsapkq5"]
 
 [ext_resource type="Texture2D" uid="uid://bklcxj0knl54b" path="res://assets/textures/sky/night_sky.png" id="1_17q8f"]
 

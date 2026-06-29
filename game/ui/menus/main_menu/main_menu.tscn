@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://2wm0f8ckxv6q"]
+[gd_scene format=3 uid="uid://2wm0f8ckxv6q"]
 
 [ext_resource type="Script" uid="uid://bk17sdospatkf" path="res://game/ui/menus/main_menu/main_menu.gd" id="1_xgfpv"]
 [ext_resource type="Theme" uid="uid://usdneyjl5qut" path="res://assets/fonts/title_theme.tres" id="2_bsl24"]
+[ext_resource type="PackedScene" uid="uid://ec62586b0fv8" path="res://game/scenes/roadside_scene/roadside.tscn" id="4_5naww"]
 [ext_resource type="PackedScene" uid="uid://be5j2bwpf1s1f" path="res://game/ui/menus/main_menu/main_menu_controls.tscn" id="4_n3xbt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a3s81"]
 font_size = 32
 
-[node name="MainMenu" type="CanvasLayer"]
+[node name="MainMenu" type="CanvasLayer" unique_id=1292053339]
 script = ExtResource("1_xgfpv")
 
-[node name="MainMenuMargin" type="MarginContainer" parent="."]
+[node name="MainMenuMargin" type="MarginContainer" parent="." unique_id=1806864486]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,14 +22,14 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="MainMenuContainer" type="VBoxContainer" parent="MainMenuMargin"]
+[node name="MainMenuContainer" type="VBoxContainer" parent="MainMenuMargin" unique_id=901150403]
 layout_mode = 2
 
-[node name="TitleMargin" type="MarginContainer" parent="MainMenuMargin/MainMenuContainer"]
+[node name="TitleMargin" type="MarginContainer" parent="MainMenuMargin/MainMenuContainer" unique_id=1089272565]
 layout_mode = 2
 theme_override_constants/margin_bottom = 25
 
-[node name="Title" type="Label" parent="MainMenuMargin/MainMenuContainer/TitleMargin"]
+[node name="Title" type="Label" parent="MainMenuMargin/MainMenuContainer/TitleMargin" unique_id=1771018653]
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("2_bsl24")
@@ -37,5 +38,10 @@ label_settings = SubResource("LabelSettings_a3s81")
 horizontal_alignment = 1
 justification_flags = 0
 
-[node name="MainMenuControls" parent="MainMenuMargin/MainMenuContainer" instance=ExtResource("4_n3xbt")]
+[node name="MainMenuControls" parent="MainMenuMargin/MainMenuContainer" unique_id=2040175986 instance=ExtResource("4_n3xbt")]
 layout_mode = 2
+
+[node name="roadside_base" parent="." unique_id=1069725144 instance=ExtResource("4_5naww")]
+
+[connection signal="host_game" from="MainMenuMargin/MainMenuContainer/MainMenuControls" to="." method="_on_main_menu_controls_host_game"]
+[connection signal="start_game" from="MainMenuMargin/MainMenuContainer/MainMenuControls" to="." method="_on_main_menu_controls_start_game"]

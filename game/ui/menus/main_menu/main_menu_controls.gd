@@ -1,6 +1,9 @@
 class_name MainMenuControls
 extends HBoxContainer
 
+signal start_game(game_name: String)
+signal host_game(game_name: String)
+
 @onready var sub_menu_container: MarginContainer = $SubMenuContainer
 @onready var start_game_menu: PanelContainer = $SubMenuContainer/StartGameMenu
 @onready var join_game_menu: PanelContainer = $SubMenuContainer/JoinGameMenu
@@ -12,6 +15,12 @@ func _ready():
 
 func _on_start_game_button_pressed():
 	switch_to(start_game_menu)
+
+func _on_start_game_menu_start_game(game_name):
+	host_game.emit(game_name)
+
+func _on_start_game_menu_host_game(game_name):
+	start_game.emit(game_name)
 
 func _on_join_game_button_pressed():
 	switch_to(join_game_menu)

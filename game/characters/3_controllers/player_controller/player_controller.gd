@@ -33,7 +33,7 @@ func _ready():
 	current_hold_point = current_frame.hold_point
 
 	if is_multiplayer_authority():
-		EventsManager.capture_mouse()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		#EventsManager.connect("safe_volume_entered", _on_safe_volume_entered)
 		#EventsManager.connect("safe_volume_exited", _on_safe_volume_exited)
 
@@ -189,7 +189,7 @@ func _process_camera_control(event: InputEvent):
 	if event is InputEventMouseMotion \
 	and not current_frame.is_knocked_out \
 	and not hud.is_text_chat_open() \
-	and EventsManager.is_mouse_captured():
+	and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if not (current_frame.held_object and Input.is_action_pressed(Keybinds.ROTATE)):
 			current_frame.rotate_y(-event.relative.x *.0025)
 			current_frame.head_pivot.rotate_x(-event.relative.y *.0025)

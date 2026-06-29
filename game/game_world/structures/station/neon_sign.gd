@@ -54,10 +54,10 @@ func _on_color_picker_color_changed(color):
 	sign_texture.emission = color
 
 func _on_exit_button_button_up():
-	EventsManager.capture_mouse()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	neon_sign_editor.hide()
 	#update values to multiplayer peers
 
 func show_editor():
-	EventsManager.free_mouse()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	neon_sign_editor.show()

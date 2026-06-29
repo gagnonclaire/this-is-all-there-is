@@ -20,7 +20,7 @@ func _physics_process(delta: float):
 	if not active:
 		return
 
-	if can_move_self and EventsManager.is_mouse_captured():
+	if can_move_self and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		move_target_point(delta)
 
 	position = position.lerp(target_position, delta * speed)
@@ -34,7 +34,7 @@ func _unhandled_input(event: InputEvent):
 		return
 
 	if event is InputEventMouseMotion \
-	 and EventsManager.is_mouse_captured() \
+	 and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED \
 	 and not is_transitioning_rotation:
 		rotate_camera(event)
 

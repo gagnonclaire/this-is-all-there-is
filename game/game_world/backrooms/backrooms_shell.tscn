@@ -240,3 +240,8 @@ skeleton = NodePath("../MeshInstance3D2")
 transform = Transform3D(-0.507779, 0, 0.86148757, 0, 1, 0, -0.86148757, 0, -0.507779, -18.345371, 1, -120.62119)
 mesh = SubResource("BoxMesh_cqt6a")
 skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D28" type="MeshInstance3D" parent="Area1Floor0/Walls"]
+transform = Transform3D(-0.9633456, 0, -0.26826417, 0, 1, 0, 0.26826417, 0, -0.9633456, -1.75761, 1, -119.41282)
+mesh = SubResource("BoxMesh_0byag")
+skeleton = NodePath("../MeshInstance3D2")

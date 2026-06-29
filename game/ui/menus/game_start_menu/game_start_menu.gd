@@ -1,7 +1,10 @@
-class_name GameStartMenu
+class_name StartGameMenu
 extends PanelContainer
 
 const GAME_ITEM_SCENE: PackedScene = preload("res://game/ui/menus/game_start_menu/game_list_item.tscn")
+
+signal start_game(game_name: String)
+signal host_game(game_name: String)
 
 @onready var game_name_entry: LineEdit = $VBoxContainer/StartNewGameContainer/GameNameEntry
 @onready var game_list: VBoxContainer = $VBoxContainer/GameListScrollContainer/GameList
@@ -9,15 +12,17 @@ const GAME_ITEM_SCENE: PackedScene = preload("res://game/ui/menus/game_start_men
 func _ready():
 	populate_game_item_list()
 
-func _on_game_start_button_pressed():
+func _on_start_game_button_pressed():
 	if game_name_entry.text.is_empty():
 		set_default_game_name()
-	start_game_with_game_name(game_name_entry.text, false)
 
-func _on_game_start_host_button_pressed():
+	start_game.emit(game_name_entry)
+
+func _on_host_game_button_pressed():
 	if game_name_entry.text.is_empty():
 		set_default_game_name()
-	start_game_with_game_name(game_name_entry.text, true)
+
+	host_game.emit(game_name_entry)
 
 func populate_game_item_list():
 	for game_filename in GameSaveLoad.game_filenames():
@@ -34,10 +39,3 @@ func set_default_game_name():
 			break
 
 	game_name_entry.text = default_game_name_base + str(name_number)
-
-func start_game_with_game_name(game_name: String, host: bool):
-	if GameSaveLoad.game_name_available(game_name):
-		SceneChange.switch_to_start_game_world(game_name, host)
-	else:
-		game_name_entry.text = ""
-		game_name_entry.placeholder_text = "Name unavailable"

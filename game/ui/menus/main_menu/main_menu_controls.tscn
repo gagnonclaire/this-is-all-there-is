@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://be5j2bwpf1s1f"]
+[gd_scene format=3 uid="uid://be5j2bwpf1s1f"]
 
 [ext_resource type="Script" uid="uid://c8ecp52wqofc3" path="res://game/ui/menus/main_menu/main_menu_controls.gd" id="1_d1uwj"]
 [ext_resource type="Theme" uid="uid://ce6cpfne6646l" path="res://assets/fonts/body_theme.tres" id="2_1hpy4"]
@@ -7,55 +7,55 @@
 [ext_resource type="PackedScene" uid="uid://ctdibhvw6yr67" path="res://game/ui/menus/join_game_menu/join_game_menu.tscn" id="4_qs3od"]
 [ext_resource type="PackedScene" uid="uid://d2qgtltsfneu3" path="res://game/ui/menus/board_editor_menu/board_editor_menu.tscn" id="5_0ojqg"]
 
-[node name="MainMenuControls" type="HBoxContainer"]
+[node name="MainMenuControls" type="HBoxContainer" unique_id=1115528706]
 offset_right = 672.0
 offset_bottom = 441.0
 theme_override_constants/separation = 4
 script = ExtResource("1_d1uwj")
 
-[node name="MenuButtonsContainer" type="VBoxContainer" parent="."]
+[node name="MenuButtonsContainer" type="VBoxContainer" parent="." unique_id=375566132]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 25
 
-[node name="StartGameButton" type="Button" parent="MenuButtonsContainer"]
+[node name="StartGameButton" type="Button" parent="MenuButtonsContainer" unique_id=1067407898]
 layout_mode = 2
 text = "Start Game"
 
-[node name="JoinGameButton" type="Button" parent="MenuButtonsContainer"]
+[node name="JoinGameButton" type="Button" parent="MenuButtonsContainer" unique_id=703317023]
 layout_mode = 2
 text = "Join Game"
 
-[node name="BoardEditorButton" type="Button" parent="MenuButtonsContainer"]
+[node name="BoardEditorButton" type="Button" parent="MenuButtonsContainer" unique_id=788968046]
 layout_mode = 2
 text = "Board Editor"
 
-[node name="SettingsButton" type="Button" parent="MenuButtonsContainer"]
+[node name="SettingsButton" type="Button" parent="MenuButtonsContainer" unique_id=1045174761]
 layout_mode = 2
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="MenuButtonsContainer"]
+[node name="ExitButton" type="Button" parent="MenuButtonsContainer" unique_id=1526507194]
 layout_mode = 2
 text = "Exit"
 
-[node name="SubMenuContainer" type="MarginContainer" parent="."]
+[node name="SubMenuContainer" type="MarginContainer" parent="." unique_id=1258763396]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 
-[node name="StartGameMenu" parent="SubMenuContainer" instance=ExtResource("2_mxomd")]
+[node name="StartGameMenu" parent="SubMenuContainer" unique_id=1875277979 instance=ExtResource("2_mxomd")]
 visible = false
 layout_mode = 2
 
-[node name="JoinGameMenu" parent="SubMenuContainer" instance=ExtResource("4_qs3od")]
+[node name="JoinGameMenu" parent="SubMenuContainer" unique_id=1982572 instance=ExtResource("4_qs3od")]
 visible = false
 layout_mode = 2
 
-[node name="BoardEditorMenu" parent="SubMenuContainer" instance=ExtResource("5_0ojqg")]
+[node name="BoardEditorMenu" parent="SubMenuContainer" unique_id=917539136 instance=ExtResource("5_0ojqg")]
 visible = false
 layout_mode = 2
 
-[node name="SettingsMenu" parent="SubMenuContainer" instance=ExtResource("3_e03x2")]
+[node name="SettingsMenu" parent="SubMenuContainer" unique_id=550236951 instance=ExtResource("3_e03x2")]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_1hpy4")
@@ -65,3 +65,5 @@ theme = ExtResource("2_1hpy4")
 [connection signal="pressed" from="MenuButtonsContainer/BoardEditorButton" to="." method="_on_board_editor_button_pressed"]
 [connection signal="pressed" from="MenuButtonsContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="host_game" from="SubMenuContainer/StartGameMenu" to="." method="_on_start_game_menu_host_game"]
+[connection signal="start_game" from="SubMenuContainer/StartGameMenu" to="." method="_on_start_game_menu_start_game"]

@@ -9,18 +9,21 @@ var camera_sensitivity = 0.0025
 var camera_rotation_clamp = PI / 2.25
 
 func _ready():
-	EventsManager.capture_mouse()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	board_editor_camera.make_current()
 
 func _process(delta: float):
-	if EventsManager.is_mouse_captured():
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		move_camera(delta)
 
 func _unhandled_input(event: InputEvent):
-	if event is InputEventMouseMotion and EventsManager.is_mouse_captured():
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_camera(event)
 	if Input.is_action_just_pressed(Keybinds.TOGGLE_MOUSE_CAPTURE):
-		EventsManager.toggle_mouse()
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func move_camera(delta: float):
 	var height_adjustment = 0

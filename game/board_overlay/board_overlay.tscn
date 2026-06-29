@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://0gwji15ps27y"]
 
 [ext_resource type="Script" uid="uid://cj7scti677g5b" path="res://game/board_overlay/board_overlay.gd" id="1_gcjhx"]
-[ext_resource type="PackedScene" uid="uid://yy5iqy1bu8hx" path="res://game/controllers/board_controller/board_controller.tscn" id="2_kax4n"]
+[ext_resource type="PackedScene" uid="uid://yy5iqy1bu8hx" path="res://game/player/controllers/board_controller/board_controller.tscn" id="2_kax4n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5xsd"]
 transparency = 1

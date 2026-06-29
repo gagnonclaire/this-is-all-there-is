@@ -3,68 +3,73 @@ extends Node
 
 @onready var board_overlay: BoardOverlay = $BoardOverlay
 
-const _PLAYER_CONTROLLER: PackedScene = preload("res://game/characters/3_controllers/player_controller/player_controller.tscn")
+const PLAYER: PackedScene = preload("res://game/player/player.tscn")
 
-@export var credits: int
+signal exit_game
 
 var game_name: String
-var player_controller: Node
-var main_player
+var is_host: bool = false
+var enet_peer: ENetMultiplayerPeer
+var port: int = 9999
 
-#TODO This should mostly be handled in the multiplayer manager
+#TODO move into dedicated host/join functions
 func _ready():
 	if not GameSaveLoad.game_name_available(game_name):
 		GameSaveLoad.load_game(game_name, self)
 
-	if is_multiplayer_authority():
-		multiplayer.peer_connected.connect(_add_player)
-		multiplayer.peer_disconnected.connect(_remove_player)
-		_add_player(multiplayer.get_unique_id())
+	if is_host:
+		enet_peer = ENetMultiplayerPeer.new()
+		enet_peer.create_server(port)
+		multiplayer.multiplayer_peer = enet_peer
 
-		credits = 0
-		#EventsManager.connect("credits_gained", _on_credits_gained)
-		#EventsManager.connect("credits_lost", _on_credits_lost)
+		multiplayer.peer_connected.connect(add_player)
+		multiplayer.peer_disconnected.connect(remove_player)
+		add_player(multiplayer.get_unique_id())
 
-#TODO This should all be handled in the multiplayer manager
 func _exit_tree():
-	multiplayer.multiplayer_peer.close()
+	pass
+	#multiplayer.multiplayer_peer.close()
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("menu"):
 		GameSaveLoad.save_game(game_name)
-		SceneChange.switch_to_main_menu()
+		exit_game.emit()
 	if Input.is_action_just_pressed(Keybinds.TOGGLE_MOUSE_CAPTURE):
-		EventsManager.toggle_mouse()
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Input.is_action_just_pressed(Keybinds.TOGGLE_BOARD_OVERLAY):
 		toggle_board_mode()
+
+func start_server():
+	pass
+
+func join_server(address: String):
+	pass
 
 func toggle_board_mode():
 	if board_overlay.active:
 		board_overlay.make_inactive()
-		main_player.current_frame.camera.make_current()
-	else:
-		board_overlay.make_active(
-			player_controller.current_frame.camera.global_position,
-			player_controller.current_frame.camera.global_rotation
-		)
+		#main_player.current_frame.camera.make_current()
+	#else:
+		#board_overlay.make_active(
+			#player_controller.current_frame.camera.global_position,
+			#player_controller.current_frame.camera.global_rotation
+		#)
 
-func _on_credits_gained(amount: int):
-	credits += amount
-
-func _on_credits_lost(amount: int):
-	credits -= amount
-
-func _add_player(peer_id):
-	var player: Node = _PLAYER_CONTROLLER.instantiate()
+func add_player(peer_id):
+	var player: Node = PLAYER.instantiate()
 	player.name = str(peer_id)
+	player.player_name = "player" + str(multiplayer.get_unique_id())
 	add_child(player)
+#
+	#player_controller = player
+#
+	#if multiplayer.is_server():
+		#main_player = player
 
-	player_controller = player
-
-	if multiplayer.is_server():
-		main_player = player
-
-func _remove_player(peer_id):
+func remove_player(peer_id):
 	var player: Node = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()

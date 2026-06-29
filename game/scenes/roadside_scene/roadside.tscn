@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ec62586b0fv8"]
+[gd_scene format=3 uid="uid://ec62586b0fv8"]
 
 [ext_resource type="PackedScene" uid="uid://3ys7ovhhdcpy" path="res://game/scenes/roadside_scene/roadside_base.blend" id="1_1n34r"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://assets/textures/concrete/concrete.tres" id="2_pp1lq"]
@@ -17,7 +17,7 @@ normal_enabled = true
 normal_texture = ExtResource("4_603ap")
 uv1_triplanar = true
 
-[node name="roadside_base" instance=ExtResource("1_1n34r")]
+[node name="roadside_base" unique_id=221327867 instance=ExtResource("1_1n34r")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="Plane" parent="." index="0"]
@@ -25,18 +25,18 @@ surface_material_override/0 = ExtResource("2_pp1lq")
 surface_material_override/1 = SubResource("StandardMaterial3D_4b31r")
 surface_material_override/2 = ExtResource("3_gfom1")
 
-[node name="Camera3D" type="Camera3D" parent="." index="1"]
+[node name="Camera3D" type="Camera3D" parent="." index="1" unique_id=1838286967]
 transform = Transform3D(2.055, 0, -3.43176, 0, 4, 0, 3.43176, 0, 2.055, -118.976, 34.2298, 92.5809)
 script = ExtResource("4_hj0el")
 
-[node name="NightEnvironment" parent="." index="2" instance=ExtResource("5_m6wk7")]
+[node name="NightEnvironment" parent="." index="2" unique_id=1408507461 instance=ExtResource("5_m6wk7")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="3"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="3" unique_id=1044227067]
 transform = Transform3D(0.0880424, -0.743727, 0.66266, 0, 0.665243, 0.746627, -0.996117, -0.0657348, 0.0585696, 0, 46.4468, 0)
 shadow_enabled = true
 
-[node name="wall1" parent="." index="4" instance=ExtResource("8_xeio8")]
+[node name="wall1" parent="." index="4" unique_id=1396147620 instance=ExtResource("8_xeio8")]
 transform = Transform3D(21.789051, 0, 45.002632, 0, 49.999992, 0, -45.002632, 0, 21.789051, 278.96185, -288.7248, 672.9623)
 
-[node name="wall2" parent="." index="5" instance=ExtResource("8_xeio8")]
+[node name="wall2" parent="." index="5" unique_id=1655059142 instance=ExtResource("8_xeio8")]
 transform = Transform3D(34.56998, 0, 36.123627, 0, 49.99999, 0, -36.123627, 0, 34.56998, 877.752, -288.7248, -189.75558)

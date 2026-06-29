@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmidx7th1t6xv"
-path.s3tc="res://.godot/imported/reticule.png-b7e91855e4f4cb8a492a5bfdde7e0a0b.s3tc.ctex"
+uid="uid://c0wyqgxe66eqd"
+path.s3tc="res://.godot/imported/mote2.png-a66409548a0047705d3b66f6d7ff8804.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/hud/reticule.png"
-dest_files=["res://.godot/imported/reticule.png-b7e91855e4f4cb8a492a5bfdde7e0a0b.s3tc.ctex"]
+source_file="res://assets/textures/particles/mote2/mote2.png"
+dest_files=["res://.godot/imported/mote2.png-a66409548a0047705d3b66f6d7ff8804.s3tc.ctex"]
 
 [params]
 
