@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dvrcyyg21c0oc"]
+
+[ext_resource type="PackedScene" uid="uid://by7mrlnwlc014" path="res://assets/models/furniture/short_cupboard.blend" id="1_jpn7d"]
+
+[node name="short_cupboard" unique_id=1723457495 instance=ExtResource("1_jpn7d")]

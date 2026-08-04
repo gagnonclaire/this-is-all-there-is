@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c0fi7gupnqyma"]
+
+[ext_resource type="PackedScene" uid="uid://bb5vrso6m0iqm" path="res://assets/models/furniture/double_couch.blend" id="1_pghf2"]
+
+[node name="double_couch" unique_id=1118410181 instance=ExtResource("1_pghf2")]
