@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://d0tdgvbrgaefj"]
+
+[ext_resource type="PackedScene" uid="uid://c26hl0c44ihxg" path="res://assets/armatures/armature_human.blend" id="1_h2ygp"]
+
+[node name="ArmatureHuman" unique_id=1922409827 instance=ExtResource("1_h2ygp")]

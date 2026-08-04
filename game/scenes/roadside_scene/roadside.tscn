@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ec62586b0fv8"]
+[gd_scene format=4 uid="uid://ec62586b0fv8"]
 
 [ext_resource type="PackedScene" uid="uid://3ys7ovhhdcpy" path="res://game/scenes/roadside_scene/roadside_base.blend" id="1_1n34r"]
 [ext_resource type="Material" uid="uid://ca0bgrg8f43ub" path="res://assets/textures/concrete/concrete.tres" id="2_pp1lq"]
@@ -17,10 +17,811 @@ normal_enabled = true
 normal_texture = ExtResource("4_603ap")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0is1u"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fpc0j"]
+_surfaces = [{
+"aabb": AABB(-0.045408115, -0.070913054, -0.045408115, 0.09081623, 0.14182611, 0.09081623),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aqi5t"]
+resource_name = "armature_human_head"
+_surfaces = [{
+"aabb": AABB(-0.045408115, -0.070913054, -0.045408115, 0.09081623, 0.14182611, 0.09081623),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_0is1u"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fpc0j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oa6a"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_crfl6"]
+_surfaces = [{
+"aabb": AABB(-0.022442248, -0.034141894, -0.022442248, 0.044884495, 0.06828379, 0.044884495),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wrp14"]
+resource_name = "armature_human_neck"
+_surfaces = [{
+"aabb": AABB(-0.022442248, -0.034141894, -0.022442248, 0.044884495, 0.06828379, 0.044884495),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_5oa6a"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_crfl6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vd647"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ts5pf"]
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAD/////AAAAAP//AAAAAAAA////////AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_t6bsa"]
+resource_name = "armature_human_hand_006"
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_vd647"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//8AAP//qir/////AACqKv//AAAAAKoq////////qir//wAAAAAAAAAA//8AAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAKoqAAD/////qioAAAAA//+qKgAA//8AAKoqAAAAAP///z//////////P///AAD///8/AAD//////z///wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAAAAAAAAAA//8AAP8//////////z8AAP//////P/////8AAP8/qiqqKqoqqiqqKqoqqiqqKv+//7//v/+//7//v/+//79U1VTVVNVU1VTVVNVU1VTV//////////////////////9//z//f/8//3//P/9//z////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ts5pf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5o34"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_66qwf"]
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAD/////AAAAAP//AAAAAAAA////////AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nhhy2"]
+resource_name = "armature_human_hand_005"
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_u5o34"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//8AAP//qir/////AACqKv//AAAAAKoq////////qir//wAAAAAAAAAA//8AAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAKoqAAD/////qioAAAAA//+qKgAA//8AAKoqAAAAAP///z//////////P///AAD///8/AAD//////z///wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAAAAAAAAAA//8AAP8//////////z8AAP//////P/////8AAP8/qiqqKqoqqiqqKqoqqiqqKv+//7//v/+//7//v/+//79U1VTVVNVU1VTVVNVU1VTV//////////////////////9//z//f/8//3//P/9//z////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_66qwf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chw6t"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b27pi"]
+_surfaces = [{
+"aabb": AABB(-0.009741161, -0.0057223244, -0.011581045, 0.019482322, 0.011444649, 0.02316209),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAD/////AAAAAP//AAAAAAAA////////AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bhh4u"]
+resource_name = "armature_human_hand_001"
+_surfaces = [{
+"aabb": AABB(-0.009741161, -0.0057223244, -0.011581045, 0.019482322, 0.011444649, 0.02316209),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_chw6t"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//8AAP//qir/////AACqKv//AAAAAKoq////////qir//wAAAAAAAAAA//8AAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAKoqAAD/////qioAAAAA//+qKgAA//8AAKoqAAAAAP///z//////////P///AAD///8/AAD//////z///wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAAAAAAAAAA//8AAP8//////////z8AAP//////P/////8AAP8/qiqqKqoqqiqqKqoqqiqqKv+//7//v/+//7//v/+//79U1VTVVNVU1VTVVNVU1VTV//////////////////////9//z//f/8//3//P/9//z////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_b27pi")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3nxm"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_506d6"]
+_surfaces = [{
+"aabb": AABB(-0.020279648, -0.006819372, -0.013801289, 0.040559296, 0.013638744, 0.027602578),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAD/////AAAAAP//AAAAAAAA////////AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_85clo"]
+resource_name = "armature_human_hand_mesh_002"
+_surfaces = [{
+"aabb": AABB(-0.020279648, -0.006819372, -0.013801289, 0.040559296, 0.013638744, 0.027602578),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_k3nxm"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//8AAP//qir/////AACqKv//AAAAAKoq////////qir//wAAAAAAAAAA//8AAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAKoqAAD/////qioAAAAA//+qKgAA//8AAKoqAAAAAP///z//////////P///AAD///8/AAD//////z///wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAAAAAAAAAA//8AAP8//////////z8AAP//////P/////8AAP8/qiqqKqoqqiqqKqoqqiqqKv+//7//v/+//7//v/+//79U1VTVVNVU1VTVVNVU1VTV//////////////////////9//z//f/8//3//P/9//z////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_506d6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kd2ej"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l78yu"]
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAD/////AAAAAP//AAAAAAAA////////AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rwpdd"]
+resource_name = "armature_human_lower_arm_001"
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_kd2ej"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//8AAP//qir/////AACqKv//AAAAAKoq////////qir//wAAAAAAAAAA//8AAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAKoqAAD/////qioAAAAA//+qKgAA//8AAKoqAAAAAP///z//////////P///AAD///8/AAD//////z///wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAAAAAAAAAA//8AAP8//////////z8AAP//////P/////8AAP8/qiqqKqoqqiqqKqoqqiqqKv+//7//v/+//7//v/+//79U1VTVVNVU1VTVVNVU1VTV//////////////////////9//z//f/8//3//P/9//z////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_l78yu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k032p"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o77y0"]
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAD/////AAAAAP//AAAAAAAA////////AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_t5gnb"]
+resource_name = "armature_human_upper_arm_001"
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_k032p"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//8AAP//qir/////AACqKv//AAAAAKoq////////qir//wAAAAAAAAAA//8AAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAKoqAAD/////qioAAAAA//+qKgAA//8AAKoqAAAAAP///z//////////P///AAD///8/AAD//////z///wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAAAAAAAAAA//8AAP8//////////z8AAP//////P/////8AAP8/qiqqKqoqqiqqKqoqqiqqKv+//7//v/+//7//v/+//79U1VTVVNVU1VTVVNVU1VTV//////////////////////9//z//f/8//3//P/9//z////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o77y0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0d8j"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_na15l"]
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_naheg"]
+resource_name = "armature_human_hand_004"
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_e0d8j"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_na15l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8e8g"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iv5kg"]
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_eqmc7"]
+resource_name = "armature_human_hand_003"
+_surfaces = [{
+"aabb": AABB(-0.0047312924, -0.004498241, -0.0091037005, 0.009462585, 0.008996482, 0.018207401),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_d8e8g"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_iv5kg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0wuo"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gh6fl"]
+_surfaces = [{
+"aabb": AABB(-0.009741161, -0.0057223244, -0.011581045, 0.019482322, 0.011444649, 0.02316209),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_h0dfe"]
+resource_name = "armature_human_hand_002"
+_surfaces = [{
+"aabb": AABB(-0.009741161, -0.0057223244, -0.011581045, 0.019482322, 0.011444649, 0.02316209),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_a0wuo"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_gh6fl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7endn"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_75epk"]
+_surfaces = [{
+"aabb": AABB(-0.020279648, -0.006819372, -0.013801289, 0.040559296, 0.013638744, 0.027602578),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pmh8t"]
+resource_name = "armature_human_hand_mesh_001"
+_surfaces = [{
+"aabb": AABB(-0.020279648, -0.006819372, -0.013801289, 0.040559296, 0.013638744, 0.027602578),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_7endn"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_75epk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdh5s"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_krrel"]
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d20er"]
+resource_name = "armature_human_lower_arm"
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_cdh5s"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_krrel")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxkas"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_sc2vf"]
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a1fm5"]
+resource_name = "armature_human_upper_arm"
+_surfaces = [{
+"aabb": AABB(-0.103542745, -0.02073411, -0.016712006, 0.20708549, 0.04146822, 0.033424012),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_gxkas"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_sc2vf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_63ygt"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3jjrq"]
+_surfaces = [{
+"aabb": AABB(-0.09856343, -0.06706755, -0.054057468, 0.19712687, 0.1341351, 0.108114935),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ojave"]
+resource_name = "armature_human_chest"
+_surfaces = [{
+"aabb": AABB(-0.09856343, -0.06706755, -0.054057468, 0.19712687, 0.1341351, 0.108114935),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_63ygt"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3jjrq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlsgb"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_odoau"]
+_surfaces = [{
+"aabb": AABB(-0.06441053, -0.11713929, -0.03850763, 0.12882106, 0.23427857, 0.07701526),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vkklq"]
+resource_name = "armature_human_spine"
+_surfaces = [{
+"aabb": AABB(-0.06441053, -0.11713929, -0.03850763, 0.12882106, 0.23427857, 0.07701526),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_xlsgb"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_odoau")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5wgm"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_urm38"]
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.017144714, -0.041810267, 0.0543854, 0.034289427, 0.08362053),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bnfwo"]
+resource_name = "armature_human_foot_004"
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.017144714, -0.041810267, 0.0543854, 0.034289427, 0.08362053),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_y5wgm"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_urm38")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kktsc"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o3576"]
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.03172951, -0.041810267, 0.0543854, 0.06345902, 0.08362053),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rbx4n"]
+resource_name = "armature_human_foot_003"
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.03172951, -0.041810267, 0.0543854, 0.06345902, 0.08362053),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_kktsc"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o3576")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_netpl"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pw87b"]
+_surfaces = [{
+"aabb": AABB(-0.031041164, -0.110851966, -0.031041164, 0.062082328, 0.22170393, 0.062082328),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3o6rv"]
+resource_name = "armature_human_lower_leg_001"
+_surfaces = [{
+"aabb": AABB(-0.031041164, -0.110851966, -0.031041164, 0.062082328, 0.22170393, 0.062082328),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_netpl"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_pw87b")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k03kj"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6fn68"]
+_surfaces = [{
+"aabb": AABB(-0.034117702, -0.15726031, -0.034117702, 0.068235405, 0.31452063, 0.068235405),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8ub6j"]
+resource_name = "armature_human_upper_leg_001"
+_surfaces = [{
+"aabb": AABB(-0.034117702, -0.15726031, -0.034117702, 0.068235405, 0.31452063, 0.068235405),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_k03kj"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6fn68")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glhpr"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o7wcm"]
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.017144714, -0.041810267, 0.0543854, 0.034289427, 0.08362053),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d8blr"]
+resource_name = "armature_human_foot_002"
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.017144714, -0.041810267, 0.0543854, 0.034289427, 0.08362053),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_glhpr"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o7wcm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkamk"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b0mjc"]
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.03172951, -0.041810267, 0.0543854, 0.06345902, 0.08362053),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mcalb"]
+resource_name = "armature_human_foot_001"
+_surfaces = [{
+"aabb": AABB(-0.0271927, -0.03172951, -0.041810267, 0.0543854, 0.06345902, 0.08362053),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_jkamk"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_b0mjc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ynnw"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6s5gu"]
+_surfaces = [{
+"aabb": AABB(-0.031041164, -0.110851966, -0.031041164, 0.062082328, 0.22170393, 0.062082328),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yo4pn"]
+resource_name = "armature_human_lower_leg"
+_surfaces = [{
+"aabb": AABB(-0.031041164, -0.110851966, -0.031041164, 0.062082328, 0.22170393, 0.062082328),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_0ynnw"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6s5gu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl7g0"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7f5ov"]
+_surfaces = [{
+"aabb": AABB(-0.034117702, -0.15726031, -0.034117702, 0.068235405, 0.31452063, 0.068235405),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQABAABAAMAAgAFAAAABQADAAAAAgAEAAYAAgAGAAUABAADAAcABgAEAAcABQAHAAMABgAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAA//8AAP///////wAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_afb04"]
+resource_name = "armature_human_upper_leg"
+_surfaces = [{
+"aabb": AABB(-0.034117702, -0.15726031, -0.034117702, 0.068235405, 0.31452063, 0.068235405),
+"attribute_data": PackedByteArray("/1////+f/7//X/+//5////9f/7//n/9//1//f/+f/7//X/9//5//P/9f/z//n/9//1//P/+fAAD/XwAA/5//P/8f/3//X/8//x//P/9f/3//n/9//9//P/+f/z//3/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_jl7g0"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAqir//wAA//+qKv///////6oq//8AAAAAqir/////////PwAAAAD///8/AAD//////z///wAA////PwAA/////6oqAAAAAAAAqioAAP//AACqKgAAAAD//6oqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD///////8AAAAA//8AAAAA/////wAAAAAAAP////8AAAAAAAD///8///8AAAAA/z8AAAAAAAD/P///AAD///8/qqpUVaqqVFWqqlRVqqpUVf9//3//f/9//3//f/9//39UVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v/9//7//f/+//3//v/9//78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7f5ov")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4exl"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_adv0v"]
+_surfaces = [{
+"aabb": AABB(-0.088261664, -0.053095262, -0.043672428, 0.17652333, 0.106190525, 0.087344855),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8w00h"]
+resource_name = "armature_human_hip"
+_surfaces = [{
+"aabb": AABB(-0.088261664, -0.053095262, -0.043672428, 0.17652333, 0.106190525, 0.087344855),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_h4exl"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_adv0v")
+
 [node name="roadside_base" unique_id=221327867 instance=ExtResource("1_1n34r")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="Plane" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017356873, 0.01089859, -0.0031633377)
 surface_material_override/0 = ExtResource("2_pp1lq")
 surface_material_override/1 = SubResource("StandardMaterial3D_4b31r")
 surface_material_override/2 = ExtResource("3_gfom1")
@@ -40,3 +841,512 @@ transform = Transform3D(21.789051, 0, 45.002632, 0, 49.999992, 0, -45.002632, 0,
 
 [node name="wall2" parent="." index="5" unique_id=1655059142 instance=ExtResource("8_xeio8")]
 transform = Transform3D(34.56998, 0, 36.123627, 0, 49.99999, 0, -36.123627, 0, 34.56998, 877.752, -288.7248, -189.75558)
+
+[node name="ArmatureHuman" type="Node3D" parent="." index="6" unique_id=1922409827]
+transform = Transform3D(1.9544194, 0, -3.4900208, 0, 4, 0, 3.4900208, 0, 1.9544194, 22.955746, 16.784107, -20.741837)
+
+[node name="armature_human" type="Node3D" parent="ArmatureHuman" index="0" unique_id=974921458]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="ArmatureHuman/armature_human" index="0" unique_id=1713044580]
+bones/0/name = "hip"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 1.1920929e-07, 0, 1, 0, -1.1920929e-07, 0, 1, 0, 0.6, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0.6, 0)
+bones/0/rotation = Quaternion(0, 5.9604645e-08, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "spine"
+bones/1/parent = 0
+bones/1/rest = Transform3D(1, 0, 1.1920929e-07, 0, 1, 0, -1.1920929e-07, 0, 1, 0, 0.10083842, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0, 0.10083842, 0)
+bones/1/rotation = Quaternion(0, 5.9604645e-08, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "chest"
+bones/2/parent = 1
+bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22499996, 0)
+bones/2/enabled = true
+bones/2/position = Vector3(0, 0.22499996, 0)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/name = "neck"
+bones/3/parent = 2
+bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15000004, 0)
+bones/3/enabled = true
+bones/3/position = Vector3(0, 0.15000004, 0)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/name = "head"
+bones/4/parent = 3
+bones/4/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049999952, 0)
+bones/4/enabled = true
+bones/4/position = Vector3(0, 0.049999952, 0)
+bones/4/rotation = Quaternion(0, 0, 0, 1)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/name = "shoulder.L"
+bones/5/parent = 2
+bones/5/rest = Transform3D(-0.33034986, 0.9438585, -2.945605e-07, -0.9438584, -0.3303499, -2.9476485e-07, -3.7552428e-07, 1.8064789e-07, 1, 0, 0.15000004, 0)
+bones/5/enabled = true
+bones/5/position = Vector3(0, 0.15000004, 0)
+bones/5/rotation = Quaternion(2.0540065e-07, 3.498019e-08, -0.8155826, 0.5786407)
+bones/5/scale = Vector3(0.9999998, 0.99999994, 1)
+bones/6/name = "upper_arm.L"
+bones/6/parent = 5
+bones/6/rest = Transform3D(0.9438586, -0.33033946, -0.002635184, 0.33034998, 0.94382846, 0.007529432, -1.0663645e-07, -0.007977251, 0.9999682, -7.0780516e-08, 0.09923296, 5.3290705e-15)
+bones/6/enabled = true
+bones/6/position = Vector3(-7.0780516e-08, 0.09923296, 5.3290705e-15)
+bones/6/rotation = Quaternion(-0.0039322856, -0.00066822005, 0.16754192, 0.9858569)
+bones/6/scale = Vector3(1.0000001, 1, 1)
+bones/7/name = "lower_arm.L"
+bones/7/parent = 6
+bones/7/rest = Transform3D(1, -4.0526325e-09, -3.906256e-11, 4.0514943e-09, 0.9998727, -0.015953882, 1.0371283e-10, 0.015953882, 0.9998727, 3.993612e-10, 0.20372106, 6.446044e-11)
+bones/7/enabled = true
+bones/7/position = Vector3(3.993612e-10, 0.20372106, 6.446044e-11)
+bones/7/rotation = Quaternion(0.007977196, -3.569498e-11, 2.0260962e-09, 0.9999682)
+bones/7/scale = Vector3(1, 0.99999994, 0.99999994)
+bones/8/name = "hand.001.L"
+bones/8/parent = 7
+bones/8/rest = Transform3D(-3.5762787e-07, 0, -1, 0.007977194, 0.9999683, -2.7939677e-09, 0.99996823, -0.007977195, -3.5762787e-07, 1.6042756e-09, 0.20372106, 1.2615553e-10)
+bones/8/enabled = true
+bones/8/position = Vector3(1.6042756e-09, 0.20372106, 1.2615553e-10)
+bones/8/rotation = Quaternion(-0.0028203854, -0.7071013, 0.0028203868, 0.70710105)
+bones/8/scale = Vector3(1, 1.0000001, 1)
+bones/9/name = "hand.002.L"
+bones/9/parent = 8
+bones/9/rest = Transform3D(1, 9.3132246e-10, -8.5265085e-13, -9.3132246e-10, 1, 4.0759507e-10, 8.526513e-13, -4.0759507e-10, 1, -3.8055496e-17, 0.037500005, -2.1952662e-10)
+bones/9/enabled = true
+bones/9/position = Vector3(-3.8055496e-17, 0.037500005, -2.1952662e-10)
+bones/9/rotation = Quaternion(-2.0379753e-10, -4.2632553e-13, -4.6566123e-10, 1)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/name = "hand.003.L"
+bones/10/parent = 9
+bones/10/rest = Transform3D(1, 3.4825778e-22, 5.421011e-20, -3.4825778e-22, 1, 1.3828582e-34, -5.421011e-20, -1.3828584e-34, 1, 5.673797e-20, 0.018749932, 0)
+bones/10/enabled = true
+bones/10/position = Vector3(5.673797e-20, 0.018749932, 0)
+bones/10/rotation = Quaternion(-6.9142916e-35, 2.7105054e-20, -1.7412889e-22, 1)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/name = "hand.004.L"
+bones/11/parent = 10
+bones/11/rest = Transform3D(1, -8.724171e-25, -3.2311743e-27, 8.724171e-25, 1, -1.151e-41, 3.2311743e-27, 1.151e-41, 1, 0, 0.009374956, 0)
+bones/11/enabled = true
+bones/11/position = Vector3(0, 0.009374956, 0)
+bones/11/rotation = Quaternion(5.755e-42, -1.6155871e-27, 4.3620853e-25, 1)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/name = "shoulder.R"
+bones/12/parent = 2
+bones/12/rest = Transform3D(-0.33034986, -0.9438585, -1.8227664e-07, 0.9438584, -0.3303499, -2.947648e-07, 2.1800115e-07, -2.6941885e-07, 1, 0, 0.15000004, 0)
+bones/12/enabled = true
+bones/12/position = Vector3(0, 0.15000004, 0)
+bones/12/rotation = Quaternion(1.0950626e-08, -1.7293885e-07, 0.8155826, 0.5786407)
+bones/12/scale = Vector3(0.9999998, 0.99999994, 1)
+bones/13/name = "upper_arm.R"
+bones/13/parent = 12
+bones/13/rest = Transform3D(0.9438586, 0.33033946, 0.002635184, -0.33034998, 0.94382846, 0.007529432, 1.0663645e-07, -0.007977251, 0.9999682, 7.0780516e-08, 0.09923296, 1.110223e-14)
+bones/13/enabled = true
+bones/13/position = Vector3(7.0780516e-08, 0.09923296, 1.110223e-14)
+bones/13/rotation = Quaternion(-0.0039322856, 0.00066822005, -0.16754192, 0.9858569)
+bones/13/scale = Vector3(1.0000001, 1, 1)
+bones/14/name = "lower_arm.R"
+bones/14/parent = 13
+bones/14/rest = Transform3D(1, 4.052631e-09, 3.900573e-11, -4.051494e-09, 0.9998727, -0.015953882, -1.0365599e-10, 0.015953882, 0.9998727, -3.993612e-10, 0.20372106, 6.468781e-11)
+bones/14/enabled = true
+bones/14/position = Vector3(-3.993612e-10, 0.20372106, 6.468781e-11)
+bones/14/rotation = Quaternion(0.007977196, 3.5666563e-11, -2.0260957e-09, 0.9999682)
+bones/14/scale = Vector3(1, 0.99999994, 0.99999994)
+bones/15/name = "hand.001.R"
+bones/15/parent = 14
+bones/15/rest = Transform3D(-3.5762787e-07, 0, 1, -0.007977194, 0.9999683, -2.7939677e-09, -0.99996823, -0.007977195, -3.5762787e-07, -1.6042756e-09, 0.20372106, 1.2632606e-10)
+bones/15/enabled = true
+bones/15/position = Vector3(-1.6042756e-09, 0.20372106, 1.2632606e-10)
+bones/15/rotation = Quaternion(-0.0028203854, 0.7071013, -0.0028203868, 0.70710105)
+bones/15/scale = Vector3(1, 1.0000001, 1)
+bones/16/name = "hand.002.R"
+bones/16/parent = 15
+bones/16/rest = Transform3D(1, -9.3132246e-10, 7.105423e-13, 9.3132246e-10, 1, 4.0759507e-10, -7.1054274e-13, -4.0759507e-10, 1, -8.548934e-17, 0.037500005, -2.1952662e-10)
+bones/16/enabled = true
+bones/16/position = Vector3(-8.548934e-17, 0.037500005, -2.1952662e-10)
+bones/16/rotation = Quaternion(-2.0379753e-10, 3.5527126e-13, 4.6566123e-10, 1)
+bones/16/scale = Vector3(1, 1, 1)
+bones/17/name = "hand.003.R"
+bones/17/parent = 16
+bones/17/rest = Transform3D(1, -2.9121756e-22, -5.421011e-20, 2.9121756e-22, 1, 9.4659914e-35, 5.421011e-20, -9.4659926e-35, 1, -5.670571e-20, 0.018749932, 0)
+bones/17/enabled = true
+bones/17/position = Vector3(-5.670571e-20, 0.018749932, 0)
+bones/17/rotation = Quaternion(-4.732996e-35, -2.7105054e-20, 1.4560878e-22, 1)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/name = "hand.004.R"
+bones/18/parent = 17
+bones/18/rest = Transform3D(1, -8.271806e-25, 3.2311743e-27, 8.271806e-25, 1, 0, -3.2311743e-27, 0, 1, 0, 0.009374956, 0)
+bones/18/enabled = true
+bones/18/position = Vector3(0, 0.009374956, 0)
+bones/18/rotation = Quaternion(0, 1.6155871e-27, 4.135903e-25, 1)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/name = "upper_leg.L"
+bones/19/parent = 0
+bones/19/rest = Transform3D(-0.99999386, -5.458138e-05, 0.0034896494, -7.812559e-08, -0.9998771, -0.015661405, 0.0034900764, -0.015661307, 0.9998712, 0.07179079, -0.003921509, -6.1890892e-09)
+bones/19/enabled = true
+bones/19/position = Vector3(0.07179079, -0.003921509, -6.1890892e-09)
+bones/19/rotation = Quaternion(0.0017449877, -0.007830932, 0.9999678, 1.3626255e-05)
+bones/19/scale = Vector3(0.99999994, 0.9999997, 0.9999999)
+bones/20/name = "lower_leg.L"
+bones/20/parent = 19
+bones/20/rest = Transform3D(1, -5.6471784e-08, -2.6028664e-07, 4.63273e-08, 0.9992467, -0.0388108, 2.622822e-07, 0.0388108, 0.9992467, 5.061276e-09, 0.3100008, 1.4551915e-10)
+bones/20/enabled = true
+bones/20/position = Vector3(5.061276e-09, 0.3100008, 1.4551915e-10)
+bones/20/rotation = Quaternion(0.019409053, -1.3066682e-07, 2.570461e-08, 0.99981165)
+bones/20/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/21/name = "foot.001.L"
+bones/21/parent = 20
+bones/21/rest = Transform3D(0.999998, 0.0019065166, -0.00052794674, -0.0018987514, 0.85009253, -0.52663016, -0.00055522536, 0.5266302, 0.8500944, 4.1510475e-09, 0.22621821, 5.820766e-11)
+bones/21/enabled = true
+bones/21/position = Vector3(4.1510475e-09, 0.22621821, 5.820766e-11)
+bones/21/rotation = Quaternion(0.27377513, 7.0905453e-06, -0.0009891075, 0.96179324)
+bones/21/scale = Vector3(0.9999999, 1.0000001, 1)
+bones/22/name = "foot.002.L"
+bones/22/parent = 21
+bones/22/rest = Transform3D(0.999994, 0.0028914097, 0.0018852568, 5.8207655e-10, 0.5461772, -0.83766955, -0.0034517304, 0.83766466, 0.5461739, -5.0864e-09, 0.071577534, -2.4499434e-09)
+bones/22/enabled = true
+bones/22/position = Vector3(-5.0864e-09, 0.071577534, -2.4499434e-09)
+bones/22/rotation = Quaternion(0.47635147, 0.0015174774, -0.0008221207, 0.87925327)
+bones/22/scale = Vector3(0.99999994, 1, 0.9999999)
+bones/23/name = "heel.L"
+bones/23/parent = 21
+bones/23/rest = Transform3D(0.999994, 0.002891409, 0.001885257, -1.16415315e-10, 0.5461774, -0.83766943, -0.00345173, 0.8376644, 0.5461741, -0.000331255, 0.009005547, -0.09596579)
+bones/23/enabled = true
+bones/23/position = Vector3(-0.000331255, 0.009005547, -0.09596579)
+bones/23/rotation = Quaternion(0.47635135, 0.0015174771, -0.00082212064, 0.8792533)
+bones/23/scale = Vector3(0.99999994, 0.9999999, 0.9999999)
+bones/24/name = "upper_leg.R"
+bones/24/parent = 0
+bones/24/rest = Transform3D(-0.99999386, 5.4581382e-05, -0.0034898887, 8.186907e-08, -0.9998771, -0.015661405, -0.0034903158, -0.015661307, 0.9998712, -0.07179079, -0.003921509, -2.3305347e-08)
+bones/24/enabled = true
+bones/24/position = Vector3(-0.07179079, -0.003921509, -2.3305347e-08)
+bones/24/rotation = Quaternion(-0.0017451075, -0.007830932, 0.9999678, -1.362532e-05)
+bones/24/scale = Vector3(0.99999994, 0.9999997, 0.9999999)
+bones/25/name = "lower_leg.R"
+bones/25/parent = 24
+bones/25/rest = Transform3D(1, 5.2733053e-08, 2.599367e-07, -4.260497e-08, 0.9992467, -0.038810793, -2.6178745e-07, 0.038810793, 0.9992467, -3.992289e-09, 0.3100008, 6.693881e-10)
+bones/25/enabled = true
+bones/25/position = Vector3(-3.992289e-09, 0.3100008, 6.693881e-10)
+bones/25/rotation = Quaternion(0.01940905, 1.304556e-07, -2.3838993e-08, 0.99981165)
+bones/25/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/26/name = "foot.001.R"
+bones/26/parent = 25
+bones/26/rest = Transform3D(0.9999979, -0.0019065167, 0.0005279469, 0.0018987516, 0.8500924, -0.52663016, 0.0005552254, 0.52663016, 0.8500944, -4.1506114e-09, 0.22621821, -5.820766e-11)
+bones/26/enabled = true
+bones/26/position = Vector3(-4.1506114e-09, 0.22621821, -5.820766e-11)
+bones/26/rotation = Quaternion(0.27377513, -7.0905453e-06, 0.0009891078, 0.96179324)
+bones/26/scale = Vector3(0.9999998, 1, 1)
+bones/27/name = "foot.002.R"
+bones/27/parent = 26
+bones/27/rest = Transform3D(0.999994, -0.0028914087, -0.0018852575, -3.4924594e-10, 0.54617745, -0.83766955, 0.00345173, 0.83766454, 0.54617417, -2.3712037e-09, 0.071577534, -4.140576e-09)
+bones/27/enabled = true
+bones/27/position = Vector3(-2.3712037e-09, 0.071577534, -4.140576e-09)
+bones/27/rotation = Quaternion(0.47635135, -0.0015174772, 0.00082212046, 0.8792533)
+bones/27/scale = Vector3(0.99999994, 1, 1)
+bones/28/name = "heel.R"
+bones/28/parent = 26
+bones/28/rest = Transform3D(0.999994, -0.0028914087, -0.0018852577, -4.6566126e-10, 0.54617745, -0.83766955, 0.00345173, 0.83766454, 0.54617417, 0.00033124757, 0.00900554, -0.095965795)
+bones/28/enabled = true
+bones/28/position = Vector3(0.00033124757, 0.00900554, -0.095965795)
+bones/28/rotation = Quaternion(0.47635135, -0.0015174772, 0.0008221204, 0.8792533)
+bones/28/scale = Vector3(0.99999994, 1, 1)
+
+[node name="head" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="0" unique_id=1654123707]
+transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, 1.1258384, 0)
+bone_name = "head"
+bone_idx = 4
+
+[node name="head_mesh" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/head" index="0" unique_id=1606477053]
+transform = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, 0, 0.07088792, 0)
+mesh = SubResource("ArrayMesh_aqi5t")
+skeleton = NodePath("")
+
+[node name="neck" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="1" unique_id=409732987]
+transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, 1.0758384, 0)
+bone_name = "neck"
+bone_idx = 3
+
+[node name="neck_mesh" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/neck" index="0" unique_id=2011668459]
+transform = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, 0, 0.02600813, 0)
+mesh = SubResource("ArrayMesh_wrp14")
+skeleton = NodePath("")
+
+[node name="hand_004_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="2" unique_id=754977935]
+transform = Transform3D(-0.10321101, -0.89213085, 0.4398293, 0.4022835, -0.4418517, -0.80183214, 0.90967864, 0.09417818, 0.40449363, 0.051374596, 0.8274424, 0.045372404)
+bone_name = "hand.004.L"
+bone_idx = 11
+
+[node name="hand_mesh_004_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_004_L" index="0" unique_id=1478915218]
+transform = Transform3D(-1.1920929e-07, 1.1920929e-07, 0.9999999, 1, 1.192093e-07, 1.1920926e-07, -1.1920929e-07, 1, -1.1920929e-07, 4.2258756e-09, 0.0039892, 0.002937913)
+mesh = SubResource("ArrayMesh_t6bsa")
+skeleton = NodePath("")
+
+[node name="hand_003_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="3" unique_id=2054427489]
+transform = Transform3D(-0.10321101, -0.89213085, 0.4398293, 0.4022835, -0.4418517, -0.80183214, 0.90967864, 0.09417818, 0.40449363, 0.059738282, 0.83158475, 0.044489488)
+bone_name = "hand.003.L"
+bone_idx = 10
+
+[node name="hand_mesh_003_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_003_L" index="0" unique_id=1524796174]
+transform = Transform3D(-1.1920929e-07, 1.1920929e-07, 0.9999999, 1, 1.192093e-07, 1.1920926e-07, -1.1920929e-07, 1, -1.1920929e-07, 4.2258756e-09, 0.004047553, 0.002937913)
+mesh = SubResource("ArrayMesh_nhhy2")
+skeleton = NodePath("")
+
+[node name="hand_002_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="4" unique_id=1359286547]
+transform = Transform3D(-0.105142206, -0.88726264, 0.4491211, 0.40131438, -0.45107368, -0.7971693, 0.90988547, 0.09642263, 0.40349832, 0.0763744, 0.84004235, 0.04268157)
+bone_name = "hand.002.L"
+bone_idx = 9
+
+[node name="hand_mesh_002_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_002_L" index="0" unique_id=508455280]
+transform = Transform3D(-1.1920929e-07, 1.1920929e-07, 0.9999999, 1, 1.192093e-07, 1.1920926e-07, -1.1920929e-07, 1, -1.1920929e-07, 4.2258756e-09, 0.00882272, 0.002937913)
+mesh = SubResource("ArrayMesh_bhh4u")
+skeleton = NodePath("")
+
+[node name="hand_001_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="5" unique_id=2147408391]
+transform = Transform3D(-0.1109416, -0.87139523, 0.47787228, 0.3982456, -0.47952643, -0.78195554, 0.91054493, 0.10355917, 0.40022895, 0.10905172, 0.8580246, 0.0387981)
+bone_name = "hand.001.L"
+bone_idx = 8
+
+[node name="hand_mesh_001_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_001_L" index="0" unique_id=526750441]
+transform = Transform3D(1.1920929e-07, -1.1920929e-07, 0.9999999, 1, 1.192093e-07, -1.1920926e-07, -1.1920929e-07, 1, 1.1920929e-07, 4.2083212e-09, 0.01865397, 0.0029379127)
+mesh = SubResource("ArrayMesh_85clo")
+skeleton = NodePath("")
+
+[node name="lower_arm_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="6" unique_id=1518122360]
+transform = Transform3D(-0.52261764, -0.8443103, -0.11836547, 0.75571245, -0.5230304, 0.39412877, -0.3946759, 0.11652843, 0.91140103, 0.2810555, 0.9645769, 0.015058806)
+bone_name = "lower_arm.L"
+bone_idx = 7
+
+[node name="lower_arm_mesh_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/lower_arm_L" index="0" unique_id=1176964035]
+transform = Transform3D(2.384186e-07, -1, -4.0041658e-07, 0.99996835, 2.3521677e-07, 0.007977193, -0.007977196, -4.023058e-07, 0.9999681, -0.0029379115, 0.10304005, 0.0008031814)
+mesh = SubResource("ArrayMesh_rwpdd")
+skeleton = NodePath("")
+
+[node name="upper_arm_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="7" unique_id=138879581]
+transform = Transform3D(-0.38535088, 0.919854, -0.07330209, -0.92267513, -0.385233, 0.01630916, -0.013236341, 0.073918775, 0.9971764, 0.09366189, 1.043057, -4.40448e-09)
+bone_name = "upper_arm.L"
+bone_idx = 6
+
+[node name="upper_arm_mesh_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/upper_arm_L" index="0" unique_id=1405968729]
+transform = Transform3D(2.384186e-07, -1, -4.0142655e-07, 0.99996835, 2.4161324e-07, -0.007977194, 0.007977197, -3.995119e-07, 0.9999681, -0.0029379132, 0.10145409, 0.0008093483)
+mesh = SubResource("ArrayMesh_t5gnb")
+skeleton = NodePath("")
+
+[node name="hand_004_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="8" unique_id=770109840]
+transform = Transform3D(-0.09799729, 0.5282597, 0.8434088, 0.17440805, 0.8434883, -0.5080445, -0.9797848, 0.09731033, -0.17479232, -0.22417012, 1.4385654, 0.045360617)
+bone_name = "hand.004.R"
+bone_idx = 18
+
+[node name="hand_mesh_004_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_004_R" index="0" unique_id=716889835]
+transform = Transform3D(-1.1920929e-07, -1.1920929e-07, -0.9999999, -1, 1.192093e-07, 1.1920926e-07, 1.1920929e-07, 1, -1.1920929e-07, -4.2258756e-09, 0.0039890213, 0.002937913)
+mesh = SubResource("ArrayMesh_naheg")
+skeleton = NodePath("")
+
+[node name="hand_003_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="9" unique_id=747929012]
+transform = Transform3D(-0.09799729, 0.5282597, 0.8434088, 0.17440805, 0.8434883, -0.5080445, -0.9797848, 0.09731033, -0.17479232, -0.22912253, 1.4306577, 0.04444834)
+bone_name = "hand.003.R"
+bone_idx = 17
+
+[node name="hand_mesh_003_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_003_R" index="0" unique_id=920425516]
+transform = Transform3D(-1.1920929e-07, -1.1920929e-07, -0.9999999, -1, 1.192093e-07, 1.1920926e-07, 1.1920929e-07, 1, -1.1920929e-07, -4.2258756e-09, 0.0040473742, 0.002937913)
+mesh = SubResource("ArrayMesh_eqmc7")
+skeleton = NodePath("")
+
+[node name="hand_002_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="10" unique_id=2065973291]
+transform = Transform3D(-0.10029264, 0.493582, 0.86389726, 0.17057265, 0.86394984, -0.47380954, -0.98022765, 0.09983767, -0.1708394, -0.23837717, 1.4144588, 0.042576388)
+bone_name = "hand.002.R"
+bone_idx = 16
+
+[node name="hand_mesh_002_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_002_R" index="0" unique_id=2107906100]
+transform = Transform3D(-1.1920929e-07, -1.1920929e-07, -0.9999999, -1, 1.192093e-07, 1.1920926e-07, 1.1920929e-07, 1, -1.1920929e-07, -4.2258756e-09, 0.008822481, 0.002937913)
+mesh = SubResource("ArrayMesh_h0dfe")
+skeleton = NodePath("")
+
+[node name="hand_001_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="11" unique_id=474710589]
+transform = Transform3D(-0.107055716, 0.36606434, 0.9244113, 0.15650342, 0.92436814, -0.34792244, -0.98185825, 0.107426494, -0.15624921, -0.25210458, 1.379795, 0.038547892)
+bone_name = "hand.001.R"
+bone_idx = 15
+
+[node name="hand_mesh_001_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hand_001_R" index="0" unique_id=1156289380]
+transform = Transform3D(1.1920929e-07, 1.1920929e-07, -0.9999999, -1, 1.192093e-07, -1.1920926e-07, 1.1920929e-07, 1, 1.1920929e-07, -4.2083217e-09, 0.01865397, 0.0029379127)
+mesh = SubResource("ArrayMesh_pmh8t")
+skeleton = NodePath("")
+
+[node name="lower_arm_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="12" unique_id=2097061935]
+transform = Transform3D(0.99275106, -0.030189518, 0.11633613, 0.0433924, 0.99268275, -0.112683564, -0.11208303, 0.116914846, 0.9867969, -0.24595435, 1.1775646, 0.014729875)
+bone_name = "lower_arm.R"
+bone_idx = 14
+
+[node name="lower_arm_mesh_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/lower_arm_R" index="0" unique_id=1606843848]
+transform = Transform3D(2.384186e-07, 1, 4.0041658e-07, -0.99996835, 2.3521677e-07, 0.007977193, 0.007977196, -4.023058e-07, 0.9999681, 0.0029379115, 0.10303981, 0.0008031832)
+mesh = SubResource("ArrayMesh_d20er")
+skeleton = NodePath("")
+
+[node name="upper_arm_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="13" unique_id=1016424642]
+transform = Transform3D(0.6604691, -0.7475538, 0.07031326, 0.75045955, 0.66025394, -0.029580327, -0.024311718, 0.07230416, 0.9970863, -0.09366189, 1.043057, -4.404467e-09)
+bone_name = "upper_arm.R"
+bone_idx = 13
+
+[node name="upper_arm_mesh_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/upper_arm_R" index="0" unique_id=148027965]
+transform = Transform3D(2.384186e-07, 1, 4.0142655e-07, -0.99996835, 2.4161324e-07, -0.007977194, -0.007977197, -3.995119e-07, 0.9999681, 0.0029379132, 0.10145382, 0.00080934603)
+mesh = SubResource("ArrayMesh_a1fm5")
+skeleton = NodePath("")
+
+[node name="chest" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="14" unique_id=1631914166]
+transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, 0.9258384, 0)
+bone_name = "chest"
+bone_idx = 2
+
+[node name="chest_mesh" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/chest" index="0" unique_id=998549208]
+transform = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, 0, 0.07845861, 0)
+mesh = SubResource("ArrayMesh_ojave")
+skeleton = NodePath("")
+
+[node name="spine" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="15" unique_id=1044960573]
+transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, 0.70083845, 0)
+bone_name = "spine"
+bone_idx = 1
+
+[node name="spine_mesh" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/spine" index="0" unique_id=132025221]
+transform = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, 0, 0.11689329, 0)
+mesh = SubResource("ArrayMesh_vkklq")
+skeleton = NodePath("")
+
+[node name="foot_002_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="16" unique_id=653287195]
+transform = Transform3D(-0.9999998, 2.3283064e-10, -9.313226e-10, -1.0477379e-09, 1.1920929e-07, 0.9999999, -9.313226e-10, 1.0000002, -2.3841858e-07, 0.07179218, -1.4901161e-08, 0.039477374)
+bone_name = "foot.002.L"
+bone_idx = 22
+
+[node name="foot_mesh_002_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/foot_002_L" index="0" unique_id=191278605]
+transform = Transform3D(-1.0000001, -5.820766e-10, -3.4924585e-10, -3.4924602e-10, 1.7881398e-07, 0.9999999, -5.8207655e-10, 1.0000001, -1.7881392e-07, 0.00040318817, 0.04056323, 0.017364087)
+mesh = SubResource("ArrayMesh_bnfwo")
+skeleton = NodePath("")
+
+[node name="foot_001_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="17" unique_id=988578698]
+transform = Transform3D(-0.9999939, 1.1641532e-10, 0.00345173, 0.0018852563, -0.8376696, 0.54617405, 0.0028914087, 0.5461775, 0.83766466, 0.07179217, 0.05995831, 0.00038334075)
+bone_name = "foot.001.L"
+bone_idx = 21
+
+[node name="foot_mesh_001_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/foot_001_L" index="0" unique_id=967769716]
+transform = Transform3D(-0.99999404, 0.001885257, 0.002891409, -1.7462301e-10, -0.83766955, 0.54617727, 0.0034517301, 0.5461741, 0.8376644, 0.0003538813, 0.018879967, -0.014284517)
+mesh = SubResource("ArrayMesh_rbx4n")
+skeleton = NodePath("")
+
+[node name="lower_leg_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="18" unique_id=2073855113]
+transform = Transform3D(-0.99999386, 8.0955026e-05, 0.003489518, -1.2855489e-07, -0.9997317, 0.023156414, 0.003490457, 0.023156283, 0.9997258, 0.071773864, 0.28611583, -0.004855032)
+bone_name = "lower_leg.L"
+bone_idx = 20
+
+[node name="lower_leg_mesh_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/lower_leg_L" index="0" unique_id=390713686]
+transform = Transform3D(-0.9999939, -1.2856255e-07, 0.0034904566, 8.095514e-05, -0.999732, 0.023156313, 0.0034895183, 0.023156459, 0.99972564, 0.00040176106, 0.10801152, 0.0023265076)
+mesh = SubResource("ArrayMesh_3o6rv")
+skeleton = NodePath("")
+
+[node name="upper_leg_L" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="19" unique_id=1970738993]
+transform = Transform3D(-0.99999386, -5.4583244e-05, 0.0034897684, -7.812559e-08, -0.99987704, -0.015661405, 0.0034901956, -0.015661305, 0.99987113, 0.07179079, 0.5960785, -1.4747219e-08)
+bone_name = "upper_leg.L"
+bone_idx = 19
+
+[node name="upper_leg_mesh_L" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/upper_leg_L" index="0" unique_id=1114372127]
+transform = Transform3D(-0.99999404, -7.8120166e-08, 0.0034901968, -5.458328e-05, -0.99987763, -0.015661316, 0.0034897698, -0.015661413, 0.99987143, 0.00040171953, 0.15266201, 0.0023631912)
+mesh = SubResource("ArrayMesh_8ub6j")
+skeleton = NodePath("")
+
+[node name="foot_002_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="20" unique_id=1960822184]
+transform = Transform3D(-0.99999976, -1.3969839e-09, -1.1641532e-10, 5.820766e-10, -8.940697e-08, 1, 4.656613e-10, 1.0000001, 2.9802322e-08, -0.07179218, -1.1175871e-08, 0.03947737)
+bone_name = "foot.002.R"
+bone_idx = 27
+
+[node name="foot_mesh_002_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/foot_002_R" index="0" unique_id=1436024059]
+transform = Transform3D(-1.0000001, 8.1490736e-10, -8.3266714e-17, -8.326674e-17, 0, 0.9999999, 8.1490736e-10, 1.0000001, 6.7854653e-26, -0.0004031882, 0.040563226, 0.017364085)
+mesh = SubResource("ArrayMesh_d8blr")
+skeleton = NodePath("")
+
+[node name="foot_001_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="21" unique_id=118887375]
+transform = Transform3D(-0.99999386, -1.1641532e-10, -0.0034517306, -0.0018852565, -0.8376695, 0.54617405, -0.0028914092, 0.54617745, 0.83766466, -0.07179218, 0.05995831, 0.00038333982)
+bone_name = "foot.001.R"
+bone_idx = 26
+
+[node name="foot_mesh_001_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/foot_001_R" index="0" unique_id=648472478]
+transform = Transform3D(-0.99999404, -0.0018852571, -0.0028914092, -1.1641534e-10, -0.8376697, 0.54617727, -0.0034517304, 0.54617417, 0.8376645, -0.0003539409, 0.018879965, -0.014284521)
+mesh = SubResource("ArrayMesh_mcalb")
+skeleton = NodePath("")
+
+[node name="lower_leg_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="22" unique_id=1379020935]
+transform = Transform3D(-0.99999386, -8.0955026e-05, -0.0034895188, 1.2857056e-07, -0.9997317, 0.023156406, -0.0034904578, 0.023156276, 0.9997258, -0.07177387, 0.28611583, -0.0048550316)
+bone_name = "lower_leg.R"
+bone_idx = 25
+
+[node name="lower_leg_mesh_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/lower_leg_R" index="0" unique_id=888317345]
+transform = Transform3D(-0.9999939, 1.2856982e-07, -0.0034904566, -8.095514e-05, -0.999732, 0.023156311, -0.0034895183, 0.023156457, 0.99972564, -0.00040179832, 0.10801152, 0.002326507)
+mesh = SubResource("ArrayMesh_yo4pn")
+skeleton = NodePath("")
+
+[node name="upper_leg_R" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="23" unique_id=1786535339]
+transform = Transform3D(-0.99999386, 5.4579516e-05, -0.0034897695, 8.187089e-08, -0.99987704, -0.015661405, -0.0034901968, -0.015661305, 0.99987113, -0.07179079, 0.5960785, -1.4747218e-08)
+bone_name = "upper_leg.R"
+bone_idx = 24
+
+[node name="upper_leg_mesh_R" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/upper_leg_R" index="0" unique_id=1365044931]
+transform = Transform3D(-0.99999404, 8.185455e-08, -0.003490197, 5.4579537e-05, -0.99987763, -0.015661312, -0.0034897702, -0.01566141, 0.99987143, -0.0004017626, 0.15266201, 0.0023631924)
+mesh = SubResource("ArrayMesh_afb04")
+skeleton = NodePath("")
+
+[node name="hip" type="BoneAttachment3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="24" unique_id=487956354]
+transform = Transform3D(1, 0, 1.1920929e-07, 0, 1, 0, -1.1920929e-07, 0, 1, 0, 0.6, 0)
+bone_name = "hip"
+bone_idx = 0
+
+[node name="hip_mesh" type="MeshInstance3D" parent="ArmatureHuman/armature_human/Skeleton3D/hip" index="0" unique_id=793336364]
+transform = Transform3D(1, 0, -1.1920929e-07, 0, 1, 0, 1.1920929e-07, 0, 1, 0, 0.04860127, 0)
+mesh = SubResource("ArrayMesh_8w00h")
+skeleton = NodePath("")
+
+[node name="IterateIK3D" type="FABRIK3D" parent="ArmatureHuman/armature_human/Skeleton3D" index="25" unique_id=1254967336]
+angular_delta_limit = 3.141592653589793
+deterministic = true
+setting_count = 2
+settings/0/target_node = NodePath("../../LeftHandTarget")
+settings/1/target_node = NodePath("../../RightHandTarget")
+settings/0/root_bone_name = "upper_arm.L"
+settings/0/root_bone = 6
+settings/0/end_bone_name = "hand.004.L"
+settings/0/end_bone = 11
+settings/0/extend_end_bone = false
+settings/0/joint_count = 6
+settings/1/root_bone_name = "upper_arm.R"
+settings/1/root_bone = 13
+settings/1/end_bone_name = "hand.004.R"
+settings/1/end_bone = 18
+settings/1/extend_end_bone = false
+settings/1/joint_count = 6
+settings/0/joints/0/rotation_axis = 3
+settings/0/joints/0/limitation = null
+settings/0/joints/1/rotation_axis = 3
+settings/0/joints/1/limitation = null
+settings/0/joints/2/rotation_axis = 3
+settings/0/joints/2/limitation = null
+settings/0/joints/3/rotation_axis = 3
+settings/0/joints/3/limitation = null
+settings/0/joints/4/rotation_axis = 3
+settings/0/joints/4/limitation = null
+settings/0/joints/5/rotation_axis = 3
+settings/0/joints/5/limitation = null
+settings/1/joints/0/rotation_axis = 3
+settings/1/joints/0/limitation = null
+settings/1/joints/1/rotation_axis = 3
+settings/1/joints/1/limitation = null
+settings/1/joints/2/rotation_axis = 3
+settings/1/joints/2/limitation = null
+settings/1/joints/3/rotation_axis = 3
+settings/1/joints/3/limitation = null
+settings/1/joints/4/rotation_axis = 3
+settings/1/joints/4/limitation = null
+settings/1/joints/5/rotation_axis = 3
+settings/1/joints/5/limitation = null
+
+[node name="LeftHandTarget" type="Marker3D" parent="ArmatureHuman/armature_human" index="1" unique_id=1546661134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050795436, 0.8271556, 0.04543352)
+
+[node name="RightHandTarget" type="Marker3D" parent="ArmatureHuman/armature_human" index="2" unique_id=140026781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22377455, 1.4391975, 0.04543352)
