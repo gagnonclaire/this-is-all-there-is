@@ -49,7 +49,8 @@ func _input(event):
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed(Keybinds.MENU):
-		SceneChange.switch_to_main_menu()
+		pass
+		#SceneChange.switch_to_main_menu()
 
 	if Input.is_action_just_pressed(Keybinds.BOARD_EDITOR_DECREASE_GRID_HEIGHT):
 		current_height -= 1

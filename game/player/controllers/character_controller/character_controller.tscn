@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bjn8a8uxy4lmp"]
+
+[ext_resource type="Script" uid="uid://btih204d2e1lx" path="res://game/player/controllers/character_controller/character_controller.gd" id="1_rav0x"]
+[ext_resource type="PackedScene" uid="uid://bdjdo5l33fwth" path="res://game/player/controllers/character_controller/character_hud.tscn" id="2_f13ob"]
+
+[node name="CharacterController" type="Node" unique_id=894094650]
+script = ExtResource("1_rav0x")
+
+[node name="Character_HUD" parent="." unique_id=1120744583 instance=ExtResource("2_f13ob")]

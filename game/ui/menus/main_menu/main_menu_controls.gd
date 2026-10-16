@@ -3,6 +3,7 @@ extends HBoxContainer
 
 signal start_game(game_name: String)
 signal host_game(game_name: String)
+signal join_game(address: String)
 
 @onready var sub_menu_container: MarginContainer = $SubMenuContainer
 @onready var start_game_menu: PanelContainer = $SubMenuContainer/StartGameMenu
@@ -16,14 +17,17 @@ func _ready():
 func _on_start_game_button_pressed():
 	switch_to(start_game_menu)
 
-func _on_start_game_menu_start_game(game_name):
+func _on_start_game_menu_start_game(game_name: String):
 	host_game.emit(game_name)
 
-func _on_start_game_menu_host_game(game_name):
+func _on_start_game_menu_host_game(game_name: String):
 	start_game.emit(game_name)
 
 func _on_join_game_button_pressed():
 	switch_to(join_game_menu)
+
+func _on_join_game_menu_join_game(address: String):
+	join_game.emit(address)
 
 func _on_board_editor_button_pressed():
 	switch_to(board_editor_menu)

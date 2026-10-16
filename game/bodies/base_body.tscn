@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://qq5es5mcf6dy"]
+
+[ext_resource type="Script" uid="uid://gnk2clkf47a1" path="res://game/bodies/base_body.gd" id="1_bwps7"]
+[ext_resource type="PackedScene" uid="uid://bcd7qsp7c5bmj" path="res://game/player/cameras/interacting_camera.tscn" id="2_cysuc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_t3p13"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bwps7"]
+
+[node name="BaseBody" type="RigidBody3D" unique_id=700168988]
+lock_rotation = true
+script = ExtResource("1_bwps7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=620528084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_t3p13")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=798740184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_bwps7")
+
+[node name="OnGroundRayCast" type="RayCast3D" parent="." unique_id=1697314303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07483119, 0)
+target_position = Vector3(0, -0.1, 0)
+
+[node name="InteractingCamera" parent="." unique_id=254330215 instance=ExtResource("2_cysuc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8502545, 0)

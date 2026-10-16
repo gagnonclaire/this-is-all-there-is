@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://lsgwlj0xx1g0"]
 
-[ext_resource type="Script" uid="uid://dvtaeqgn42g5o" path="res://game/game_world/game_world.gd" id="1_vn3ld"]
+[ext_resource type="Script" uid="uid://dvtaeqgn42g5o" path="res://game/main_scene/game_world.gd" id="1_vn3ld"]
 [ext_resource type="Environment" uid="uid://cv4hq6xsapkq5" path="res://game/game_world/environments/night_environment.tres" id="2_pwq27"]
 [ext_resource type="PackedScene" uid="uid://0gwji15ps27y" path="res://game/board_overlay/board_overlay.tscn" id="3_7tuyl"]
 [ext_resource type="PackedScene" uid="uid://i2uptxaa4rfx" path="res://game/game_world/structures/station/station.tscn" id="3_8s1tw"]
@@ -111,5 +111,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.445352, 0.30386868, -6.027
 
 [node name="BackroomsShell" parent="." unique_id=587159398 instance=ExtResource("16_hp6pg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.136742, -23.586506, 108.23703)
+visible = false
 
 [node name="FireflyParticles" parent="." unique_id=1318663083 instance=ExtResource("17_cryop")]

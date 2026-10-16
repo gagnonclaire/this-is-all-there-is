@@ -3,32 +3,24 @@ extends Node
 
 @onready var board_overlay: BoardOverlay = $BoardOverlay
 
-const PLAYER: PackedScene = preload("res://game/player/player.tscn")
+const PLAYER_SCENE: PackedScene = preload("res://game/player/player.tscn")
 
 signal exit_game
 
 var game_name: String
-var is_host: bool = false
+var offline: bool = true
 var enet_peer: ENetMultiplayerPeer
 var port: int = 9999
 
-#TODO move into dedicated host/join functions
 func _ready():
 	if not GameSaveLoad.game_name_available(game_name):
 		GameSaveLoad.load_game(game_name, self)
 
-	if is_host:
-		enet_peer = ENetMultiplayerPeer.new()
-		enet_peer.create_server(port)
-		multiplayer.multiplayer_peer = enet_peer
-
-		multiplayer.peer_connected.connect(add_player)
-		multiplayer.peer_disconnected.connect(remove_player)
-		add_player(multiplayer.get_unique_id())
+	if offline:
+		add_player(1)
 
 func _exit_tree():
-	pass
-	#multiplayer.multiplayer_peer.close()
+	enet_peer.close()
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("menu"):
@@ -43,10 +35,18 @@ func _unhandled_input(_event):
 		toggle_board_mode()
 
 func start_server():
-	pass
+	enet_peer = ENetMultiplayerPeer.new()
+	enet_peer.create_server(port)
+	multiplayer.multiplayer_peer = enet_peer
 
-func join_server(address: String):
-	pass
+	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
+	add_player(multiplayer.get_unique_id())
+
+func start_client(join_address):
+	enet_peer = ENetMultiplayerPeer.new()
+	enet_peer.create_client(join_address, port)
+	multiplayer.multiplayer_peer = enet_peer
 
 func toggle_board_mode():
 	if board_overlay.active:
@@ -59,7 +59,7 @@ func toggle_board_mode():
 		#)
 
 func add_player(peer_id):
-	var player: Node = PLAYER.instantiate()
+	var player: Player = PLAYER_SCENE.instantiate()
 	player.name = str(peer_id)
 	player.player_name = "player" + str(multiplayer.get_unique_id())
 	add_child(player)

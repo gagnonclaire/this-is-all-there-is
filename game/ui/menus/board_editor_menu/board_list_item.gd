@@ -9,4 +9,5 @@ func _ready():
 	board_name_label.text = board_name
 
 func _on_load_board_button_pressed():
-	SceneChange.switch_to_board_creator(board_name)
+	pass
+	#SceneChange.switch_to_board_creator(board_name)

@@ -67,3 +67,4 @@ theme = ExtResource("2_1hpy4")
 [connection signal="pressed" from="MenuButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="host_game" from="SubMenuContainer/StartGameMenu" to="." method="_on_start_game_menu_host_game"]
 [connection signal="start_game" from="SubMenuContainer/StartGameMenu" to="." method="_on_start_game_menu_start_game"]
+[connection signal="join_game" from="SubMenuContainer/JoinGameMenu" to="." method="_on_join_game_menu_join_game"]

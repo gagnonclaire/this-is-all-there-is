@@ -12,23 +12,31 @@ signal host_game(game_name: String)
 func _ready():
 	populate_game_item_list()
 
-func _on_start_game_button_pressed():
+func _on_start_new_game_button_pressed():
 	if game_name_entry.text.is_empty():
 		set_default_game_name()
 
-	start_game.emit(game_name_entry)
+	start_game.emit(game_name_entry.text)
 
-func _on_host_game_button_pressed():
+func _on_host_new_game_button_pressed():
 	if game_name_entry.text.is_empty():
 		set_default_game_name()
 
-	host_game.emit(game_name_entry)
+	host_game.emit(game_name_entry.text)
+
+func on_start_game_world(game_name: String):
+	start_game.emit(game_name)
+
+func on_start_host_game_world(game_name: String):
+	host_game.emit(game_name)
 
 func populate_game_item_list():
 	for game_filename in GameSaveLoad.game_filenames():
 		var game_item: GameListItem = GAME_ITEM_SCENE.instantiate()
 		game_item.game_name = game_filename.get_slice(".", 0)
 		game_list.add_child(game_item)
+		game_item.start_game_world.connect(on_start_game_world)
+		game_item.start_host_game_world.connect(on_start_host_game_world)
 
 func set_default_game_name():
 	var default_game_name_base: String = "new_game_"

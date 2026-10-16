@@ -25,8 +25,8 @@ func _ready():
 	neon_sign_mesh.set_surface_override_material(0, sign_texture)
 
 	neon_sign_interactable.add_to_group("interact_target")
-	neon_sign_interactable.set_collision_layer_value(CollisionLayerManager.PHYSICS_COLLISION_LAYER, true)
-	neon_sign_interactable.set_collision_layer_value(CollisionLayerManager.INTERACTABLE_LAYER, true)
+	neon_sign_interactable.set_collision_layer_value(Constants.PHYSICS_COLLISION_LAYER, true)
+	neon_sign_interactable.set_collision_layer_value(Constants.INTERACTABLE_LAYER, true)
 
 	neon_sign_editor.hide()
 

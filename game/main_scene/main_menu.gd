@@ -3,6 +3,7 @@ extends CanvasLayer
 
 signal start_game(game_name: String)
 signal host_game(game_name: String)
+signal join_game(address: String)
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -16,3 +17,6 @@ func _on_main_menu_controls_start_game(game_name):
 
 func _on_main_menu_controls_host_game(game_name):
 	host_game.emit(game_name)
+
+func _on_main_menu_controls_join_game(address):
+	join_game.emit(address)

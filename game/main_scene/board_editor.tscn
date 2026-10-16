@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bha6uxi7idv01"]
+[gd_scene format=3 uid="uid://bha6uxi7idv01"]
 
-[ext_resource type="Script" uid="uid://u7jxf4j5gimk" path="res://game/board_editor/board_editor.gd" id="1_tfjaa"]
+[ext_resource type="Script" uid="uid://u7jxf4j5gimk" path="res://game/main_scene/board_editor.gd" id="1_tfjaa"]
 [ext_resource type="PackedScene" uid="uid://ec62586b0fv8" path="res://game/scenes/roadside_scene/roadside.tscn" id="2_1cclm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5xsd"]

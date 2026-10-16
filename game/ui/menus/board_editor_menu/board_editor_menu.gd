@@ -32,7 +32,8 @@ func set_default_board_name():
 
 func create_board_with_board_name(board_name: String):
 	if BoardSaveLoad.board_name_available(board_name):
-		SceneChange.switch_to_board_creator(board_name)
+		pass
+		#SceneChange.switch_to_board_creator(board_name)
 	else:
 		board_name_entry.text = ""
 		board_name_entry.placeholder_text = "Name unavailable"

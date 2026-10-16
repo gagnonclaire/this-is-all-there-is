@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bcd7qsp7c5bmj"]
+
+[ext_resource type="Script" uid="uid://bhul7ia1faw52" path="res://game/player/cameras/interacting_camera.gd" id="1_wxyid"]
+
+[node name="InteractingCamera" type="Node3D" unique_id=254330215]
+script = ExtResource("1_wxyid")
+
+[node name="CameraNode" type="Camera3D" parent="." unique_id=125739796]
+
+[node name="InteractingRayCast" type="RayCast3D" parent="." unique_id=1749603193]
+target_position = Vector3(0, 0, -2)
